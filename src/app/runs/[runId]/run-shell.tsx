@@ -30,8 +30,14 @@ import type {
   PersonaLite,
   RunSnapshot as VizRunSnapshot,
 } from "@/components/run-live/types";
-import type { Brief } from "@/lib/schemas/brief";
-import type { Synthesis } from "@/lib/schemas/synthesis";
+import type { MarketingBrief } from "@/lib/schemas/brief";
+import type {
+  AdvisorConsensus,
+  AdvisorVerdict,
+  CampaignStrategy,
+  RaceResult,
+} from "@/lib/schemas/marketing";
+import type { MarketingReport } from "@/lib/schemas/report";
 import type { RunStatus } from "@/lib/db/schema";
 import { useRunSnapshot, type SnapshotAgentRun } from "@/lib/hooks/use-run-snapshot";
 import { isTerminalStatus, useRunStream, type RunStreamState } from "@/lib/hooks/use-run-stream";
@@ -212,10 +218,24 @@ export function RunShell({ runId }: { runId: string }) {
   const personas = snapshot.personas as Record<string, PersonaLite>;
   const verdict = verdictFromSynthesis(run.synthesis);
 
+  const rawRun = run as typeof run & {
+    productName?: string | null;
+    strategies?: unknown;
+    race?: unknown;
+    advisorReport?: unknown;
+  };
   const vizRun: VizRunSnapshot = {
     ...run,
-    brief: (run.brief as Brief | null) ?? null,
-    synthesis: (run.synthesis as Synthesis | null) ?? null,
+    brief: (run.brief as MarketingBrief | null) ?? null,
+    synthesis: (run.synthesis as MarketingReport | null) ?? null,
+    productName: rawRun.productName ?? null,
+    strategies: (rawRun.strategies as CampaignStrategy[] | null) ?? null,
+    race: (rawRun.race as RaceResult[] | null) ?? null,
+    advisorReport:
+      (rawRun.advisorReport as {
+        consensus: AdvisorConsensus;
+        verdicts: AdvisorVerdict[];
+      } | null) ?? null,
     aggregates: toRunAggregates(run.aggregates, agents),
   };
 

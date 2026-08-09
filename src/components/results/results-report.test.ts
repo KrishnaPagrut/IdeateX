@@ -96,6 +96,28 @@ describe("FocusGroup", () => {
 });
 
 describe("ResultsView report composition", () => {
+  it("renders the full marketing report with contiguous numbering", () => {
+    const html = renderToStaticMarkup(
+      createElement(ResultsView, {
+        run: RUN,
+        agents: FIXTURE.agents,
+        personas: FIXTURE.personas,
+      }),
+    );
+    expect(html).toContain("Study design");
+    expect(html).toContain("The strategy race");
+    expect(html).toContain("The advisory panel");
+    expect(html).toContain("Deep swarm on the winner");
+    expect(html).toContain("Focus group");
+    expect(html).toContain("The campaign package");
+    expect(html).toContain("§09"); // all 9 sections with a focus group
+    expect(html).not.toContain("§10");
+    expect(html.indexOf('id="race"')).toBeLessThan(html.indexOf('id="advisors"'));
+    expect(html.indexOf('id="advisors"')).toBeLessThan(html.indexOf('id="evidence"'));
+    expect(html.indexOf('id="evidence"')).toBeLessThan(html.indexOf('id="focus-group"'));
+    expect(html.indexOf('id="focus-group"')).toBeLessThan(html.indexOf('id="campaign"'));
+  });
+
   it("omits the focus-group section without discussion rows, numbering contiguous", () => {
     const html = renderToStaticMarkup(
       createElement(ResultsView, {
@@ -105,27 +127,11 @@ describe("ResultsView report composition", () => {
       }),
     );
     expect(html).not.toContain("Focus group");
-    expect(html).toContain("Study design");
-    expect(html).toContain("Adversarial review");
-    expect(html).toContain("§06"); // 6 sections without a focus group
-    expect(html).not.toContain("§07");
+    expect(html).toContain("§08"); // 8 sections without a focus group
+    expect(html).not.toContain("§09");
   });
 
-  it("inserts the focus-group section between evidence and the red team", () => {
-    const html = renderToStaticMarkup(
-      createElement(ResultsView, {
-        run: RUN,
-        agents: FIXTURE.agents,
-        personas: FIXTURE.personas,
-      }),
-    );
-    expect(html).toContain("Focus group");
-    expect(html).toContain("§07"); // 7 sections with a focus group
-    expect(html.indexOf('id="evidence"')).toBeLessThan(html.indexOf('id="focus-group"'));
-    expect(html.indexOf('id="focus-group"')).toBeLessThan(html.indexOf('id="red-team"'));
-  });
-
-  it("falls back to an empty state without a synthesis", () => {
+  it("falls back to an empty state without a report", () => {
     const html = renderToStaticMarkup(
       createElement(ResultsView, {
         run: { ...RUN, synthesis: null },
@@ -133,6 +139,6 @@ describe("ResultsView report composition", () => {
         personas: FIXTURE.personas,
       }),
     );
-    expect(html).toContain("No synthesis yet");
+    expect(html).toContain("No report yet");
   });
 });

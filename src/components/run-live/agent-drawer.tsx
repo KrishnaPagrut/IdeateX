@@ -10,10 +10,11 @@ import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "
 import { Skeleton } from "@/components/ui/skeleton";
 import { DotmSquare4 } from "@/components/ui/dotm-square-4";
 import type { AgentStatus } from "@/lib/db/schema";
-import type { Brief } from "@/lib/schemas/brief";
+import type { Brief, MarketingBrief } from "@/lib/schemas/brief";
 import type { CastingPlan, CastingSpec } from "@/lib/schemas/casting";
 import type { Critique } from "@/lib/schemas/critique";
 import type { DiscussionOutput } from "@/lib/schemas/discussion";
+import type { MarketingReport } from "@/lib/schemas/report";
 import type { Synthesis } from "@/lib/schemas/synthesis";
 import type { Verdict } from "@/lib/schemas/verdict";
 
@@ -283,21 +284,36 @@ function CastingOutput({
   );
 }
 
-function BriefOutput({ brief }: { brief: Brief }) {
+function BriefOutput({ brief }: { brief: Brief | MarketingBrief }) {
+  // Marketing briefs carry cohorts; legacy (pre-pivot) briefs carry segments.
+  const marketing = "cohorts" in brief ? brief : null;
+  const groups = marketing ? marketing.cohorts : (brief as Brief).segments;
   return (
     <div className="space-y-4">
       <div>
-        <Eyebrow>Idea summary</Eyebrow>
-        <p className="mt-1 text-xs leading-relaxed text-foreground/90">{brief.ideaSummary}</p>
+        <Eyebrow>{marketing ? "Product summary" : "Idea summary"}</Eyebrow>
+        <p className="mt-1 text-xs leading-relaxed text-foreground/90">
+          {marketing ? marketing.productSummary : (brief as Brief).ideaSummary}
+        </p>
       </div>
+      {marketing && (
+        <div>
+          <Eyebrow>Objective</Eyebrow>
+          <p className="mt-1 text-xs leading-relaxed text-foreground/90">
+            {marketing.objectiveSummary}
+          </p>
+        </div>
+      )}
       <div className="grid grid-cols-2 gap-2">
-        <Stat label="Category" value={brief.category} />
+        {!marketing && <Stat label="Category" value={(brief as Brief).category} />}
         <Stat label="Clarity" value={`${brief.clarityScore}/100`} />
       </div>
       <div>
-        <Eyebrow>Segments to study · {brief.segments.length}</Eyebrow>
+        <Eyebrow>
+          {marketing ? "Audience cohorts" : "Segments to study"} · {groups.length}
+        </Eyebrow>
         <ul className="mt-2 space-y-2">
-          {brief.segments.map((s) => (
+          {groups.map((s) => (
             <li key={s.name} className="rounded-lg border p-2.5">
               <p className="text-xs font-medium">{s.name}</p>
               <p className="mt-0.5 text-2xs leading-relaxed text-muted-foreground">{s.description}</p>
@@ -339,7 +355,29 @@ function CritiqueOutput({ critique }: { critique: Critique }) {
   );
 }
 
-function SynthesisOutput({ synthesis }: { synthesis: Synthesis }) {
+function SynthesisOutput({ synthesis }: { synthesis: Synthesis | MarketingReport }) {
+  // Marketing reports carry a campaign block; legacy syntheses carry scores.
+  if ("campaign" in synthesis) {
+    const report = synthesis;
+    return (
+      <div className="space-y-4">
+        <div>
+          <Eyebrow>Verdict</Eyebrow>
+          <p className="mt-1 font-mono text-sm font-semibold tracking-wide uppercase">
+            {report.verdict.replaceAll("_", " ")}
+          </p>
+          <p className="mt-1 text-xs leading-relaxed text-foreground/90">{report.oneLiner}</p>
+        </div>
+        <Meter label="Confidence" value={report.confidence} />
+        <div>
+          <Eyebrow>Why the winner won</Eyebrow>
+          <p className="mt-1 text-xs leading-relaxed text-foreground/90">{report.winnerRationale}</p>
+        </div>
+        <ListSection title="Key findings" items={report.keyFindings.map((f) => f.title)} />
+        <ListSection title="Next steps" items={report.nextSteps} />
+      </div>
+    );
+  }
   return (
     <div className="space-y-4">
       <div>
@@ -423,13 +461,13 @@ function OutputSection({
         <CastingOutput plan={agent.output as CastingPlan} personas={personas} />
       );
     case "framing":
-      return <BriefOutput brief={agent.output as Brief} />;
+      return <BriefOutput brief={agent.output as Brief | MarketingBrief} />;
     case "discussion":
       return <DiscussionOutputSection reply={agent.output as DiscussionOutput} />;
     case "critique":
       return <CritiqueOutput critique={agent.output as Critique} />;
     case "synthesis":
-      return <SynthesisOutput synthesis={agent.output as Synthesis} />;
+      return <SynthesisOutput synthesis={agent.output as Synthesis | MarketingReport} />;
     default:
       return (
         <pre className="max-h-80 overflow-auto rounded-lg border bg-secondary/40 p-3 font-mono text-2xs leading-relaxed whitespace-pre-wrap">

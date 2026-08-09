@@ -1,6 +1,12 @@
 import type { AgentKind, AgentStatus, RunStatus, RunTier } from "@/lib/db/schema";
-import type { Brief } from "@/lib/schemas/brief";
-import type { Synthesis } from "@/lib/schemas/synthesis";
+import type { MarketingBrief } from "@/lib/schemas/brief";
+import type {
+  AdvisorConsensus,
+  AdvisorVerdict,
+  CampaignStrategy,
+  RaceResult,
+} from "@/lib/schemas/marketing";
+import type { MarketingReport } from "@/lib/schemas/report";
 
 // ---------------------------------------------------------------------------
 // UI-facing shapes. These are the wire shapes (JSON — dates are ISO strings),
@@ -68,12 +74,18 @@ export interface AgentRunSnapshot extends AgentLite {
 export interface RunSnapshot {
   id: string;
   idea: string;
+  productName?: string | null;
+  targetAudience?: string | null;
+  objective?: string | null;
   context: string | null;
   tier: RunTier;
   grounding: boolean;
   status: RunStatus;
-  brief: Brief | null;
-  synthesis: Synthesis | null;
+  brief: MarketingBrief | null;
+  strategies?: CampaignStrategy[] | null;
+  race?: RaceResult[] | null;
+  advisorReport?: { consensus: AdvisorConsensus; verdicts: AdvisorVerdict[] } | null;
+  synthesis: MarketingReport | null;
   aggregates: RunAggregates | null;
   estCostUsd: string | null;
   actualCostUsd: string | null;

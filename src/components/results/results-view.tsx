@@ -1,125 +1,83 @@
-import { ArrowRight, Lightbulb } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
-import type { Critique } from "@/lib/schemas/critique";
-import type { Synthesis } from "@/lib/schemas/synthesis";
+import type { MarketingReport } from "@/lib/schemas/report";
 import type { AgentRunSnapshot, PersonaLite, RunSnapshot } from "@/components/run-live/types";
 
 import { VerdictCard } from "./verdict-card";
 import { StudyBrief } from "./study-brief";
+import { RaceComparison } from "./race-comparison";
+import { AdvisorPanel } from "./advisor-panel";
 import { ScoreDistribution } from "./score-distribution";
-import { SegmentBreakdown } from "./segment-breakdown";
 import { ObjectionsList } from "./objections-list";
 import { QuotesWall } from "./quotes-wall";
-import { CritiquePanel } from "./critique-panel";
+import { CampaignPackage } from "./campaign-package";
 import { FocusGroup, hasFocusGroup } from "./focus-group";
 import { ReportIndex, ReportSection, type ReportSectionDef } from "./report-section";
 
 // ---------------------------------------------------------------------------
-// The full results report, composed as one numbered document a founder reads
+// The full campaign report, composed as one numbered document a founder reads
 // top-to-bottom:
 //
 //   §01 Verdict     — the answer first; nobody should scroll for the verdict.
-//   §02 Method      — how the answer was produced (brief, segments,
+//   §02 Method      — how the answer was produced (brief, cohorts,
 //                     assumptions), so the evidence is read with the study's
-//                     blind spots in mind. Answer → method → evidence mirrors
-//                     how research reports earn trust.
-//   §03 Evidence    — distribution, objections, segments, findings & risks.
-//   §04 Focus group — deliberation: what moved when personas heard peers.
-//   §05 Red team    — adversarial review challenges everything above it, so
-//                     it comes after the evidence it attacks.
-//   §06 Voices      — the raw verbatim reactions, the report's source data.
-//   §07 Next        — close with actions, not analysis.
+//                     blind spots in mind.
+//   §03 The race    — how the strategies actually behaved against the same
+//                     audience: scores, narratives, where reach landed.
+//   §04 Advisors    — the deliberation that picked the winner, disagreements
+//                     included, plus the directives that constrain the drafts.
+//   §05 Deep swarm  — the full persona panel's evidence on the winner.
+//   §06 Focus group — deliberation: what moved when personas heard peers.
+//   §07 Voices      — the raw verbatim reactions, the report's source data.
+//   §08 Campaign    — the deliverable: drafts, objection ledger, pre-mortem.
+//   §09 Next        — close with actions, not analysis.
 //
-// The section list is built dynamically so absent stages (no brief, no
-// discussion, no critics) drop out without leaving numbering gaps.
+// The section list is built dynamically so absent stages drop out without
+// leaving numbering gaps.
 // ---------------------------------------------------------------------------
 
-function FindingsAndRisks({ synthesis }: { synthesis: Synthesis }) {
+function Findings({ report }: { report: MarketingReport }) {
   return (
-    <div className="grid gap-3 lg:grid-cols-2">
-      <div className="rounded-xl border bg-card p-5">
-        <h4 className="text-sm font-medium">Key findings</h4>
-        <ol className="mt-3 space-y-3">
-          {synthesis.keyFindings.map((f, i) => (
-            <li key={f.title} className="flex gap-3">
-              <span className="mt-0.5 font-mono text-2xs font-semibold text-muted-foreground">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <div>
-                <p className="text-xs font-medium">{f.title}</p>
-                <p className="mt-0.5 text-2xs leading-relaxed text-muted-foreground">{f.detail}</p>
-                <div className="mt-1.5 flex flex-wrap gap-1">
-                  {f.supportingSegments.map((s) => (
-                    <Badge key={s} variant="outline" className="text-3xs">
-                      {s}
-                    </Badge>
-                  ))}
-                </div>
-              </div>
-            </li>
-          ))}
-        </ol>
-      </div>
-      <div className="rounded-xl border bg-card p-5">
-        <h4 className="text-sm font-medium">Top risks</h4>
-        <ul className="mt-3 space-y-3">
-          {synthesis.topRisks.map((r) => (
-            <li key={r.risk}>
-              <div className="flex items-start justify-between gap-2">
-                <p className="text-xs leading-snug font-medium">{r.risk}</p>
-                <Badge
-                  variant={
-                    r.severity === "high"
-                      ? "destructive"
-                      : r.severity === "medium"
-                        ? "outline"
-                        : "secondary"
-                  }
-                  className="shrink-0 font-mono text-3xs tracking-eyebrow uppercase"
-                >
-                  {r.severity}
-                </Badge>
-              </div>
-              <p className="mt-0.5 text-2xs leading-relaxed text-muted-foreground">
-                <span className="font-mono text-3xs tracking-eyebrow uppercase">Mitigation · </span>
-                {r.mitigation}
-              </p>
-            </li>
-          ))}
-        </ul>
-      </div>
+    <div className="rounded-xl border bg-card p-5">
+      <h4 className="text-sm font-medium">Key findings</h4>
+      <ol className="mt-3 grid gap-x-8 gap-y-3 lg:grid-cols-2">
+        {report.keyFindings.map((f, i) => (
+          <li key={f.title} className="flex gap-3">
+            <span className="mt-0.5 font-mono text-2xs font-semibold text-muted-foreground">
+              {String(i + 1).padStart(2, "0")}
+            </span>
+            <div>
+              <p className="text-xs font-medium">{f.title}</p>
+              <p className="mt-0.5 text-2xs leading-relaxed text-muted-foreground">{f.detail}</p>
+              <Badge variant="outline" className="mt-1.5 text-3xs font-normal">
+                {f.sourceRef}
+              </Badge>
+            </div>
+          </li>
+        ))}
+      </ol>
     </div>
   );
 }
 
-function NextMoves({ synthesis }: { synthesis: Synthesis }) {
+function NextMoves({ report }: { report: MarketingReport }) {
   return (
     <div className="rounded-xl border bg-card p-5">
-      <div className="grid gap-5 lg:grid-cols-[1fr_1.2fr]">
-        <div className="rounded-lg border border-primary/25 bg-secondary/40 p-4">
-          <p className="flex items-center gap-1.5 font-mono text-3xs tracking-eyebrow text-muted-foreground uppercase">
-            <Lightbulb className="size-3.5" /> Boldest bet
-          </p>
-          <p className="mt-2 text-sm leading-relaxed font-medium">{synthesis.boldestBet}</p>
-        </div>
-        <div>
-          <p className="font-mono text-3xs tracking-eyebrow text-muted-foreground uppercase">
-            Next steps
-          </p>
-          <ol className="mt-2 space-y-2">
-            {synthesis.nextSteps.map((step, i) => (
-              <li key={step} className="flex items-start gap-2 text-xs leading-relaxed">
-                <span className="mt-0.5 font-mono text-3xs font-semibold text-muted-foreground">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <span className="flex-1">{step}</span>
-                <ArrowRight className="mt-0.5 size-3 shrink-0 text-muted-foreground/50" />
-              </li>
-            ))}
-          </ol>
-        </div>
-      </div>
+      <p className="font-mono text-3xs tracking-eyebrow text-muted-foreground uppercase">
+        Next steps
+      </p>
+      <ol className="mt-2 space-y-2">
+        {report.nextSteps.map((step, i) => (
+          <li key={step} className="flex items-start gap-2 text-xs leading-relaxed">
+            <span className="mt-0.5 font-mono text-3xs font-semibold text-muted-foreground">
+              {String(i + 1).padStart(2, "0")}
+            </span>
+            <span className="flex-1">{step}</span>
+            <ArrowRight className="mt-0.5 size-3 shrink-0 text-muted-foreground/50" />
+          </li>
+        ))}
+      </ol>
     </div>
   );
 }
@@ -136,25 +94,26 @@ export function ResultsView({
   /** Optional: quote/exchange cards open that agent in the inspector. */
   onSelectAgent?: (agentRunId: string) => void;
 }) {
-  const synthesis = run.synthesis;
+  const report = run.synthesis;
   const aggregates = run.aggregates;
 
-  if (!synthesis) {
+  if (!report) {
     return (
       <div className="rounded-xl border border-dashed p-10 text-center">
         <p className="text-sm text-muted-foreground">
-          No synthesis yet — results appear when the run completes.
+          No report yet — results appear when the run completes.
         </p>
       </div>
     );
   }
 
-  const critiques = agents.filter(
-    (a) => a.kind === "critique" && a.status === "completed" && a.output != null,
-  );
-  const highSeverityFindings = critiques
-    .map((a) => a.output as Critique)
-    .reduce((n, c) => n + c.findings.filter((f) => f.severity === "high").length, 0);
+  const strategies = run.strategies ?? [];
+  const race = run.race ?? [];
+  const advisorReport = run.advisorReport ?? null;
+  const winnerId = advisorReport?.consensus.winnerStrategyId ?? null;
+  const winner = strategies.find((s) => s.id === winnerId) ?? null;
+  const winnerRace = race.find((r) => r.strategyId === winnerId) ?? null;
+
   const quoteCount = agents.filter(
     (a) => a.kind === "persona" && a.status === "completed" && a.output != null,
   ).length;
@@ -167,24 +126,59 @@ export function ResultsView({
       id: "verdict",
       label: "Verdict",
       title: "Verdict",
-      sub: `synthesis of ${aggregates ? `${aggregates.completed} persona verdicts` : "the swarm"}`,
-      node: <VerdictCard synthesis={synthesis} aggregates={aggregates} />,
+      sub: winner ? `winning strategy: ${winner.name}` : undefined,
+      node: (
+        <VerdictCard
+          report={report}
+          winnerName={winner?.name ?? null}
+          winnerScores={winnerRace?.scores ?? null}
+          aggregates={aggregates}
+        />
+      ),
     },
-    ...(run.brief
+    ...(run.brief && "cohorts" in run.brief
       ? [
           {
             id: "method",
             label: "Method",
             title: "Study design",
-            sub: `${run.brief.segments.length} segments · clarity ${Math.round(run.brief.clarityScore)}/100`,
+            sub: `${run.brief.cohorts.length} cohorts · clarity ${Math.round(run.brief.clarityScore)}/100`,
             node: <StudyBrief brief={run.brief} />,
+          },
+        ]
+      : []),
+    ...(race.length > 0 && strategies.length > 0
+      ? [
+          {
+            id: "race",
+            label: "Race",
+            title: "The strategy race",
+            sub: `${strategies.length} strategies · same audience, identical conditions`,
+            node: <RaceComparison strategies={strategies} race={race} winnerId={winnerId} />,
+          },
+        ]
+      : []),
+    ...(advisorReport
+      ? [
+          {
+            id: "advisors",
+            label: "Advisors",
+            title: "The advisory panel",
+            sub: `${advisorReport.verdicts.length} expert lenses argued; the moderator synthesized`,
+            node: (
+              <AdvisorPanel
+                verdicts={advisorReport.verdicts}
+                consensus={advisorReport.consensus}
+                strategies={strategies}
+              />
+            ),
           },
         ]
       : []),
     {
       id: "evidence",
       label: "Evidence",
-      title: "Evidence from the swarm",
+      title: "Deep swarm on the winner",
       sub: aggregates
         ? `n = ${aggregates.completed}/${aggregates.personaCount} personas`
         : undefined,
@@ -196,8 +190,7 @@ export function ResultsView({
               <ObjectionsList aggregates={aggregates} />
             </div>
           )}
-          <SegmentBreakdown synthesis={synthesis} aggregates={aggregates} />
-          <FindingsAndRisks synthesis={synthesis} />
+          <Findings report={report} />
         </div>
       ),
     },
@@ -207,21 +200,8 @@ export function ResultsView({
             id: "focus-group",
             label: "Focus group",
             title: "Focus group",
-            sub: `${discussionCount} personas reconvened to hear their segment peers`,
+            sub: `${discussionCount} personas reconvened to hear their cohort peers`,
             node: <FocusGroup agents={agents} personas={personas} onSelect={onSelectAgent} />,
-          },
-        ]
-      : []),
-    ...(critiques.length > 0
-      ? [
-          {
-            id: "red-team",
-            label: "Red team",
-            title: "Adversarial review",
-            sub: `${critiques.length} critics attacked this study before synthesis${
-              highSeverityFindings > 0 ? ` · ${highSeverityFindings} high-severity findings` : ""
-            }`,
-            node: <CritiquePanel agents={agents} synthesisConfidence={synthesis.confidence} />,
           },
         ]
       : []),
@@ -237,10 +217,17 @@ export function ResultsView({
         ]
       : []),
     {
+      id: "campaign",
+      label: "Campaign",
+      title: "The campaign package",
+      sub: "every draft cites the finding it answers",
+      node: <CampaignPackage report={report} />,
+    },
+    {
       id: "next",
       label: "Next",
       title: "What next",
-      node: <NextMoves synthesis={synthesis} />,
+      node: <NextMoves report={report} />,
     },
   ];
 

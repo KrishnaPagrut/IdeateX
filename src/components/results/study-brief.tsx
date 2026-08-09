@@ -5,14 +5,14 @@ import { ChevronDown } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
-import type { Brief } from "@/lib/schemas/brief";
+import type { MarketingBrief } from "@/lib/schemas/brief";
 
 // ---------------------------------------------------------------------------
 // The "methods" section: what the study actually tested. It sits right after
 // the verdict on purpose — first the answer, then how it was produced — so
 // everything below is read with the study's assumptions and blind spots in
-// mind. Quiet reference material: the idea-as-framed and target market stay
-// visible; segments, assumptions, risks, and ambiguities collapse on demand.
+// mind. Quiet reference material: the product-as-framed and objective stay
+// visible; cohorts, assumptions, risks, and ambiguities collapse on demand.
 // ---------------------------------------------------------------------------
 
 function FieldLabel({ className, children }: { className?: string; children: React.ReactNode }) {
@@ -28,7 +28,7 @@ function FieldLabel({ className, children }: { className?: string; children: Rea
   );
 }
 
-export function StudyBrief({ brief }: { brief: Brief }) {
+export function StudyBrief({ brief }: { brief: MarketingBrief }) {
   const [open, setOpen] = useState(true);
   const clarity = Math.round(brief.clarityScore);
 
@@ -37,20 +37,15 @@ export function StudyBrief({ brief }: { brief: Brief }) {
       <div className="flex items-start justify-between gap-3 p-5">
         <div className="min-w-0 grid gap-4 lg:grid-cols-[1.3fr_1fr] lg:gap-8">
           <div>
-            <div className="flex items-center gap-2">
-              <FieldLabel>Idea as framed</FieldLabel>
-              <Badge variant="outline" className="font-mono text-3xs tracking-eyebrow uppercase">
-                {brief.category}
-              </Badge>
-            </div>
+            <FieldLabel>Product as framed</FieldLabel>
             <p className="mt-1.5 text-sm leading-relaxed text-foreground/90">
-              {brief.ideaSummary}
+              {brief.productSummary}
             </p>
           </div>
           <div>
-            <FieldLabel>Target market</FieldLabel>
+            <FieldLabel>Campaign objective</FieldLabel>
             <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">
-              {brief.targetMarket}
+              {brief.objectiveSummary}
             </p>
           </div>
         </div>
@@ -69,21 +64,33 @@ export function StudyBrief({ brief }: { brief: Brief }) {
         <>
           <div className="border-t p-5">
             <FieldLabel>
-              Segments studied · {brief.segments.length} · one planner per segment
+              Audience cohorts · {brief.cohorts.length} · one planner per cohort
             </FieldLabel>
             <div className="mt-3 grid gap-3 sm:grid-cols-2">
-              {brief.segments.map((s) => (
-                <div key={s.name} className="rounded-lg border p-3">
-                  <p className="text-xs font-medium">{s.name}</p>
+              {brief.cohorts.map((c) => (
+                <div key={c.name} className="rounded-lg border p-3">
+                  <div className="flex items-baseline justify-between gap-2">
+                    <p className="text-xs font-medium">{c.name}</p>
+                    <span className="font-mono text-3xs tabular-nums text-muted-foreground">
+                      ~{Math.round(c.populationShare * 100)}%
+                    </span>
+                  </div>
                   <p className="mt-0.5 text-2xs leading-relaxed text-muted-foreground">
-                    {s.description}
+                    {c.description}
                   </p>
                   <p className="mt-1.5 text-2xs leading-relaxed text-foreground/80">
                     <span className="font-mono text-3xs tracking-eyebrow text-muted-foreground uppercase">
-                      Why studied ·{" "}
+                      Objections ·{" "}
                     </span>
-                    {s.whyRelevant}
+                    {c.commonObjections.join("; ")}
                   </p>
+                  <div className="mt-1.5 flex flex-wrap gap-1">
+                    {c.mediaDiet.map((p) => (
+                      <Badge key={p} variant="outline" className="text-3xs font-normal">
+                        {p}
+                      </Badge>
+                    ))}
+                  </div>
                 </div>
               ))}
             </div>
