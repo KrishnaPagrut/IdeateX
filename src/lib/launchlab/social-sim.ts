@@ -16,7 +16,7 @@
  * Everything is emitted as a stream of events so the UI can animate the run
  * rather than showing a spinner and then a number.
  */
-import { hashSeed, makeRng, type Rng } from "./rng";
+import { hashSeed, makeRng, type Rng } from "@/lib/engine/social/rng";
 import type {
   AudienceCohort,
   CampaignStrategy,
