@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/dialog";
 import { DotmSquare3 } from "@/components/ui/dotm-square-3";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { LaunchKitPanel } from "@/components/launch-kit/launch-kit-view";
 import { ResultsView } from "@/components/results/results-view";
 import { toRunAggregates } from "@/components/run-live/adapt";
 import { AgentDrawer } from "@/components/run-live/agent-drawer";
@@ -130,7 +131,7 @@ export function RunShell({ runId }: { runId: string }) {
   // completes live. The landing decision comes from the SNAPSHOT status,
   // never the SSE stream — the stream replays historical statuses on connect,
   // so a completed run briefly "looks" active on it.
-  const [tab, setTab] = React.useState<"swarm" | "results" | null>(null);
+  const [tab, setTab] = React.useState<"swarm" | "results" | "launch-kit" | null>(null);
   const [landing, setLanding] = React.useState<"completed" | "active" | null>(null);
   const [autoSwitched, setAutoSwitched] = React.useState(false);
 
@@ -168,7 +169,7 @@ export function RunShell({ runId }: { runId: string }) {
     toast.success("Report ready");
   }, [landing, status, autoSwitched]);
 
-  const resolvedTab: "swarm" | "results" =
+  const resolvedTab: "swarm" | "results" | "launch-kit" =
     tab ?? (landing === "completed" || autoSwitched ? "results" : "swarm");
 
   // Once the run settles, pull the final snapshot (synthesis, costs, timings).
@@ -368,13 +369,18 @@ export function RunShell({ runId }: { runId: string }) {
       {/* Tabs */}
       <Tabs
         value={resolvedTab}
-        onValueChange={(value) => setTab(value === "results" ? "results" : "swarm")}
+        onValueChange={(value) =>
+          setTab(value === "results" ? "results" : value === "launch-kit" ? "launch-kit" : "swarm")
+        }
         className="mt-8"
       >
         <div className="mx-auto w-full max-w-4xl px-6">
           <TabsList variant="line">
             <TabsTrigger value="swarm">Swarm</TabsTrigger>
             <TabsTrigger value="results">Results</TabsTrigger>
+            {run.status === "completed" && run.synthesis != null && (
+              <TabsTrigger value="launch-kit">Launch kit</TabsTrigger>
+            )}
           </TabsList>
         </div>
 
@@ -424,6 +430,14 @@ export function RunShell({ runId }: { runId: string }) {
             )}
           </div>
         </TabsContent>
+
+        {run.status === "completed" && run.synthesis != null && (
+          <TabsContent value="launch-kit" className="mt-6">
+            <div className="mx-auto w-full max-w-4xl px-6">
+              <LaunchKitPanel runId={runId} />
+            </div>
+          </TabsContent>
+        )}
       </Tabs>
 
       <AgentDrawer
