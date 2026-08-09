@@ -5,6 +5,7 @@ import { PGlite } from "@electric-sql/pglite";
 import postgres from "postgres";
 import path from "node:path";
 
+import { pooledDatabaseUrl } from "./connection";
 import * as schema from "./schema";
 
 // With DATABASE_URL set (Supabase), use the postgres-js driver against the
@@ -20,7 +21,7 @@ type Database = ReturnType<typeof drizzlePostgres<typeof schema>>;
 const globalDb = globalThis as unknown as { __ideatexDb?: Promise<Database> };
 
 async function createDb(): Promise<Database> {
-  const connectionString = process.env.DATABASE_URL;
+  const connectionString = pooledDatabaseUrl();
   if (connectionString) {
     // Supabase transaction-mode pooler does not support prepared statements.
     const client = postgres(connectionString, { prepare: false });
