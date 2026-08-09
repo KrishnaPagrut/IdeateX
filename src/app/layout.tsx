@@ -1,46 +1,44 @@
 import type { Metadata } from "next";
-import { Inter, Instrument_Serif, JetBrains_Mono } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-/*
- * Dual-font system. Loaded through next/font so they're self-hosted and
- * preloaded — no external request, no layout shift. Each exposes a CSS
- * variable that globals.css consumes, keeping font choice a token like any
- * other rather than something hardcoded into components.
- */
-const sans = Inter({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+import { ThemeProvider } from "@/components/layout/theme-provider";
+import { TopNav } from "@/components/layout/top-nav";
+import { Toaster } from "@/components/ui/sonner";
+
+const geistSans = Geist({
   variable: "--font-sans",
-  display: "swap",
+  subsets: ["latin"],
 });
 
-/** The personality voice. Editorial and high-contrast; headlines only. */
-const display = Instrument_Serif({
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
   subsets: ["latin"],
-  weight: "400",
-  variable: "--font-display",
-  display: "swap",
-});
-
-/** The technical voice. Section labels, metrics, identifiers. */
-const mono = JetBrains_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  variable: "--font-mono",
-  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "LaunchLab",
+  title: {
+    default: "IdeateX",
+    template: "%s · IdeateX",
+  },
   description:
-    "Your executive team, before you hire one. Delegate an objective to your CTO or CMO — each gathers evidence, analyses it, and hands back findings plus artifacts.",
+    "Stress-test an idea on a synthetic population of AI personas before it meets real people.",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${sans.variable} ${display.variable} ${mono.variable}`}>
-      <body>{children}</body>
+    <html
+      lang="en"
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
+    >
+      <body className="flex min-h-full flex-col">
+        <ThemeProvider>
+          <TopNav />
+          <main className="flex flex-1 flex-col">{children}</main>
+          <Toaster position="bottom-right" />
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

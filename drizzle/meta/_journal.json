@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1786236686928,
+      "tag": "0000_lethal_blob",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1786240016298,
+      "tag": "0001_yielding_sentry",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1786240641532,
+      "tag": "0002_secret_vermin",
+      "breakpoints": true
+    }
+  ]
+}

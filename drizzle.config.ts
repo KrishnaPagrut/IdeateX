@@ -1,10 +1,11 @@
-import type { Config } from "drizzle-kit";
+import { defineConfig } from "drizzle-kit";
 
-export default {
+export default defineConfig({
   schema: "./src/lib/db/schema.ts",
   out: "./drizzle",
-  dialect: "sqlite",
+  dialect: "postgresql",
   dbCredentials: {
-    url: process.env.LAUNCHLAB_DB ?? "./launchlab.db",
+    // Session-mode direct URL — migrations must not go through the transaction pooler.
+    url: process.env.DIRECT_URL ?? process.env.DATABASE_URL ?? "",
   },
-} satisfies Config;
+});

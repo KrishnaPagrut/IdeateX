@@ -1,486 +1,137 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-/* ===========================================================================
-   Design tokens — Minimalist Modern
-   ---------------------------------------------------------------------------
-   Every colour, shadow and radius in the app resolves through this block, so
-   the whole product can be re-themed from one place. Pages never hardcode hex.
-   =========================================================================== */
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-sans);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+  /* Dot-matrix loaders (solid-theme preset) follow the accent. */
+  --color-dot-on: var(--primary);
+}
+
+/* ---------------------------------------------------------------------------
+   IdeateX tokens — "research instrument": warm-gray surfaces, one restrained
+   viridian accent (hue ~175), tight radii. Components inherit from here.
+--------------------------------------------------------------------------- */
 
 :root {
-  /* Canvas & ink */
-  --bg: #fafafa;
-  --panel: #ffffff;
-  --panel-2: #f1f5f9;
-  --line: #e2e8f0;
-  --line-strong: #cbd5e1;
-  --ink: #0f172a;
-  --ink-2: #334155;
-  --muted: #64748b;
-  --faint: #94a3b8;
-  --track: #eef2f7;
-
-  /* The signature gradient — the heartbeat of the system. */
-  --accent: #0052ff;
-  --accent-2: #4d7cff;
-  --accent-soft: rgb(0 82 255 / 0.06);
-  --accent-line: rgb(0 82 255 / 0.28);
-  --gradient: linear-gradient(135deg, var(--accent), var(--accent-2));
-  --gradient-r: linear-gradient(to right, var(--accent), var(--accent-2));
-
-  /* Role identities. Distinct from each other and from the brand accent. */
-  --cto: #0052ff;
-  --cmo: #ec4899;
-
-  /* Semantic */
-  --pos: #0f8a4d;
-  --neg: #d0342c;
-  --warn: #b45309;
-
-  /* Elevation. Layered, never a single flat drop. */
-  --shadow-sm: 0 1px 3px rgb(15 23 42 / 0.06);
-  --shadow-md: 0 1px 2px rgb(15 23 42 / 0.04), 0 4px 12px rgb(15 23 42 / 0.06);
-  --shadow-lg: 0 2px 4px rgb(15 23 42 / 0.04), 0 12px 28px rgb(15 23 42 / 0.09);
-  --shadow-xl: 0 4px 8px rgb(15 23 42 / 0.05), 0 24px 48px rgb(15 23 42 / 0.12);
-  --shadow-accent: 0 4px 14px rgb(0 82 255 / 0.25);
-  --shadow-accent-lg: 0 8px 24px rgb(0 82 255 / 0.35);
-
-  --radius: 12px;
-  --radius-lg: 16px;
-
-  /*
-   * Measure system. Without explicit caps, `flex-1` children grow without
-   * limit on wide displays — 1200px progress bars and 1000px single-line
-   * inputs. These are the widths past which an element stops communicating.
-   */
-  --w-page: 1440px; /* outer shell */
-  --w-prose: 1120px; /* reading + forms */
-  --w-input: 760px; /* single-line inputs */
-  --w-meter: 560px; /* bars and meters */
+  --background: oklch(0.976 0.0035 80);
+  --foreground: oklch(0.235 0.008 60);
+  --card: oklch(0.99 0.002 80);
+  --card-foreground: oklch(0.235 0.008 60);
+  --popover: oklch(0.99 0.002 80);
+  --popover-foreground: oklch(0.235 0.008 60);
+  --primary: oklch(0.46 0.07 175);
+  --primary-foreground: oklch(0.98 0.008 175);
+  --secondary: oklch(0.942 0.005 80);
+  --secondary-foreground: oklch(0.3 0.01 60);
+  --muted: oklch(0.945 0.005 80);
+  --muted-foreground: oklch(0.5 0.012 70);
+  --accent: oklch(0.936 0.008 165);
+  --accent-foreground: oklch(0.28 0.02 175);
+  --destructive: oklch(0.55 0.19 27);
+  --border: oklch(0.898 0.006 80);
+  --input: oklch(0.898 0.006 80);
+  --ring: oklch(0.55 0.07 175);
+  --chart-1: oklch(0.46 0.07 175);
+  --chart-2: oklch(0.65 0.06 175);
+  --chart-3: oklch(0.8 0.04 175);
+  --chart-4: oklch(0.55 0.012 70);
+  --chart-5: oklch(0.72 0.008 75);
+  --radius: 0.5rem;
+  --sidebar: oklch(0.96 0.004 80);
+  --sidebar-foreground: oklch(0.235 0.008 60);
+  --sidebar-primary: oklch(0.46 0.07 175);
+  --sidebar-primary-foreground: oklch(0.98 0.008 175);
+  --sidebar-accent: oklch(0.936 0.008 165);
+  --sidebar-accent-foreground: oklch(0.28 0.02 175);
+  --sidebar-border: oklch(0.898 0.006 80);
+  --sidebar-ring: oklch(0.55 0.07 175);
 }
 
-/* Shared page gutter, so every screen lands on the same left edge. */
-.page {
-  width: 100%;
-  max-width: var(--w-page);
-  margin-inline: auto;
-}
-.prose-w {
-  width: 100%;
-  max-width: var(--w-prose);
-}
-.input-w {
-  max-width: var(--w-input);
-}
-.meter-w {
-  max-width: var(--w-meter);
-}
-
-html,
-body {
-  background: var(--bg);
-  color: var(--ink);
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-}
-
-/* ---------------------------------------------------------------------------
-   Typography — dual-font system.
-   Serif carries personality on headlines; Inter carries clarity everywhere
-   else; mono marks technical/labelling moments.
-   --------------------------------------------------------------------------- */
-
-body {
-  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
-}
-
-.display {
-  font-family: var(--font-display), Georgia, serif;
-  font-weight: 400;
-  letter-spacing: -0.02em;
-  line-height: 1.08;
+.dark {
+  --background: oklch(0.195 0.006 70);
+  --foreground: oklch(0.94 0.005 80);
+  --card: oklch(0.235 0.006 70);
+  --card-foreground: oklch(0.94 0.005 80);
+  --popover: oklch(0.235 0.006 70);
+  --popover-foreground: oklch(0.94 0.005 80);
+  --primary: oklch(0.75 0.085 172);
+  --primary-foreground: oklch(0.2 0.03 175);
+  --secondary: oklch(0.28 0.006 70);
+  --secondary-foreground: oklch(0.94 0.005 80);
+  --muted: oklch(0.28 0.006 70);
+  --muted-foreground: oklch(0.69 0.01 75);
+  --accent: oklch(0.3 0.015 175);
+  --accent-foreground: oklch(0.92 0.02 175);
+  --destructive: oklch(0.66 0.17 25);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 14%);
+  --ring: oklch(0.62 0.08 172);
+  --chart-1: oklch(0.75 0.085 172);
+  --chart-2: oklch(0.62 0.07 175);
+  --chart-3: oklch(0.5 0.05 175);
+  --chart-4: oklch(0.7 0.01 75);
+  --chart-5: oklch(0.5 0.008 75);
+  --sidebar: oklch(0.235 0.006 70);
+  --sidebar-foreground: oklch(0.94 0.005 80);
+  --sidebar-primary: oklch(0.75 0.085 172);
+  --sidebar-primary-foreground: oklch(0.2 0.03 175);
+  --sidebar-accent: oklch(0.3 0.015 175);
+  --sidebar-accent-foreground: oklch(0.92 0.02 175);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.62 0.08 172);
 }
 
-.mono {
-  font-family: var(--font-mono), ui-monospace, Menlo, monospace;
-}
-
-/* Key words in a headline take the gradient. Used sparingly — one per page. */
-.gradient-text {
-  background: var(--gradient-r);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-/* Soft gradient bar under a headline word. Purely decorative, sits behind. */
-.gradient-underline {
-  position: relative;
-  display: inline-block;
-}
-.gradient-underline::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -0.15em;
-  height: 0.42em;
-  width: 100%;
-  border-radius: 2px;
-  background: linear-gradient(to right, rgb(0 82 255 / 0.16), rgb(77 124 255 / 0.08));
-  z-index: -1;
-}
-
-/* ---------------------------------------------------------------------------
-   Surfaces
-   --------------------------------------------------------------------------- */
-
-.panel {
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-md);
-}
-
-/* Cards that respond to the cursor. Opt-in so static panels stay calm. */
-.panel-hover {
-  transition: box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
-}
-.panel-hover:hover {
-  box-shadow: var(--shadow-lg);
-  border-color: var(--line-strong);
-  transform: translateY(-2px);
-}
-
-.panel-2 {
-  background: var(--panel-2);
-  border: 1px solid var(--line);
-  border-radius: 10px;
-}
-
-/*
- * Featured surface: a 2px gradient stroke achieved with a padded wrapper.
- * Cheaper and more reliable across browsers than border-image.
- */
-.panel-featured {
-  background: var(--gradient);
-  border-radius: var(--radius);
-  padding: 2px;
-  box-shadow: var(--shadow-accent);
-}
-.panel-featured > * {
-  background: var(--panel);
-  border-radius: calc(var(--radius) - 2px);
-  height: 100%;
-}
-
-/* Inverted section — dramatic rhythm break. Pairs with .dot-pattern. */
-.inverted {
-  background: var(--ink);
-  color: #fff;
-  border-radius: var(--radius-lg);
-  position: relative;
-  overflow: hidden;
-}
-.inverted .label,
-.inverted .muted-in {
-  color: rgb(255 255 255 / 0.55);
-}
-
-/*
- * Texture. Felt rather than seen — stops large flat fields reading as sterile.
- */
-.dot-pattern::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(circle, #fff 1px, transparent 1px);
-  background-size: 32px 32px;
-  opacity: 0.035;
-  pointer-events: none;
-}
-
-.glow::after {
-  content: "";
-  position: absolute;
-  width: 420px;
-  height: 420px;
-  border-radius: 999px;
-  background: var(--accent);
-  opacity: 0.06;
-  filter: blur(150px);
-  top: -160px;
-  right: -120px;
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* ---------------------------------------------------------------------------
-   Controls
-   --------------------------------------------------------------------------- */
-
-.field {
-  width: 100%;
-  background: var(--panel);
-  border: 1px solid var(--line-strong);
-  border-radius: 10px;
-  padding: 11px 13px;
-  color: var(--ink);
-  font-size: 14px;
-  outline: none;
-  transition: border-color 0.18s, box-shadow 0.18s;
-}
-.field:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgb(0 82 255 / 0.14);
-}
-.field::placeholder {
-  color: var(--faint);
-}
-
-.label {
-  display: block;
-  font-family: var(--font-mono), ui-monospace, monospace;
-  font-size: 10.5px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 8px;
-}
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  border-radius: 10px;
-  /* 44px minimum touch target. */
-  min-height: 44px;
-  padding: 10px 18px;
-  font-size: 14px;
-  font-weight: 500;
-  border: 1px solid var(--line-strong);
-  background: var(--panel);
-  color: var(--ink);
-  cursor: pointer;
-  box-shadow: var(--shadow-sm);
-  transition: all 0.2s ease-out;
-}
-.btn:hover:not(:disabled) {
-  background: var(--panel-2);
-  border-color: var(--accent-line);
-  box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
-}
-.btn:active:not(:disabled) {
-  transform: scale(0.98);
-}
-.btn:disabled {
-  opacity: 0.45;
-  cursor: not-allowed;
-}
-
-.btn-primary {
-  background: var(--gradient-r);
-  border-color: transparent;
-  color: #fff;
-  box-shadow: var(--shadow-accent);
-}
-.btn-primary:hover:not(:disabled) {
-  background: var(--gradient-r);
-  border-color: transparent;
-  box-shadow: var(--shadow-accent-lg);
-  filter: brightness(1.08);
-  transform: translateY(-2px);
-}
-
-/* Arrow glyphs slide on hover — a small, consistent reward for pointing. */
-.btn .arrow {
-  transition: transform 0.2s ease-out;
-}
-.btn:hover .arrow {
-  transform: translateX(3px);
-}
-
-.chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  border-radius: 999px;
-  padding: 7px 13px;
-  font-size: 12.5px;
-  min-height: 34px;
-  border: 1px solid var(--line-strong);
-  background: var(--panel);
-  color: var(--muted);
-  cursor: pointer;
-  transition: all 0.18s ease-out;
-  user-select: none;
-}
-.chip:hover:not(:disabled) {
-  border-color: var(--accent-line);
-  color: var(--ink);
-  transform: translateY(-1px);
-}
-.chip:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-.chip[data-on="true"] {
-  background: var(--accent-soft);
-  border-color: var(--accent);
-  color: var(--accent);
-  font-weight: 500;
-}
-
-/* Section label badge — the orienting device at the top of each section. */
-.section-label {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  border-radius: 999px;
-  border: 1px solid var(--accent-line);
-  background: var(--accent-soft);
-  padding: 6px 14px;
-  font-family: var(--font-mono), ui-monospace, monospace;
-  font-size: 10.5px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--accent);
-}
-
-/* Gradient-filled icon tile. */
-.icon-tile {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 38px;
-  height: 38px;
-  border-radius: 10px;
-  background: var(--gradient);
-  color: #fff;
-  box-shadow: var(--shadow-accent);
-  flex-shrink: 0;
-}
-
-/* ===========================================================================
-   Motion
-   ---------------------------------------------------------------------------
-   Driven by CSS + a small IntersectionObserver hook rather than an animation
-   library: everything here is keyframe-shaped, and this keeps the bundle flat
-   and makes reduced-motion a single override.
-   =========================================================================== */
-
-@keyframes revealUp {
-  from {
-    opacity: 0;
-    transform: translateY(28px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-/* Elements start hidden and animate once the observer marks them visible. */
-.reveal {
-  opacity: 0;
-}
-.reveal.is-visible {
-  animation: revealUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-@keyframes floatY {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-.float {
-  animation: floatY 5s ease-in-out infinite;
-}
-.float-slow {
-  animation: floatY 4s ease-in-out infinite;
-}
-
-@keyframes spinSlow {
-  to {
-    transform: rotate(360deg);
-  }
-}
-.spin-slow {
-  animation: spinSlow 60s linear infinite;
-}
-
-@keyframes pulseDot {
-  0%,
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.35);
-    opacity: 0.65;
-  }
-}
-.pulse-dot {
-  animation: pulseDot 2s ease-in-out infinite;
-}
-
-@keyframes shimmer {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(100%);
-  }
-}
-
-.slide-in {
-  animation: revealUp 0.32s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-/* Honour the OS setting: kill continuous motion, keep content visible. */
-@media (prefers-reduced-motion: reduce) {
-  .reveal,
-  .reveal.is-visible,
-  .slide-in {
-    animation: none;
-    opacity: 1;
-  }
-  .float,
-  .float-slow,
-  .spin-slow,
-  .pulse-dot {
-    animation: none;
-  }
+@layer base {
   * {
-    transition-duration: 0.01ms !important;
+    @apply border-border outline-ring/50;
   }
-}
-
-/* ---------------------------------------------------------------------------
-   Misc
-   --------------------------------------------------------------------------- */
-
-.scroll-thin::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-.scroll-thin::-webkit-scrollbar-thumb {
-  background: var(--line-strong);
-  border-radius: 8px;
-}
-.scroll-thin::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-  border-radius: 4px;
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
 }
