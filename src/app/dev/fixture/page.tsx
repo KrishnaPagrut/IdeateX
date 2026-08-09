@@ -150,13 +150,7 @@ export default function FixtureHarnessPage() {
     : null;
 
   return (
-    <div
-      className="mx-auto min-h-dvh max-w-7xl px-4 py-6 sm:px-6"
-      // Workaround for the shell's circular --font-sans token (falls back to
-      // serif); scoped to the harness. Remove once globals.css maps
-      // --font-sans to --font-geist-sans.
-      style={{ fontFamily: "var(--font-geist-sans), system-ui, sans-serif" }}
-    >
+    <div className="mx-auto min-h-dvh max-w-7xl px-4 py-6 sm:px-6">
       <header className="flex flex-wrap items-start justify-between gap-4">
         <div className="min-w-0 max-w-3xl">
           <p className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase">

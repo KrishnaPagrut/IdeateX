@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { ArrowLeftIcon, CheckIcon } from "lucide-react";
+import { ArrowLeftIcon } from "lucide-react";
 import { toast } from "sonner";
 
 import { Badge } from "@/components/ui/badge";
@@ -18,17 +18,22 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { DotmSquare3 } from "@/components/ui/dotm-square-3";
-import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import type { AgentKind, RunStatus } from "@/lib/db/schema";
-import { useRunSnapshot } from "@/lib/hooks/use-run-snapshot";
-import {
-  isTerminalStatus,
-  RUN_STAGES,
-  useRunStream,
-  type RunStage,
-  type RunStreamState,
-} from "@/lib/hooks/use-run-stream";
+import { ResultsView } from "@/components/results/results-view";
+import { toRunAggregates } from "@/components/run-live/adapt";
+import { AgentDrawer } from "@/components/run-live/agent-drawer";
+import { AgentGraph } from "@/components/run-live/agent-graph";
+import { StageProgress } from "@/components/run-live/stage-progress";
+import type {
+  AgentRunSnapshot,
+  PersonaLite,
+  RunSnapshot as VizRunSnapshot,
+} from "@/components/run-live/types";
+import type { Brief } from "@/lib/schemas/brief";
+import type { Synthesis } from "@/lib/schemas/synthesis";
+import type { RunStatus } from "@/lib/db/schema";
+import { useRunSnapshot, type SnapshotAgentRun } from "@/lib/hooks/use-run-snapshot";
+import { isTerminalStatus, useRunStream, type RunStreamState } from "@/lib/hooks/use-run-stream";
 import { cn } from "@/lib/utils";
 import {
   formatElapsed,
@@ -41,77 +46,48 @@ import {
   verdictFromSynthesis,
 } from "../format";
 
-const STAGE_KIND: Record<RunStage, AgentKind> = {
-  framing: "framing",
-  planning: "planner",
-  simulating: "persona",
-  critiquing: "critique",
-  synthesizing: "synthesis",
-};
-
-const STAGE_LABELS: Record<RunStage, string> = {
-  framing: "Framing",
-  planning: "Planning",
-  simulating: "Simulating",
-  critiquing: "Critiquing",
-  synthesizing: "Synthesizing",
-};
-
-interface StageView {
-  stage: RunStage;
-  label: string;
-  state: "pending" | "active" | "completed";
-  done: number;
-  failed: number;
-  total: number | null;
-}
-
 /**
- * Per-stage progress derived from the live stream, with the snapshot filling
- * in whatever happened before this client connected (replay usually covers
- * it, but a completed run with a closed stream still renders correctly).
+ * Snapshot rows overlaid with live stream events: statuses freshen in place,
+ * and agents that only exist as events yet (snapshot not refetched) appear as
+ * minimal rows so the graph shows them immediately.
  */
-function deriveStages(
-  status: RunStatus,
-  stream: RunStreamState,
-  snapshotAgents: Array<{ id: string; kind: AgentKind; status: string }>,
-): StageView[] {
-  // Union of snapshot agent rows and live agent events, keyed by id.
-  const agentById = new Map<string, { kind: AgentKind; status: string }>();
-  for (const agent of snapshotAgents) agentById.set(agent.id, agent);
-  for (const [id, payload] of Object.entries(stream.agents)) {
-    agentById.set(id, { kind: payload.kind, status: payload.status });
-  }
-
-  const statusIdx = (RUN_STAGES as readonly string[]).indexOf(status);
-  const allDone = status === "completed";
-
-  return RUN_STAGES.map((stage, idx) => {
-    const live = stream.stages[stage];
-    const completed = allDone || live.completed || (statusIdx >= 0 && idx < statusIdx);
-    const started = completed || live.started || statusIdx === idx;
-
-    const kind = STAGE_KIND[stage];
-    let done = 0;
-    let failed = 0;
-    let seen = 0;
-    for (const agent of agentById.values()) {
-      if (agent.kind !== kind) continue;
-      seen += 1;
-      if (agent.status === "completed") done += 1;
-      if (agent.status === "failed") failed += 1;
+function mergeAgents(
+  snapshotAgents: SnapshotAgentRun[],
+  streamAgents: RunStreamState["agents"],
+  runId: string,
+): AgentRunSnapshot[] {
+  const byId = new Map<string, AgentRunSnapshot>();
+  for (const row of snapshotAgents) byId.set(row.id, row);
+  for (const [id, payload] of Object.entries(streamAgents)) {
+    const existing = byId.get(id);
+    if (existing) {
+      byId.set(id, { ...existing, status: payload.status, error: payload.error ?? existing.error });
+    } else {
+      byId.set(id, {
+        id,
+        runId,
+        kind: payload.kind,
+        label: payload.label,
+        status: payload.status,
+        parentAgentRunId: payload.parentAgentRunId,
+        personaId: payload.personaId ?? null,
+        segment: payload.segment ?? null,
+        model: null,
+        systemPrompt: null,
+        userPrompt: null,
+        output: null,
+        rawText: null,
+        inputTokens: null,
+        outputTokens: null,
+        costUsd: null,
+        error: payload.error ?? null,
+        startedAt: null,
+        finishedAt: null,
+        createdAt: new Date().toISOString(),
+      });
     }
-    const total = live.agentCount ?? (seen > 0 ? seen : null);
-
-    return {
-      stage,
-      label: STAGE_LABELS[stage],
-      state: completed ? "completed" : started ? "active" : "pending",
-      done,
-      failed,
-      total,
-    };
-  });
+  }
+  return [...byId.values()];
 }
 
 function useElapsed(startIso: string | null, endIso: string | null, running: boolean): string {
@@ -134,6 +110,21 @@ export function RunShell({ runId }: { runId: string }) {
   const stream = useRunStream(runId);
   const [cancelOpen, setCancelOpen] = React.useState(false);
   const [cancelling, setCancelling] = React.useState(false);
+  const [selectedId, setSelectedId] = React.useState<string | null>(null);
+
+  const agents = React.useMemo(
+    () => mergeAgents(snapshot?.agents ?? [], stream.agents, runId),
+    [snapshot?.agents, stream.agents, runId],
+  );
+
+  const handleSelect = React.useCallback(
+    (agentRunId: string) => {
+      setSelectedId(agentRunId);
+      // Freshen prompts/output for agents that finished since the last snapshot.
+      void refetch();
+    },
+    [refetch],
+  );
 
   const status: RunStatus = stream.status ?? snapshot?.run.status ?? "pending";
   const terminal = isTerminalStatus(status);
@@ -183,8 +174,20 @@ export function RunShell({ runId }: { runId: string }) {
   }
 
   const { run } = snapshot;
-  const stages = deriveStages(status, stream, snapshot.agents);
+  const personas = snapshot.personas as Record<string, PersonaLite>;
   const verdict = verdictFromSynthesis(run.synthesis);
+
+  const vizRun: VizRunSnapshot = {
+    ...run,
+    brief: (run.brief as Brief | null) ?? null,
+    synthesis: (run.synthesis as Synthesis | null) ?? null,
+    aggregates: toRunAggregates(run.aggregates, agents),
+  };
+
+  const selectedAgent = selectedId ? (agents.find((a) => a.id === selectedId) ?? null) : null;
+  const selectedPersona = selectedAgent?.personaId
+    ? (personas[selectedAgent.personaId] ?? null)
+    : null;
 
   const cost =
     stream.costUsd !== null
@@ -311,105 +314,43 @@ export function RunShell({ runId }: { runId: string }) {
           <TabsTrigger value="results">Results</TabsTrigger>
         </TabsList>
 
-        <TabsContent value="swarm" className="mt-4">
-          {/* Placeholder panel — workstream C's swarm graph replaces this at integration. */}
-          <div className="rounded-lg border bg-card">
-            <div className="flex items-center justify-between border-b px-4 py-2.5">
-              <span className="font-mono text-[10px] tracking-[0.14em] text-muted-foreground uppercase">
-                Pipeline telemetry
-              </span>
-              <span className="font-mono text-[10px] tracking-[0.14em] text-muted-foreground/60 uppercase">
-                Swarm graph lands at integration
-              </span>
-            </div>
-            <ol className="flex flex-col divide-y">
-              {stages.map((s, i) => (
-                <li key={s.stage} className="flex flex-col gap-2 px-4 py-3">
-                  <div className="flex items-center gap-3">
-                    <span className="font-mono text-[10px] text-muted-foreground tabular-nums">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <span
-                      className={cn(
-                        "text-sm",
-                        s.state === "pending" ? "text-muted-foreground" : "font-medium",
-                      )}
-                    >
-                      {s.label}
-                    </span>
-                    <span className="ml-auto flex items-center gap-2">
-                      {s.total !== null && (
-                        <span className="font-mono text-xs text-muted-foreground tabular-nums">
-                          {s.done}/{s.total} agents
-                          {s.failed > 0 && (
-                            <span className="text-destructive"> · {s.failed} failed</span>
-                          )}
-                        </span>
-                      )}
-                      {s.state === "completed" && <CheckIcon className="size-4 text-primary" />}
-                      {s.state === "active" && (
-                        <DotmSquare3
-                          colorPreset="solid-theme"
-                          size={16}
-                          dotSize={2}
-                          ariaLabel={`${s.label} in progress`}
-                        />
-                      )}
-                      {s.state === "pending" && (
-                        <span className="size-1.5 rounded-full bg-border" aria-hidden />
-                      )}
-                    </span>
-                  </div>
-                  {s.stage === "simulating" && s.total !== null && s.total > 0 && (
-                    <Progress
-                      value={Math.min(100, (s.done / s.total) * 100)}
-                      className="ml-7 h-1"
-                    />
-                  )}
-                </li>
-              ))}
-            </ol>
+        <TabsContent value="swarm" className="mt-4 flex flex-col gap-4">
+          <StageProgress status={status} agents={agents} />
+          <div className="h-[560px] overflow-hidden rounded-lg border bg-card">
+            <AgentGraph
+              agents={agents}
+              personas={personas}
+              onSelect={handleSelect}
+              selectedId={selectedId}
+              className="h-full"
+            />
           </div>
         </TabsContent>
 
         <TabsContent value="results" className="mt-4">
-          {/* Placeholder panel — workstream C's results view replaces this at integration. */}
-          <div className="rounded-lg border bg-card">
-            <div className="flex items-center justify-between border-b px-4 py-2.5">
-              <span className="font-mono text-[10px] tracking-[0.14em] text-muted-foreground uppercase">
-                Synthesis
-              </span>
-              <span className="font-mono text-[10px] tracking-[0.14em] text-muted-foreground/60 uppercase">
-                Full results land at integration
-              </span>
+          {terminal && status !== "completed" && !run.synthesis ? (
+            <div className="rounded-xl border border-dashed p-10 text-center">
+              <p className="text-sm text-muted-foreground">
+                This run ended before a verdict — status: {STATUS_LABELS[status].toLowerCase()}.
+              </p>
             </div>
-            <div className="px-4 py-6">
-              {status === "completed" && verdict ? (
-                <div className="flex flex-col gap-3">
-                  <Badge className={verdictBadgeClass(verdict)}>{VERDICT_LABELS[verdict]}</Badge>
-                  {typeof (run.synthesis as { oneLiner?: unknown })?.oneLiner === "string" && (
-                    <p className="max-w-prose text-lg font-medium text-balance">
-                      {(run.synthesis as { oneLiner: string }).oneLiner}
-                    </p>
-                  )}
-                </div>
-              ) : status === "completed" ? (
-                <p className="text-sm text-muted-foreground">
-                  The run completed, but no synthesis was recorded.
-                </p>
-              ) : terminal ? (
-                <p className="text-sm text-muted-foreground">
-                  This run ended before a verdict — status: {STATUS_LABELS[status].toLowerCase()}.
-                </p>
-              ) : (
-                <p className="text-sm text-muted-foreground">
-                  Results appear here when the run completes.
-                </p>
-              )}
-            </div>
-          </div>
+          ) : (
+            <ResultsView
+              run={vizRun}
+              agents={agents}
+              personas={personas}
+              onSelectAgent={handleSelect}
+            />
+          )}
         </TabsContent>
       </Tabs>
+
+      <AgentDrawer
+        agent={selectedAgent}
+        persona={selectedPersona}
+        personas={personas}
+        onClose={() => setSelectedId(null)}
+      />
     </div>
   );
 }
