@@ -12,6 +12,10 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Generated dot-matrix loader files (shadcn registry) — consumed as-is.
+    "src/lib/dotmatrix-core.tsx",
+    "src/lib/dotmatrix-hooks.ts",
+    "src/components/ui/dotm-square-1.tsx",
   ]),
 ]);
 
