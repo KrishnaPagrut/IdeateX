@@ -56,8 +56,9 @@ export function cancelRun(runId: string): boolean; // true if the run was live i
   `data` = JSON `RunEventMessage`. 15s heartbeat comments.
 - `POST /api/runs/[runId]/cancel` → `{cancelled: boolean}`.
 - `POST /api/runs/estimate` body `{tier, grounding}` → `{usd: number}`.
-- `GET/POST /api/personas`, `GET/PATCH /api/personas/[id]`,
-  `POST /api/personas/generate` body `{count}` (see workstream D).
+- `GET/POST /api/personas` (list filters include `domain` + `subdomain`),
+  `GET /api/personas/pools`, `GET/PATCH /api/personas/[id]`,
+  `POST /api/personas/generate` body `{count?, pool?}` (see workstream D).
 
 ## Fixture contract (workstream C consumes)
 
@@ -70,9 +71,29 @@ export function cancelRun(runId: string): boolean; // true if the run was live i
 
 ## Persona contract (workstream D provides)
 
-- `scripts/seed-personas.ts`: generates ~120 diverse personas in batches of 20
-  via `generate({role: "generator", schema: GeneratedPersonaBatchSchema, ...})`,
-  inserts with `source: 'seed'`, `avatarSeed = nanoid()`. Idempotent-ish: warns
-  if the table already has ≥100 active personas.
-- Persona index format handed to planners (workstream A builds it):
-  `id · name · archetype · age/occupation/location · one-line psychographic summary`.
+- The library is pooled: `src/lib/personas/taxonomy.ts` defines domains →
+  subdomains, and every persona carries `domain` + `subdomain` columns
+  (default `general`/`general` for pre-taxonomy personas).
+- `scripts/seed-personas.ts`: seeds pool-by-pool from the taxonomy via
+  `generate({role: "generator", schema: GeneratedPersonaBatchSchema, ...})`,
+  inserting with the pool's `domain`/`subdomain`, `source: 'seed'`,
+  `avatarSeed = nanoid()`. `--per-pool N` (default 12; ~25 is the full pool
+  target), `--pool domain/subdomain` for one pool, `--append` to grow past the
+  target. Idempotent-ish: pools already at/above target are skipped and a
+  per-pool count report is printed.
+- `GET /api/personas/pools` → `{pools: [{domain, subdomain, name, description,
+  count, sample}]}` — every taxonomy pool (count may be 0) plus non-taxonomy
+  pools found in the DB (e.g. general/general). `sample` is up to 5
+  `{id, name, avatarSeed}` for avatar stacks.
+- `POST /api/personas/generate` body `{count?, pool?: "domain/subdomain"}` —
+  with `pool`, personas are written to fit that subdomain and stamped into it;
+  unknown pools 400.
+- Planners never see individual personas at library scale. The engine
+  (workstream A) builds a `PoolCatalogEntry[]` catalog from the live library —
+  `{key, name, description, available, labels}` per pool, labels being the
+  pool's most frequent persona tags — and planners write casting contracts
+  against it (`formatPoolCatalog` in `src/lib/prompts/planner.ts`). The engine
+  resolves contracts to concrete personas within the run's persona budget,
+  softly matching `mustInclude` labels against persona `tags`/`archetype` — so
+  tags are casting labels: 3-6 lowercase-kebab-case descriptors per persona
+  mixing attitude, life stage, and context.

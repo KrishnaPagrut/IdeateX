@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 
 import { PersonaLibrary } from "@/components/personas/persona-library";
@@ -8,5 +9,10 @@ export const metadata: Metadata = {
 };
 
 export default function PersonasPage() {
-  return <PersonaLibrary />;
+  // Suspense: PersonaLibrary reads useSearchParams (pool deep-links).
+  return (
+    <Suspense>
+      <PersonaLibrary />
+    </Suspense>
+  );
 }

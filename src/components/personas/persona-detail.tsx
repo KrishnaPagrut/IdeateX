@@ -167,6 +167,12 @@ export function PersonaDetail({ id }: { id: string }) {
           </div>
           <dl className="flex flex-col gap-1 font-mono text-[11px] text-muted-foreground">
             <div>
+              POOL{" "}
+              <span title="The domain/subdomain pool planners cast this persona from">
+                {persona.domain}/{persona.subdomain}
+              </span>
+            </div>
+            <div>
               SRC <span className="uppercase">{persona.source}</span>
             </div>
             <div>ID {persona.id.slice(0, 8)}</div>
@@ -288,11 +294,15 @@ export function PersonaDetail({ id }: { id: string }) {
 
               <section>
                 <h2 className="font-mono text-[11px] tracking-[0.18em] uppercase text-muted-foreground">
-                  Tags
+                  Casting labels
                 </h2>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  Planners match these against their casting contracts when drawing from
+                  the {persona.domain}/{persona.subdomain} pool.
+                </p>
                 <div className="mt-3 flex flex-wrap gap-1.5">
                   {persona.tags.map((t) => (
-                    <Badge key={t} variant="outline" className="font-mono text-[10px]">
+                    <Badge key={t} variant="secondary" className="font-mono text-[10px]">
                       {t}
                     </Badge>
                   ))}
