@@ -2,6 +2,8 @@
 
 import { useRouter } from "next/navigation";
 
+import { RelativeTime } from "@/components/relative-time";
+
 import { Badge } from "@/components/ui/badge";
 import {
   Table,
@@ -13,7 +15,7 @@ import {
 } from "@/components/ui/table";
 import type { RunStatus, RunTier } from "@/lib/db/schema";
 import {
-  formatRelativeTime,
+  
   formatUsd,
   STATUS_LABELS,
   statusBadgeClass,
@@ -83,7 +85,7 @@ export function RunsTable({ rows }: { rows: RunRow[] }) {
                 {formatUsd(run.costUsd) ?? "—"}
               </TableCell>
               <TableCell className="text-right text-xs whitespace-nowrap text-muted-foreground">
-                {formatRelativeTime(run.createdAt)}
+                <RelativeTime iso={run.createdAt} />
               </TableCell>
             </TableRow>
           ))}

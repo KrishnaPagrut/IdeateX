@@ -79,10 +79,10 @@ export function formatUsd(value: string | number | null | undefined): string | n
   return `$${usd.toFixed(2)}`;
 }
 
-export function formatRelativeTime(iso: string): string {
+export function formatRelativeTime(iso: string, now: number = Date.now()): string {
   const then = new Date(iso).getTime();
   if (!Number.isFinite(then)) return "—";
-  const seconds = Math.round((Date.now() - then) / 1000);
+  const seconds = Math.round((now - then) / 1000);
   if (seconds < 45) return "just now";
   const minutes = Math.round(seconds / 60);
   if (minutes < 60) return `${minutes}m ago`;

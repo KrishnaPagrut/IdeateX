@@ -100,6 +100,10 @@ function useElapsed(startIso: string | null, endIso: string | null, running: boo
   }, [running]);
 
   if (!startIso) return "00:00";
+  // A settled run with no recorded end (a stale run, or the moment between
+  // live completion and the final snapshot refetch) has an unknowable
+  // duration — wall-clock-since-start would show hours for a 2-minute run.
+  if (!running && !endIso) return "—";
   const start = new Date(startIso).getTime();
   const end = endIso ? new Date(endIso).getTime() : now;
   return formatElapsed(end - start);
