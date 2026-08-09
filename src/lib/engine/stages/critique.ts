@@ -3,7 +3,7 @@ import { xai } from "@ai-sdk/xai";
 import type { Run } from "@/lib/db";
 import { isMock } from "@/lib/llm/client";
 import { methodologyCritiquePrompt, redTeamCritiquePrompt } from "@/lib/prompts/critique";
-import type { Brief } from "@/lib/schemas/brief";
+import type { MarketingBrief } from "@/lib/schemas/brief";
 import { CritiqueSchema, type Critique } from "@/lib/schemas/critique";
 import type { Aggregates, VerdictRecord } from "../aggregate";
 import { executeAgent, type AgentContext } from "../agent";
@@ -35,7 +35,7 @@ function sampleVerdicts(records: VerdictRecord[], n: number): VerdictRecord[] {
 export async function runCritiqueStage(
   ctx: AgentContext,
   run: Run,
-  brief: Brief,
+  brief: MarketingBrief,
   aggregates: Aggregates,
   records: VerdictRecord[],
   framingAgentId: string,

@@ -10,7 +10,7 @@ import {
   plannerPrompt,
   type PoolCatalogEntry,
 } from "@/lib/prompts/planner";
-import type { Brief } from "@/lib/schemas/brief";
+import type { MarketingBrief } from "@/lib/schemas/brief";
 import { CastingSpecSchema, type CastingSpec } from "@/lib/schemas/casting";
 import { executeAgent, type AgentContext } from "../agent";
 
@@ -146,7 +146,7 @@ function resolveSpec(
 export async function runPlanningStage(
   ctx: AgentContext,
   run: Run,
-  brief: Brief,
+  brief: MarketingBrief,
   framingAgentId: string,
 ): Promise<PlanningResult> {
   const shape = TIER_SHAPE[run.tier];
@@ -164,9 +164,9 @@ export async function runPlanningStage(
   const perPlannerBudget = Math.max(3, Math.floor(runBudget / shape.planners));
 
   const plannerJobs = Array.from({ length: shape.planners }, (_, i) => {
-    // The framing prompt pins segment count to planner count, but tolerate a
-    // shorter list (e.g. schema-min mock briefs) by cycling segments.
-    const segment = brief.segments[i % brief.segments.length];
+    // The framing prompt pins cohort count to planner count, but tolerate a
+    // shorter list (e.g. schema-min mock briefs) by cycling cohorts.
+    const segment = brief.cohorts[i % brief.cohorts.length];
     return { index: i, segment };
   });
 

@@ -2,7 +2,7 @@ import { eq } from "drizzle-orm";
 
 import { db, runs, type Run } from "@/lib/db";
 import { synthesisPrompt, type QuoteForSynthesis } from "@/lib/prompts/synthesis";
-import type { Brief } from "@/lib/schemas/brief";
+import type { MarketingBrief } from "@/lib/schemas/brief";
 import { SynthesisSchema, type Synthesis } from "@/lib/schemas/synthesis";
 import type { Aggregates, VerdictRecord } from "../aggregate";
 import { executeAgent, type AgentContext } from "../agent";
@@ -49,7 +49,7 @@ export function selectQuotes(records: VerdictRecord[], budget = QUOTE_BUDGET): Q
 export async function runSynthesisStage(
   ctx: AgentContext,
   run: Run,
-  brief: Brief,
+  brief: MarketingBrief,
   aggregates: Aggregates,
   critiques: CritiqueResult,
   records: VerdictRecord[],

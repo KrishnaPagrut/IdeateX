@@ -1,5 +1,5 @@
 import type { Aggregates, VerdictRecord } from "@/lib/engine/aggregate";
-import type { Brief } from "@/lib/schemas/brief";
+import type { MarketingBrief } from "@/lib/schemas/brief";
 
 // ---------------------------------------------------------------------------
 // Two critics with opposite targets:
@@ -27,7 +27,7 @@ function formatVerdictSample(records: VerdictRecord[]): string {
 }
 
 export interface MethodologyCritiquePromptArgs {
-  brief: Brief;
+  brief: MarketingBrief;
   aggregates: Aggregates;
   sampledVerdicts: VerdictRecord[];
 }
@@ -43,7 +43,7 @@ export function methodologyCritiquePrompt(args: MethodologyCritiquePromptArgs): 
   ].join("\n");
 
   const prompt = [
-    `# Study design\nIdea: ${args.brief.ideaSummary}\nSegments: ${args.brief.segments.map((s) => s.name).join("; ")}\nKey assumptions probed: ${args.brief.keyAssumptions.join("; ")}`,
+    `# Study design\nIdea: ${args.brief.productSummary}\nSegments: ${args.brief.cohorts.map((s) => s.name).join("; ")}\nKey assumptions probed: ${args.brief.keyAssumptions.join("; ")}`,
     `# Aggregate results\n${JSON.stringify(args.aggregates, null, 2)}`,
     `# Sampled raw verdicts (${args.sampledVerdicts.length})\n${formatVerdictSample(args.sampledVerdicts)}`,
     "Critique the study now.",
@@ -53,7 +53,7 @@ export function methodologyCritiquePrompt(args: MethodologyCritiquePromptArgs): 
 }
 
 export interface RedTeamCritiquePromptArgs {
-  brief: Brief;
+  brief: MarketingBrief;
   idea: string;
   context?: string | null;
   aggregates: Aggregates;
@@ -77,7 +77,7 @@ export function redTeamCritiquePrompt(args: RedTeamCritiquePromptArgs): {
   const prompt = [
     `# The idea\n${args.idea}`,
     args.context ? `# Founder context\n${args.context}` : null,
-    `# How the study framed it\nSummary: ${args.brief.ideaSummary}\nTarget market: ${args.brief.targetMarket}\nRisk dimensions already identified: ${args.brief.riskDimensions.join("; ")}`,
+    `# How the study framed it\nSummary: ${args.brief.productSummary}\nTarget market: ${args.brief.objectiveSummary}\nRisk dimensions already identified: ${args.brief.riskDimensions.join("; ")}`,
     `# What the simulated panel concluded\n${JSON.stringify(args.aggregates, null, 2)}`,
     "Attack the idea now.",
   ]
