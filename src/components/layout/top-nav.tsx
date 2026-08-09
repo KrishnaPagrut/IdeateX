@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { cn } from "@/lib/utils";
 
 const LINKS = [
@@ -27,7 +28,7 @@ export function TopNav() {
             synthetic focus groups
           </span>
         </Link>
-        <nav className="flex items-center gap-1 text-sm">
+        <nav className="flex flex-1 items-center gap-1 text-sm">
           {LINKS.map((link) => {
             const active = link.isActive(pathname);
             return (
@@ -47,6 +48,7 @@ export function TopNav() {
             );
           })}
         </nav>
+        <ThemeToggle />
       </div>
     </header>
   );
