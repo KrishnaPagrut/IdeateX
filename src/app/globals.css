@@ -1,0 +1,459 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===========================================================================
+   Design tokens — Minimalist Modern
+   ---------------------------------------------------------------------------
+   Every colour, shadow and radius in the app resolves through this block, so
+   the whole product can be re-themed from one place. Pages never hardcode hex.
+   =========================================================================== */
+
+:root {
+  /* Canvas & ink */
+  --bg: #fafafa;
+  --panel: #ffffff;
+  --panel-2: #f1f5f9;
+  --line: #e2e8f0;
+  --line-strong: #cbd5e1;
+  --ink: #0f172a;
+  --ink-2: #334155;
+  --muted: #64748b;
+  --faint: #94a3b8;
+  --track: #eef2f7;
+
+  /* The signature gradient — the heartbeat of the system. */
+  --accent: #0052ff;
+  --accent-2: #4d7cff;
+  --accent-soft: rgb(0 82 255 / 0.06);
+  --accent-line: rgb(0 82 255 / 0.28);
+  --gradient: linear-gradient(135deg, var(--accent), var(--accent-2));
+  --gradient-r: linear-gradient(to right, var(--accent), var(--accent-2));
+
+  /* Role identities. Distinct from each other and from the brand accent. */
+  --cto: #0052ff;
+  --cmo: #ec4899;
+
+  /* Semantic */
+  --pos: #0f8a4d;
+  --neg: #d0342c;
+  --warn: #b45309;
+
+  /* Elevation. Layered, never a single flat drop. */
+  --shadow-sm: 0 1px 3px rgb(15 23 42 / 0.06);
+  --shadow-md: 0 1px 2px rgb(15 23 42 / 0.04), 0 4px 12px rgb(15 23 42 / 0.06);
+  --shadow-lg: 0 2px 4px rgb(15 23 42 / 0.04), 0 12px 28px rgb(15 23 42 / 0.09);
+  --shadow-xl: 0 4px 8px rgb(15 23 42 / 0.05), 0 24px 48px rgb(15 23 42 / 0.12);
+  --shadow-accent: 0 4px 14px rgb(0 82 255 / 0.25);
+  --shadow-accent-lg: 0 8px 24px rgb(0 82 255 / 0.35);
+
+  --radius: 12px;
+  --radius-lg: 16px;
+}
+
+html,
+body {
+  background: var(--bg);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ---------------------------------------------------------------------------
+   Typography — dual-font system.
+   Serif carries personality on headlines; Inter carries clarity everywhere
+   else; mono marks technical/labelling moments.
+   --------------------------------------------------------------------------- */
+
+body {
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+.display {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.08;
+}
+
+.mono {
+  font-family: var(--font-mono), ui-monospace, Menlo, monospace;
+}
+
+/* Key words in a headline take the gradient. Used sparingly — one per page. */
+.gradient-text {
+  background: var(--gradient-r);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Soft gradient bar under a headline word. Purely decorative, sits behind. */
+.gradient-underline {
+  position: relative;
+  display: inline-block;
+}
+.gradient-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.15em;
+  height: 0.42em;
+  width: 100%;
+  border-radius: 2px;
+  background: linear-gradient(to right, rgb(0 82 255 / 0.16), rgb(77 124 255 / 0.08));
+  z-index: -1;
+}
+
+/* ---------------------------------------------------------------------------
+   Surfaces
+   --------------------------------------------------------------------------- */
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+}
+
+/* Cards that respond to the cursor. Opt-in so static panels stay calm. */
+.panel-hover {
+  transition: box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+}
+.panel-hover:hover {
+  box-shadow: var(--shadow-lg);
+  border-color: var(--line-strong);
+  transform: translateY(-2px);
+}
+
+.panel-2 {
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
+/*
+ * Featured surface: a 2px gradient stroke achieved with a padded wrapper.
+ * Cheaper and more reliable across browsers than border-image.
+ */
+.panel-featured {
+  background: var(--gradient);
+  border-radius: var(--radius);
+  padding: 2px;
+  box-shadow: var(--shadow-accent);
+}
+.panel-featured > * {
+  background: var(--panel);
+  border-radius: calc(var(--radius) - 2px);
+  height: 100%;
+}
+
+/* Inverted section — dramatic rhythm break. Pairs with .dot-pattern. */
+.inverted {
+  background: var(--ink);
+  color: #fff;
+  border-radius: var(--radius-lg);
+  position: relative;
+  overflow: hidden;
+}
+.inverted .label,
+.inverted .muted-in {
+  color: rgb(255 255 255 / 0.55);
+}
+
+/*
+ * Texture. Felt rather than seen — stops large flat fields reading as sterile.
+ */
+.dot-pattern::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, #fff 1px, transparent 1px);
+  background-size: 32px 32px;
+  opacity: 0.035;
+  pointer-events: none;
+}
+
+.glow::after {
+  content: "";
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  border-radius: 999px;
+  background: var(--accent);
+  opacity: 0.06;
+  filter: blur(150px);
+  top: -160px;
+  right: -120px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ---------------------------------------------------------------------------
+   Controls
+   --------------------------------------------------------------------------- */
+
+.field {
+  width: 100%;
+  background: var(--panel);
+  border: 1px solid var(--line-strong);
+  border-radius: 10px;
+  padding: 11px 13px;
+  color: var(--ink);
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.18s, box-shadow 0.18s;
+}
+.field:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgb(0 82 255 / 0.14);
+}
+.field::placeholder {
+  color: var(--faint);
+}
+
+.label {
+  display: block;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 10px;
+  /* 44px minimum touch target. */
+  min-height: 44px;
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 500;
+  border: 1px solid var(--line-strong);
+  background: var(--panel);
+  color: var(--ink);
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s ease-out;
+}
+.btn:hover:not(:disabled) {
+  background: var(--panel-2);
+  border-color: var(--accent-line);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+.btn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: var(--gradient-r);
+  border-color: transparent;
+  color: #fff;
+  box-shadow: var(--shadow-accent);
+}
+.btn-primary:hover:not(:disabled) {
+  background: var(--gradient-r);
+  border-color: transparent;
+  box-shadow: var(--shadow-accent-lg);
+  filter: brightness(1.08);
+  transform: translateY(-2px);
+}
+
+/* Arrow glyphs slide on hover — a small, consistent reward for pointing. */
+.btn .arrow {
+  transition: transform 0.2s ease-out;
+}
+.btn:hover .arrow {
+  transform: translateX(3px);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 999px;
+  padding: 7px 13px;
+  font-size: 12.5px;
+  min-height: 34px;
+  border: 1px solid var(--line-strong);
+  background: var(--panel);
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.18s ease-out;
+  user-select: none;
+}
+.chip:hover:not(:disabled) {
+  border-color: var(--accent-line);
+  color: var(--ink);
+  transform: translateY(-1px);
+}
+.chip:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.chip[data-on="true"] {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent);
+  font-weight: 500;
+}
+
+/* Section label badge — the orienting device at the top of each section. */
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 999px;
+  border: 1px solid var(--accent-line);
+  background: var(--accent-soft);
+  padding: 6px 14px;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* Gradient-filled icon tile. */
+.icon-tile {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: var(--gradient);
+  color: #fff;
+  box-shadow: var(--shadow-accent);
+  flex-shrink: 0;
+}
+
+/* ===========================================================================
+   Motion
+   ---------------------------------------------------------------------------
+   Driven by CSS + a small IntersectionObserver hook rather than an animation
+   library: everything here is keyframe-shaped, and this keeps the bundle flat
+   and makes reduced-motion a single override.
+   =========================================================================== */
+
+@keyframes revealUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Elements start hidden and animate once the observer marks them visible. */
+.reveal {
+  opacity: 0;
+}
+.reveal.is-visible {
+  animation: revealUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes floatY {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+.float {
+  animation: floatY 5s ease-in-out infinite;
+}
+.float-slow {
+  animation: floatY 4s ease-in-out infinite;
+}
+
+@keyframes spinSlow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.spin-slow {
+  animation: spinSlow 60s linear infinite;
+}
+
+@keyframes pulseDot {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.35);
+    opacity: 0.65;
+  }
+}
+.pulse-dot {
+  animation: pulseDot 2s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.slide-in {
+  animation: revealUp 0.32s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Honour the OS setting: kill continuous motion, keep content visible. */
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal.is-visible,
+  .slide-in {
+    animation: none;
+    opacity: 1;
+  }
+  .float,
+  .float-slow,
+  .spin-slow,
+  .pulse-dot {
+    animation: none;
+  }
+  * {
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Misc
+   --------------------------------------------------------------------------- */
+
+.scroll-thin::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.scroll-thin::-webkit-scrollbar-thumb {
+  background: var(--line-strong);
+  border-radius: 8px;
+}
+.scroll-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
