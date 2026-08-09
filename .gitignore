@@ -32,3 +32,6 @@ coverage/
 
 # local dev database (PGlite fallback when DATABASE_URL is unset)
 .pglite/
+
+# claude worktrees / local session files
+.claude/
