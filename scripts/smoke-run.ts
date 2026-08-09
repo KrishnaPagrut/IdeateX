@@ -26,6 +26,7 @@ const mock = hasFlag("mock");
 const fixture = hasFlag("fixture");
 // The fixture contract wants a completed mock Standard run; otherwise default quick.
 const tier = optValue("tier") ?? (fixture ? "standard" : "quick");
+const discussion = hasFlag("discussion");
 
 if (!["quick", "standard", "deep"].includes(tier)) {
   console.error(`invalid --tier ${tier} (expected quick|standard|deep)`);
@@ -155,12 +156,13 @@ async function main(): Promise<void> {
       context: "Target launch: US + EU app stores. Team of 2, pre-seed.",
       tier: tier as RunTier,
       grounding: false,
+      discussion,
       status: "pending",
-      estCostUsd: estimateRunCost(tier as RunTier, false).toFixed(4),
+      estCostUsd: estimateRunCost(tier as RunTier, false, discussion).toFixed(4),
     })
     .returning();
   const runId = runRow.id;
-  console.log(`Run ${runId} created (tier=${tier}, mock=${mock})`);
+  console.log(`Run ${runId} created (tier=${tier}, mock=${mock}, discussion=${discussion})`);
 
   // 3. Follow the live event stream.
   const liveSeqs: number[] = [];

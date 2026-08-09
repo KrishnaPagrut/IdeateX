@@ -54,8 +54,9 @@ export async function runSynthesisStage(
   critiques: CritiqueResult,
   records: VerdictRecord[],
   framingAgentId: string,
+  discussionNote = "",
 ): Promise<Synthesis> {
-  const { system, prompt } = synthesisPrompt({
+  const { system, prompt: basePrompt } = synthesisPrompt({
     idea: run.idea,
     context: run.context,
     brief,
@@ -64,6 +65,7 @@ export async function runSynthesisStage(
     redTeamCritique: critiques.redteam,
     quotes: selectQuotes(records),
   });
+  const prompt = discussionNote ? `${basePrompt}\n\n${discussionNote}` : basePrompt;
 
   const { output } = await executeAgent({
     ctx,

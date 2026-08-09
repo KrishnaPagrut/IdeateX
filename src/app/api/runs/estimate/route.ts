@@ -8,6 +8,7 @@ export const runtime = "nodejs";
 const EstimateSchema = z.object({
   tier: z.enum(RUN_TIERS),
   grounding: z.boolean(),
+  discussion: z.boolean().optional().default(false),
 });
 
 export async function POST(request: Request) {
@@ -26,5 +27,5 @@ export async function POST(request: Request) {
     );
   }
 
-  return Response.json({ usd: estimateRunCost(parsed.data.tier, parsed.data.grounding) });
+  return Response.json({ usd: estimateRunCost(parsed.data.tier, parsed.data.grounding, parsed.data.discussion) });
 }

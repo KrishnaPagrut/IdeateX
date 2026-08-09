@@ -27,7 +27,9 @@ async function createDb(): Promise<Database> {
     return drizzlePostgres(client, { schema });
   }
 
-  const pglite = new PGlite(path.join(process.cwd(), ".pglite"));
+  // PGLITE_DIR lets scripts/tests use their own database directory — PGlite is
+  // single-process, so sharing ./.pglite with a running dev server corrupts it.
+  const pglite = new PGlite(process.env.PGLITE_DIR ?? path.join(process.cwd(), ".pglite"));
   const db = drizzlePglite(pglite, { schema });
   await migratePglite(db, { migrationsFolder: path.join(process.cwd(), "drizzle") });
   return db as unknown as Database;

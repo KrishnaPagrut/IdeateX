@@ -13,6 +13,8 @@ export interface VerdictRecord {
   archetype: string;
   incomeBand: string;
   verdict: Verdict;
+  /** agent_runs id of the simulation call — used by the discussion stage for graph edges. */
+  agentRunId?: string;
 }
 
 export interface GroupStats {

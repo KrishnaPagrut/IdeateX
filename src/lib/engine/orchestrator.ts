@@ -8,6 +8,7 @@ import { isAbortError } from "./concurrency";
 import { emitRunEvent, initRunSequence } from "./events";
 import { abortRun, registerRun, releaseRun } from "./registry";
 import { runCritiqueStage } from "./stages/critique";
+import { runDiscussionStage, summarizeDiscussion } from "./stages/discussion";
 import { runFramingStage } from "./stages/framing";
 import { runSimulationStage } from "./stages/personas";
 import { runPlanningStage } from "./stages/planning";
@@ -31,6 +32,7 @@ const NON_TERMINAL: RunStatus[] = [
   "framing",
   "planning",
   "simulating",
+  "discussing",
   "critiquing",
   "synthesizing",
 ];
@@ -125,17 +127,45 @@ async function pipeline(runId: string, signal: AbortSignal, meter: CostMeter): P
   await emitRunEvent(runId, "stage:completed", { stage: "simulating" });
   checkpoint(ctx);
 
+  // -- discussing (opt-in focus group)
+  let discussionNote = "";
+  if (run.discussion) {
+    await setStatus(runId, "discussing");
+    await emitRunEvent(runId, "stage:started", { stage: "discussing", agentCount: records.length });
+    const replies = await runDiscussionStage(ctx, run, records, personaById);
+    discussionNote = summarizeDiscussion(replies);
+    await emitRunEvent(runId, "stage:completed", { stage: "discussing" });
+    checkpoint(ctx);
+  }
+
   // -- critiquing
   await setStatus(runId, "critiquing");
   await emitRunEvent(runId, "stage:started", { stage: "critiquing", agentCount: 2 });
-  const critiques = await runCritiqueStage(ctx, run, brief, aggregates, records, framingAgentId);
+  const critiques = await runCritiqueStage(
+    ctx,
+    run,
+    brief,
+    aggregates,
+    records,
+    framingAgentId,
+    discussionNote,
+  );
   await emitRunEvent(runId, "stage:completed", { stage: "critiquing" });
   checkpoint(ctx);
 
   // -- synthesizing
   await setStatus(runId, "synthesizing");
   await emitRunEvent(runId, "stage:started", { stage: "synthesizing", agentCount: 1 });
-  await runSynthesisStage(ctx, run, brief, aggregates, critiques, records, framingAgentId);
+  await runSynthesisStage(
+    ctx,
+    run,
+    brief,
+    aggregates,
+    critiques,
+    records,
+    framingAgentId,
+    discussionNote,
+  );
   await emitRunEvent(runId, "stage:completed", { stage: "synthesizing" });
 
   // -- done

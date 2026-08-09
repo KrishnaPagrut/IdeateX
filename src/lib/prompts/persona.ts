@@ -14,7 +14,7 @@ export interface PersonaPromptArgs {
   probeQuestions: string[];
 }
 
-function characterSheet(p: Persona): string {
+export function characterSheet(p: Persona): string {
   const d = p.demographics;
   const s = p.psychographics;
   return [

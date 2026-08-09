@@ -13,6 +13,7 @@ import type { AgentStatus } from "@/lib/db/schema";
 import type { Brief } from "@/lib/schemas/brief";
 import type { CastingPlan } from "@/lib/schemas/casting";
 import type { Critique } from "@/lib/schemas/critique";
+import type { DiscussionOutput } from "@/lib/schemas/discussion";
 import type { Synthesis } from "@/lib/schemas/synthesis";
 import type { Verdict } from "@/lib/schemas/verdict";
 
@@ -317,6 +318,36 @@ function SynthesisOutput({ synthesis }: { synthesis: Synthesis }) {
   );
 }
 
+function DiscussionOutputSection({ reply }: { reply: DiscussionOutput }) {
+  return (
+    <div className="space-y-4">
+      <div className="rounded-lg border bg-secondary/40 p-3">
+        <Quote className="size-3 text-muted-foreground" aria-hidden />
+        <p className="mt-1.5 text-xs leading-relaxed text-foreground/90 italic">{reply.reaction}</p>
+      </div>
+      <div className="flex items-center gap-2">
+        <Eyebrow>After the group</Eyebrow>
+        <span className="font-mono text-xs tabular-nums">
+          adoption → {reply.updatedAdoptionLikelihood}/100
+        </span>
+        {reply.changedMind && (
+          <Badge variant="outline" className="font-mono text-[9px] tracking-wider uppercase">
+            changed mind
+          </Badge>
+        )}
+      </div>
+      <div>
+        <Eyebrow>Key point heard</Eyebrow>
+        <p className="mt-1 text-xs leading-relaxed text-foreground/90">{reply.keyPointHeard}</p>
+      </div>
+      {reply.agreesWith.length > 0 && <ListSection title="Sided with" items={reply.agreesWith} />}
+      {reply.disagreesWith.length > 0 && (
+        <ListSection title="Pushed back on" items={reply.disagreesWith} tone="destructive" />
+      )}
+    </div>
+  );
+}
+
 function OutputSection({
   agent,
   personas,
@@ -341,6 +372,8 @@ function OutputSection({
       return <CastingOutput plan={agent.output as CastingPlan} personas={personas} />;
     case "framing":
       return <BriefOutput brief={agent.output as Brief} />;
+    case "discussion":
+      return <DiscussionOutputSection reply={agent.output as DiscussionOutput} />;
     case "critique":
       return <CritiqueOutput critique={agent.output as Critique} />;
     case "synthesis":

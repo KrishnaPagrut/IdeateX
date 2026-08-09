@@ -46,47 +46,73 @@ export interface AgentGraphProps {
   className?: string;
 }
 
-function buildGraph(agents: AgentLite[], personas: Record<string, PersonaLite>) {
+/** Reads the focus-group interaction targets from a discussion agent's output. */
+function heardIds(agent: AgentLite): string[] {
+  const output = (agent as { output?: unknown }).output;
+  if (output && typeof output === "object" && Array.isArray((output as { heardAgentRunIds?: unknown }).heardAgentRunIds)) {
+    return (output as { heardAgentRunIds: string[] }).heardAgentRunIds;
+  }
+  return [];
+}
+
+function buildGraph(
+  agents: AgentLite[],
+  personas: Record<string, PersonaLite>,
+  selectedId?: string | null,
+) {
   const framing = agents.filter((a) => a.kind === "framing");
   const planners = agents.filter((a) => a.kind === "planner");
   const personaAgents = agents.filter((a) => a.kind === "persona");
+  const discussions = agents.filter((a) => a.kind === "discussion");
   const critiques = agents.filter((a) => a.kind === "critique");
   const synthesis = agents.filter((a) => a.kind === "synthesis");
 
   // Cluster personas by parent planner (preserving planner order); personas
   // with an unknown parent get a trailing cluster so nothing is dropped.
-  const clusters: Array<{ plannerId: string | null; members: AgentLite[] }> = planners.map(
-    (p) => ({ plannerId: p.id, members: [] }),
-  );
+  const clusters: Array<{
+    plannerId: string | null;
+    members: AgentLite[];
+    replies: AgentLite[];
+  }> = planners.map((p) => ({ plannerId: p.id, members: [], replies: [] }));
   const orphans: AgentLite[] = [];
   for (const pa of personaAgents) {
     const c = clusters.find((cl) => cl.plannerId === pa.parentAgentRunId);
     if (c) c.members.push(pa);
     else orphans.push(pa);
   }
-  if (orphans.length > 0) clusters.push({ plannerId: null, members: orphans });
+  if (orphans.length > 0) clusters.push({ plannerId: null, members: orphans, replies: [] });
+
+  // Focus-group replies join the cluster holding their parent persona.
+  for (const d of discussions) {
+    const c = clusters.find((cl) => cl.members.some((m) => m.id === d.parentAgentRunId));
+    (c ?? clusters[clusters.length - 1])?.replies.push(d);
+  }
 
   // Cluster geometry: compact grid, more columns as clusters grow so 100+
-  // personas stay shallow and legible.
+  // personas stay shallow and legible. Replies add rows below the personas.
+  const REPLY_GAP = 18;
   const geo = clusters.map((c) => {
     const n = Math.max(c.members.length, 1);
     const cols = Math.min(5, Math.max(2, Math.ceil(Math.sqrt(n))));
     const rows = Math.ceil(n / cols);
+    const replyRows = Math.ceil(c.replies.length / cols);
     const width = Math.max(cols * CHIP_W + (cols - 1) * CHIP_GAP_X, HUB_W);
-    return { cols, rows, width };
+    return { cols, rows, replyRows, width };
   });
 
   const totalWidth =
     geo.reduce((sum, g) => sum + g.width, 0) + CLUSTER_GAP * Math.max(geo.length - 1, 0);
-  const maxRows = Math.max(...geo.map((g) => g.rows), 1);
-  const bottomY = ROW_PERSONA_Y + maxRows * (CHIP_H + CHIP_GAP_Y) + 90;
+  const maxRows = Math.max(...geo.map((g) => g.rows + g.replyRows), 1);
+  const hasReplies = discussions.length > 0;
+  const bottomY =
+    ROW_PERSONA_Y + maxRows * (CHIP_H + CHIP_GAP_Y) + (hasReplies ? REPLY_GAP : 0) + 90;
 
   const nodes: AgentNodeType[] = [];
   const edges: Edge[] = [];
   const centerX = totalWidth / 2;
 
   const push = (agent: AgentLite, x: number, y: number) => {
-    const hub = agent.kind !== "persona";
+    const hub = agent.kind !== "persona" && agent.kind !== "discussion";
     nodes.push({
       id: agent.id,
       type: "agent",
@@ -140,6 +166,38 @@ function buildGraph(agents: AgentLite[], personas: Record<string, PersonaLite>) 
       push(m, x, y);
       if (planner) edge(planner.id, m.id, m.status);
     });
+
+    // Focus-group replies: rows below the persona grid, tied to their persona.
+    const replyBaseY = ROW_PERSONA_Y + g.rows * (CHIP_H + CHIP_GAP_Y) + REPLY_GAP;
+    c.replies.forEach((d, j) => {
+      const col = j % g.cols;
+      const row = Math.floor(j / g.cols);
+      const rowCount = Math.min(g.cols, c.replies.length - row * g.cols);
+      const rowWidth = rowCount * CHIP_W + (rowCount - 1) * CHIP_GAP_X;
+      const x = clusterCenter - rowWidth / 2 + col * (CHIP_W + CHIP_GAP_X);
+      const y = replyBaseY + row * (CHIP_H + CHIP_GAP_Y);
+      push(d, x, y);
+      if (d.parentAgentRunId) edge(d.parentAgentRunId, d.id, d.status);
+      // The interaction web: dashed edges from every peer this reply heard,
+      // drawn only for the selected reply so the graph stays legible.
+      if (selectedId === d.id) {
+        for (const peerId of heardIds(d)) {
+          edges.push({
+            id: `${peerId}~>${d.id}`,
+            source: peerId,
+            target: d.id,
+            type: "smoothstep",
+            animated: false,
+            style: {
+              stroke: "var(--primary)",
+              strokeWidth: 1.25,
+              strokeDasharray: "4 4",
+              opacity: 0.8,
+            },
+          });
+        }
+      }
+    });
     cursor += g.width + CLUSTER_GAP;
   });
 
@@ -181,7 +239,7 @@ function AgentGraphInner({ agents, personas, onSelect, selectedId, className }: 
   // stay hidden until that change is applied — so agents streamed in after
   // mount would never render in a fully-controlled setup.
   useEffect(() => {
-    const graph = buildGraph(agents, personas);
+    const graph = buildGraph(agents, personas, selectedId);
     for (const n of graph.nodes) n.selected = n.id === selectedId;
     setNodes((prev) => {
       // Preserve dimensions React Flow already measured so a sync never

@@ -48,7 +48,7 @@ export async function runSimulationStage(
         });
 
         try {
-          const { output } = await executeAgent({
+          const { output, agentRunId } = await executeAgent({
             ctx,
             kind: "persona",
             label: persona.name,
@@ -67,6 +67,7 @@ export async function runSimulationStage(
             archetype: persona.archetype,
             incomeBand: persona.demographics.incomeBand,
             verdict: output,
+            agentRunId,
           });
         } catch (error) {
           if (isAbortError(error)) throw error;

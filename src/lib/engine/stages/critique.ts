@@ -39,6 +39,7 @@ export async function runCritiqueStage(
   aggregates: Aggregates,
   records: VerdictRecord[],
   framingAgentId: string,
+  discussionNote = "",
 ): Promise<CritiqueResult> {
   const grounded = run.grounding && !isMock();
   // Server-side tools can't be combined with mock mode; and grok's search
@@ -60,6 +61,10 @@ export async function runCritiqueStage(
     aggregates,
     grounded,
   });
+  if (discussionNote) {
+    methodologyPrompts.prompt += `\n\n${discussionNote}`;
+    redteamPrompts.prompt += `\n\n${discussionNote}`;
+  }
 
   const [methodology, redteam] = await Promise.all([
     executeAgent({

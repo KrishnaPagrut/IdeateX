@@ -40,13 +40,14 @@ export function NewRunForm() {
   const [showContext, setShowContext] = React.useState(false);
   const [tier, setTier] = React.useState<RunTier>("standard");
   const [grounding, setGrounding] = React.useState(false);
+  const [discussion, setDiscussion] = React.useState(true);
   const [touched, setTouched] = React.useState(false);
   const [submitting, setSubmitting] = React.useState(false);
 
   const [estimate, setEstimate] = React.useState<number | null>(null);
   const [estimating, setEstimating] = React.useState(false);
 
-  // Debounced live cost estimate whenever tier or grounding changes.
+  // Debounced live cost estimate whenever tier, grounding, or discussion changes.
   React.useEffect(() => {
     const controller = new AbortController();
     const timer = setTimeout(async () => {
@@ -55,7 +56,7 @@ export function NewRunForm() {
         const res = await fetch("/api/runs/estimate", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ tier, grounding }),
+          body: JSON.stringify({ tier, grounding, discussion }),
           signal: controller.signal,
         });
         if (!res.ok) return;
@@ -71,7 +72,7 @@ export function NewRunForm() {
       controller.abort();
       clearTimeout(timer);
     };
-  }, [tier, grounding]);
+  }, [tier, grounding, discussion]);
 
   const ideaLength = idea.trim().length;
   const ideaTooShort = ideaLength < MIN_IDEA_LENGTH;
@@ -91,6 +92,7 @@ export function NewRunForm() {
           context: context.trim() ? context.trim() : undefined,
           tier,
           grounding,
+          discussion,
         }),
       });
       if (res.status !== 201) {
@@ -213,6 +215,20 @@ export function NewRunForm() {
           </p>
         </div>
         <Switch id="grounding" checked={grounding} onCheckedChange={setGrounding} />
+      </div>
+
+      {/* Focus group */}
+      <div className="flex items-start justify-between gap-4 rounded-lg border bg-card p-4">
+        <div className="flex flex-col gap-1">
+          <Label htmlFor="discussion" className="text-sm font-medium">
+            Run a focus group after first reactions
+          </Label>
+          <p className="text-xs text-muted-foreground">
+            Personas hear their segment peers and respond — who holds firm, who bends, and why.
+            One extra reply per persona.
+          </p>
+        </div>
+        <Switch id="discussion" checked={discussion} onCheckedChange={setDiscussion} />
       </div>
 
       {/* Launch */}

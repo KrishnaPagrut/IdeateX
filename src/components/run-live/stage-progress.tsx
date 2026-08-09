@@ -14,24 +14,32 @@ import type { AgentLite } from "./types";
 // matching kind (e.g. simulating 18/24).
 // ---------------------------------------------------------------------------
 
-const STAGES = [
+const ALL_STAGES = [
   { stage: "framing", kind: "framing", label: "Framing" },
   { stage: "planning", kind: "planner", label: "Planning" },
   { stage: "simulating", kind: "persona", label: "Simulating" },
+  { stage: "discussing", kind: "discussion", label: "Focus group" },
   { stage: "critiquing", kind: "critique", label: "Critiquing" },
   { stage: "synthesizing", kind: "synthesis", label: "Synthesizing" },
 ] as const satisfies ReadonlyArray<{ stage: string; kind: AgentKind; label: string }>;
 
+type StageDef = (typeof ALL_STAGES)[number];
 type StageState = "pending" | "active" | "done" | "failed";
 
-function activeStageIndex(status: RunStatus, agents: AgentLite[]): number {
-  const idx = STAGES.findIndex((s) => s.stage === status);
+/** The focus-group stage only shows for runs that have (or are in) one. */
+function visibleStages(status: RunStatus, agents: AgentLite[]): StageDef[] {
+  const hasDiscussion = status === "discussing" || agents.some((a) => a.kind === "discussion");
+  return hasDiscussion ? [...ALL_STAGES] : ALL_STAGES.filter((s) => s.stage !== "discussing");
+}
+
+function activeStageIndex(stages: StageDef[], status: RunStatus, agents: AgentLite[]): number {
+  const idx = stages.findIndex((s) => s.stage === status);
   if (idx >= 0) return idx;
-  if (status === "completed") return STAGES.length;
+  if (status === "completed") return stages.length;
   if (status === "pending") return -1;
   // failed / cancelled / stale: freeze at the furthest stage that has agents.
-  for (let i = STAGES.length - 1; i >= 0; i--) {
-    if (agents.some((a) => a.kind === STAGES[i].kind)) return i;
+  for (let i = stages.length - 1; i >= 0; i--) {
+    if (agents.some((a) => a.kind === stages[i].kind)) return i;
   }
   return -1;
 }
@@ -47,12 +55,13 @@ export function StageProgress({
   agents: AgentLite[];
   className?: string;
 }) {
-  const active = activeStageIndex(status, agents);
+  const stages = visibleStages(status, agents);
+  const active = activeStageIndex(stages, status, agents);
   const runFailed = status === "failed" || status === "cancelled" || status === "stale";
 
   return (
     <ol className={cn("flex items-center", className)} aria-label="Run pipeline progress">
-      {STAGES.map((s, i) => {
+      {stages.map((s, i) => {
         const stageAgents = agents.filter((a) => a.kind === s.kind);
         const done = stageAgents.filter(
           (a) => a.status === "completed" || a.status === "failed" || a.status === "skipped",
@@ -63,7 +72,7 @@ export function StageProgress({
         let state: StageState = "pending";
         if (i < active) state = "done";
         else if (i === active) state = runFailed ? "failed" : "active";
-        if (active >= STAGES.length) state = "done";
+        if (active >= stages.length) state = "done";
 
         return (
           <li key={s.stage} className="flex min-w-0 items-center">
