@@ -7,6 +7,7 @@ import { SearchIcon, PlusIcon, ArrowLeftIcon } from "lucide-react";
 
 import type { Persona } from "@/lib/db/schema";
 import type { PoolInfo } from "@/app/api/personas/pools/route";
+import { allSubdomains } from "@/lib/personas/taxonomy";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -112,10 +113,15 @@ export function PersonaLibrary() {
     return () => controller.abort();
   }, [gridMode, selectedPool, debouncedQ, filters.archetype, filters.incomeBand, refreshKey]);
 
-  async function generateInto(pool: string | null) {
+  /** Batch size that tops a pool up toward its target without overshooting far. */
+  function fillCount(poolCount: number): number {
+    return Math.max(6, Math.min(12, POOL_TARGET - poolCount));
+  }
+
+  async function generateInto(pool: string | null, poolCount = 0) {
     setGenerating(true);
     try {
-      const count = pool ? 12 : 20;
+      const count = pool ? fillCount(poolCount) : 20;
       const res = await fetch("/api/personas/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -136,17 +142,30 @@ export function PersonaLibrary() {
     }
   }
 
+  // push (not replace) so the browser's back button walks pool → catalog.
   function openPool(key: string) {
-    router.replace(`/personas?pool=${encodeURIComponent(key)}`, { scroll: false });
+    router.push(`/personas?pool=${encodeURIComponent(key)}`, { scroll: false });
   }
 
   function backToPools() {
-    router.replace("/personas", { scroll: false });
+    router.push("/personas", { scroll: false });
     setFilters(NO_FILTERS);
   }
 
+  // Taxonomy pools vs. strays (e.g. general/general): the header reconciles
+  // both so "N active" always adds up with what the catalog shows.
+  const taxonomyKeys = React.useMemo(
+    () => new Set(allSubdomains().map((s) => `${s.domainKey}/${s.key}`)),
+    [],
+  );
   const totalCount = pools?.reduce((sum, p) => sum + p.count, 0) ?? null;
-  const poolCount = pools?.filter((p) => p.count > 0).length ?? null;
+  const seededCount =
+    pools?.filter((p) => p.count > 0 && taxonomyKeys.has(`${p.domain}/${p.subdomain}`)).length ??
+    null;
+  const unpooledCount =
+    pools
+      ?.filter((p) => !taxonomyKeys.has(`${p.domain}/${p.subdomain}`))
+      .reduce((sum, p) => sum + p.count, 0) ?? 0;
   const count = personas?.length ?? 0;
   const initialLoading = pools === null && !error;
   const libraryEmpty = pools !== null && totalCount === 0 && !gridMode;
@@ -171,10 +190,12 @@ export function PersonaLibrary() {
               ? "N = —"
               : gridMode
                 ? `N = ${personas === null ? "—" : count} shown of ${totalCount} active`
-                : `N = ${totalCount} active across ${poolCount} seeded ${poolCount === 1 ? "pool" : "pools"}`}
+                : `N = ${totalCount} active · ${seededCount}/${taxonomyKeys.size} pools seeded${
+                    unpooledCount > 0 ? ` · ${unpooledCount} outside the taxonomy` : ""
+                  }`}
           </p>
         </div>
-        {!gridMode && !libraryEmpty && (
+        {!selectedPool && !libraryEmpty && (
           <Button onClick={() => generateInto(null)} disabled={generating}>
             {generating ? (
               <>
@@ -257,7 +278,7 @@ export function PersonaLibrary() {
           {!gridMode && (
             <Button
               variant="ghost"
-              onClick={() => router.replace("/personas?view=all", { scroll: false })}
+              onClick={() => router.push("/personas?view=all", { scroll: false })}
             >
               All personas
             </Button>
@@ -351,7 +372,7 @@ export function PersonaLibrary() {
                   </div>
                 </div>
                 <Button
-                  onClick={() => generateInto(selectedPool)}
+                  onClick={() => generateInto(selectedPool, selected.count)}
                   disabled={generating}
                   variant={selected.count === 0 ? "default" : "outline"}
                 >
@@ -363,7 +384,7 @@ export function PersonaLibrary() {
                   ) : (
                     <>
                       <PlusIcon data-icon="inline-start" />
-                      Generate 12 into this pool
+                      Generate {fillCount(selected.count)} into this pool
                     </>
                   )}
                 </Button>
@@ -390,7 +411,7 @@ export function PersonaLibrary() {
                   </p>
                   <Button
                     className="mt-4"
-                    onClick={() => generateInto(selectedPool)}
+                    onClick={() => generateInto(selectedPool, 0)}
                     disabled={generating}
                   >
                     {generating ? (
