@@ -5,9 +5,18 @@ import { Badge } from "@/components/ui/badge";
 import { PersonaAvatar } from "./persona-avatar";
 import { PsychoDots } from "./psycho-dots";
 
-export function PersonaCard({ persona }: { persona: Persona }) {
+export function PersonaCard({
+  persona,
+  showPool = true,
+}: {
+  persona: Persona;
+  /** Hide the pool label when the surrounding view already states the pool. */
+  showPool?: boolean;
+}) {
   const d = persona.demographics;
   const p = persona.psychographics;
+  const visibleTags = persona.tags.slice(0, 4);
+  const moreTags = persona.tags.length - visibleTags.length;
 
   return (
     <Link
@@ -35,10 +44,28 @@ export function PersonaCard({ persona }: { persona: Persona }) {
         <PsychoDots label="Openness" value={p.openness} />
       </div>
 
-      {persona.tags.length > 0 && (
-        <p className="truncate font-mono text-[10px] tracking-wide text-muted-foreground/80">
-          {persona.tags.slice(0, 4).join(" · ")}
-        </p>
+      {(persona.tags.length > 0 || showPool) && (
+        <div className="flex flex-col gap-1.5">
+          {persona.tags.length > 0 && (
+            <div className="flex flex-wrap gap-1">
+              {visibleTags.map((t) => (
+                <Badge key={t} variant="secondary" className="max-w-full font-mono text-[10px]">
+                  <span className="truncate">{t}</span>
+                </Badge>
+              ))}
+              {moreTags > 0 && (
+                <span className="self-center font-mono text-[10px] text-muted-foreground/80">
+                  +{moreTags}
+                </span>
+              )}
+            </div>
+          )}
+          {showPool && (
+            <p className="truncate font-mono text-[10px] tracking-wide text-muted-foreground/70">
+              {persona.domain}/{persona.subdomain}
+            </p>
+          )}
+        </div>
       )}
     </Link>
   );

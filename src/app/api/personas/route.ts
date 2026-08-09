@@ -7,7 +7,8 @@ import { GeneratedPersonaSchema } from "@/lib/schemas/persona-gen";
 
 /**
  * GET /api/personas — list active personas, newest first.
- * Query params: archetype, tag, q (name/occupation search), incomeBand.
+ * Query params: archetype, tag, q (name/occupation search), incomeBand,
+ * domain, subdomain (pool filters — combine for one pool).
  */
 export async function GET(req: NextRequest) {
   const params = req.nextUrl.searchParams;
@@ -15,8 +16,12 @@ export async function GET(req: NextRequest) {
   const tag = params.get("tag");
   const q = params.get("q");
   const incomeBand = params.get("incomeBand");
+  const domain = params.get("domain");
+  const subdomain = params.get("subdomain");
 
   const conditions: SQL[] = [eq(personas.active, true)];
+  if (domain) conditions.push(eq(personas.domain, domain));
+  if (subdomain) conditions.push(eq(personas.subdomain, subdomain));
   if (archetype) conditions.push(eq(personas.archetype, archetype));
   if (tag) conditions.push(sql`${tag} = ANY(${personas.tags})`);
   if (incomeBand) {
