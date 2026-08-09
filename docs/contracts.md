@@ -133,6 +133,50 @@ export function cancelRun(runId: string): boolean; // true if the run was live i
 - `POST /api/personas/generate` body `{count?, pool?: "domain/subdomain"}` —
   with `pool` (taxonomy or custom), personas are written to fit that pool and
   stamped into it; unknown pools 400.
+## Launch kit (post-run tooling)
+
+After a run completes, the user expands the WINNING strategy into a dated
+campaign timeline with platform-native copy and image prompts, then images
+stream in asynchronously. Shapes live in `src/lib/schemas/launch.ts`
+(`GeneratedTimelineSchema`, `CampaignItemSnapshot`, `ImageStreamEventSchema`);
+rows in `campaign_items` (`src/lib/db/schema.ts`).
+
+- `POST /api/runs/[runId]/launch-kit` → `201 {items: CampaignItemSnapshot[]}`.
+  Guards: run exists (404), status `completed` and brief/strategies/
+  advisorReport/synthesis present (409), no existing items — a second POST is
+  an idempotent read: `409 {error, items}`. Winner = strategy matching
+  `advisorReport.consensus.winnerStrategyId` (falls back to `strategies[0]`
+  when the id doesn't resolve, e.g. synthetic mock ids). ONE
+  `generate({role: "reasoner", effort: "medium", schema:
+  GeneratedTimelineSchema})` call with the advisory directives + verdict
+  concerns + report risks as hard constraints (`src/lib/prompts/timeline.ts`).
+  The call is made directly via `generate()` — deliberately NOT through
+  `executeAgent`, and no `agent_runs` row is created: the launch kit is
+  post-run tooling, not a pipeline stage, so it must not appear in the run's
+  agent graph. Items are ordered by `dayOffset` with `sortOrder = index`; if
+  the model produced no dayOffset-0 item, the item closest to 0 is snapped to
+  0 so every kit has a launch-day anchor.
+- `GET /api/runs/[runId]/launch-kit` → `{items}` (may be empty), ordered by
+  `sortOrder`.
+- `GET /api/runs/[runId]/images` → SSE of `ImageStreamEvent` (plain `data:`
+  lines, JSON discriminated on `type`: start/image/failed/done). Pending =
+  this run's items with `imagePrompt` NOT null AND `imageUrl` null, in
+  `sortOrder`. 3-way concurrency over a shared cursor; each image is generated
+  via `generateImage(prompt, "runs/<runId>/<itemId>.jpg")` (stable path —
+  regeneration overwrites in place), persisted to the row FIRST, then pushed.
+  A module-level in-flight set keyed by runId makes reconnects no-ops
+  (start + done immediately) instead of duplicate work; client aborts do NOT
+  stop generation — completed work is persisted for the next load. Nothing
+  pending → `start{total:0}` + `done` immediately. 15s heartbeat comments,
+  `Cache-Control: no-cache, no-transform`, `X-Accel-Buffering: no`.
+- `PATCH /api/items/[itemId]` body: either `{action: "regenerate_image"}`
+  (nulls `imageUrl` so the image stream regenerates exactly that item; 400 if
+  the item has no `imagePrompt`) or a strict partial of `{title, body,
+  callToAction, hashtags, state, dayOffset, imagePrompt}` — clearing or
+  changing `imagePrompt` also nulls `imageUrl`. Sets `updatedAt`. →
+  `{item: CampaignItemSnapshot}`.
+- `DELETE /api/items/[itemId]` → soft delete: `state: "cut"`, → `{item}`.
+
 - Planners never see individual personas at library scale. The engine
   (workstream A) builds a `PoolCatalogEntry[]` catalog from the live library —
   `{key, name, description, available, labels}` per pool, labels being the
