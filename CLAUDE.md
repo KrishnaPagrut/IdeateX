@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-IdeateX stress-tests a policy, price change, or campaign on a synthetic population: a run flows framing → K planners (cast personas from the library) → persona swarm → 2 critics (optional web/x_search grounding) → synthesis. Next.js 16 (App Router) + AI SDK 7 (`@ai-sdk/xai`) + Drizzle. Development happens on `idhant/mvp`; do not merge to `main` without asking.
+IdeateX is a marketing platform that races campaign strategies on a synthetic population before launch. A run flows framing (audience cohorts) → K planners (cast personas from the library into one shared audience + follow graph) → 3 strategists → social-sim race (seeded tick engine, ~12 LLM "reaction" calls per strategy) → advisor panel (3 lenses + moderator pick the winner, optional web/x_search grounding) → deep persona swarm on the winner → report synthesis (drafted content, objection ledger, PR pre-mortem). Next.js 16 (App Router) + AI SDK 7 (`@ai-sdk/xai`) + Drizzle. Development happens on `idhant/mvp`; do not merge to `main` without asking.
 
 ## Commands
 

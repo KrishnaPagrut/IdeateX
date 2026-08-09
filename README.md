@@ -1,2 +1,2 @@
 # IdeateX
-Stress-test a policy, price change, or campaign on a synthetic population before it hits real people. Describe your target market, describe the decision, and IdeateX builds a statistically grounded population, runs it, and tells you who revolts and why.
+Race your campaign before the internet sees it. Describe a product, its audience, and what you want out of the launch — IdeateX builds a synthetic audience from a pooled persona library, races three campaign strategies through a live social simulation, has an advisor panel pick the winner, stress-tests it with a full persona swarm, and hands you a report with ready-to-post content: X posts, a Reddit post, ad variants, an objection ledger, and a PR pre-mortem — every draft traceable to the finding it answers.
