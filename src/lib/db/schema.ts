@@ -1,0 +1,164 @@
+import {
+  bigserial,
+  boolean,
+  index,
+  integer,
+  jsonb,
+  numeric,
+  pgTable,
+  text,
+  timestamp,
+  uniqueIndex,
+  uuid,
+} from "drizzle-orm/pg-core";
+
+// ---------------------------------------------------------------------------
+// Enum value lists (kept as TS unions + text columns so adding a value never
+// requires a migration; zod validates at the boundary — see lib/schemas)
+// ---------------------------------------------------------------------------
+
+export const RUN_TIERS = ["quick", "standard", "deep"] as const;
+export type RunTier = (typeof RUN_TIERS)[number];
+
+export const RUN_STATUSES = [
+  "pending",
+  "framing",
+  "planning",
+  "simulating",
+  "critiquing",
+  "synthesizing",
+  "completed",
+  "failed",
+  "cancelled",
+  "stale",
+] as const;
+export type RunStatus = (typeof RUN_STATUSES)[number];
+
+export const AGENT_KINDS = [
+  "framing",
+  "planner",
+  "persona",
+  "critique",
+  "synthesis",
+] as const;
+export type AgentKind = (typeof AGENT_KINDS)[number];
+
+export const AGENT_STATUSES = [
+  "pending",
+  "running",
+  "completed",
+  "failed",
+  "skipped",
+] as const;
+export type AgentStatus = (typeof AGENT_STATUSES)[number];
+
+// ---------------------------------------------------------------------------
+// Tables
+// ---------------------------------------------------------------------------
+
+export const personas = pgTable("personas", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  name: text("name").notNull(),
+  archetype: text("archetype").notNull(),
+  demographics: jsonb("demographics")
+    .$type<{
+      age: number;
+      gender: string;
+      location: string;
+      incomeBand: string;
+      education: string;
+      occupation: string;
+    }>()
+    .notNull(),
+  psychographics: jsonb("psychographics")
+    .$type<{
+      techSavviness: number; // 1-5
+      riskTolerance: number; // 1-5
+      priceSensitivity: number; // 1-5
+      openness: number; // 1-5
+      values: string[];
+      spendingHabits: string;
+    }>()
+    .notNull(),
+  backstory: text("backstory").notNull(),
+  avatarSeed: text("avatar_seed").notNull(),
+  tags: text("tags").array().notNull().default([]),
+  source: text("source").$type<"seed" | "generated" | "edited">().notNull().default("seed"),
+  active: boolean("active").notNull().default(true),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+});
+
+export const runs = pgTable("runs", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  idea: text("idea").notNull(),
+  context: text("context"),
+  tier: text("tier").$type<RunTier>().notNull().default("standard"),
+  grounding: boolean("grounding").notNull().default(false),
+  status: text("status").$type<RunStatus>().notNull().default("pending"),
+  brief: jsonb("brief"),
+  synthesis: jsonb("synthesis"),
+  aggregates: jsonb("aggregates"),
+  estCostUsd: numeric("est_cost_usd", { precision: 10, scale: 4 }),
+  actualCostUsd: numeric("actual_cost_usd", { precision: 10, scale: 4 }),
+  error: text("error"),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  startedAt: timestamp("started_at", { withTimezone: true }),
+  finishedAt: timestamp("finished_at", { withTimezone: true }),
+});
+
+export const agentRuns = pgTable(
+  "agent_runs",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    runId: uuid("run_id")
+      .notNull()
+      .references(() => runs.id, { onDelete: "cascade" }),
+    // Builds the swarm graph: framing → planners → personas; critique/synthesis
+    // attach per the orchestrator's parent assignments.
+    parentAgentRunId: uuid("parent_agent_run_id"),
+    kind: text("kind").$type<AgentKind>().notNull(),
+    label: text("label").notNull(),
+    personaId: uuid("persona_id").references(() => personas.id, { onDelete: "set null" }),
+    segment: text("segment"),
+    status: text("status").$type<AgentStatus>().notNull().default("pending"),
+    model: text("model"),
+    systemPrompt: text("system_prompt"),
+    userPrompt: text("user_prompt"),
+    output: jsonb("output"),
+    rawText: text("raw_text"),
+    inputTokens: integer("input_tokens"),
+    outputTokens: integer("output_tokens"),
+    costUsd: numeric("cost_usd", { precision: 10, scale: 6 }),
+    error: text("error"),
+    startedAt: timestamp("started_at", { withTimezone: true }),
+    finishedAt: timestamp("finished_at", { withTimezone: true }),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [index("agent_runs_run_id_idx").on(t.runId)],
+);
+
+export const runEvents = pgTable(
+  "run_events",
+  {
+    id: bigserial("id", { mode: "number" }).primaryKey(),
+    runId: uuid("run_id")
+      .notNull()
+      .references(() => runs.id, { onDelete: "cascade" }),
+    seq: integer("seq").notNull(),
+    type: text("type").notNull(),
+    agentRunId: uuid("agent_run_id"),
+    payload: jsonb("payload"),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    index("run_events_run_id_idx").on(t.runId),
+    uniqueIndex("run_events_run_id_seq_idx").on(t.runId, t.seq),
+  ],
+);
+
+export type Persona = typeof personas.$inferSelect;
+export type NewPersona = typeof personas.$inferInsert;
+export type Run = typeof runs.$inferSelect;
+export type AgentRun = typeof agentRuns.$inferSelect;
+export type RunEvent = typeof runEvents.$inferSelect;
