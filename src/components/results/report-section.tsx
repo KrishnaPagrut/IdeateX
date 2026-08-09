@@ -40,14 +40,14 @@ export function ReportSection({
             : "mb-3 flex flex-wrap items-baseline gap-x-3 gap-y-1 border-t pt-5"
         }
       >
-        <span className="font-mono text-[10px] font-semibold tracking-[0.18em] text-primary">
+        <span className="font-mono text-3xs font-semibold tracking-eyebrow text-primary">
           §{String(index).padStart(2, "0")}
         </span>
-        <h3 id={`${id}-title`} className="text-sm font-medium">
+        <h3 id={`${id}-title`} className="font-serif text-lg font-bold tracking-tight">
           {title}
         </h3>
         {sub && (
-          <p className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase">
+          <p className="font-mono text-3xs tracking-eyebrow text-muted-foreground uppercase">
             {sub}
           </p>
         )}
@@ -69,7 +69,7 @@ export function ReportIndex({ sections }: { sections: Array<{ id: string; label:
           <li key={s.id}>
             <a
               href={`#${s.id}`}
-              className="flex items-baseline gap-1.5 rounded-md px-2 py-1 font-mono text-[10px] tracking-[0.14em] text-muted-foreground uppercase transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/60 focus-visible:outline-none"
+              className="flex items-baseline gap-1.5 rounded-md px-2 py-1 font-mono text-3xs tracking-eyebrow text-muted-foreground uppercase transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/60 focus-visible:outline-none"
             >
               <span className="text-primary/70">{String(i + 1).padStart(2, "0")}</span>
               {s.label}

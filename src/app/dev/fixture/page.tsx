@@ -31,7 +31,8 @@ interface Slot {
 const STAGE_BOUNDS: Array<{ status: RunStatus; until: number }> = [
   { status: "framing", until: 2.0 },
   { status: "planning", until: 4.4 },
-  { status: "simulating", until: 13.0 },
+  { status: "simulating", until: 10.6 },
+  { status: "discussing", until: 13.6 },
   { status: "critiquing", until: 15.2 },
   { status: "synthesizing", until: 17.2 },
 ];
@@ -41,6 +42,7 @@ function buildSchedule(agents: AgentRunSnapshot[]): Map<string, Slot> {
   const schedule = new Map<string, Slot>();
   let personaIdx = 0;
   let plannerIdx = 0;
+  let discussionIdx = 0;
   let critiqueIdx = 0;
   for (const a of agents) {
     switch (a.kind) {
@@ -52,13 +54,19 @@ function buildSchedule(agents: AgentRunSnapshot[]): Map<string, Slot> {
         plannerIdx++;
         break;
       case "persona": {
-        const start = 4.6 + personaIdx * 0.28;
-        schedule.set(a.id, { start, end: start + 1.6 + (personaIdx % 4) * 0.35 });
+        const start = 4.6 + personaIdx * 0.2;
+        schedule.set(a.id, { start, end: start + 1.4 + (personaIdx % 4) * 0.3 });
         personaIdx++;
         break;
       }
+      case "discussion": {
+        const start = 10.7 + discussionIdx * 0.12;
+        schedule.set(a.id, { start, end: start + 1.2 + (discussionIdx % 3) * 0.3 });
+        discussionIdx++;
+        break;
+      }
       case "critique":
-        schedule.set(a.id, { start: 13.1 + critiqueIdx * 0.3, end: 15.0 + critiqueIdx * 0.2 });
+        schedule.set(a.id, { start: 13.7 + critiqueIdx * 0.3, end: 15.0 + critiqueIdx * 0.2 });
         critiqueIdx++;
         break;
       case "synthesis":
@@ -160,29 +168,29 @@ export default function FixtureHarnessPage() {
     <div className="mx-auto min-h-dvh max-w-7xl px-4 py-6 sm:px-6">
       <header className="flex flex-wrap items-start justify-between gap-4">
         <div className="min-w-0 max-w-3xl">
-          <p className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase">
+          <p className="font-mono text-3xs tracking-eyebrow text-muted-foreground uppercase">
             IdeateX · dev fixture harness · run {FIXTURE.run.id.slice(0, 8)}
           </p>
-          <h1 className="mt-1 truncate text-base font-medium sm:text-lg" title={FIXTURE.run.idea}>
+          <h1 className="mt-1 truncate font-serif text-lg font-bold tracking-tight sm:text-xl" title={FIXTURE.run.idea}>
             {FIXTURE.run.idea}
           </h1>
           <div className="mt-2 flex flex-wrap items-center gap-1.5">
-            <Badge variant="outline" className="font-mono text-[10px] uppercase">
+            <Badge variant="outline" className="font-mono text-3xs uppercase">
               {FIXTURE.run.tier}
             </Badge>
             <Badge
               variant={runStatus === "completed" ? "secondary" : "outline"}
-              className="font-mono text-[10px] uppercase"
+              className="font-mono text-3xs uppercase"
             >
               {runStatus}
             </Badge>
             {FIXTURE.run.actualCostUsd && (
-              <Badge variant="ghost" className="font-mono text-[10px] tabular-nums">
+              <Badge variant="ghost" className="font-mono text-3xs tabular-nums">
                 ${Number(FIXTURE.run.actualCostUsd).toFixed(2)}
               </Badge>
             )}
             {durationSec !== null && (
-              <Badge variant="ghost" className="font-mono text-[10px] tabular-nums">
+              <Badge variant="ghost" className="font-mono text-3xs tabular-nums">
                 {Math.floor(durationSec / 60)}m {durationSec % 60}s
               </Badge>
             )}
@@ -215,7 +223,7 @@ export default function FixtureHarnessPage() {
         </TabsList>
 
         <TabsContent value="swarm">
-          <div className="h-[calc(100dvh-300px)] min-h-[480px] overflow-hidden rounded-xl border">
+          <div className="relative h-[calc(100dvh-300px)] min-h-[480px] overflow-hidden border-y">
             <AgentGraph
               agents={agents}
               personas={FIXTURE.personas}

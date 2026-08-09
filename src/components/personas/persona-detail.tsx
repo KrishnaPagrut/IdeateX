@@ -28,7 +28,7 @@ import { PsychoDots } from "./psycho-dots";
 function DemoField({ label, value }: { label: string; value: React.ReactNode }) {
   return (
     <div>
-      <dt className="font-mono text-[10px] tracking-[0.12em] uppercase text-muted-foreground">
+      <dt className="font-mono text-3xs tracking-eyebrow uppercase text-muted-foreground">
         {label}
       </dt>
       <dd className="mt-0.5 text-sm text-foreground">{value}</dd>
@@ -131,7 +131,7 @@ export function PersonaDetail({ id }: { id: string }) {
     return (
       <div className="mx-auto flex w-full max-w-4xl flex-col items-center px-6 py-24">
         <MatrixLoader size={28} label="Loading persona" />
-        <p className="mt-3 font-mono text-[11px] tracking-[0.18em] uppercase text-muted-foreground">
+        <p className="mt-3 font-mono text-2xs tracking-eyebrow uppercase text-muted-foreground">
           Loading persona
         </p>
       </div>
@@ -147,7 +147,7 @@ export function PersonaDetail({ id }: { id: string }) {
 
       <Link
         href="/personas"
-        className="inline-flex items-center gap-1.5 font-mono text-[11px] tracking-[0.12em] uppercase text-muted-foreground transition-colors hover:text-foreground"
+        className="inline-flex items-center gap-1.5 font-mono text-2xs tracking-eyebrow uppercase text-muted-foreground transition-colors hover:text-foreground"
       >
         <ArrowLeftIcon className="size-3.5" />
         Library
@@ -158,14 +158,14 @@ export function PersonaDetail({ id }: { id: string }) {
         <aside className="flex flex-col items-start gap-4">
           <PersonaAvatar seed={persona.avatarSeed} name={persona.name} size={96} />
           <div>
-            <h1 className="text-xl font-semibold tracking-tight text-foreground">
+            <h1 className="font-serif text-2xl font-bold tracking-tight text-foreground">
               {persona.name}
             </h1>
             <Badge variant="outline" className="mt-2">
               {persona.archetype}
             </Badge>
           </div>
-          <dl className="flex flex-col gap-1 font-mono text-[11px] text-muted-foreground">
+          <dl className="flex flex-col gap-1 font-mono text-2xs text-muted-foreground">
             <div>
               POOL{" "}
               <span title="The domain/subdomain pool planners cast this persona from">
@@ -223,7 +223,7 @@ export function PersonaDetail({ id }: { id: string }) {
           ) : (
             <div className="flex flex-col gap-8">
               <section>
-                <h2 className="font-mono text-[11px] tracking-[0.18em] uppercase text-muted-foreground">
+                <h2 className="font-mono text-2xs tracking-eyebrow uppercase text-muted-foreground">
                   Demographics
                 </h2>
                 <dl className="mt-3 grid grid-cols-2 gap-x-6 gap-y-4 sm:grid-cols-3">
@@ -237,7 +237,7 @@ export function PersonaDetail({ id }: { id: string }) {
               </section>
 
               <section>
-                <h2 className="font-mono text-[11px] tracking-[0.18em] uppercase text-muted-foreground">
+                <h2 className="font-mono text-2xs tracking-eyebrow uppercase text-muted-foreground">
                   Psychographics
                 </h2>
                 <div className="mt-3 grid max-w-xl grid-cols-1 gap-x-10 gap-y-2 sm:grid-cols-2">
@@ -265,7 +265,7 @@ export function PersonaDetail({ id }: { id: string }) {
 
               <section>
                 <div className="flex items-center justify-between gap-4">
-                  <h2 className="font-mono text-[11px] tracking-[0.18em] uppercase text-muted-foreground">
+                  <h2 className="font-mono text-2xs tracking-eyebrow uppercase text-muted-foreground">
                     Backstory
                   </h2>
                   <Button
@@ -287,13 +287,13 @@ export function PersonaDetail({ id }: { id: string }) {
                     )}
                   </Button>
                 </div>
-                <p className="mt-3 max-w-prose text-sm leading-6 text-foreground/90">
+                <p className="mt-3 max-w-prose font-serif text-[15px] leading-7 text-foreground/90">
                   {persona.backstory}
                 </p>
               </section>
 
               <section>
-                <h2 className="font-mono text-[11px] tracking-[0.18em] uppercase text-muted-foreground">
+                <h2 className="font-mono text-2xs tracking-eyebrow uppercase text-muted-foreground">
                   Casting labels
                 </h2>
                 <p className="mt-1 text-xs text-muted-foreground">
@@ -302,7 +302,7 @@ export function PersonaDetail({ id }: { id: string }) {
                 </p>
                 <div className="mt-3 flex flex-wrap gap-1.5">
                   {persona.tags.map((t) => (
-                    <Badge key={t} variant="secondary" className="font-mono text-[10px]">
+                    <Badge key={t} variant="secondary" className="font-mono text-3xs">
                       {t}
                     </Badge>
                   ))}

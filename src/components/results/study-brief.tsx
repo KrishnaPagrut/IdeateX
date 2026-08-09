@@ -19,7 +19,7 @@ function FieldLabel({ className, children }: { className?: string; children: Rea
   return (
     <p
       className={cn(
-        "font-mono text-[10px] tracking-widest text-muted-foreground uppercase",
+        "font-mono text-3xs tracking-eyebrow text-muted-foreground uppercase",
         className,
       )}
     >
@@ -39,11 +39,11 @@ export function StudyBrief({ brief }: { brief: Brief }) {
           <div>
             <div className="flex items-center gap-2">
               <FieldLabel>Idea as framed</FieldLabel>
-              <Badge variant="outline" className="font-mono text-[9px] tracking-widest uppercase">
+              <Badge variant="outline" className="font-mono text-3xs tracking-eyebrow uppercase">
                 {brief.category}
               </Badge>
             </div>
-            <p className="mt-1.5 text-[13px] leading-relaxed text-foreground/90">
+            <p className="mt-1.5 text-sm leading-relaxed text-foreground/90">
               {brief.ideaSummary}
             </p>
           </div>
@@ -75,11 +75,11 @@ export function StudyBrief({ brief }: { brief: Brief }) {
               {brief.segments.map((s) => (
                 <div key={s.name} className="rounded-lg border p-3">
                   <p className="text-xs font-medium">{s.name}</p>
-                  <p className="mt-0.5 text-[11px] leading-relaxed text-muted-foreground">
+                  <p className="mt-0.5 text-2xs leading-relaxed text-muted-foreground">
                     {s.description}
                   </p>
-                  <p className="mt-1.5 text-[11px] leading-relaxed text-foreground/80">
-                    <span className="font-mono text-[9px] tracking-widest text-muted-foreground uppercase">
+                  <p className="mt-1.5 text-2xs leading-relaxed text-foreground/80">
+                    <span className="font-mono text-3xs tracking-eyebrow text-muted-foreground uppercase">
                       Why studied ·{" "}
                     </span>
                     {s.whyRelevant}
@@ -94,7 +94,7 @@ export function StudyBrief({ brief }: { brief: Brief }) {
               <FieldLabel>Key assumptions</FieldLabel>
               <ul className="mt-2 space-y-1.5">
                 {brief.keyAssumptions.map((a) => (
-                  <li key={a} className="flex gap-2 text-[11px] leading-relaxed text-foreground/85">
+                  <li key={a} className="flex gap-2 text-2xs leading-relaxed text-foreground/85">
                     <span className="mt-1.5 size-1 shrink-0 rounded-full bg-primary/70" />
                     {a}
                   </li>
@@ -105,7 +105,7 @@ export function StudyBrief({ brief }: { brief: Brief }) {
               <FieldLabel>Risk dimensions</FieldLabel>
               <div className="mt-2 flex flex-wrap gap-1">
                 {brief.riskDimensions.map((r) => (
-                  <Badge key={r} variant="outline" className="text-[10px] font-normal">
+                  <Badge key={r} variant="outline" className="text-3xs font-normal">
                     {r}
                   </Badge>
                 ))}
@@ -118,7 +118,7 @@ export function StudyBrief({ brief }: { brief: Brief }) {
                   {brief.ambiguities.map((a) => (
                     <li
                       key={a}
-                      className="flex gap-2 text-[11px] leading-relaxed text-foreground/85"
+                      className="flex gap-2 text-2xs leading-relaxed text-foreground/85"
                     >
                       <span className="mt-1.5 size-1 shrink-0 rounded-full bg-muted-foreground" />
                       {a}
@@ -126,7 +126,7 @@ export function StudyBrief({ brief }: { brief: Brief }) {
                   ))}
                 </ul>
               ) : (
-                <p className="mt-2 text-[11px] text-muted-foreground">None flagged.</p>
+                <p className="mt-2 text-2xs text-muted-foreground">None flagged.</p>
               )}
               <div className="mt-3">
                 <div className="flex items-baseline justify-between">

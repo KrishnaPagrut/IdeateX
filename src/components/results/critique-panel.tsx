@@ -44,19 +44,19 @@ function CritiqueCard({
           </span>
           <div>
             <h4 className="text-sm font-medium">{meta.title}</h4>
-            <p className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase">
+            <p className="font-mono text-3xs tracking-eyebrow text-muted-foreground uppercase">
               {meta.sub}
             </p>
           </div>
         </div>
         <div className="text-right">
-          <p className="font-mono text-[9px] tracking-widest text-muted-foreground uppercase">
+          <p className="font-mono text-3xs tracking-eyebrow text-muted-foreground uppercase">
             Adj. confidence
           </p>
           <p className="font-mono text-lg font-semibold tabular-nums">
             {critique.adjustedConfidence}
             {delta !== null && (
-              <span className="ml-1 text-[11px] font-normal text-destructive">
+              <span className="ml-1 text-2xs font-normal text-destructive">
                 {delta > 0 ? "+" : ""}
                 {delta}
               </span>
@@ -78,24 +78,24 @@ function CritiqueCard({
                       ? "outline"
                       : "secondary"
                 }
-                className="shrink-0 font-mono text-[9px] tracking-widest uppercase"
+                className="shrink-0 font-mono text-3xs tracking-eyebrow uppercase"
               >
                 {f.severity}
               </Badge>
             </div>
-            <p className="mt-1 text-[11px] leading-relaxed text-muted-foreground">{f.evidence}</p>
+            <p className="mt-1 text-2xs leading-relaxed text-muted-foreground">{f.evidence}</p>
           </li>
         ))}
       </ul>
 
       {critique.biasWarnings.length > 0 && (
         <div className="mt-4">
-          <p className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase">
+          <p className="font-mono text-3xs tracking-eyebrow text-muted-foreground uppercase">
             Bias warnings
           </p>
           <ul className="mt-1.5 space-y-1.5">
             {critique.biasWarnings.map((w) => (
-              <li key={w} className="flex gap-2 text-[11px] leading-relaxed text-foreground/85">
+              <li key={w} className="flex gap-2 text-2xs leading-relaxed text-foreground/85">
                 <span className="mt-1.5 size-1 shrink-0 rounded-full bg-destructive" />
                 {w}
               </li>
@@ -106,12 +106,12 @@ function CritiqueCard({
 
       {critique.contraryEvidence.length > 0 && (
         <div className="mt-4">
-          <p className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase">
+          <p className="font-mono text-3xs tracking-eyebrow text-muted-foreground uppercase">
             Contrary evidence
           </p>
           <ul className="mt-1.5 space-y-1.5">
             {critique.contraryEvidence.map((c) => (
-              <li key={c} className="flex gap-2 text-[11px] leading-relaxed text-foreground/85">
+              <li key={c} className="flex gap-2 text-2xs leading-relaxed text-foreground/85">
                 <span className="mt-1.5 size-1 shrink-0 rounded-full bg-muted-foreground" />
                 {c}
               </li>

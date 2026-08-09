@@ -31,7 +31,7 @@ function VerdictStamp({ verdict }: { verdict: Synthesis["verdict"] }) {
         v.className,
       )}
     >
-      <span className="font-mono text-lg font-bold tracking-[0.2em] uppercase sm:text-xl">
+      <span className="font-mono text-lg font-bold tracking-stamp uppercase sm:text-xl">
         {v.label}
       </span>
     </div>
@@ -43,7 +43,7 @@ function ScoreBar({ label, value }: { label: string; value: number }) {
   return (
     <div>
       <div className="flex items-baseline justify-between">
-        <span className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase">
+        <span className="font-mono text-3xs tracking-eyebrow text-muted-foreground uppercase">
           {label}
         </span>
         <span className="font-mono text-sm font-semibold tabular-nums">{rounded}</span>
@@ -58,7 +58,7 @@ function ScoreBar({ label, value }: { label: string; value: number }) {
 function MetaStat({ label, children }: { label: string; children: ReactNode }) {
   return (
     <div>
-      <p className="font-mono text-[9px] tracking-widest text-muted-foreground uppercase">{label}</p>
+      <p className="font-mono text-3xs tracking-eyebrow text-muted-foreground uppercase">{label}</p>
       <p className="font-mono text-xs tabular-nums">{children}</p>
     </div>
   );
@@ -77,7 +77,7 @@ export function VerdictCard({
         <div className="max-w-2xl">
           {/* The section header above supplies the eyebrow; the stamp leads. */}
           <VerdictStamp verdict={synthesis.verdict} />
-          <p className="mt-5 text-lg leading-snug font-medium text-balance sm:text-xl">
+          <p className="mt-5 font-serif text-xl leading-snug font-medium text-balance sm:text-2xl">
             {synthesis.oneLiner}
           </p>
           {aggregates && (

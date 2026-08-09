@@ -13,7 +13,7 @@ export function ObjectionsList({ aggregates }: { aggregates: RunAggregates }) {
     <section className="rounded-xl border bg-card p-5">
       <header>
         <h3 className="text-sm font-medium">Top objections</h3>
-        <p className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase">
+        <p className="font-mono text-3xs tracking-eyebrow text-muted-foreground uppercase">
           mentions across {aggregates.completed} personas
         </p>
       </header>
@@ -22,7 +22,7 @@ export function ObjectionsList({ aggregates }: { aggregates: RunAggregates }) {
           <li key={item.objection}>
             <div className="flex items-baseline justify-between gap-3">
               <span className="text-xs leading-snug text-foreground/90">
-                <span className="mr-1.5 font-mono text-[10px] text-muted-foreground">
+                <span className="mr-1.5 font-mono text-3xs text-muted-foreground">
                   {String(rank + 1).padStart(2, "0")}
                 </span>
                 {item.objection}

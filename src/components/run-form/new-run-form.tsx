@@ -117,12 +117,12 @@ export function NewRunForm() {
       {/* Idea */}
       <div className="flex flex-col gap-2">
         <div className="flex items-baseline justify-between">
-          <Label htmlFor="idea" className="font-mono text-xs tracking-[0.14em] uppercase">
+          <Label htmlFor="idea" className="font-mono text-xs tracking-eyebrow uppercase">
             The idea
           </Label>
           <span
             className={cn(
-              "font-mono text-[11px] tabular-nums",
+              "font-mono text-2xs tabular-nums",
               touched && ideaTooShort ? "text-destructive" : "text-muted-foreground",
             )}
           >
@@ -175,7 +175,7 @@ export function NewRunForm() {
 
       {/* Tier */}
       <div className="flex flex-col gap-2">
-        <Label className="font-mono text-xs tracking-[0.14em] uppercase">Population</Label>
+        <Label className="font-mono text-xs tracking-eyebrow uppercase">Population</Label>
         <div role="radiogroup" aria-label="Run tier" className="grid gap-3 sm:grid-cols-3">
           {TIERS.map(({ tier: value, name, blurb }) => {
             const shape = TIER_SHAPE[value];
@@ -265,7 +265,7 @@ export function NewRunForm() {
       {/* Launch */}
       <div className="flex items-center justify-between border-t pt-6">
         <div className="flex items-center gap-2 font-mono text-sm text-muted-foreground">
-          <span className="text-xs tracking-[0.14em] uppercase">Est. cost</span>
+          <span className="text-xs tracking-eyebrow uppercase">Est. cost</span>
           {estimating ? (
             <DotmSquare3 colorPreset="solid-theme" size={16} dotSize={2} ariaLabel="Estimating cost" />
           ) : (

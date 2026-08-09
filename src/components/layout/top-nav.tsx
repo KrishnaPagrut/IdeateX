@@ -23,8 +23,8 @@ export function TopNav() {
     <header className="sticky top-0 z-40 border-b bg-background/90 backdrop-blur supports-[backdrop-filter]:bg-background/75">
       <div className="mx-auto flex h-12 w-full max-w-6xl items-center gap-8 px-6">
         <Link href="/" className="flex items-baseline gap-2.5">
-          <span className="text-sm font-semibold tracking-tight">IdeateX</span>
-          <span className="hidden font-mono text-[10px] tracking-[0.18em] text-muted-foreground uppercase sm:inline">
+          <span className="font-serif text-[17px] font-bold tracking-tight">IdeateX</span>
+          <span className="hidden font-mono text-3xs tracking-eyebrow text-muted-foreground uppercase sm:inline">
             synthetic focus groups
           </span>
         </Link>

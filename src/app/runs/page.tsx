@@ -26,8 +26,8 @@ export default async function RunsPage() {
   return (
     <div className="mx-auto w-full max-w-6xl px-6 py-14">
       <header className="flex flex-col gap-3">
-        <p className="font-mono text-xs tracking-[0.18em] text-primary uppercase">Run history</p>
-        <h1 className="text-3xl font-semibold tracking-tight">Runs</h1>
+        <p className="font-mono text-xs tracking-eyebrow text-primary uppercase">Run history</p>
+        <h1 className="font-serif text-3xl font-bold tracking-tight">Runs</h1>
       </header>
       <div className="mt-8">
         {tableRows.length === 0 ? (

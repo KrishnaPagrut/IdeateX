@@ -51,7 +51,7 @@ function DotInput({
 }) {
   return (
     <div className="flex items-center justify-between gap-3">
-      <span className="font-mono text-[10px] tracking-[0.12em] uppercase text-muted-foreground">
+      <span className="font-mono text-3xs tracking-eyebrow uppercase text-muted-foreground">
         {label}
       </span>
       <div
@@ -89,7 +89,7 @@ function Field({
 }) {
   return (
     <div className={cn("flex flex-col gap-1.5", className)}>
-      <Label className="font-mono text-[10px] tracking-[0.12em] uppercase text-muted-foreground">
+      <Label className="font-mono text-3xs tracking-eyebrow uppercase text-muted-foreground">
         {label}
       </Label>
       {children}
@@ -175,7 +175,7 @@ export function PersonaEditor({
       </section>
 
       <section>
-        <h3 className="font-mono text-[11px] tracking-[0.18em] uppercase text-muted-foreground">
+        <h3 className="font-mono text-2xs tracking-eyebrow uppercase text-muted-foreground">
           Demographics
         </h3>
         <div className="mt-3 grid grid-cols-1 gap-4 sm:grid-cols-3">
@@ -234,7 +234,7 @@ export function PersonaEditor({
       </section>
 
       <section>
-        <h3 className="font-mono text-[11px] tracking-[0.18em] uppercase text-muted-foreground">
+        <h3 className="font-mono text-2xs tracking-eyebrow uppercase text-muted-foreground">
           Psychographics
         </h3>
         <div className="mt-3 grid grid-cols-1 gap-x-10 gap-y-3 sm:grid-cols-2">

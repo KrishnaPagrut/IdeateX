@@ -195,7 +195,7 @@ export function RunShell({ runId }: { runId: string }) {
       <div className="flex flex-1 items-center justify-center py-24">
         <div className="flex flex-col items-center gap-3">
           <DotmSquare3 colorPreset="solid-theme" size={36} dotSize={5} ariaLabel="Loading run" />
-          <p className="font-mono text-xs tracking-[0.14em] text-muted-foreground uppercase">
+          <p className="font-mono text-xs tracking-eyebrow text-muted-foreground uppercase">
             Loading run
           </p>
         </div>
@@ -244,9 +244,9 @@ export function RunShell({ runId }: { runId: string }) {
   }
 
   return (
-    <div className="mx-auto w-full max-w-4xl px-6 py-10">
+    <div className="w-full py-10">
       {/* Header */}
-      <header className="flex flex-col gap-4">
+      <header className="mx-auto flex w-full max-w-4xl flex-col gap-4 px-6">
         <div className="flex items-center gap-3">
           <Link
             href="/runs"
@@ -261,21 +261,24 @@ export function RunShell({ runId }: { runId: string }) {
 
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div className="flex min-w-0 flex-col gap-2">
-            <h1 className="line-clamp-2 max-w-prose text-xl font-semibold tracking-tight" title={run.idea}>
+            <h1
+              className="line-clamp-2 max-w-prose font-serif text-2xl leading-snug font-bold tracking-tight"
+              title={run.idea}
+            >
               {run.idea}
             </h1>
             <div className="flex flex-wrap items-center gap-3">
-              <Badge className={cn("font-mono text-[10px] tracking-wider uppercase", statusBadgeClass(status))}>
+              <Badge className={cn("font-mono text-3xs tracking-wider uppercase", statusBadgeClass(status))}>
                 {STATUS_LABELS[status]}
               </Badge>
               {active && (
                 <DotmSquare3 colorPreset="solid-theme" size={16} dotSize={2} ariaLabel="Run in progress" />
               )}
-              <Badge variant="outline" className="font-mono text-[10px] tracking-wider uppercase">
+              <Badge variant="outline" className="font-mono text-3xs tracking-wider uppercase">
                 {run.tier}
               </Badge>
               {run.grounding && (
-                <Badge variant="outline" className="font-mono text-[10px] tracking-wider uppercase">
+                <Badge variant="outline" className="font-mono text-3xs tracking-wider uppercase">
                   grounded
                 </Badge>
               )}
@@ -287,13 +290,13 @@ export function RunShell({ runId }: { runId: string }) {
 
           <div className="flex items-center gap-5">
             <div className="flex flex-col items-end">
-              <span className="font-mono text-[10px] tracking-[0.14em] text-muted-foreground uppercase">
+              <span className="font-mono text-3xs tracking-eyebrow text-muted-foreground uppercase">
                 Elapsed
               </span>
               <span className="font-mono text-sm tabular-nums">{elapsed}</span>
             </div>
             <div className="flex flex-col items-end">
-              <span className="font-mono text-[10px] tracking-[0.14em] text-muted-foreground uppercase">
+              <span className="font-mono text-3xs tracking-eyebrow text-muted-foreground uppercase">
                 Cost
               </span>
               <span className="font-mono text-sm tabular-nums">{cost ?? "—"}</span>
@@ -343,14 +346,20 @@ export function RunShell({ runId }: { runId: string }) {
         onValueChange={(value) => setTab(value === "results" ? "results" : "swarm")}
         className="mt-8"
       >
-        <TabsList variant="line">
-          <TabsTrigger value="swarm">Swarm</TabsTrigger>
-          <TabsTrigger value="results">Results</TabsTrigger>
-        </TabsList>
+        <div className="mx-auto w-full max-w-4xl px-6">
+          <TabsList variant="line">
+            <TabsTrigger value="swarm">Swarm</TabsTrigger>
+            <TabsTrigger value="results">Results</TabsTrigger>
+          </TabsList>
+        </div>
 
-        <TabsContent value="swarm" className="mt-4 flex flex-col gap-4">
-          <StageProgress status={status} agents={agents} />
-          <div className="h-[560px] overflow-hidden rounded-lg border bg-card">
+        {/* The swarm map runs edge to edge — the canvas is the page itself,
+            bounded by hairline rules, not a widget in a card. */}
+        <TabsContent value="swarm" className="mt-5 flex flex-col">
+          <div className="mx-auto w-full max-w-4xl px-6 pb-4">
+            <StageProgress status={status} agents={agents} />
+          </div>
+          <div className="relative h-[max(540px,calc(100dvh-24rem))] border-y">
             <AgentGraph
               agents={agents}
               personas={personas}
@@ -358,24 +367,32 @@ export function RunShell({ runId }: { runId: string }) {
               selectedId={selectedId}
               className="h-full"
             />
+            <p
+              aria-hidden
+              className="pointer-events-none absolute bottom-2 left-4 font-mono text-3xs tracking-eyebrow text-muted-foreground/70 uppercase"
+            >
+              drag to pan · scroll to zoom · click an agent to inspect
+            </p>
           </div>
         </TabsContent>
 
-        <TabsContent value="results" className="mt-4">
-          {terminal && status !== "completed" && !run.synthesis ? (
-            <div className="rounded-xl border border-dashed p-10 text-center">
-              <p className="text-sm text-muted-foreground">
-                This run ended before a verdict — status: {STATUS_LABELS[status].toLowerCase()}.
-              </p>
-            </div>
-          ) : (
-            <ResultsView
-              run={vizRun}
-              agents={agents}
-              personas={personas}
-              onSelectAgent={handleSelect}
-            />
-          )}
+        <TabsContent value="results" className="mt-6">
+          <div className="mx-auto w-full max-w-4xl px-6">
+            {terminal && status !== "completed" && !run.synthesis ? (
+              <div className="rounded-xl border border-dashed p-10 text-center">
+                <p className="text-sm text-muted-foreground">
+                  This run ended before a verdict — status: {STATUS_LABELS[status].toLowerCase()}.
+                </p>
+              </div>
+            ) : (
+              <ResultsView
+                run={vizRun}
+                agents={agents}
+                personas={personas}
+                onSelectAgent={handleSelect}
+              />
+            )}
+          </div>
         </TabsContent>
       </Tabs>
 
