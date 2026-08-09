@@ -47,6 +47,12 @@ export const TAXONOMY: Domain[] = [
         seedHints: "parents of young kids and teens, PTA types, minivan-and-mortgage households, multigenerational homes",
       },
       {
+        key: "students-young-adults",
+        name: "Students & young adults",
+        description: "16-26; low income but high influence, mobile-native, trend-driven, subscription-fatigued.",
+        seedHints: "college students, first-jobbers, community-college part-timers, campus workers, young adults at home",
+      },
+      {
         key: "seniors-retirees",
         name: "Seniors & retirees",
         description: "65+; fixed incomes, loyalty to known brands, wary of tech friction and subscriptions.",
@@ -143,6 +149,12 @@ export const TAXONOMY: Domain[] = [
         seedHints: "gym rats, runners, biohackers, weekend athletes, supplement stackers",
       },
       {
+        key: "care-providers",
+        name: "Care providers",
+        description: "Clinicians and care workers; evidence- and workflow-driven, liability-aware, time-starved.",
+        seedHints: "nurses, primary-care physicians, therapists, pharmacists, home-care aides, clinic managers",
+      },
+      {
         key: "wellness-seekers",
         name: "Wellness seekers",
         description: "Stress, sleep, and balance focused; skeptical of hype but drawn to ritual and community.",
@@ -195,6 +207,24 @@ export const TAXONOMY: Domain[] = [
         name: "Corporate employees",
         description: "Salaried office workers; careers, commutes, and benefits shape their spending.",
         seedHints: "middle managers, HR, accountants, sales reps, remote workers, recent grads",
+      },
+    ],
+  },
+  {
+    key: "global",
+    name: "Global markets",
+    subdomains: [
+      {
+        key: "emerging-markets",
+        name: "Emerging markets",
+        description: "Consumers in fast-growing economies; mobile-first, price-per-value sharp, infrastructure-aware.",
+        seedHints: "India, Brazil, Nigeria, Indonesia, Vietnam, Mexico — city and small-town, across incomes",
+      },
+      {
+        key: "european-consumers",
+        name: "European consumers",
+        description: "EU/UK buyers; privacy-regulation literate, quality-over-novelty, wary of US-style subscriptions.",
+        seedHints: "Germany, France, UK, Nordics, Spain, Poland — mix of urban and provincial, all ages",
       },
     ],
   },
