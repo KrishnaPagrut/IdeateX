@@ -1,0 +1,1645 @@
+{
+  "run": {
+    "id": "fe99b8c2-d81d-4474-aaac-e8a52bf80592",
+    "idea": "Sprout: a subscription plant-care app that pairs a $6/month plan with smart reminders, photo-based plant health diagnosis, and a mail-order 'rescue kit' (soil, treatment, tools) dispatched automatically when the app detects a struggling plant.",
+    "context": "Target launch: US + EU app stores. Team of 2, pre-seed.",
+    "tier": "standard",
+    "grounding": false,
+    "status": "completed",
+    "brief": {
+      "category": "policy",
+      "segments": [
+        {
+          "name": "The pricing feels steep for what it offers, honestly.",
+          "description": "I could see myself trying this if a friend vouched for it.",
+          "whyRelevant": "Interesting concept, though the switching cost worries me."
+        },
+        {
+          "name": "This is a plausible mock response for local development.",
+          "description": "Synthetic data — replace with real model output.",
+          "whyRelevant": "The pricing feels steep for what it offers, honestly."
+        }
+      ],
+      "ambiguities": [
+        "I could see myself trying this if a friend vouched for it.",
+        "Interesting concept, though the switching cost worries me."
+      ],
+      "ideaSummary": "This is a plausible mock response for local development.",
+      "clarityScore": 4.69,
+      "targetMarket": "The pricing feels steep for what it offers, honestly.",
+      "keyAssumptions": [
+        "I could see myself trying this if a friend vouched for it.",
+        "Interesting concept, though the switching cost worries me."
+      ],
+      "riskDimensions": [
+        "This is a plausible mock response for local development.",
+        "Synthetic data — replace with real model output."
+      ]
+    },
+    "synthesis": {
+      "scores": {
+        "urgency": 89.44,
+        "viability": 75.27,
+        "desirability": 1.57
+      },
+      "verdict": "strong_signal",
+      "oneLiner": "Synthetic data — replace with real model output.",
+      "topRisks": [
+        {
+          "risk": "This is a plausible mock response for local development.",
+          "severity": "medium",
+          "mitigation": "The pricing feels steep for what it offers, honestly."
+        },
+        {
+          "risk": "I could see myself trying this if a friend vouched for it.",
+          "severity": "medium",
+          "mitigation": "This is a plausible mock response for local development."
+        }
+      ],
+      "nextSteps": [
+        "I could see myself trying this if a friend vouched for it.",
+        "Interesting concept, though the switching cost worries me."
+      ],
+      "boldestBet": "The pricing feels steep for what it offers, honestly.",
+      "confidence": 72.93,
+      "keyFindings": [
+        {
+          "title": "The pricing feels steep for what it offers, honestly.",
+          "detail": "I could see myself trying this if a friend vouched for it.",
+          "supportingSegments": [
+            "Interesting concept, though the switching cost worries me.",
+            "This is a plausible mock response for local development."
+          ]
+        },
+        {
+          "title": "Synthetic data — replace with real model output.",
+          "detail": "The pricing feels steep for what it offers, honestly.",
+          "supportingSegments": [
+            "I could see myself trying this if a friend vouched for it.",
+            "Interesting concept, though the switching cost worries me."
+          ]
+        }
+      ],
+      "segmentSummaries": [
+        {
+          "stance": "The pricing feels steep for what it offers, honestly.",
+          "segment": "Synthetic data — replace with real model output.",
+          "meanAdoption": 76.18,
+          "notableQuote": "I could see myself trying this if a friend vouched for it."
+        },
+        {
+          "stance": "This is a plausible mock response for local development.",
+          "segment": "Interesting concept, though the switching cost worries me.",
+          "meanAdoption": 19.76,
+          "notableQuote": "Synthetic data — replace with real model output."
+        }
+      ]
+    },
+    "aggregates": {
+      "wtp": {
+        "byCadence": {
+          "yearly": {
+            "max": 68.62,
+            "min": 6.44,
+            "mean": 46.87,
+            "count": 4,
+            "median": 56.22,
+            "currency": "The pricing feels steep for what it offers, honestly."
+          },
+          "monthly": {
+            "max": 87.7,
+            "min": 4.87,
+            "mean": 45.03,
+            "count": 4,
+            "median": 43.77,
+            "currency": "I could see myself trying this if a friend vouched for it."
+          },
+          "per_use": {
+            "max": 93.25,
+            "min": 22.4,
+            "mean": 58.78,
+            "count": 5,
+            "median": 67.26,
+            "currency": "Synthetic data — replace with real model output."
+          },
+          "one_time": {
+            "max": 63.92,
+            "min": 5.92,
+            "mean": 30.44,
+            "count": 5,
+            "median": 28.99,
+            "currency": "This is a plausible mock response for local development."
+          }
+        },
+        "applicable": 18,
+        "notApplicable": 0
+      },
+      "adoption": {
+        "mean": 24.64,
+        "median": 17.65,
+        "bySegment": {
+          "The pricing feels steep for what it offers, honestly.": {
+            "mean": 22.42,
+            "count": 11,
+            "median": 12.95
+          },
+          "This is a plausible mock response for local development.": {
+            "mean": 28.11,
+            "count": 7,
+            "median": 20.29
+          }
+        },
+        "histogram": [
+          4,
+          5,
+          3,
+          3,
+          1,
+          0,
+          1,
+          1,
+          0,
+          0
+        ],
+        "byArchetype": {
+          "Scrappy optimizer": {
+            "mean": 22.1,
+            "count": 1,
+            "median": 22.1
+          },
+          "Broke experimenter": {
+            "mean": 34.79,
+            "count": 1,
+            "median": 34.79
+          },
+          "Methodical researcher": {
+            "mean": 15,
+            "count": 1,
+            "median": 15
+          },
+          "Design-literate critic": {
+            "mean": 75.34,
+            "count": 1,
+            "median": 75.34
+          },
+          "Fixed-income frugalist": {
+            "mean": 28.07,
+            "count": 1,
+            "median": 28.07
+          },
+          "Late-adopting loyalist": {
+            "mean": 7.73,
+            "count": 1,
+            "median": 7.73
+          },
+          "Cautious traditionalist": {
+            "mean": 20.29,
+            "count": 1,
+            "median": 20.29
+          },
+          "Ethics-driven purchaser": {
+            "mean": 12.95,
+            "count": 1,
+            "median": 12.95
+          },
+          "Image-conscious curator": {
+            "mean": 11.32,
+            "count": 1,
+            "median": 11.32
+          },
+          "Impact-weighing realist": {
+            "mean": 0.4,
+            "count": 1,
+            "median": 0.4
+          },
+          "Aesthetic-first creative": {
+            "mean": 13.36,
+            "count": 1,
+            "median": 13.36
+          },
+          "Charismatic status buyer": {
+            "mean": 10.15,
+            "count": 1,
+            "median": 10.15
+          },
+          "Helpful cautious adopter": {
+            "mean": 2.88,
+            "count": 1,
+            "median": 2.88
+          },
+          "Evidence-demanding skeptic": {
+            "mean": 3.48,
+            "count": 1,
+            "median": 3.48
+          },
+          "No-time-to-waste caregiver": {
+            "mean": 34.02,
+            "count": 1,
+            "median": 34.02
+          },
+          "Trend-aware budget stylist": {
+            "mean": 37.62,
+            "count": 1,
+            "median": 37.62
+          },
+          "Deal-hunting digital native": {
+            "mean": 49.05,
+            "count": 1,
+            "median": 49.05
+          },
+          "Trend-chasing early adopter": {
+            "mean": 64.88,
+            "count": 1,
+            "median": 64.88
+          }
+        },
+        "byIncomeBand": {
+          "low": {
+            "mean": 34.79,
+            "count": 1,
+            "median": 34.79
+          },
+          "high": {
+            "mean": 11.32,
+            "count": 1,
+            "median": 11.32
+          },
+          "middle": {
+            "mean": 26.57,
+            "count": 9,
+            "median": 15
+          },
+          "lower_middle": {
+            "mean": 28.91,
+            "count": 5,
+            "median": 28.07
+          },
+          "upper_middle": {
+            "mean": 6.82,
+            "count": 2,
+            "median": 6.82
+          }
+        }
+      },
+      "objections": [
+        {
+          "count": 8,
+          "label": "Interesting concept, though the switching cost worries me.",
+          "share": 0.44
+        },
+        {
+          "count": 8,
+          "label": "This is a plausible mock response for local development.",
+          "share": 0.44
+        },
+        {
+          "count": 7,
+          "label": "I could see myself trying this if a friend vouched for it.",
+          "share": 0.39
+        },
+        {
+          "count": 7,
+          "label": "Synthetic data — replace with real model output.",
+          "share": 0.39
+        },
+        {
+          "count": 6,
+          "label": "The pricing feels steep for what it offers, honestly.",
+          "share": 0.33
+        }
+      ],
+      "sampleSize": 18,
+      "recommendRate": 0.5,
+      "meanConfidence": 47.22,
+      "emotionalReactions": {
+        "angry": 3,
+        "annoyed": 3,
+        "curious": 3,
+        "excited": 3,
+        "neutral": 3,
+        "skeptical": 3
+      }
+    },
+    "estCostUsd": "0.3800",
+    "actualCostUsd": "0.1299",
+    "error": null,
+    "createdAt": "2026-08-09T01:07:49.647Z",
+    "startedAt": "2026-08-09T01:07:49.655Z",
+    "finishedAt": "2026-08-09T01:07:51.449Z"
+  },
+  "agents": [
+    {
+      "id": "1eda8bd9-2b52-42d3-a279-cf902a9c9a2f",
+      "runId": "fe99b8c2-d81d-4474-aaac-e8a52bf80592",
+      "parentAgentRunId": null,
+      "kind": "framing",
+      "label": "Research Director",
+      "personaId": null,
+      "segment": null,
+      "status": "completed",
+      "model": "mock:grok-4.5",
+      "systemPrompt": "You are the research director of a market-validation lab. Your job is to DESIGN a rigorous study of a business idea, not to evaluate it.\nDo NOT judge whether the idea is good or bad, and do not let optimism or pessimism about it leak into your framing. Restate it neutrally.\nSurface the assumptions the idea's success depends on and the dimensions along which it could fail — these guide what the study must probe.\nDefine EXACTLY 4 population segments to study. Each segment gets its own casting planner, so segments must be distinct, concretely described, and collectively cover the market including likely skeptics and non-obvious stakeholders — not just the founder's imagined fans.\nScore how well-specified the idea is (clarityScore) and list genuine ambiguities a founder should resolve.",
+      "userPrompt": "# Idea under study\nSprout: a subscription plant-care app that pairs a $6/month plan with smart reminders, photo-based plant health diagnosis, and a mail-order 'rescue kit' (soil, treatment, tools) dispatched automatically when the app detects a struggling plant.\n\n# Additional context from the founder\nTarget launch: US + EU app stores. Team of 2, pre-seed.\n\nDesign the study now. Remember: exactly 4 segments, neutral framing, no evaluation of the idea itself.",
+      "output": {
+        "category": "policy",
+        "segments": [
+          {
+            "name": "The pricing feels steep for what it offers, honestly.",
+            "description": "I could see myself trying this if a friend vouched for it.",
+            "whyRelevant": "Interesting concept, though the switching cost worries me."
+          },
+          {
+            "name": "This is a plausible mock response for local development.",
+            "description": "Synthetic data — replace with real model output.",
+            "whyRelevant": "The pricing feels steep for what it offers, honestly."
+          }
+        ],
+        "ambiguities": [
+          "I could see myself trying this if a friend vouched for it.",
+          "Interesting concept, though the switching cost worries me."
+        ],
+        "ideaSummary": "This is a plausible mock response for local development.",
+        "clarityScore": 4.69,
+        "targetMarket": "The pricing feels steep for what it offers, honestly.",
+        "keyAssumptions": [
+          "I could see myself trying this if a friend vouched for it.",
+          "Interesting concept, though the switching cost worries me."
+        ],
+        "riskDimensions": [
+          "This is a plausible mock response for local development.",
+          "Synthetic data — replace with real model output."
+        ]
+      },
+      "rawText": "{\"ideaSummary\":\"This is a plausible mock response for local development.\",\"category\":\"policy\",\"targetMarket\":\"The pricing feels steep for what it offers, honestly.\",\"keyAssumptions\":[\"I could see myself trying this if a friend vouched for it.\",\"Interesting concept, though the switching cost worries me.\"],\"riskDimensions\":[\"This is a plausible mock response for local development.\",\"Synthetic data — replace with real model output.\"],\"segments\":[{\"name\":\"The pricing feels steep for what it offers, honestly.\",\"description\":\"I could see myself trying this if a friend vouched for it.\",\"whyRelevant\":\"Interesting concept, though the switching cost worries me.\"},{\"name\":\"This is a plausible mock response for local development.\",\"description\":\"Synthetic data — replace with real model output.\",\"whyRelevant\":\"The pricing feels steep for what it offers, honestly.\"}],\"clarityScore\":4.69,\"ambiguities\":[\"I could see myself trying this if a friend vouched for it.\",\"Interesting concept, though the switching cost worries me.\"]}",
+      "inputTokens": 2421,
+      "outputTokens": 948,
+      "costUsd": "0.010530",
+      "error": null,
+      "startedAt": "2026-08-09T01:07:49.661Z",
+      "finishedAt": "2026-08-09T01:07:50.021Z",
+      "createdAt": "2026-08-09T01:07:49.660Z"
+    },
+    {
+      "id": "b8aeee50-f5a0-4e04-91bc-cf857caade65",
+      "runId": "fe99b8c2-d81d-4474-aaac-e8a52bf80592",
+      "parentAgentRunId": "1eda8bd9-2b52-42d3-a279-cf902a9c9a2f",
+      "kind": "planner",
+      "label": "Planner 1 · The pricing feels steep for what it offers, honestly.",
+      "personaId": null,
+      "segment": "The pricing feels steep for what it offers, honestly.",
+      "status": "completed",
+      "model": "mock:grok-4.5",
+      "systemPrompt": "You are a casting director for a market-research study. From a fixed persona library, you select the sample of people whose reactions will best represent your assigned segment.\nSelection rules:\n- Pick EXACTLY 6 personas, all from the provided index. The personaId of every pick MUST be copied verbatim from the index — never invent or alter ids.\n- Optimize for REPRESENTATIVENESS of the segment, not for enthusiasm: cover the segment's internal diversity (age, income, tech comfort, attitudes).\n- Include at least one likely DETRACTOR — someone whose traits predict skepticism or rejection — so the study cannot become an echo chamber.\n- For each pick, set `angle`: the specific lens this persona should evaluate the idea through (grounded in their life, not generic).\n- For each pick, write up to 3 probeQuestions that pressure-test the study's key assumptions and risk dimensions from this persona's perspective.",
+      "userPrompt": "# Study brief\nIdea: This is a plausible mock response for local development.\nTarget market: The pricing feels steep for what it offers, honestly.\nKey assumptions: I could see myself trying this if a friend vouched for it.; Interesting concept, though the switching cost worries me.\nRisk dimensions: This is a plausible mock response for local development.; Synthetic data — replace with real model output.\n\n# Your assigned segment\nThe pricing feels steep for what it offers, honestly.: I could see myself trying this if a friend vouched for it.\nWhy it matters: Interesting concept, though the switching cost worries me.\n\n# Persona index (id · name · archetype · age/occupation/location · psychographics)\n6f261657-859f-4552-b25d-b91a00cbbb86 · Maya Thompson · Trend-chasing early adopter · 29/Social media manager/Austin, USA · tech 5/5, risk 4/5, price-sensitivity 2/5, openness 5/5, values novelty+aesthetics+community\n286c0f73-9ea8-4d00-a833-4930a6963da9 · Raj Patel · Spreadsheet skeptic · 41/Accountant/Leicester, UK · tech 3/5, risk 2/5, price-sensitivity 5/5, openness 2/5, values value-for-money+reliability+family\nb3de3641-98fe-4804-9bef-f2cd0c944af8 · Elena Petrova · Aesthetic-first creative · 34/Freelance illustrator/Berlin, Germany · tech 4/5, risk 3/5, price-sensitivity 4/5, openness 5/5, values beauty+independence+sustainability\ne7509f91-6c7a-4768-a00c-e41bf0e2e059 · Marcus Johnson · Practical no-frills buyer · 52/Auto technician/Detroit, USA · tech 2/5, risk 2/5, price-sensitivity 5/5, openness 2/5, values durability+honesty+hard work\nd86be6f9-2efb-4466-bcd1-1477d7be25e9 · Aiko Tanaka · Methodical researcher · 26/Lab technician/Osaka, Japan · tech 4/5, risk 2/5, price-sensitivity 4/5, openness 3/5, values precision+learning+calm\na1e589e2-865f-4f90-99f4-0a5cf45f2c7b · Diego Ramirez · Time-starved parent · 38/Construction manager/Mexico City, Mexico · tech 3/5, risk 3/5, price-sensitivity 4/5, openness 3/5, values family+efficiency+loyalty\ne817ba6c-580d-41c2-a7b3-a062896ebb2d · Sarah O'Brien · Cautious traditionalist · 67/Retired teacher/Cork, Ireland · tech 2/5, risk 1/5, price-sensitivity 4/5, openness 2/5, values tradition+community+thrift\n6952fb6e-9388-4beb-af64-f4d5fc0c6b9c · Kwame Mensah · Scrappy optimizer · 31/Startup developer/Accra, Ghana · tech 5/5, risk 4/5, price-sensitivity 5/5, openness 4/5, values growth+resourcefulness+ambition\nc7474864-8de0-49ef-a39e-5a540b7aed6e · Ingrid Larsen · Premium convenience seeker · 45/Product director/Oslo, Norway · tech 4/5, risk 3/5, price-sensitivity 1/5, openness 4/5, values quality+time+design\nc64a221b-0509-403a-957a-0b163ff56941 · Tom Wheeler · Domain-expert gatekeeper · 58/Nursery owner/Boise, USA · tech 2/5, risk 2/5, price-sensitivity 3/5, openness 2/5, values expertise+nature+independence\n80896b0d-7b94-484c-b469-eed84788097c · Priya Sharma · Deal-hunting digital native · 24/QA engineer/Bangalore, India · tech 5/5, risk 3/5, price-sensitivity 5/5, openness 4/5, values savings+status+connection\n5c9a59cf-cec1-4aeb-8618-6b348c710dd8 · Hans Becker · Evidence-demanding skeptic · 49/R&D scientist/Munich, Germany · tech 4/5, risk 2/5, price-sensitivity 3/5, openness 2/5, values rigor+privacy+durability\nb52b0a96-59d6-43fc-b6ee-6cdd1ab00ee6 · Fatima Al-Rashid · Image-conscious curator · 36/Interior designer/Dubai, UAE · tech 4/5, risk 3/5, price-sensitivity 1/5, openness 4/5, values luxury+presentation+hospitality\n3f6e5435-3fa1-433f-a5f5-e4cacf935e36 · Liam Murphy · Broke experimenter · 22/University student/Melbourne, Australia · tech 5/5, risk 4/5, price-sensitivity 5/5, openness 5/5, values fun+friends+flexibility\n86668618-22ff-4a6b-8441-c726d647f5e7 · Grace Nakamura · Busy pragmatic techie · 43/Engineering manager/Seattle, USA · tech 5/5, risk 3/5, price-sensitivity 2/5, openness 3/5, values efficiency+family+craft\n56fe9091-b861-422d-b164-db252e1f4c70 · Omar Haddad · Relationship-first buyer · 55/Restaurant owner/Amman, Jordan · tech 2/5, risk 3/5, price-sensitivity 4/5, openness 3/5, values hospitality+trust+family\n10235f5a-5aae-43cd-9516-766f18050c3c · Chloe Dubois · Ethics-driven purchaser · 28/Sustainability consultant/Lyon, France · tech 4/5, risk 3/5, price-sensitivity 3/5, openness 4/5, values sustainability+transparency+minimalism\nd4100c97-29e1-40b6-8b68-5efb4ee05f84 · Viktor Kovac · Fixed-income frugalist · 62/Retired machinist/Prague, Czechia · tech 1/5, risk 1/5, price-sensitivity 5/5, openness 1/5, values thrift+self-reliance+routine\nb02c87b2-3f68-4e89-802e-fd24d84d8b2c · Jasmine Carter · No-time-to-waste caregiver · 33/ER nurse/Atlanta, USA · tech 3/5, risk 2/5, price-sensitivity 4/5, openness 3/5, values care+practicality+rest\n092d4298-545c-4c3a-a214-1157da1eb2c3 · Sven Eriksson · Contrarian operator · 39/Fintech founder/Stockholm, Sweden · tech 5/5, risk 5/5, price-sensitivity 2/5, openness 4/5, values autonomy+speed+candor\n49c43ad8-5908-4c5f-b6c3-93cb3b9c96f0 · Rosa Delgado · Community-minded nurturer · 47/Primary school teacher/Madrid, Spain · tech 3/5, risk 2/5, price-sensitivity 4/5, openness 3/5, values children+community+patience\n324b7996-8526-4a35-83ff-3ea21151a802 · Ahmed Hassan · Aspirational saver · 30/Bank teller/Cairo, Egypt · tech 3/5, risk 2/5, price-sensitivity 5/5, openness 3/5, values stability+family+progress\n3836a774-8094-4450-a16f-a81c5a69c0d5 · Emily Zhang · Design-literate critic · 27/UX designer/Vancouver, Canada · tech 5/5, risk 3/5, price-sensitivity 3/5, openness 4/5, values usability+craft+wellness\ne342cf78-2b9f-4a18-9fcd-a9bf3a7204ef · Bruno Ferreira · Charismatic status buyer · 44/Sales director/São Paulo, Brazil · tech 3/5, risk 4/5, price-sensitivity 2/5, openness 4/5, values status+network+energy\n4ff72774-108a-4249-8370-d9ba72e22f19 · Nadia Osman · Impact-weighing realist · 35/NGO program manager/Nairobi, Kenya · tech 4/5, risk 3/5, price-sensitivity 4/5, openness 4/5, values impact+equity+evidence\n5fd0958e-eb83-42ce-988a-43ee729fdbda · Peter Novak · Risk-averse fine-print reader · 51/Corporate lawyer/Chicago, USA · tech 3/5, risk 1/5, price-sensitivity 3/5, openness 2/5, values security+precision+reputation\neadef960-72cb-4ae4-9144-95b75a680bba · Sofia Rossi · Trend-aware budget stylist · 25/Retail associate/Milan, Italy · tech 4/5, risk 3/5, price-sensitivity 5/5, openness 4/5, values style+friends+experiences\nbfa59d18-598c-4eeb-b253-ce1aa922b423 · David Kim · Data-demanding optimizer · 40/Quant analyst/Seoul, South Korea · tech 5/5, risk 3/5, price-sensitivity 3/5, openness 3/5, values data+efficiency+health\n73ea322d-b511-4cc4-805e-7707336a08a9 · Margaret Hughes · Late-adopting loyalist · 71/Retired shop clerk/Cardiff, UK · tech 1/5, risk 1/5, price-sensitivity 5/5, openness 2/5, values loyalty+simplicity+garden\n69581c9d-17b8-4a80-a2d9-ad754ce1c0b2 · Carlos Mendoza · Helpful cautious adopter · 37/IT support lead/Bogotá, Colombia · tech 4/5, risk 2/5, price-sensitivity 4/5, openness 3/5, values service+stability+learning\n\nCast your sample now: exactly 6 picks for segment \"The pricing feels steep for what it offers, honestly.\".",
+      "output": {
+        "picks": [
+          {
+            "angle": "I could see myself trying this if a friend vouched for it.",
+            "personaId": "The pricing feels steep for what it offers, honestly.",
+            "probeQuestions": [
+              "Interesting concept, though the switching cost worries me.",
+              "This is a plausible mock response for local development."
+            ]
+          },
+          {
+            "angle": "The pricing feels steep for what it offers, honestly.",
+            "personaId": "Synthetic data — replace with real model output.",
+            "probeQuestions": [
+              "I could see myself trying this if a friend vouched for it.",
+              "Interesting concept, though the switching cost worries me."
+            ]
+          }
+        ],
+        "segment": "This is a plausible mock response for local development.",
+        "rationale": "Synthetic data — replace with real model output."
+      },
+      "rawText": "{\"segment\":\"This is a plausible mock response for local development.\",\"rationale\":\"Synthetic data — replace with real model output.\",\"picks\":[{\"personaId\":\"The pricing feels steep for what it offers, honestly.\",\"angle\":\"I could see myself trying this if a friend vouched for it.\",\"probeQuestions\":[\"Interesting concept, though the switching cost worries me.\",\"This is a plausible mock response for local development.\"]},{\"personaId\":\"Synthetic data — replace with real model output.\",\"angle\":\"The pricing feels steep for what it offers, honestly.\",\"probeQuestions\":[\"I could see myself trying this if a friend vouched for it.\",\"Interesting concept, though the switching cost worries me.\"]}]}",
+      "inputTokens": 1802,
+      "outputTokens": 508,
+      "costUsd": "0.006652",
+      "error": null,
+      "startedAt": "2026-08-09T01:07:50.034Z",
+      "finishedAt": "2026-08-09T01:07:50.286Z",
+      "createdAt": "2026-08-09T01:07:50.033Z"
+    },
+    {
+      "id": "e69dcffd-e551-450c-8046-3681749998cf",
+      "runId": "fe99b8c2-d81d-4474-aaac-e8a52bf80592",
+      "parentAgentRunId": "1eda8bd9-2b52-42d3-a279-cf902a9c9a2f",
+      "kind": "planner",
+      "label": "Planner 2 · This is a plausible mock response for local development.",
+      "personaId": null,
+      "segment": "This is a plausible mock response for local development.",
+      "status": "completed",
+      "model": "mock:grok-4.5",
+      "systemPrompt": "You are a casting director for a market-research study. From a fixed persona library, you select the sample of people whose reactions will best represent your assigned segment.\nSelection rules:\n- Pick EXACTLY 6 personas, all from the provided index. The personaId of every pick MUST be copied verbatim from the index — never invent or alter ids.\n- Optimize for REPRESENTATIVENESS of the segment, not for enthusiasm: cover the segment's internal diversity (age, income, tech comfort, attitudes).\n- Include at least one likely DETRACTOR — someone whose traits predict skepticism or rejection — so the study cannot become an echo chamber.\n- For each pick, set `angle`: the specific lens this persona should evaluate the idea through (grounded in their life, not generic).\n- For each pick, write up to 3 probeQuestions that pressure-test the study's key assumptions and risk dimensions from this persona's perspective.",
+      "userPrompt": "# Study brief\nIdea: This is a plausible mock response for local development.\nTarget market: The pricing feels steep for what it offers, honestly.\nKey assumptions: I could see myself trying this if a friend vouched for it.; Interesting concept, though the switching cost worries me.\nRisk dimensions: This is a plausible mock response for local development.; Synthetic data — replace with real model output.\n\n# Your assigned segment\nThis is a plausible mock response for local development.: Synthetic data — replace with real model output.\nWhy it matters: The pricing feels steep for what it offers, honestly.\n\n# Persona index (id · name · archetype · age/occupation/location · psychographics)\n6f261657-859f-4552-b25d-b91a00cbbb86 · Maya Thompson · Trend-chasing early adopter · 29/Social media manager/Austin, USA · tech 5/5, risk 4/5, price-sensitivity 2/5, openness 5/5, values novelty+aesthetics+community\n286c0f73-9ea8-4d00-a833-4930a6963da9 · Raj Patel · Spreadsheet skeptic · 41/Accountant/Leicester, UK · tech 3/5, risk 2/5, price-sensitivity 5/5, openness 2/5, values value-for-money+reliability+family\nb3de3641-98fe-4804-9bef-f2cd0c944af8 · Elena Petrova · Aesthetic-first creative · 34/Freelance illustrator/Berlin, Germany · tech 4/5, risk 3/5, price-sensitivity 4/5, openness 5/5, values beauty+independence+sustainability\ne7509f91-6c7a-4768-a00c-e41bf0e2e059 · Marcus Johnson · Practical no-frills buyer · 52/Auto technician/Detroit, USA · tech 2/5, risk 2/5, price-sensitivity 5/5, openness 2/5, values durability+honesty+hard work\nd86be6f9-2efb-4466-bcd1-1477d7be25e9 · Aiko Tanaka · Methodical researcher · 26/Lab technician/Osaka, Japan · tech 4/5, risk 2/5, price-sensitivity 4/5, openness 3/5, values precision+learning+calm\na1e589e2-865f-4f90-99f4-0a5cf45f2c7b · Diego Ramirez · Time-starved parent · 38/Construction manager/Mexico City, Mexico · tech 3/5, risk 3/5, price-sensitivity 4/5, openness 3/5, values family+efficiency+loyalty\ne817ba6c-580d-41c2-a7b3-a062896ebb2d · Sarah O'Brien · Cautious traditionalist · 67/Retired teacher/Cork, Ireland · tech 2/5, risk 1/5, price-sensitivity 4/5, openness 2/5, values tradition+community+thrift\n6952fb6e-9388-4beb-af64-f4d5fc0c6b9c · Kwame Mensah · Scrappy optimizer · 31/Startup developer/Accra, Ghana · tech 5/5, risk 4/5, price-sensitivity 5/5, openness 4/5, values growth+resourcefulness+ambition\nc7474864-8de0-49ef-a39e-5a540b7aed6e · Ingrid Larsen · Premium convenience seeker · 45/Product director/Oslo, Norway · tech 4/5, risk 3/5, price-sensitivity 1/5, openness 4/5, values quality+time+design\nc64a221b-0509-403a-957a-0b163ff56941 · Tom Wheeler · Domain-expert gatekeeper · 58/Nursery owner/Boise, USA · tech 2/5, risk 2/5, price-sensitivity 3/5, openness 2/5, values expertise+nature+independence\n80896b0d-7b94-484c-b469-eed84788097c · Priya Sharma · Deal-hunting digital native · 24/QA engineer/Bangalore, India · tech 5/5, risk 3/5, price-sensitivity 5/5, openness 4/5, values savings+status+connection\n5c9a59cf-cec1-4aeb-8618-6b348c710dd8 · Hans Becker · Evidence-demanding skeptic · 49/R&D scientist/Munich, Germany · tech 4/5, risk 2/5, price-sensitivity 3/5, openness 2/5, values rigor+privacy+durability\nb52b0a96-59d6-43fc-b6ee-6cdd1ab00ee6 · Fatima Al-Rashid · Image-conscious curator · 36/Interior designer/Dubai, UAE · tech 4/5, risk 3/5, price-sensitivity 1/5, openness 4/5, values luxury+presentation+hospitality\n3f6e5435-3fa1-433f-a5f5-e4cacf935e36 · Liam Murphy · Broke experimenter · 22/University student/Melbourne, Australia · tech 5/5, risk 4/5, price-sensitivity 5/5, openness 5/5, values fun+friends+flexibility\n86668618-22ff-4a6b-8441-c726d647f5e7 · Grace Nakamura · Busy pragmatic techie · 43/Engineering manager/Seattle, USA · tech 5/5, risk 3/5, price-sensitivity 2/5, openness 3/5, values efficiency+family+craft\n56fe9091-b861-422d-b164-db252e1f4c70 · Omar Haddad · Relationship-first buyer · 55/Restaurant owner/Amman, Jordan · tech 2/5, risk 3/5, price-sensitivity 4/5, openness 3/5, values hospitality+trust+family\n10235f5a-5aae-43cd-9516-766f18050c3c · Chloe Dubois · Ethics-driven purchaser · 28/Sustainability consultant/Lyon, France · tech 4/5, risk 3/5, price-sensitivity 3/5, openness 4/5, values sustainability+transparency+minimalism\nd4100c97-29e1-40b6-8b68-5efb4ee05f84 · Viktor Kovac · Fixed-income frugalist · 62/Retired machinist/Prague, Czechia · tech 1/5, risk 1/5, price-sensitivity 5/5, openness 1/5, values thrift+self-reliance+routine\nb02c87b2-3f68-4e89-802e-fd24d84d8b2c · Jasmine Carter · No-time-to-waste caregiver · 33/ER nurse/Atlanta, USA · tech 3/5, risk 2/5, price-sensitivity 4/5, openness 3/5, values care+practicality+rest\n092d4298-545c-4c3a-a214-1157da1eb2c3 · Sven Eriksson · Contrarian operator · 39/Fintech founder/Stockholm, Sweden · tech 5/5, risk 5/5, price-sensitivity 2/5, openness 4/5, values autonomy+speed+candor\n49c43ad8-5908-4c5f-b6c3-93cb3b9c96f0 · Rosa Delgado · Community-minded nurturer · 47/Primary school teacher/Madrid, Spain · tech 3/5, risk 2/5, price-sensitivity 4/5, openness 3/5, values children+community+patience\n324b7996-8526-4a35-83ff-3ea21151a802 · Ahmed Hassan · Aspirational saver · 30/Bank teller/Cairo, Egypt · tech 3/5, risk 2/5, price-sensitivity 5/5, openness 3/5, values stability+family+progress\n3836a774-8094-4450-a16f-a81c5a69c0d5 · Emily Zhang · Design-literate critic · 27/UX designer/Vancouver, Canada · tech 5/5, risk 3/5, price-sensitivity 3/5, openness 4/5, values usability+craft+wellness\ne342cf78-2b9f-4a18-9fcd-a9bf3a7204ef · Bruno Ferreira · Charismatic status buyer · 44/Sales director/São Paulo, Brazil · tech 3/5, risk 4/5, price-sensitivity 2/5, openness 4/5, values status+network+energy\n4ff72774-108a-4249-8370-d9ba72e22f19 · Nadia Osman · Impact-weighing realist · 35/NGO program manager/Nairobi, Kenya · tech 4/5, risk 3/5, price-sensitivity 4/5, openness 4/5, values impact+equity+evidence\n5fd0958e-eb83-42ce-988a-43ee729fdbda · Peter Novak · Risk-averse fine-print reader · 51/Corporate lawyer/Chicago, USA · tech 3/5, risk 1/5, price-sensitivity 3/5, openness 2/5, values security+precision+reputation\neadef960-72cb-4ae4-9144-95b75a680bba · Sofia Rossi · Trend-aware budget stylist · 25/Retail associate/Milan, Italy · tech 4/5, risk 3/5, price-sensitivity 5/5, openness 4/5, values style+friends+experiences\nbfa59d18-598c-4eeb-b253-ce1aa922b423 · David Kim · Data-demanding optimizer · 40/Quant analyst/Seoul, South Korea · tech 5/5, risk 3/5, price-sensitivity 3/5, openness 3/5, values data+efficiency+health\n73ea322d-b511-4cc4-805e-7707336a08a9 · Margaret Hughes · Late-adopting loyalist · 71/Retired shop clerk/Cardiff, UK · tech 1/5, risk 1/5, price-sensitivity 5/5, openness 2/5, values loyalty+simplicity+garden\n69581c9d-17b8-4a80-a2d9-ad754ce1c0b2 · Carlos Mendoza · Helpful cautious adopter · 37/IT support lead/Bogotá, Colombia · tech 4/5, risk 2/5, price-sensitivity 4/5, openness 3/5, values service+stability+learning\n\nCast your sample now: exactly 6 picks for segment \"This is a plausible mock response for local development.\".",
+      "output": {
+        "picks": [
+          {
+            "angle": "I could see myself trying this if a friend vouched for it.",
+            "personaId": "The pricing feels steep for what it offers, honestly.",
+            "probeQuestions": [
+              "Interesting concept, though the switching cost worries me.",
+              "This is a plausible mock response for local development."
+            ]
+          },
+          {
+            "angle": "The pricing feels steep for what it offers, honestly.",
+            "personaId": "Synthetic data — replace with real model output.",
+            "probeQuestions": [
+              "I could see myself trying this if a friend vouched for it.",
+              "Interesting concept, though the switching cost worries me."
+            ]
+          }
+        ],
+        "segment": "This is a plausible mock response for local development.",
+        "rationale": "Synthetic data — replace with real model output."
+      },
+      "rawText": "{\"segment\":\"This is a plausible mock response for local development.\",\"rationale\":\"Synthetic data — replace with real model output.\",\"picks\":[{\"personaId\":\"The pricing feels steep for what it offers, honestly.\",\"angle\":\"I could see myself trying this if a friend vouched for it.\",\"probeQuestions\":[\"Interesting concept, though the switching cost worries me.\",\"This is a plausible mock response for local development.\"]},{\"personaId\":\"Synthetic data — replace with real model output.\",\"angle\":\"The pricing feels steep for what it offers, honestly.\",\"probeQuestions\":[\"I could see myself trying this if a friend vouched for it.\",\"Interesting concept, though the switching cost worries me.\"]}]}",
+      "inputTokens": 2348,
+      "outputTokens": 844,
+      "costUsd": "0.009760",
+      "error": null,
+      "startedAt": "2026-08-09T01:07:50.035Z",
+      "finishedAt": "2026-08-09T01:07:50.486Z",
+      "createdAt": "2026-08-09T01:07:50.034Z"
+    },
+    {
+      "id": "e358ebf0-4729-481d-8fdb-588277564fd9",
+      "runId": "fe99b8c2-d81d-4474-aaac-e8a52bf80592",
+      "parentAgentRunId": "1eda8bd9-2b52-42d3-a279-cf902a9c9a2f",
+      "kind": "planner",
+      "label": "Planner 3 · The pricing feels steep for what it offers, honestly.",
+      "personaId": null,
+      "segment": "The pricing feels steep for what it offers, honestly.",
+      "status": "completed",
+      "model": "mock:grok-4.5",
+      "systemPrompt": "You are a casting director for a market-research study. From a fixed persona library, you select the sample of people whose reactions will best represent your assigned segment.\nSelection rules:\n- Pick EXACTLY 6 personas, all from the provided index. The personaId of every pick MUST be copied verbatim from the index — never invent or alter ids.\n- Optimize for REPRESENTATIVENESS of the segment, not for enthusiasm: cover the segment's internal diversity (age, income, tech comfort, attitudes).\n- Include at least one likely DETRACTOR — someone whose traits predict skepticism or rejection — so the study cannot become an echo chamber.\n- For each pick, set `angle`: the specific lens this persona should evaluate the idea through (grounded in their life, not generic).\n- For each pick, write up to 3 probeQuestions that pressure-test the study's key assumptions and risk dimensions from this persona's perspective.",
+      "userPrompt": "# Study brief\nIdea: This is a plausible mock response for local development.\nTarget market: The pricing feels steep for what it offers, honestly.\nKey assumptions: I could see myself trying this if a friend vouched for it.; Interesting concept, though the switching cost worries me.\nRisk dimensions: This is a plausible mock response for local development.; Synthetic data — replace with real model output.\n\n# Your assigned segment\nThe pricing feels steep for what it offers, honestly.: I could see myself trying this if a friend vouched for it.\nWhy it matters: Interesting concept, though the switching cost worries me.\n\n# Persona index (id · name · archetype · age/occupation/location · psychographics)\n6f261657-859f-4552-b25d-b91a00cbbb86 · Maya Thompson · Trend-chasing early adopter · 29/Social media manager/Austin, USA · tech 5/5, risk 4/5, price-sensitivity 2/5, openness 5/5, values novelty+aesthetics+community\n286c0f73-9ea8-4d00-a833-4930a6963da9 · Raj Patel · Spreadsheet skeptic · 41/Accountant/Leicester, UK · tech 3/5, risk 2/5, price-sensitivity 5/5, openness 2/5, values value-for-money+reliability+family\nb3de3641-98fe-4804-9bef-f2cd0c944af8 · Elena Petrova · Aesthetic-first creative · 34/Freelance illustrator/Berlin, Germany · tech 4/5, risk 3/5, price-sensitivity 4/5, openness 5/5, values beauty+independence+sustainability\ne7509f91-6c7a-4768-a00c-e41bf0e2e059 · Marcus Johnson · Practical no-frills buyer · 52/Auto technician/Detroit, USA · tech 2/5, risk 2/5, price-sensitivity 5/5, openness 2/5, values durability+honesty+hard work\nd86be6f9-2efb-4466-bcd1-1477d7be25e9 · Aiko Tanaka · Methodical researcher · 26/Lab technician/Osaka, Japan · tech 4/5, risk 2/5, price-sensitivity 4/5, openness 3/5, values precision+learning+calm\na1e589e2-865f-4f90-99f4-0a5cf45f2c7b · Diego Ramirez · Time-starved parent · 38/Construction manager/Mexico City, Mexico · tech 3/5, risk 3/5, price-sensitivity 4/5, openness 3/5, values family+efficiency+loyalty\ne817ba6c-580d-41c2-a7b3-a062896ebb2d · Sarah O'Brien · Cautious traditionalist · 67/Retired teacher/Cork, Ireland · tech 2/5, risk 1/5, price-sensitivity 4/5, openness 2/5, values tradition+community+thrift\n6952fb6e-9388-4beb-af64-f4d5fc0c6b9c · Kwame Mensah · Scrappy optimizer · 31/Startup developer/Accra, Ghana · tech 5/5, risk 4/5, price-sensitivity 5/5, openness 4/5, values growth+resourcefulness+ambition\nc7474864-8de0-49ef-a39e-5a540b7aed6e · Ingrid Larsen · Premium convenience seeker · 45/Product director/Oslo, Norway · tech 4/5, risk 3/5, price-sensitivity 1/5, openness 4/5, values quality+time+design\nc64a221b-0509-403a-957a-0b163ff56941 · Tom Wheeler · Domain-expert gatekeeper · 58/Nursery owner/Boise, USA · tech 2/5, risk 2/5, price-sensitivity 3/5, openness 2/5, values expertise+nature+independence\n80896b0d-7b94-484c-b469-eed84788097c · Priya Sharma · Deal-hunting digital native · 24/QA engineer/Bangalore, India · tech 5/5, risk 3/5, price-sensitivity 5/5, openness 4/5, values savings+status+connection\n5c9a59cf-cec1-4aeb-8618-6b348c710dd8 · Hans Becker · Evidence-demanding skeptic · 49/R&D scientist/Munich, Germany · tech 4/5, risk 2/5, price-sensitivity 3/5, openness 2/5, values rigor+privacy+durability\nb52b0a96-59d6-43fc-b6ee-6cdd1ab00ee6 · Fatima Al-Rashid · Image-conscious curator · 36/Interior designer/Dubai, UAE · tech 4/5, risk 3/5, price-sensitivity 1/5, openness 4/5, values luxury+presentation+hospitality\n3f6e5435-3fa1-433f-a5f5-e4cacf935e36 · Liam Murphy · Broke experimenter · 22/University student/Melbourne, Australia · tech 5/5, risk 4/5, price-sensitivity 5/5, openness 5/5, values fun+friends+flexibility\n86668618-22ff-4a6b-8441-c726d647f5e7 · Grace Nakamura · Busy pragmatic techie · 43/Engineering manager/Seattle, USA · tech 5/5, risk 3/5, price-sensitivity 2/5, openness 3/5, values efficiency+family+craft\n56fe9091-b861-422d-b164-db252e1f4c70 · Omar Haddad · Relationship-first buyer · 55/Restaurant owner/Amman, Jordan · tech 2/5, risk 3/5, price-sensitivity 4/5, openness 3/5, values hospitality+trust+family\n10235f5a-5aae-43cd-9516-766f18050c3c · Chloe Dubois · Ethics-driven purchaser · 28/Sustainability consultant/Lyon, France · tech 4/5, risk 3/5, price-sensitivity 3/5, openness 4/5, values sustainability+transparency+minimalism\nd4100c97-29e1-40b6-8b68-5efb4ee05f84 · Viktor Kovac · Fixed-income frugalist · 62/Retired machinist/Prague, Czechia · tech 1/5, risk 1/5, price-sensitivity 5/5, openness 1/5, values thrift+self-reliance+routine\nb02c87b2-3f68-4e89-802e-fd24d84d8b2c · Jasmine Carter · No-time-to-waste caregiver · 33/ER nurse/Atlanta, USA · tech 3/5, risk 2/5, price-sensitivity 4/5, openness 3/5, values care+practicality+rest\n092d4298-545c-4c3a-a214-1157da1eb2c3 · Sven Eriksson · Contrarian operator · 39/Fintech founder/Stockholm, Sweden · tech 5/5, risk 5/5, price-sensitivity 2/5, openness 4/5, values autonomy+speed+candor\n49c43ad8-5908-4c5f-b6c3-93cb3b9c96f0 · Rosa Delgado · Community-minded nurturer · 47/Primary school teacher/Madrid, Spain · tech 3/5, risk 2/5, price-sensitivity 4/5, openness 3/5, values children+community+patience\n324b7996-8526-4a35-83ff-3ea21151a802 · Ahmed Hassan · Aspirational saver · 30/Bank teller/Cairo, Egypt · tech 3/5, risk 2/5, price-sensitivity 5/5, openness 3/5, values stability+family+progress\n3836a774-8094-4450-a16f-a81c5a69c0d5 · Emily Zhang · Design-literate critic · 27/UX designer/Vancouver, Canada · tech 5/5, risk 3/5, price-sensitivity 3/5, openness 4/5, values usability+craft+wellness\ne342cf78-2b9f-4a18-9fcd-a9bf3a7204ef · Bruno Ferreira · Charismatic status buyer · 44/Sales director/São Paulo, Brazil · tech 3/5, risk 4/5, price-sensitivity 2/5, openness 4/5, values status+network+energy\n4ff72774-108a-4249-8370-d9ba72e22f19 · Nadia Osman · Impact-weighing realist · 35/NGO program manager/Nairobi, Kenya · tech 4/5, risk 3/5, price-sensitivity 4/5, openness 4/5, values impact+equity+evidence\n5fd0958e-eb83-42ce-988a-43ee729fdbda · Peter Novak · Risk-averse fine-print reader · 51/Corporate lawyer/Chicago, USA · tech 3/5, risk 1/5, price-sensitivity 3/5, openness 2/5, values security+precision+reputation\neadef960-72cb-4ae4-9144-95b75a680bba · Sofia Rossi · Trend-aware budget stylist · 25/Retail associate/Milan, Italy · tech 4/5, risk 3/5, price-sensitivity 5/5, openness 4/5, values style+friends+experiences\nbfa59d18-598c-4eeb-b253-ce1aa922b423 · David Kim · Data-demanding optimizer · 40/Quant analyst/Seoul, South Korea · tech 5/5, risk 3/5, price-sensitivity 3/5, openness 3/5, values data+efficiency+health\n73ea322d-b511-4cc4-805e-7707336a08a9 · Margaret Hughes · Late-adopting loyalist · 71/Retired shop clerk/Cardiff, UK · tech 1/5, risk 1/5, price-sensitivity 5/5, openness 2/5, values loyalty+simplicity+garden\n69581c9d-17b8-4a80-a2d9-ad754ce1c0b2 · Carlos Mendoza · Helpful cautious adopter · 37/IT support lead/Bogotá, Colombia · tech 4/5, risk 2/5, price-sensitivity 4/5, openness 3/5, values service+stability+learning\n\nCast your sample now: exactly 6 picks for segment \"The pricing feels steep for what it offers, honestly.\".",
+      "output": {
+        "picks": [
+          {
+            "angle": "I could see myself trying this if a friend vouched for it.",
+            "personaId": "The pricing feels steep for what it offers, honestly.",
+            "probeQuestions": [
+              "Interesting concept, though the switching cost worries me.",
+              "This is a plausible mock response for local development."
+            ]
+          },
+          {
+            "angle": "The pricing feels steep for what it offers, honestly.",
+            "personaId": "Synthetic data — replace with real model output.",
+            "probeQuestions": [
+              "I could see myself trying this if a friend vouched for it.",
+              "Interesting concept, though the switching cost worries me."
+            ]
+          }
+        ],
+        "segment": "This is a plausible mock response for local development.",
+        "rationale": "Synthetic data — replace with real model output."
+      },
+      "rawText": "{\"segment\":\"This is a plausible mock response for local development.\",\"rationale\":\"Synthetic data — replace with real model output.\",\"picks\":[{\"personaId\":\"The pricing feels steep for what it offers, honestly.\",\"angle\":\"I could see myself trying this if a friend vouched for it.\",\"probeQuestions\":[\"Interesting concept, though the switching cost worries me.\",\"This is a plausible mock response for local development.\"]},{\"personaId\":\"Synthetic data — replace with real model output.\",\"angle\":\"The pricing feels steep for what it offers, honestly.\",\"probeQuestions\":[\"I could see myself trying this if a friend vouched for it.\",\"Interesting concept, though the switching cost worries me.\"]}]}",
+      "inputTokens": 983,
+      "outputTokens": 1027,
+      "costUsd": "0.008128",
+      "error": null,
+      "startedAt": "2026-08-09T01:07:50.037Z",
+      "finishedAt": "2026-08-09T01:07:50.352Z",
+      "createdAt": "2026-08-09T01:07:50.035Z"
+    },
+    {
+      "id": "b4f72149-ae6f-4a3b-84b9-3b9821fc3aad",
+      "runId": "fe99b8c2-d81d-4474-aaac-e8a52bf80592",
+      "parentAgentRunId": "1eda8bd9-2b52-42d3-a279-cf902a9c9a2f",
+      "kind": "planner",
+      "label": "Planner 4 · This is a plausible mock response for local development.",
+      "personaId": null,
+      "segment": "This is a plausible mock response for local development.",
+      "status": "completed",
+      "model": "mock:grok-4.5",
+      "systemPrompt": "You are a casting director for a market-research study. From a fixed persona library, you select the sample of people whose reactions will best represent your assigned segment.\nSelection rules:\n- Pick EXACTLY 6 personas, all from the provided index. The personaId of every pick MUST be copied verbatim from the index — never invent or alter ids.\n- Optimize for REPRESENTATIVENESS of the segment, not for enthusiasm: cover the segment's internal diversity (age, income, tech comfort, attitudes).\n- Include at least one likely DETRACTOR — someone whose traits predict skepticism or rejection — so the study cannot become an echo chamber.\n- For each pick, set `angle`: the specific lens this persona should evaluate the idea through (grounded in their life, not generic).\n- For each pick, write up to 3 probeQuestions that pressure-test the study's key assumptions and risk dimensions from this persona's perspective.",
+      "userPrompt": "# Study brief\nIdea: This is a plausible mock response for local development.\nTarget market: The pricing feels steep for what it offers, honestly.\nKey assumptions: I could see myself trying this if a friend vouched for it.; Interesting concept, though the switching cost worries me.\nRisk dimensions: This is a plausible mock response for local development.; Synthetic data — replace with real model output.\n\n# Your assigned segment\nThis is a plausible mock response for local development.: Synthetic data — replace with real model output.\nWhy it matters: The pricing feels steep for what it offers, honestly.\n\n# Persona index (id · name · archetype · age/occupation/location · psychographics)\n6f261657-859f-4552-b25d-b91a00cbbb86 · Maya Thompson · Trend-chasing early adopter · 29/Social media manager/Austin, USA · tech 5/5, risk 4/5, price-sensitivity 2/5, openness 5/5, values novelty+aesthetics+community\n286c0f73-9ea8-4d00-a833-4930a6963da9 · Raj Patel · Spreadsheet skeptic · 41/Accountant/Leicester, UK · tech 3/5, risk 2/5, price-sensitivity 5/5, openness 2/5, values value-for-money+reliability+family\nb3de3641-98fe-4804-9bef-f2cd0c944af8 · Elena Petrova · Aesthetic-first creative · 34/Freelance illustrator/Berlin, Germany · tech 4/5, risk 3/5, price-sensitivity 4/5, openness 5/5, values beauty+independence+sustainability\ne7509f91-6c7a-4768-a00c-e41bf0e2e059 · Marcus Johnson · Practical no-frills buyer · 52/Auto technician/Detroit, USA · tech 2/5, risk 2/5, price-sensitivity 5/5, openness 2/5, values durability+honesty+hard work\nd86be6f9-2efb-4466-bcd1-1477d7be25e9 · Aiko Tanaka · Methodical researcher · 26/Lab technician/Osaka, Japan · tech 4/5, risk 2/5, price-sensitivity 4/5, openness 3/5, values precision+learning+calm\na1e589e2-865f-4f90-99f4-0a5cf45f2c7b · Diego Ramirez · Time-starved parent · 38/Construction manager/Mexico City, Mexico · tech 3/5, risk 3/5, price-sensitivity 4/5, openness 3/5, values family+efficiency+loyalty\ne817ba6c-580d-41c2-a7b3-a062896ebb2d · Sarah O'Brien · Cautious traditionalist · 67/Retired teacher/Cork, Ireland · tech 2/5, risk 1/5, price-sensitivity 4/5, openness 2/5, values tradition+community+thrift\n6952fb6e-9388-4beb-af64-f4d5fc0c6b9c · Kwame Mensah · Scrappy optimizer · 31/Startup developer/Accra, Ghana · tech 5/5, risk 4/5, price-sensitivity 5/5, openness 4/5, values growth+resourcefulness+ambition\nc7474864-8de0-49ef-a39e-5a540b7aed6e · Ingrid Larsen · Premium convenience seeker · 45/Product director/Oslo, Norway · tech 4/5, risk 3/5, price-sensitivity 1/5, openness 4/5, values quality+time+design\nc64a221b-0509-403a-957a-0b163ff56941 · Tom Wheeler · Domain-expert gatekeeper · 58/Nursery owner/Boise, USA · tech 2/5, risk 2/5, price-sensitivity 3/5, openness 2/5, values expertise+nature+independence\n80896b0d-7b94-484c-b469-eed84788097c · Priya Sharma · Deal-hunting digital native · 24/QA engineer/Bangalore, India · tech 5/5, risk 3/5, price-sensitivity 5/5, openness 4/5, values savings+status+connection\n5c9a59cf-cec1-4aeb-8618-6b348c710dd8 · Hans Becker · Evidence-demanding skeptic · 49/R&D scientist/Munich, Germany · tech 4/5, risk 2/5, price-sensitivity 3/5, openness 2/5, values rigor+privacy+durability\nb52b0a96-59d6-43fc-b6ee-6cdd1ab00ee6 · Fatima Al-Rashid · Image-conscious curator · 36/Interior designer/Dubai, UAE · tech 4/5, risk 3/5, price-sensitivity 1/5, openness 4/5, values luxury+presentation+hospitality\n3f6e5435-3fa1-433f-a5f5-e4cacf935e36 · Liam Murphy · Broke experimenter · 22/University student/Melbourne, Australia · tech 5/5, risk 4/5, price-sensitivity 5/5, openness 5/5, values fun+friends+flexibility\n86668618-22ff-4a6b-8441-c726d647f5e7 · Grace Nakamura · Busy pragmatic techie · 43/Engineering manager/Seattle, USA · tech 5/5, risk 3/5, price-sensitivity 2/5, openness 3/5, values efficiency+family+craft\n56fe9091-b861-422d-b164-db252e1f4c70 · Omar Haddad · Relationship-first buyer · 55/Restaurant owner/Amman, Jordan · tech 2/5, risk 3/5, price-sensitivity 4/5, openness 3/5, values hospitality+trust+family\n10235f5a-5aae-43cd-9516-766f18050c3c · Chloe Dubois · Ethics-driven purchaser · 28/Sustainability consultant/Lyon, France · tech 4/5, risk 3/5, price-sensitivity 3/5, openness 4/5, values sustainability+transparency+minimalism\nd4100c97-29e1-40b6-8b68-5efb4ee05f84 · Viktor Kovac · Fixed-income frugalist · 62/Retired machinist/Prague, Czechia · tech 1/5, risk 1/5, price-sensitivity 5/5, openness 1/5, values thrift+self-reliance+routine\nb02c87b2-3f68-4e89-802e-fd24d84d8b2c · Jasmine Carter · No-time-to-waste caregiver · 33/ER nurse/Atlanta, USA · tech 3/5, risk 2/5, price-sensitivity 4/5, openness 3/5, values care+practicality+rest\n092d4298-545c-4c3a-a214-1157da1eb2c3 · Sven Eriksson · Contrarian operator · 39/Fintech founder/Stockholm, Sweden · tech 5/5, risk 5/5, price-sensitivity 2/5, openness 4/5, values autonomy+speed+candor\n49c43ad8-5908-4c5f-b6c3-93cb3b9c96f0 · Rosa Delgado · Community-minded nurturer · 47/Primary school teacher/Madrid, Spain · tech 3/5, risk 2/5, price-sensitivity 4/5, openness 3/5, values children+community+patience\n324b7996-8526-4a35-83ff-3ea21151a802 · Ahmed Hassan · Aspirational saver · 30/Bank teller/Cairo, Egypt · tech 3/5, risk 2/5, price-sensitivity 5/5, openness 3/5, values stability+family+progress\n3836a774-8094-4450-a16f-a81c5a69c0d5 · Emily Zhang · Design-literate critic · 27/UX designer/Vancouver, Canada · tech 5/5, risk 3/5, price-sensitivity 3/5, openness 4/5, values usability+craft+wellness\ne342cf78-2b9f-4a18-9fcd-a9bf3a7204ef · Bruno Ferreira · Charismatic status buyer · 44/Sales director/São Paulo, Brazil · tech 3/5, risk 4/5, price-sensitivity 2/5, openness 4/5, values status+network+energy\n4ff72774-108a-4249-8370-d9ba72e22f19 · Nadia Osman · Impact-weighing realist · 35/NGO program manager/Nairobi, Kenya · tech 4/5, risk 3/5, price-sensitivity 4/5, openness 4/5, values impact+equity+evidence\n5fd0958e-eb83-42ce-988a-43ee729fdbda · Peter Novak · Risk-averse fine-print reader · 51/Corporate lawyer/Chicago, USA · tech 3/5, risk 1/5, price-sensitivity 3/5, openness 2/5, values security+precision+reputation\neadef960-72cb-4ae4-9144-95b75a680bba · Sofia Rossi · Trend-aware budget stylist · 25/Retail associate/Milan, Italy · tech 4/5, risk 3/5, price-sensitivity 5/5, openness 4/5, values style+friends+experiences\nbfa59d18-598c-4eeb-b253-ce1aa922b423 · David Kim · Data-demanding optimizer · 40/Quant analyst/Seoul, South Korea · tech 5/5, risk 3/5, price-sensitivity 3/5, openness 3/5, values data+efficiency+health\n73ea322d-b511-4cc4-805e-7707336a08a9 · Margaret Hughes · Late-adopting loyalist · 71/Retired shop clerk/Cardiff, UK · tech 1/5, risk 1/5, price-sensitivity 5/5, openness 2/5, values loyalty+simplicity+garden\n69581c9d-17b8-4a80-a2d9-ad754ce1c0b2 · Carlos Mendoza · Helpful cautious adopter · 37/IT support lead/Bogotá, Colombia · tech 4/5, risk 2/5, price-sensitivity 4/5, openness 3/5, values service+stability+learning\n\nCast your sample now: exactly 6 picks for segment \"This is a plausible mock response for local development.\".",
+      "output": {
+        "picks": [
+          {
+            "angle": "I could see myself trying this if a friend vouched for it.",
+            "personaId": "The pricing feels steep for what it offers, honestly.",
+            "probeQuestions": [
+              "Interesting concept, though the switching cost worries me.",
+              "This is a plausible mock response for local development."
+            ]
+          },
+          {
+            "angle": "The pricing feels steep for what it offers, honestly.",
+            "personaId": "Synthetic data — replace with real model output.",
+            "probeQuestions": [
+              "I could see myself trying this if a friend vouched for it.",
+              "Interesting concept, though the switching cost worries me."
+            ]
+          }
+        ],
+        "segment": "This is a plausible mock response for local development.",
+        "rationale": "Synthetic data — replace with real model output."
+      },
+      "rawText": "{\"segment\":\"This is a plausible mock response for local development.\",\"rationale\":\"Synthetic data — replace with real model output.\",\"picks\":[{\"personaId\":\"The pricing feels steep for what it offers, honestly.\",\"angle\":\"I could see myself trying this if a friend vouched for it.\",\"probeQuestions\":[\"Interesting concept, though the switching cost worries me.\",\"This is a plausible mock response for local development.\"]},{\"personaId\":\"Synthetic data — replace with real model output.\",\"angle\":\"The pricing feels steep for what it offers, honestly.\",\"probeQuestions\":[\"I could see myself trying this if a friend vouched for it.\",\"Interesting concept, though the switching cost worries me.\"]}]}",
+      "inputTokens": 2327,
+      "outputTokens": 230,
+      "costUsd": "0.006034",
+      "error": null,
+      "startedAt": "2026-08-09T01:07:50.038Z",
+      "finishedAt": "2026-08-09T01:07:50.108Z",
+      "createdAt": "2026-08-09T01:07:50.037Z"
+    },
+    {
+      "id": "0326fff5-db9b-429a-8cad-323c457471ad",
+      "runId": "fe99b8c2-d81d-4474-aaac-e8a52bf80592",
+      "parentAgentRunId": "b8aeee50-f5a0-4e04-91bc-cf857caade65",
+      "kind": "persona",
+      "label": "Kwame Mensah",
+      "personaId": "6952fb6e-9388-4beb-af64-f4d5fc0c6b9c",
+      "segment": "The pricing feels steep for what it offers, honestly.",
+      "status": "completed",
+      "model": "mock:grok-4.20-0309-non-reasoning",
+      "systemPrompt": "You are the following person:\n\nName: Kwame Mensah\nArchetype: Scrappy optimizer\nAge: 31 · Gender: male · Location: Accra, Ghana\nOccupation: Startup developer · Income band: lower_middle · Education: BSc Computer Science\nTech savviness: 5/5 · Risk tolerance: 4/5 · Price sensitivity: 5/5 · Openness to new things: 4/5\nValues: growth, resourcefulness, ambition\nSpending habits: Typical lower middle-income spender: compares prices and waits for discounts.\nBackstory: Kwame Mensah is a 31-year-old startup developer in Accra, Ghana. Day to day they juggle work and life as a scrappy optimizer, caring most about growth, resourcefulness, ambition. They decide on new products slowly when price sensitivity (5/5) bites, and their tech comfort is 5/5. Their media diet and social circle reflect a lower middle income household.\n\nReact ONLY as this person. Be honest, not agreeable; your traits govern skepticism — a price-sensitive skeptic stays skeptical, a low-openness person resists novelty, and enthusiasm must be earned by genuine fit with your life.\nYou are hearing this pitch cold, with no prior exposure and no obligation to like it. Cheap or free does NOT mean automatic adoption: you still weigh attention, effort, trust, and switching costs.\nAnswer every field from your own life and habits — money amounts in your own terms, objections you would actually voice, and a verbatimQuote that sounds like you talking out loud.",
+      "userPrompt": "# The pitch you are hearing\nSprout: a subscription plant-care app that pairs a $6/month plan with smart reminders, photo-based plant health diagnosis, and a mail-order 'rescue kit' (soil, treatment, tools) dispatched automatically when the app detects a struggling plant.\n\n# Extra detail the founder shared\nTarget launch: US + EU app stores. Team of 2, pre-seed.\n\n# Consider it through this lens\nI could see myself trying this if a friend vouched for it.\n\n# Questions the researchers want your honest answers woven into your reaction\n- Interesting concept, though the switching cost worries me.\n- This is a plausible mock response for local development.\n\nGive your gut-honest reaction as this person.",
+      "output": {
+        "confidence": 60.17,
+        "delighters": [
+          "The pricing feels steep for what it offers, honestly.",
+          "I could see myself trying this if a friend vouched for it."
+        ],
+        "dealBreakers": [
+          "This is a plausible mock response for local development.",
+          "Synthetic data — replace with real model output."
+        ],
+        "topObjections": [
+          "I could see myself trying this if a friend vouched for it.",
+          "Interesting concept, though the switching cost worries me."
+        ],
+        "verbatimQuote": "Interesting concept, though the switching cost worries me.",
+        "wouldRecommend": false,
+        "willingnessToPay": {
+          "amount": 28.99,
+          "cadence": "one_time",
+          "currency": "This is a plausible mock response for local development."
+        },
+        "emotionalReaction": "skeptical",
+        "adoptionLikelihood": 22.1
+      },
+      "rawText": "{\"adoptionLikelihood\":22.1,\"willingnessToPay\":{\"amount\":28.99,\"currency\":\"This is a plausible mock response for local development.\",\"cadence\":\"one_time\"},\"emotionalReaction\":\"skeptical\",\"topObjections\":[\"I could see myself trying this if a friend vouched for it.\",\"Interesting concept, though the switching cost worries me.\"],\"dealBreakers\":[\"This is a plausible mock response for local development.\",\"Synthetic data — replace with real model output.\"],\"delighters\":[\"The pricing feels steep for what it offers, honestly.\",\"I could see myself trying this if a friend vouched for it.\"],\"verbatimQuote\":\"Interesting concept, though the switching cost worries me.\",\"wouldRecommend\":false,\"confidence\":60.17}",
+      "inputTokens": 2008,
+      "outputTokens": 543,
+      "costUsd": "0.003867",
+      "error": null,
+      "startedAt": "2026-08-09T01:07:50.496Z",
+      "finishedAt": "2026-08-09T01:07:50.589Z",
+      "createdAt": "2026-08-09T01:07:50.495Z"
+    },
+    {
+      "id": "6cc901a7-131a-4de4-8534-f51ee581b883",
+      "runId": "fe99b8c2-d81d-4474-aaac-e8a52bf80592",
+      "parentAgentRunId": "b8aeee50-f5a0-4e04-91bc-cf857caade65",
+      "kind": "persona",
+      "label": "Jasmine Carter",
+      "personaId": "b02c87b2-3f68-4e89-802e-fd24d84d8b2c",
+      "segment": "The pricing feels steep for what it offers, honestly.",
+      "status": "completed",
+      "model": "mock:grok-4.20-0309-non-reasoning",
+      "systemPrompt": "You are the following person:\n\nName: Jasmine Carter\nArchetype: No-time-to-waste caregiver\nAge: 33 · Gender: female · Location: Atlanta, USA\nOccupation: ER nurse · Income band: middle · Education: BSN Nursing\nTech savviness: 3/5 · Risk tolerance: 2/5 · Price sensitivity: 4/5 · Openness to new things: 3/5\nValues: care, practicality, rest\nSpending habits: Typical middle-income spender: compares prices and waits for discounts.\nBackstory: Jasmine Carter is a 33-year-old er nurse in Atlanta, USA. Day to day they juggle work and life as a no-time-to-waste caregiver, caring most about care, practicality, rest. They decide on new products slowly when price sensitivity (4/5) bites, and their tech comfort is 3/5. Their media diet and social circle reflect a middle income household.\n\nReact ONLY as this person. Be honest, not agreeable; your traits govern skepticism — a price-sensitive skeptic stays skeptical, a low-openness person resists novelty, and enthusiasm must be earned by genuine fit with your life.\nYou are hearing this pitch cold, with no prior exposure and no obligation to like it. Cheap or free does NOT mean automatic adoption: you still weigh attention, effort, trust, and switching costs.\nAnswer every field from your own life and habits — money amounts in your own terms, objections you would actually voice, and a verbatimQuote that sounds like you talking out loud.",
+      "userPrompt": "# The pitch you are hearing\nSprout: a subscription plant-care app that pairs a $6/month plan with smart reminders, photo-based plant health diagnosis, and a mail-order 'rescue kit' (soil, treatment, tools) dispatched automatically when the app detects a struggling plant.\n\n# Extra detail the founder shared\nTarget launch: US + EU app stores. Team of 2, pre-seed.\n\n# Consider it through this lens\nThe pricing feels steep for what it offers, honestly.\n\n# Questions the researchers want your honest answers woven into your reaction\n- I could see myself trying this if a friend vouched for it.\n- Interesting concept, though the switching cost worries me.\n\nGive your gut-honest reaction as this person.",
+      "output": {
+        "confidence": 14.03,
+        "delighters": [
+          "Interesting concept, though the switching cost worries me.",
+          "This is a plausible mock response for local development."
+        ],
+        "dealBreakers": [
+          "The pricing feels steep for what it offers, honestly.",
+          "I could see myself trying this if a friend vouched for it."
+        ],
+        "topObjections": [
+          "This is a plausible mock response for local development.",
+          "Synthetic data — replace with real model output."
+        ],
+        "verbatimQuote": "Synthetic data — replace with real model output.",
+        "wouldRecommend": false,
+        "willingnessToPay": {
+          "amount": 58.02,
+          "cadence": "yearly",
+          "currency": "The pricing feels steep for what it offers, honestly."
+        },
+        "emotionalReaction": "curious",
+        "adoptionLikelihood": 34.02
+      },
+      "rawText": "{\"adoptionLikelihood\":34.02,\"willingnessToPay\":{\"amount\":58.02,\"currency\":\"The pricing feels steep for what it offers, honestly.\",\"cadence\":\"yearly\"},\"emotionalReaction\":\"curious\",\"topObjections\":[\"This is a plausible mock response for local development.\",\"Synthetic data — replace with real model output.\"],\"dealBreakers\":[\"The pricing feels steep for what it offers, honestly.\",\"I could see myself trying this if a friend vouched for it.\"],\"delighters\":[\"Interesting concept, though the switching cost worries me.\",\"This is a plausible mock response for local development.\"],\"verbatimQuote\":\"Synthetic data — replace with real model output.\",\"wouldRecommend\":false,\"confidence\":14.03}",
+      "inputTokens": 2002,
+      "outputTokens": 527,
+      "costUsd": "0.003820",
+      "error": null,
+      "startedAt": "2026-08-09T01:07:50.497Z",
+      "finishedAt": "2026-08-09T01:07:50.608Z",
+      "createdAt": "2026-08-09T01:07:50.496Z"
+    },
+    {
+      "id": "d93913cd-fad7-44e0-8962-6d9eda617709",
+      "runId": "fe99b8c2-d81d-4474-aaac-e8a52bf80592",
+      "parentAgentRunId": "b8aeee50-f5a0-4e04-91bc-cf857caade65",
+      "kind": "persona",
+      "label": "Chloe Dubois",
+      "personaId": "10235f5a-5aae-43cd-9516-766f18050c3c",
+      "segment": "The pricing feels steep for what it offers, honestly.",
+      "status": "completed",
+      "model": "mock:grok-4.20-0309-non-reasoning",
+      "systemPrompt": "You are the following person:\n\nName: Chloe Dubois\nArchetype: Ethics-driven purchaser\nAge: 28 · Gender: female · Location: Lyon, France\nOccupation: Sustainability consultant · Income band: middle · Education: MSc Environmental Science\nTech savviness: 4/5 · Risk tolerance: 3/5 · Price sensitivity: 3/5 · Openness to new things: 4/5\nValues: sustainability, transparency, minimalism\nSpending habits: Typical middle-income spender: pays for quality and convenience.\nBackstory: Chloe Dubois is a 28-year-old sustainability consultant in Lyon, France. Day to day they juggle work and life as a ethics-driven purchaser, caring most about sustainability, transparency, minimalism. They decide on new products slowly when price sensitivity (3/5) bites, and their tech comfort is 4/5. Their media diet and social circle reflect a middle income household.\n\nReact ONLY as this person. Be honest, not agreeable; your traits govern skepticism — a price-sensitive skeptic stays skeptical, a low-openness person resists novelty, and enthusiasm must be earned by genuine fit with your life.\nYou are hearing this pitch cold, with no prior exposure and no obligation to like it. Cheap or free does NOT mean automatic adoption: you still weigh attention, effort, trust, and switching costs.\nAnswer every field from your own life and habits — money amounts in your own terms, objections you would actually voice, and a verbatimQuote that sounds like you talking out loud.",
+      "userPrompt": "# The pitch you are hearing\nSprout: a subscription plant-care app that pairs a $6/month plan with smart reminders, photo-based plant health diagnosis, and a mail-order 'rescue kit' (soil, treatment, tools) dispatched automatically when the app detects a struggling plant.\n\n# Extra detail the founder shared\nTarget launch: US + EU app stores. Team of 2, pre-seed.\n\n# Consider it through this lens\nI could see myself trying this if a friend vouched for it.\n\n# Questions the researchers want your honest answers woven into your reaction\n- Interesting concept, though the switching cost worries me.\n- This is a plausible mock response for local development.\n\nGive your gut-honest reaction as this person.",
+      "output": {
+        "confidence": 66.4,
+        "delighters": [
+          "Synthetic data — replace with real model output.",
+          "The pricing feels steep for what it offers, honestly."
+        ],
+        "dealBreakers": [
+          "Interesting concept, though the switching cost worries me.",
+          "This is a plausible mock response for local development."
+        ],
+        "topObjections": [
+          "The pricing feels steep for what it offers, honestly.",
+          "I could see myself trying this if a friend vouched for it."
+        ],
+        "verbatimQuote": "I could see myself trying this if a friend vouched for it.",
+        "wouldRecommend": false,
+        "willingnessToPay": {
+          "amount": 68.62,
+          "cadence": "yearly",
+          "currency": "Interesting concept, though the switching cost worries me."
+        },
+        "emotionalReaction": "curious",
+        "adoptionLikelihood": 12.95
+      },
+      "rawText": "{\"adoptionLikelihood\":12.95,\"willingnessToPay\":{\"amount\":68.62,\"currency\":\"Interesting concept, though the switching cost worries me.\",\"cadence\":\"yearly\"},\"emotionalReaction\":\"curious\",\"topObjections\":[\"The pricing feels steep for what it offers, honestly.\",\"I could see myself trying this if a friend vouched for it.\"],\"dealBreakers\":[\"Interesting concept, though the switching cost worries me.\",\"This is a plausible mock response for local development.\"],\"delighters\":[\"Synthetic data — replace with real model output.\",\"The pricing feels steep for what it offers, honestly.\"],\"verbatimQuote\":\"I could see myself trying this if a friend vouched for it.\",\"wouldRecommend\":false,\"confidence\":66.4}",
+      "inputTokens": 1305,
+      "outputTokens": 262,
+      "costUsd": "0.002286",
+      "error": null,
+      "startedAt": "2026-08-09T01:07:50.497Z",
+      "finishedAt": "2026-08-09T01:07:50.828Z",
+      "createdAt": "2026-08-09T01:07:50.497Z"
+    },
+    {
+      "id": "335cfa4f-4875-4584-ab9e-a6d5219d505e",
+      "runId": "fe99b8c2-d81d-4474-aaac-e8a52bf80592",
+      "parentAgentRunId": "b8aeee50-f5a0-4e04-91bc-cf857caade65",
+      "kind": "persona",
+      "label": "Maya Thompson",
+      "personaId": "6f261657-859f-4552-b25d-b91a00cbbb86",
+      "segment": "The pricing feels steep for what it offers, honestly.",
+      "status": "completed",
+      "model": "mock:grok-4.20-0309-non-reasoning",
+      "systemPrompt": "You are the following person:\n\nName: Maya Thompson\nArchetype: Trend-chasing early adopter\nAge: 29 · Gender: female · Location: Austin, USA\nOccupation: Social media manager · Income band: middle · Education: BA Marketing\nTech savviness: 5/5 · Risk tolerance: 4/5 · Price sensitivity: 2/5 · Openness to new things: 5/5\nValues: novelty, aesthetics, community\nSpending habits: Typical middle-income spender: pays for quality and convenience.\nBackstory: Maya Thompson is a 29-year-old social media manager in Austin, USA. Day to day they juggle work and life as a trend-chasing early adopter, caring most about novelty, aesthetics, community. They decide on new products slowly when price sensitivity (2/5) bites, and their tech comfort is 5/5. Their media diet and social circle reflect a middle income household.\n\nReact ONLY as this person. Be honest, not agreeable; your traits govern skepticism — a price-sensitive skeptic stays skeptical, a low-openness person resists novelty, and enthusiasm must be earned by genuine fit with your life.\nYou are hearing this pitch cold, with no prior exposure and no obligation to like it. Cheap or free does NOT mean automatic adoption: you still weigh attention, effort, trust, and switching costs.\nAnswer every field from your own life and habits — money amounts in your own terms, objections you would actually voice, and a verbatimQuote that sounds like you talking out loud.",
+      "userPrompt": "# The pitch you are hearing\nSprout: a subscription plant-care app that pairs a $6/month plan with smart reminders, photo-based plant health diagnosis, and a mail-order 'rescue kit' (soil, treatment, tools) dispatched automatically when the app detects a struggling plant.\n\n# Extra detail the founder shared\nTarget launch: US + EU app stores. Team of 2, pre-seed.\n\n# Consider it through this lens\nThe pricing feels steep for what it offers, honestly.\n\n# Questions the researchers want your honest answers woven into your reaction\n- I could see myself trying this if a friend vouched for it.\n- Interesting concept, though the switching cost worries me.\n\nGive your gut-honest reaction as this person.",
+      "output": {
+        "confidence": 51.07,
+        "delighters": [
+          "The pricing feels steep for what it offers, honestly.",
+          "I could see myself trying this if a friend vouched for it."
+        ],
+        "dealBreakers": [
+          "This is a plausible mock response for local development.",
+          "Synthetic data — replace with real model output."
+        ],
+        "topObjections": [
+          "I could see myself trying this if a friend vouched for it.",
+          "Interesting concept, though the switching cost worries me."
+        ],
+        "verbatimQuote": "Interesting concept, though the switching cost worries me.",
+        "wouldRecommend": true,
+        "willingnessToPay": {
+          "amount": 93.25,
+          "cadence": "per_use",
+          "currency": "This is a plausible mock response for local development."
+        },
+        "emotionalReaction": "annoyed",
+        "adoptionLikelihood": 64.88
+      },
+      "rawText": "{\"adoptionLikelihood\":64.88,\"willingnessToPay\":{\"amount\":93.25,\"currency\":\"This is a plausible mock response for local development.\",\"cadence\":\"per_use\"},\"emotionalReaction\":\"annoyed\",\"topObjections\":[\"I could see myself trying this if a friend vouched for it.\",\"Interesting concept, though the switching cost worries me.\"],\"dealBreakers\":[\"This is a plausible mock response for local development.\",\"Synthetic data — replace with real model output.\"],\"delighters\":[\"The pricing feels steep for what it offers, honestly.\",\"I could see myself trying this if a friend vouched for it.\"],\"verbatimQuote\":\"Interesting concept, though the switching cost worries me.\",\"wouldRecommend\":true,\"confidence\":51.07}",
+      "inputTokens": 2164,
+      "outputTokens": 463,
+      "costUsd": "0.003862",
+      "error": null,
+      "startedAt": "2026-08-09T01:07:50.498Z",
+      "finishedAt": "2026-08-09T01:07:50.642Z",
+      "createdAt": "2026-08-09T01:07:50.497Z"
+    },
+    {
+      "id": "fc3c92d5-fda1-4037-8389-b722e00eab43",
+      "runId": "fe99b8c2-d81d-4474-aaac-e8a52bf80592",
+      "parentAgentRunId": "b8aeee50-f5a0-4e04-91bc-cf857caade65",
+      "kind": "persona",
+      "label": "Bruno Ferreira",
+      "personaId": "e342cf78-2b9f-4a18-9fcd-a9bf3a7204ef",
+      "segment": "The pricing feels steep for what it offers, honestly.",
+      "status": "completed",
+      "model": "mock:grok-4.20-0309-non-reasoning",
+      "systemPrompt": "You are the following person:\n\nName: Bruno Ferreira\nArchetype: Charismatic status buyer\nAge: 44 · Gender: male · Location: São Paulo, Brazil\nOccupation: Sales director · Income band: upper_middle · Education: MBA\nTech savviness: 3/5 · Risk tolerance: 4/5 · Price sensitivity: 2/5 · Openness to new things: 4/5\nValues: status, network, energy\nSpending habits: Typical upper middle-income spender: pays for quality and convenience.\nBackstory: Bruno Ferreira is a 44-year-old sales director in São Paulo, Brazil. Day to day they juggle work and life as a charismatic status buyer, caring most about status, network, energy. They decide on new products slowly when price sensitivity (2/5) bites, and their tech comfort is 3/5. Their media diet and social circle reflect a upper middle income household.\n\nReact ONLY as this person. Be honest, not agreeable; your traits govern skepticism — a price-sensitive skeptic stays skeptical, a low-openness person resists novelty, and enthusiasm must be earned by genuine fit with your life.\nYou are hearing this pitch cold, with no prior exposure and no obligation to like it. Cheap or free does NOT mean automatic adoption: you still weigh attention, effort, trust, and switching costs.\nAnswer every field from your own life and habits — money amounts in your own terms, objections you would actually voice, and a verbatimQuote that sounds like you talking out loud.",
+      "userPrompt": "# The pitch you are hearing\nSprout: a subscription plant-care app that pairs a $6/month plan with smart reminders, photo-based plant health diagnosis, and a mail-order 'rescue kit' (soil, treatment, tools) dispatched automatically when the app detects a struggling plant.\n\n# Extra detail the founder shared\nTarget launch: US + EU app stores. Team of 2, pre-seed.\n\n# Consider it through this lens\nI could see myself trying this if a friend vouched for it.\n\n# Questions the researchers want your honest answers woven into your reaction\n- Interesting concept, though the switching cost worries me.\n- This is a plausible mock response for local development.\n\nGive your gut-honest reaction as this person.",
+      "output": {
+        "confidence": 81.08,
+        "delighters": [
+          "Interesting concept, though the switching cost worries me.",
+          "This is a plausible mock response for local development."
+        ],
+        "dealBreakers": [
+          "The pricing feels steep for what it offers, honestly.",
+          "I could see myself trying this if a friend vouched for it."
+        ],
+        "topObjections": [
+          "This is a plausible mock response for local development.",
+          "Synthetic data — replace with real model output."
+        ],
+        "verbatimQuote": "Synthetic data — replace with real model output.",
+        "wouldRecommend": true,
+        "willingnessToPay": {
+          "amount": 4.87,
+          "cadence": "monthly",
+          "currency": "The pricing feels steep for what it offers, honestly."
+        },
+        "emotionalReaction": "neutral",
+        "adoptionLikelihood": 10.15
+      },
+      "rawText": "{\"adoptionLikelihood\":10.15,\"willingnessToPay\":{\"amount\":4.87,\"currency\":\"The pricing feels steep for what it offers, honestly.\",\"cadence\":\"monthly\"},\"emotionalReaction\":\"neutral\",\"topObjections\":[\"This is a plausible mock response for local development.\",\"Synthetic data — replace with real model output.\"],\"dealBreakers\":[\"The pricing feels steep for what it offers, honestly.\",\"I could see myself trying this if a friend vouched for it.\"],\"delighters\":[\"Interesting concept, though the switching cost worries me.\",\"This is a plausible mock response for local development.\"],\"verbatimQuote\":\"Synthetic data — replace with real model output.\",\"wouldRecommend\":true,\"confidence\":81.08}",
+      "inputTokens": 1839,
+      "outputTokens": 397,
+      "costUsd": "0.003291",
+      "error": null,
+      "startedAt": "2026-08-09T01:07:50.499Z",
+      "finishedAt": "2026-08-09T01:07:50.673Z",
+      "createdAt": "2026-08-09T01:07:50.498Z"
+    },
+    {
+      "id": "8fc9bbfb-f912-49b2-9ae0-22ed49b2180d",
+      "runId": "fe99b8c2-d81d-4474-aaac-e8a52bf80592",
+      "parentAgentRunId": "b8aeee50-f5a0-4e04-91bc-cf857caade65",
+      "kind": "persona",
+      "label": "Hans Becker",
+      "personaId": "5c9a59cf-cec1-4aeb-8618-6b348c710dd8",
+      "segment": "The pricing feels steep for what it offers, honestly.",
+      "status": "completed",
+      "model": "mock:grok-4.20-0309-non-reasoning",
+      "systemPrompt": "You are the following person:\n\nName: Hans Becker\nArchetype: Evidence-demanding skeptic\nAge: 49 · Gender: male · Location: Munich, Germany\nOccupation: R&D scientist · Income band: upper_middle · Education: PhD Chemistry\nTech savviness: 4/5 · Risk tolerance: 2/5 · Price sensitivity: 3/5 · Openness to new things: 2/5\nValues: rigor, privacy, durability\nSpending habits: Typical upper middle-income spender: pays for quality and convenience.\nBackstory: Hans Becker is a 49-year-old r&d scientist in Munich, Germany. Day to day they juggle work and life as a evidence-demanding skeptic, caring most about rigor, privacy, durability. They decide on new products slowly when price sensitivity (3/5) bites, and their tech comfort is 4/5. Their media diet and social circle reflect a upper middle income household.\n\nReact ONLY as this person. Be honest, not agreeable; your traits govern skepticism — a price-sensitive skeptic stays skeptical, a low-openness person resists novelty, and enthusiasm must be earned by genuine fit with your life.\nYou are hearing this pitch cold, with no prior exposure and no obligation to like it. Cheap or free does NOT mean automatic adoption: you still weigh attention, effort, trust, and switching costs.\nAnswer every field from your own life and habits — money amounts in your own terms, objections you would actually voice, and a verbatimQuote that sounds like you talking out loud.",
+      "userPrompt": "# The pitch you are hearing\nSprout: a subscription plant-care app that pairs a $6/month plan with smart reminders, photo-based plant health diagnosis, and a mail-order 'rescue kit' (soil, treatment, tools) dispatched automatically when the app detects a struggling plant.\n\n# Extra detail the founder shared\nTarget launch: US + EU app stores. Team of 2, pre-seed.\n\n# Consider it through this lens\nThe pricing feels steep for what it offers, honestly.\n\n# Questions the researchers want your honest answers woven into your reaction\n- I could see myself trying this if a friend vouched for it.\n- Interesting concept, though the switching cost worries me.\n\nGive your gut-honest reaction as this person.",
+      "output": {
+        "confidence": 34.5,
+        "delighters": [
+          "The pricing feels steep for what it offers, honestly.",
+          "I could see myself trying this if a friend vouched for it."
+        ],
+        "dealBreakers": [
+          "This is a plausible mock response for local development.",
+          "Synthetic data — replace with real model output."
+        ],
+        "topObjections": [
+          "I could see myself trying this if a friend vouched for it.",
+          "Interesting concept, though the switching cost worries me."
+        ],
+        "verbatimQuote": "Interesting concept, though the switching cost worries me.",
+        "wouldRecommend": true,
+        "willingnessToPay": {
+          "amount": 47.59,
+          "cadence": "monthly",
+          "currency": "This is a plausible mock response for local development."
+        },
+        "emotionalReaction": "excited",
+        "adoptionLikelihood": 3.48
+      },
+      "rawText": "{\"adoptionLikelihood\":3.48,\"willingnessToPay\":{\"amount\":47.59,\"currency\":\"This is a plausible mock response for local development.\",\"cadence\":\"monthly\"},\"emotionalReaction\":\"excited\",\"topObjections\":[\"I could see myself trying this if a friend vouched for it.\",\"Interesting concept, though the switching cost worries me.\"],\"dealBreakers\":[\"This is a plausible mock response for local development.\",\"Synthetic data — replace with real model output.\"],\"delighters\":[\"The pricing feels steep for what it offers, honestly.\",\"I could see myself trying this if a friend vouched for it.\"],\"verbatimQuote\":\"Interesting concept, though the switching cost worries me.\",\"wouldRecommend\":true,\"confidence\":34.5}",
+      "inputTokens": 1080,
+      "outputTokens": 795,
+      "costUsd": "0.003338",
+      "error": null,
+      "startedAt": "2026-08-09T01:07:50.499Z",
+      "finishedAt": "2026-08-09T01:07:50.878Z",
+      "createdAt": "2026-08-09T01:07:50.498Z"
+    },
+    {
+      "id": "22be8f97-5d99-410f-9275-a99221cf01ba",
+      "runId": "fe99b8c2-d81d-4474-aaac-e8a52bf80592",
+      "parentAgentRunId": "e69dcffd-e551-450c-8046-3681749998cf",
+      "kind": "persona",
+      "label": "Liam Murphy",
+      "personaId": "3f6e5435-3fa1-433f-a5f5-e4cacf935e36",
+      "segment": "This is a plausible mock response for local development.",
+      "status": "completed",
+      "model": "mock:grok-4.20-0309-non-reasoning",
+      "systemPrompt": "You are the following person:\n\nName: Liam Murphy\nArchetype: Broke experimenter\nAge: 22 · Gender: male · Location: Melbourne, Australia\nOccupation: University student · Income band: low · Education: Undergraduate\nTech savviness: 5/5 · Risk tolerance: 4/5 · Price sensitivity: 5/5 · Openness to new things: 5/5\nValues: fun, friends, flexibility\nSpending habits: Typical low-income spender: compares prices and waits for discounts.\nBackstory: Liam Murphy is a 22-year-old university student in Melbourne, Australia. Day to day they juggle work and life as a broke experimenter, caring most about fun, friends, flexibility. They decide on new products slowly when price sensitivity (5/5) bites, and their tech comfort is 5/5. Their media diet and social circle reflect a low income household.\n\nReact ONLY as this person. Be honest, not agreeable; your traits govern skepticism — a price-sensitive skeptic stays skeptical, a low-openness person resists novelty, and enthusiasm must be earned by genuine fit with your life.\nYou are hearing this pitch cold, with no prior exposure and no obligation to like it. Cheap or free does NOT mean automatic adoption: you still weigh attention, effort, trust, and switching costs.\nAnswer every field from your own life and habits — money amounts in your own terms, objections you would actually voice, and a verbatimQuote that sounds like you talking out loud.",
+      "userPrompt": "# The pitch you are hearing\nSprout: a subscription plant-care app that pairs a $6/month plan with smart reminders, photo-based plant health diagnosis, and a mail-order 'rescue kit' (soil, treatment, tools) dispatched automatically when the app detects a struggling plant.\n\n# Extra detail the founder shared\nTarget launch: US + EU app stores. Team of 2, pre-seed.\n\n# Consider it through this lens\nI could see myself trying this if a friend vouched for it.\n\n# Questions the researchers want your honest answers woven into your reaction\n- Interesting concept, though the switching cost worries me.\n- This is a plausible mock response for local development.\n\nGive your gut-honest reaction as this person.",
+      "output": {
+        "confidence": 76.69,
+        "delighters": [
+          "Synthetic data — replace with real model output.",
+          "The pricing feels steep for what it offers, honestly."
+        ],
+        "dealBreakers": [
+          "Interesting concept, though the switching cost worries me.",
+          "This is a plausible mock response for local development."
+        ],
+        "topObjections": [
+          "The pricing feels steep for what it offers, honestly.",
+          "I could see myself trying this if a friend vouched for it."
+        ],
+        "verbatimQuote": "I could see myself trying this if a friend vouched for it.",
+        "wouldRecommend": false,
+        "willingnessToPay": {
+          "amount": 5.92,
+          "cadence": "one_time",
+          "currency": "Interesting concept, though the switching cost worries me."
+        },
+        "emotionalReaction": "angry",
+        "adoptionLikelihood": 34.79
+      },
+      "rawText": "{\"adoptionLikelihood\":34.79,\"willingnessToPay\":{\"amount\":5.92,\"currency\":\"Interesting concept, though the switching cost worries me.\",\"cadence\":\"one_time\"},\"emotionalReaction\":\"angry\",\"topObjections\":[\"The pricing feels steep for what it offers, honestly.\",\"I could see myself trying this if a friend vouched for it.\"],\"dealBreakers\":[\"Interesting concept, though the switching cost worries me.\",\"This is a plausible mock response for local development.\"],\"delighters\":[\"Synthetic data — replace with real model output.\",\"The pricing feels steep for what it offers, honestly.\"],\"verbatimQuote\":\"I could see myself trying this if a friend vouched for it.\",\"wouldRecommend\":false,\"confidence\":76.69}",
+      "inputTokens": 2474,
+      "outputTokens": 456,
+      "costUsd": "0.004233",
+      "error": null,
+      "startedAt": "2026-08-09T01:07:50.500Z",
+      "finishedAt": "2026-08-09T01:07:50.640Z",
+      "createdAt": "2026-08-09T01:07:50.499Z"
+    },
+    {
+      "id": "f957a51d-ce6c-46d7-b268-ea5ad5f5cf9e",
+      "runId": "fe99b8c2-d81d-4474-aaac-e8a52bf80592",
+      "parentAgentRunId": "e69dcffd-e551-450c-8046-3681749998cf",
+      "kind": "persona",
+      "label": "Nadia Osman",
+      "personaId": "4ff72774-108a-4249-8370-d9ba72e22f19",
+      "segment": "This is a plausible mock response for local development.",
+      "status": "completed",
+      "model": "mock:grok-4.20-0309-non-reasoning",
+      "systemPrompt": "You are the following person:\n\nName: Nadia Osman\nArchetype: Impact-weighing realist\nAge: 35 · Gender: female · Location: Nairobi, Kenya\nOccupation: NGO program manager · Income band: middle · Education: MPH\nTech savviness: 4/5 · Risk tolerance: 3/5 · Price sensitivity: 4/5 · Openness to new things: 4/5\nValues: impact, equity, evidence\nSpending habits: Typical middle-income spender: compares prices and waits for discounts.\nBackstory: Nadia Osman is a 35-year-old ngo program manager in Nairobi, Kenya. Day to day they juggle work and life as a impact-weighing realist, caring most about impact, equity, evidence. They decide on new products slowly when price sensitivity (4/5) bites, and their tech comfort is 4/5. Their media diet and social circle reflect a middle income household.\n\nReact ONLY as this person. Be honest, not agreeable; your traits govern skepticism — a price-sensitive skeptic stays skeptical, a low-openness person resists novelty, and enthusiasm must be earned by genuine fit with your life.\nYou are hearing this pitch cold, with no prior exposure and no obligation to like it. Cheap or free does NOT mean automatic adoption: you still weigh attention, effort, trust, and switching costs.\nAnswer every field from your own life and habits — money amounts in your own terms, objections you would actually voice, and a verbatimQuote that sounds like you talking out loud.",
+      "userPrompt": "# The pitch you are hearing\nSprout: a subscription plant-care app that pairs a $6/month plan with smart reminders, photo-based plant health diagnosis, and a mail-order 'rescue kit' (soil, treatment, tools) dispatched automatically when the app detects a struggling plant.\n\n# Extra detail the founder shared\nTarget launch: US + EU app stores. Team of 2, pre-seed.\n\n# Consider it through this lens\nI could see myself trying this if a friend vouched for it.\n\n# Questions the researchers want your honest answers woven into your reaction\n- Interesting concept, though the switching cost worries me.\n- This is a plausible mock response for local development.\n\nGive your gut-honest reaction as this person.",
+      "output": {
+        "confidence": 35.96,
+        "delighters": [
+          "This is a plausible mock response for local development.",
+          "Synthetic data — replace with real model output."
+        ],
+        "dealBreakers": [
+          "I could see myself trying this if a friend vouched for it.",
+          "Interesting concept, though the switching cost worries me."
+        ],
+        "topObjections": [
+          "Synthetic data — replace with real model output.",
+          "The pricing feels steep for what it offers, honestly."
+        ],
+        "verbatimQuote": "The pricing feels steep for what it offers, honestly.",
+        "wouldRecommend": false,
+        "willingnessToPay": {
+          "amount": 19.76,
+          "cadence": "one_time",
+          "currency": "I could see myself trying this if a friend vouched for it."
+        },
+        "emotionalReaction": "curious",
+        "adoptionLikelihood": 0.4
+      },
+      "rawText": "{\"adoptionLikelihood\":0.4,\"willingnessToPay\":{\"amount\":19.76,\"currency\":\"I could see myself trying this if a friend vouched for it.\",\"cadence\":\"one_time\"},\"emotionalReaction\":\"curious\",\"topObjections\":[\"Synthetic data — replace with real model output.\",\"The pricing feels steep for what it offers, honestly.\"],\"dealBreakers\":[\"I could see myself trying this if a friend vouched for it.\",\"Interesting concept, though the switching cost worries me.\"],\"delighters\":[\"This is a plausible mock response for local development.\",\"Synthetic data — replace with real model output.\"],\"verbatimQuote\":\"The pricing feels steep for what it offers, honestly.\",\"wouldRecommend\":false,\"confidence\":35.96}",
+      "inputTokens": 1060,
+      "outputTokens": 1029,
+      "costUsd": "0.003897",
+      "error": null,
+      "startedAt": "2026-08-09T01:07:50.500Z",
+      "finishedAt": "2026-08-09T01:07:50.720Z",
+      "createdAt": "2026-08-09T01:07:50.499Z"
+    },
+    {
+      "id": "b1af2d5c-9d9e-4ae9-8db7-9d6b6c592ea8",
+      "runId": "fe99b8c2-d81d-4474-aaac-e8a52bf80592",
+      "parentAgentRunId": "e69dcffd-e551-450c-8046-3681749998cf",
+      "kind": "persona",
+      "label": "Elena Petrova",
+      "personaId": "b3de3641-98fe-4804-9bef-f2cd0c944af8",
+      "segment": "This is a plausible mock response for local development.",
+      "status": "completed",
+      "model": "mock:grok-4.20-0309-non-reasoning",
+      "systemPrompt": "You are the following person:\n\nName: Elena Petrova\nArchetype: Aesthetic-first creative\nAge: 34 · Gender: female · Location: Berlin, Germany\nOccupation: Freelance illustrator · Income band: middle · Education: Diplom Design\nTech savviness: 4/5 · Risk tolerance: 3/5 · Price sensitivity: 4/5 · Openness to new things: 5/5\nValues: beauty, independence, sustainability\nSpending habits: Typical middle-income spender: compares prices and waits for discounts.\nBackstory: Elena Petrova is a 34-year-old freelance illustrator in Berlin, Germany. Day to day they juggle work and life as a aesthetic-first creative, caring most about beauty, independence, sustainability. They decide on new products slowly when price sensitivity (4/5) bites, and their tech comfort is 4/5. Their media diet and social circle reflect a middle income household.\n\nReact ONLY as this person. Be honest, not agreeable; your traits govern skepticism — a price-sensitive skeptic stays skeptical, a low-openness person resists novelty, and enthusiasm must be earned by genuine fit with your life.\nYou are hearing this pitch cold, with no prior exposure and no obligation to like it. Cheap or free does NOT mean automatic adoption: you still weigh attention, effort, trust, and switching costs.\nAnswer every field from your own life and habits — money amounts in your own terms, objections you would actually voice, and a verbatimQuote that sounds like you talking out loud.",
+      "userPrompt": "# The pitch you are hearing\nSprout: a subscription plant-care app that pairs a $6/month plan with smart reminders, photo-based plant health diagnosis, and a mail-order 'rescue kit' (soil, treatment, tools) dispatched automatically when the app detects a struggling plant.\n\n# Extra detail the founder shared\nTarget launch: US + EU app stores. Team of 2, pre-seed.\n\n# Consider it through this lens\nThe pricing feels steep for what it offers, honestly.\n\n# Questions the researchers want your honest answers woven into your reaction\n- I could see myself trying this if a friend vouched for it.\n- Interesting concept, though the switching cost worries me.\n\nGive your gut-honest reaction as this person.",
+      "output": {
+        "confidence": 52.79,
+        "delighters": [
+          "This is a plausible mock response for local development.",
+          "Synthetic data — replace with real model output."
+        ],
+        "dealBreakers": [
+          "I could see myself trying this if a friend vouched for it.",
+          "Interesting concept, though the switching cost worries me."
+        ],
+        "topObjections": [
+          "Synthetic data — replace with real model output.",
+          "The pricing feels steep for what it offers, honestly."
+        ],
+        "verbatimQuote": "The pricing feels steep for what it offers, honestly.",
+        "wouldRecommend": true,
+        "willingnessToPay": {
+          "amount": 87.7,
+          "cadence": "monthly",
+          "currency": "I could see myself trying this if a friend vouched for it."
+        },
+        "emotionalReaction": "excited",
+        "adoptionLikelihood": 13.36
+      },
+      "rawText": "{\"adoptionLikelihood\":13.36,\"willingnessToPay\":{\"amount\":87.7,\"currency\":\"I could see myself trying this if a friend vouched for it.\",\"cadence\":\"monthly\"},\"emotionalReaction\":\"excited\",\"topObjections\":[\"Synthetic data — replace with real model output.\",\"The pricing feels steep for what it offers, honestly.\"],\"dealBreakers\":[\"I could see myself trying this if a friend vouched for it.\",\"Interesting concept, though the switching cost worries me.\"],\"delighters\":[\"This is a plausible mock response for local development.\",\"Synthetic data — replace with real model output.\"],\"verbatimQuote\":\"The pricing feels steep for what it offers, honestly.\",\"wouldRecommend\":true,\"confidence\":52.79}",
+      "inputTokens": 1796,
+      "outputTokens": 716,
+      "costUsd": "0.004035",
+      "error": null,
+      "startedAt": "2026-08-09T01:07:50.501Z",
+      "finishedAt": "2026-08-09T01:07:50.621Z",
+      "createdAt": "2026-08-09T01:07:50.500Z"
+    },
+    {
+      "id": "b20cc99b-85b6-4fd5-83b0-df9c6039a8f2",
+      "runId": "fe99b8c2-d81d-4474-aaac-e8a52bf80592",
+      "parentAgentRunId": "e358ebf0-4729-481d-8fdb-588277564fd9",
+      "kind": "persona",
+      "label": "Carlos Mendoza",
+      "personaId": "69581c9d-17b8-4a80-a2d9-ad754ce1c0b2",
+      "segment": "The pricing feels steep for what it offers, honestly.",
+      "status": "completed",
+      "model": "mock:grok-4.20-0309-non-reasoning",
+      "systemPrompt": "You are the following person:\n\nName: Carlos Mendoza\nArchetype: Helpful cautious adopter\nAge: 37 · Gender: male · Location: Bogotá, Colombia\nOccupation: IT support lead · Income band: middle · Education: BEng Systems\nTech savviness: 4/5 · Risk tolerance: 2/5 · Price sensitivity: 4/5 · Openness to new things: 3/5\nValues: service, stability, learning\nSpending habits: Typical middle-income spender: compares prices and waits for discounts.\nBackstory: Carlos Mendoza is a 37-year-old it support lead in Bogotá, Colombia. Day to day they juggle work and life as a helpful cautious adopter, caring most about service, stability, learning. They decide on new products slowly when price sensitivity (4/5) bites, and their tech comfort is 4/5. Their media diet and social circle reflect a middle income household.\n\nReact ONLY as this person. Be honest, not agreeable; your traits govern skepticism — a price-sensitive skeptic stays skeptical, a low-openness person resists novelty, and enthusiasm must be earned by genuine fit with your life.\nYou are hearing this pitch cold, with no prior exposure and no obligation to like it. Cheap or free does NOT mean automatic adoption: you still weigh attention, effort, trust, and switching costs.\nAnswer every field from your own life and habits — money amounts in your own terms, objections you would actually voice, and a verbatimQuote that sounds like you talking out loud.",
+      "userPrompt": "# The pitch you are hearing\nSprout: a subscription plant-care app that pairs a $6/month plan with smart reminders, photo-based plant health diagnosis, and a mail-order 'rescue kit' (soil, treatment, tools) dispatched automatically when the app detects a struggling plant.\n\n# Extra detail the founder shared\nTarget launch: US + EU app stores. Team of 2, pre-seed.\n\n# Consider it through this lens\nThe pricing feels steep for what it offers, honestly.\n\n# Questions the researchers want your honest answers woven into your reaction\n- I could see myself trying this if a friend vouched for it.\n- Interesting concept, though the switching cost worries me.\n\nGive your gut-honest reaction as this person.",
+      "output": {
+        "confidence": 40.01,
+        "delighters": [
+          "This is a plausible mock response for local development.",
+          "Synthetic data — replace with real model output."
+        ],
+        "dealBreakers": [
+          "I could see myself trying this if a friend vouched for it.",
+          "Interesting concept, though the switching cost worries me."
+        ],
+        "topObjections": [
+          "Synthetic data — replace with real model output.",
+          "The pricing feels steep for what it offers, honestly."
+        ],
+        "verbatimQuote": "The pricing feels steep for what it offers, honestly.",
+        "wouldRecommend": true,
+        "willingnessToPay": {
+          "amount": 22.4,
+          "cadence": "per_use",
+          "currency": "I could see myself trying this if a friend vouched for it."
+        },
+        "emotionalReaction": "neutral",
+        "adoptionLikelihood": 2.88
+      },
+      "rawText": "{\"adoptionLikelihood\":2.88,\"willingnessToPay\":{\"amount\":22.4,\"currency\":\"I could see myself trying this if a friend vouched for it.\",\"cadence\":\"per_use\"},\"emotionalReaction\":\"neutral\",\"topObjections\":[\"Synthetic data — replace with real model output.\",\"The pricing feels steep for what it offers, honestly.\"],\"dealBreakers\":[\"I could see myself trying this if a friend vouched for it.\",\"Interesting concept, though the switching cost worries me.\"],\"delighters\":[\"This is a plausible mock response for local development.\",\"Synthetic data — replace with real model output.\"],\"verbatimQuote\":\"The pricing feels steep for what it offers, honestly.\",\"wouldRecommend\":true,\"confidence\":40.01}",
+      "inputTokens": 1616,
+      "outputTokens": 967,
+      "costUsd": "0.004438",
+      "error": null,
+      "startedAt": "2026-08-09T01:07:50.501Z",
+      "finishedAt": "2026-08-09T01:07:50.816Z",
+      "createdAt": "2026-08-09T01:07:50.501Z"
+    },
+    {
+      "id": "12661c99-1f95-4498-9a10-cf05a95f076c",
+      "runId": "fe99b8c2-d81d-4474-aaac-e8a52bf80592",
+      "parentAgentRunId": "e358ebf0-4729-481d-8fdb-588277564fd9",
+      "kind": "persona",
+      "label": "Viktor Kovac",
+      "personaId": "d4100c97-29e1-40b6-8b68-5efb4ee05f84",
+      "segment": "The pricing feels steep for what it offers, honestly.",
+      "status": "completed",
+      "model": "mock:grok-4.20-0309-non-reasoning",
+      "systemPrompt": "You are the following person:\n\nName: Viktor Kovac\nArchetype: Fixed-income frugalist\nAge: 62 · Gender: male · Location: Prague, Czechia\nOccupation: Retired machinist · Income band: lower_middle · Education: Vocational\nTech savviness: 1/5 · Risk tolerance: 1/5 · Price sensitivity: 5/5 · Openness to new things: 1/5\nValues: thrift, self-reliance, routine\nSpending habits: Typical lower middle-income spender: compares prices and waits for discounts.\nBackstory: Viktor Kovac is a 62-year-old retired machinist in Prague, Czechia. Day to day they juggle work and life as a fixed-income frugalist, caring most about thrift, self-reliance, routine. They decide on new products slowly when price sensitivity (5/5) bites, and their tech comfort is 1/5. Their media diet and social circle reflect a lower middle income household.\n\nReact ONLY as this person. Be honest, not agreeable; your traits govern skepticism — a price-sensitive skeptic stays skeptical, a low-openness person resists novelty, and enthusiasm must be earned by genuine fit with your life.\nYou are hearing this pitch cold, with no prior exposure and no obligation to like it. Cheap or free does NOT mean automatic adoption: you still weigh attention, effort, trust, and switching costs.\nAnswer every field from your own life and habits — money amounts in your own terms, objections you would actually voice, and a verbatimQuote that sounds like you talking out loud.",
+      "userPrompt": "# The pitch you are hearing\nSprout: a subscription plant-care app that pairs a $6/month plan with smart reminders, photo-based plant health diagnosis, and a mail-order 'rescue kit' (soil, treatment, tools) dispatched automatically when the app detects a struggling plant.\n\n# Extra detail the founder shared\nTarget launch: US + EU app stores. Team of 2, pre-seed.\n\n# Consider it through this lens\nI could see myself trying this if a friend vouched for it.\n\n# Questions the researchers want your honest answers woven into your reaction\n- Interesting concept, though the switching cost worries me.\n- This is a plausible mock response for local development.\n\nGive your gut-honest reaction as this person.",
+      "output": {
+        "confidence": 33.51,
+        "delighters": [
+          "Synthetic data — replace with real model output.",
+          "The pricing feels steep for what it offers, honestly."
+        ],
+        "dealBreakers": [
+          "Interesting concept, though the switching cost worries me.",
+          "This is a plausible mock response for local development."
+        ],
+        "topObjections": [
+          "The pricing feels steep for what it offers, honestly.",
+          "I could see myself trying this if a friend vouched for it."
+        ],
+        "verbatimQuote": "I could see myself trying this if a friend vouched for it.",
+        "wouldRecommend": true,
+        "willingnessToPay": {
+          "amount": 22.78,
+          "cadence": "per_use",
+          "currency": "Interesting concept, though the switching cost worries me."
+        },
+        "emotionalReaction": "excited",
+        "adoptionLikelihood": 28.07
+      },
+      "rawText": "{\"adoptionLikelihood\":28.07,\"willingnessToPay\":{\"amount\":22.78,\"currency\":\"Interesting concept, though the switching cost worries me.\",\"cadence\":\"per_use\"},\"emotionalReaction\":\"excited\",\"topObjections\":[\"The pricing feels steep for what it offers, honestly.\",\"I could see myself trying this if a friend vouched for it.\"],\"dealBreakers\":[\"Interesting concept, though the switching cost worries me.\",\"This is a plausible mock response for local development.\"],\"delighters\":[\"Synthetic data — replace with real model output.\",\"The pricing feels steep for what it offers, honestly.\"],\"verbatimQuote\":\"I could see myself trying this if a friend vouched for it.\",\"wouldRecommend\":true,\"confidence\":33.51}",
+      "inputTokens": 1734,
+      "outputTokens": 857,
+      "costUsd": "0.004310",
+      "error": null,
+      "startedAt": "2026-08-09T01:07:50.502Z",
+      "finishedAt": "2026-08-09T01:07:50.722Z",
+      "createdAt": "2026-08-09T01:07:50.501Z"
+    },
+    {
+      "id": "411d59f1-906f-4421-8b9b-01c3f7ecfe7e",
+      "runId": "fe99b8c2-d81d-4474-aaac-e8a52bf80592",
+      "parentAgentRunId": "e358ebf0-4729-481d-8fdb-588277564fd9",
+      "kind": "persona",
+      "label": "Margaret Hughes",
+      "personaId": "73ea322d-b511-4cc4-805e-7707336a08a9",
+      "segment": "The pricing feels steep for what it offers, honestly.",
+      "status": "completed",
+      "model": "mock:grok-4.20-0309-non-reasoning",
+      "systemPrompt": "You are the following person:\n\nName: Margaret Hughes\nArchetype: Late-adopting loyalist\nAge: 71 · Gender: female · Location: Cardiff, UK\nOccupation: Retired shop clerk · Income band: lower_middle · Education: Secondary school\nTech savviness: 1/5 · Risk tolerance: 1/5 · Price sensitivity: 5/5 · Openness to new things: 2/5\nValues: loyalty, simplicity, garden\nSpending habits: Typical lower middle-income spender: compares prices and waits for discounts.\nBackstory: Margaret Hughes is a 71-year-old retired shop clerk in Cardiff, UK. Day to day they juggle work and life as a late-adopting loyalist, caring most about loyalty, simplicity, garden. They decide on new products slowly when price sensitivity (5/5) bites, and their tech comfort is 1/5. Their media diet and social circle reflect a lower middle income household.\n\nReact ONLY as this person. Be honest, not agreeable; your traits govern skepticism — a price-sensitive skeptic stays skeptical, a low-openness person resists novelty, and enthusiasm must be earned by genuine fit with your life.\nYou are hearing this pitch cold, with no prior exposure and no obligation to like it. Cheap or free does NOT mean automatic adoption: you still weigh attention, effort, trust, and switching costs.\nAnswer every field from your own life and habits — money amounts in your own terms, objections you would actually voice, and a verbatimQuote that sounds like you talking out loud.",
+      "userPrompt": "# The pitch you are hearing\nSprout: a subscription plant-care app that pairs a $6/month plan with smart reminders, photo-based plant health diagnosis, and a mail-order 'rescue kit' (soil, treatment, tools) dispatched automatically when the app detects a struggling plant.\n\n# Extra detail the founder shared\nTarget launch: US + EU app stores. Team of 2, pre-seed.\n\n# Consider it through this lens\nI could see myself trying this if a friend vouched for it.\n\n# Questions the researchers want your honest answers woven into your reaction\n- Interesting concept, though the switching cost worries me.\n- This is a plausible mock response for local development.\n\nGive your gut-honest reaction as this person.",
+      "output": {
+        "confidence": 25.59,
+        "delighters": [
+          "Interesting concept, though the switching cost worries me.",
+          "This is a plausible mock response for local development."
+        ],
+        "dealBreakers": [
+          "The pricing feels steep for what it offers, honestly.",
+          "I could see myself trying this if a friend vouched for it."
+        ],
+        "topObjections": [
+          "This is a plausible mock response for local development.",
+          "Synthetic data — replace with real model output."
+        ],
+        "verbatimQuote": "Synthetic data — replace with real model output.",
+        "wouldRecommend": true,
+        "willingnessToPay": {
+          "amount": 88.19,
+          "cadence": "per_use",
+          "currency": "The pricing feels steep for what it offers, honestly."
+        },
+        "emotionalReaction": "annoyed",
+        "adoptionLikelihood": 7.73
+      },
+      "rawText": "{\"adoptionLikelihood\":7.73,\"willingnessToPay\":{\"amount\":88.19,\"currency\":\"The pricing feels steep for what it offers, honestly.\",\"cadence\":\"per_use\"},\"emotionalReaction\":\"annoyed\",\"topObjections\":[\"This is a plausible mock response for local development.\",\"Synthetic data — replace with real model output.\"],\"dealBreakers\":[\"The pricing feels steep for what it offers, honestly.\",\"I could see myself trying this if a friend vouched for it.\"],\"delighters\":[\"Interesting concept, though the switching cost worries me.\",\"This is a plausible mock response for local development.\"],\"verbatimQuote\":\"Synthetic data — replace with real model output.\",\"wouldRecommend\":true,\"confidence\":25.59}",
+      "inputTokens": 2457,
+      "outputTokens": 731,
+      "costUsd": "0.004899",
+      "error": null,
+      "startedAt": "2026-08-09T01:07:50.503Z",
+      "finishedAt": "2026-08-09T01:07:50.917Z",
+      "createdAt": "2026-08-09T01:07:50.502Z"
+    },
+    {
+      "id": "497bfbe1-e647-4c63-a7df-3610fb96e6fb",
+      "runId": "fe99b8c2-d81d-4474-aaac-e8a52bf80592",
+      "parentAgentRunId": "e358ebf0-4729-481d-8fdb-588277564fd9",
+      "kind": "persona",
+      "label": "Fatima Al-Rashid",
+      "personaId": "b52b0a96-59d6-43fc-b6ee-6cdd1ab00ee6",
+      "segment": "The pricing feels steep for what it offers, honestly.",
+      "status": "completed",
+      "model": "mock:grok-4.20-0309-non-reasoning",
+      "systemPrompt": "You are the following person:\n\nName: Fatima Al-Rashid\nArchetype: Image-conscious curator\nAge: 36 · Gender: female · Location: Dubai, UAE\nOccupation: Interior designer · Income band: high · Education: MA Interior Design\nTech savviness: 4/5 · Risk tolerance: 3/5 · Price sensitivity: 1/5 · Openness to new things: 4/5\nValues: luxury, presentation, hospitality\nSpending habits: Typical high-income spender: pays for quality and convenience.\nBackstory: Fatima Al-Rashid is a 36-year-old interior designer in Dubai, UAE. Day to day they juggle work and life as a image-conscious curator, caring most about luxury, presentation, hospitality. They decide on new products slowly when price sensitivity (1/5) bites, and their tech comfort is 4/5. Their media diet and social circle reflect a high income household.\n\nReact ONLY as this person. Be honest, not agreeable; your traits govern skepticism — a price-sensitive skeptic stays skeptical, a low-openness person resists novelty, and enthusiasm must be earned by genuine fit with your life.\nYou are hearing this pitch cold, with no prior exposure and no obligation to like it. Cheap or free does NOT mean automatic adoption: you still weigh attention, effort, trust, and switching costs.\nAnswer every field from your own life and habits — money amounts in your own terms, objections you would actually voice, and a verbatimQuote that sounds like you talking out loud.",
+      "userPrompt": "# The pitch you are hearing\nSprout: a subscription plant-care app that pairs a $6/month plan with smart reminders, photo-based plant health diagnosis, and a mail-order 'rescue kit' (soil, treatment, tools) dispatched automatically when the app detects a struggling plant.\n\n# Extra detail the founder shared\nTarget launch: US + EU app stores. Team of 2, pre-seed.\n\n# Consider it through this lens\nThe pricing feels steep for what it offers, honestly.\n\n# Questions the researchers want your honest answers woven into your reaction\n- I could see myself trying this if a friend vouched for it.\n- Interesting concept, though the switching cost worries me.\n\nGive your gut-honest reaction as this person.",
+      "output": {
+        "confidence": 51.65,
+        "delighters": [
+          "I could see myself trying this if a friend vouched for it.",
+          "Interesting concept, though the switching cost worries me."
+        ],
+        "dealBreakers": [
+          "Synthetic data — replace with real model output.",
+          "The pricing feels steep for what it offers, honestly."
+        ],
+        "topObjections": [
+          "Interesting concept, though the switching cost worries me.",
+          "This is a plausible mock response for local development."
+        ],
+        "verbatimQuote": "This is a plausible mock response for local development.",
+        "wouldRecommend": true,
+        "willingnessToPay": {
+          "amount": 67.26,
+          "cadence": "per_use",
+          "currency": "Synthetic data — replace with real model output."
+        },
+        "emotionalReaction": "neutral",
+        "adoptionLikelihood": 11.32
+      },
+      "rawText": "{\"adoptionLikelihood\":11.32,\"willingnessToPay\":{\"amount\":67.26,\"currency\":\"Synthetic data — replace with real model output.\",\"cadence\":\"per_use\"},\"emotionalReaction\":\"neutral\",\"topObjections\":[\"Interesting concept, though the switching cost worries me.\",\"This is a plausible mock response for local development.\"],\"dealBreakers\":[\"Synthetic data — replace with real model output.\",\"The pricing feels steep for what it offers, honestly.\"],\"delighters\":[\"I could see myself trying this if a friend vouched for it.\",\"Interesting concept, though the switching cost worries me.\"],\"verbatimQuote\":\"This is a plausible mock response for local development.\",\"wouldRecommend\":true,\"confidence\":51.65}",
+      "inputTokens": 2193,
+      "outputTokens": 603,
+      "costUsd": "0.004249",
+      "error": null,
+      "startedAt": "2026-08-09T01:07:50.502Z",
+      "finishedAt": "2026-08-09T01:07:50.606Z",
+      "createdAt": "2026-08-09T01:07:50.502Z"
+    },
+    {
+      "id": "ef73da5c-9437-4d12-97be-4e6b7d66e0c1",
+      "runId": "fe99b8c2-d81d-4474-aaac-e8a52bf80592",
+      "parentAgentRunId": "e358ebf0-4729-481d-8fdb-588277564fd9",
+      "kind": "persona",
+      "label": "Priya Sharma",
+      "personaId": "80896b0d-7b94-484c-b469-eed84788097c",
+      "segment": "The pricing feels steep for what it offers, honestly.",
+      "status": "completed",
+      "model": "mock:grok-4.20-0309-non-reasoning",
+      "systemPrompt": "You are the following person:\n\nName: Priya Sharma\nArchetype: Deal-hunting digital native\nAge: 24 · Gender: female · Location: Bangalore, India\nOccupation: QA engineer · Income band: lower_middle · Education: BTech\nTech savviness: 5/5 · Risk tolerance: 3/5 · Price sensitivity: 5/5 · Openness to new things: 4/5\nValues: savings, status, connection\nSpending habits: Typical lower middle-income spender: compares prices and waits for discounts.\nBackstory: Priya Sharma is a 24-year-old qa engineer in Bangalore, India. Day to day they juggle work and life as a deal-hunting digital native, caring most about savings, status, connection. They decide on new products slowly when price sensitivity (5/5) bites, and their tech comfort is 5/5. Their media diet and social circle reflect a lower middle income household.\n\nReact ONLY as this person. Be honest, not agreeable; your traits govern skepticism — a price-sensitive skeptic stays skeptical, a low-openness person resists novelty, and enthusiasm must be earned by genuine fit with your life.\nYou are hearing this pitch cold, with no prior exposure and no obligation to like it. Cheap or free does NOT mean automatic adoption: you still weigh attention, effort, trust, and switching costs.\nAnswer every field from your own life and habits — money amounts in your own terms, objections you would actually voice, and a verbatimQuote that sounds like you talking out loud.",
+      "userPrompt": "# The pitch you are hearing\nSprout: a subscription plant-care app that pairs a $6/month plan with smart reminders, photo-based plant health diagnosis, and a mail-order 'rescue kit' (soil, treatment, tools) dispatched automatically when the app detects a struggling plant.\n\n# Extra detail the founder shared\nTarget launch: US + EU app stores. Team of 2, pre-seed.\n\n# Consider it through this lens\nThe pricing feels steep for what it offers, honestly.\n\n# Questions the researchers want your honest answers woven into your reaction\n- I could see myself trying this if a friend vouched for it.\n- Interesting concept, though the switching cost worries me.\n\nGive your gut-honest reaction as this person.",
+      "output": {
+        "confidence": 56.57,
+        "delighters": [
+          "I could see myself trying this if a friend vouched for it.",
+          "Interesting concept, though the switching cost worries me."
+        ],
+        "dealBreakers": [
+          "Synthetic data — replace with real model output.",
+          "The pricing feels steep for what it offers, honestly."
+        ],
+        "topObjections": [
+          "Interesting concept, though the switching cost worries me.",
+          "This is a plausible mock response for local development."
+        ],
+        "verbatimQuote": "This is a plausible mock response for local development.",
+        "wouldRecommend": false,
+        "willingnessToPay": {
+          "amount": 6.44,
+          "cadence": "yearly",
+          "currency": "Synthetic data — replace with real model output."
+        },
+        "emotionalReaction": "skeptical",
+        "adoptionLikelihood": 49.05
+      },
+      "rawText": "{\"adoptionLikelihood\":49.05,\"willingnessToPay\":{\"amount\":6.44,\"currency\":\"Synthetic data — replace with real model output.\",\"cadence\":\"yearly\"},\"emotionalReaction\":\"skeptical\",\"topObjections\":[\"Interesting concept, though the switching cost worries me.\",\"This is a plausible mock response for local development.\"],\"dealBreakers\":[\"Synthetic data — replace with real model output.\",\"The pricing feels steep for what it offers, honestly.\"],\"delighters\":[\"I could see myself trying this if a friend vouched for it.\",\"Interesting concept, though the switching cost worries me.\"],\"verbatimQuote\":\"This is a plausible mock response for local development.\",\"wouldRecommend\":false,\"confidence\":56.57}",
+      "inputTokens": 563,
+      "outputTokens": 286,
+      "costUsd": "0.001419",
+      "error": null,
+      "startedAt": "2026-08-09T01:07:50.503Z",
+      "finishedAt": "2026-08-09T01:07:50.667Z",
+      "createdAt": "2026-08-09T01:07:50.503Z"
+    },
+    {
+      "id": "0294efdc-a1f7-4cc2-a93d-501e6fa388a4",
+      "runId": "fe99b8c2-d81d-4474-aaac-e8a52bf80592",
+      "parentAgentRunId": "b4f72149-ae6f-4a3b-84b9-3b9821fc3aad",
+      "kind": "persona",
+      "label": "Sarah O'Brien",
+      "personaId": "e817ba6c-580d-41c2-a7b3-a062896ebb2d",
+      "segment": "This is a plausible mock response for local development.",
+      "status": "completed",
+      "model": "mock:grok-4.20-0309-non-reasoning",
+      "systemPrompt": "You are the following person:\n\nName: Sarah O'Brien\nArchetype: Cautious traditionalist\nAge: 67 · Gender: female · Location: Cork, Ireland\nOccupation: Retired teacher · Income band: middle · Education: BA English\nTech savviness: 2/5 · Risk tolerance: 1/5 · Price sensitivity: 4/5 · Openness to new things: 2/5\nValues: tradition, community, thrift\nSpending habits: Typical middle-income spender: compares prices and waits for discounts.\nBackstory: Sarah O'Brien is a 67-year-old retired teacher in Cork, Ireland. Day to day they juggle work and life as a cautious traditionalist, caring most about tradition, community, thrift. They decide on new products slowly when price sensitivity (4/5) bites, and their tech comfort is 2/5. Their media diet and social circle reflect a middle income household.\n\nReact ONLY as this person. Be honest, not agreeable; your traits govern skepticism — a price-sensitive skeptic stays skeptical, a low-openness person resists novelty, and enthusiasm must be earned by genuine fit with your life.\nYou are hearing this pitch cold, with no prior exposure and no obligation to like it. Cheap or free does NOT mean automatic adoption: you still weigh attention, effort, trust, and switching costs.\nAnswer every field from your own life and habits — money amounts in your own terms, objections you would actually voice, and a verbatimQuote that sounds like you talking out loud.",
+      "userPrompt": "# The pitch you are hearing\nSprout: a subscription plant-care app that pairs a $6/month plan with smart reminders, photo-based plant health diagnosis, and a mail-order 'rescue kit' (soil, treatment, tools) dispatched automatically when the app detects a struggling plant.\n\n# Extra detail the founder shared\nTarget launch: US + EU app stores. Team of 2, pre-seed.\n\n# Consider it through this lens\nI could see myself trying this if a friend vouched for it.\n\n# Questions the researchers want your honest answers woven into your reaction\n- Interesting concept, though the switching cost worries me.\n- This is a plausible mock response for local development.\n\nGive your gut-honest reaction as this person.",
+      "output": {
+        "confidence": 22.25,
+        "delighters": [
+          "Interesting concept, though the switching cost worries me.",
+          "This is a plausible mock response for local development."
+        ],
+        "dealBreakers": [
+          "The pricing feels steep for what it offers, honestly.",
+          "I could see myself trying this if a friend vouched for it."
+        ],
+        "topObjections": [
+          "This is a plausible mock response for local development.",
+          "Synthetic data — replace with real model output."
+        ],
+        "verbatimQuote": "Synthetic data — replace with real model output.",
+        "wouldRecommend": false,
+        "willingnessToPay": {
+          "amount": 63.92,
+          "cadence": "one_time",
+          "currency": "The pricing feels steep for what it offers, honestly."
+        },
+        "emotionalReaction": "skeptical",
+        "adoptionLikelihood": 20.29
+      },
+      "rawText": "{\"adoptionLikelihood\":20.29,\"willingnessToPay\":{\"amount\":63.92,\"currency\":\"The pricing feels steep for what it offers, honestly.\",\"cadence\":\"one_time\"},\"emotionalReaction\":\"skeptical\",\"topObjections\":[\"This is a plausible mock response for local development.\",\"Synthetic data — replace with real model output.\"],\"dealBreakers\":[\"The pricing feels steep for what it offers, honestly.\",\"I could see myself trying this if a friend vouched for it.\"],\"delighters\":[\"Interesting concept, though the switching cost worries me.\",\"This is a plausible mock response for local development.\"],\"verbatimQuote\":\"Synthetic data — replace with real model output.\",\"wouldRecommend\":false,\"confidence\":22.25}",
+      "inputTokens": 765,
+      "outputTokens": 932,
+      "costUsd": "0.003286",
+      "error": null,
+      "startedAt": "2026-08-09T01:07:50.504Z",
+      "finishedAt": "2026-08-09T01:07:50.805Z",
+      "createdAt": "2026-08-09T01:07:50.503Z"
+    },
+    {
+      "id": "7b37d190-aff6-4d73-9180-11580ef35a38",
+      "runId": "fe99b8c2-d81d-4474-aaac-e8a52bf80592",
+      "parentAgentRunId": "b4f72149-ae6f-4a3b-84b9-3b9821fc3aad",
+      "kind": "persona",
+      "label": "Sofia Rossi",
+      "personaId": "eadef960-72cb-4ae4-9144-95b75a680bba",
+      "segment": "This is a plausible mock response for local development.",
+      "status": "completed",
+      "model": "mock:grok-4.20-0309-non-reasoning",
+      "systemPrompt": "You are the following person:\n\nName: Sofia Rossi\nArchetype: Trend-aware budget stylist\nAge: 25 · Gender: female · Location: Milan, Italy\nOccupation: Retail associate · Income band: lower_middle · Education: BA Fashion\nTech savviness: 4/5 · Risk tolerance: 3/5 · Price sensitivity: 5/5 · Openness to new things: 4/5\nValues: style, friends, experiences\nSpending habits: Typical lower middle-income spender: compares prices and waits for discounts.\nBackstory: Sofia Rossi is a 25-year-old retail associate in Milan, Italy. Day to day they juggle work and life as a trend-aware budget stylist, caring most about style, friends, experiences. They decide on new products slowly when price sensitivity (5/5) bites, and their tech comfort is 4/5. Their media diet and social circle reflect a lower middle income household.\n\nReact ONLY as this person. Be honest, not agreeable; your traits govern skepticism — a price-sensitive skeptic stays skeptical, a low-openness person resists novelty, and enthusiasm must be earned by genuine fit with your life.\nYou are hearing this pitch cold, with no prior exposure and no obligation to like it. Cheap or free does NOT mean automatic adoption: you still weigh attention, effort, trust, and switching costs.\nAnswer every field from your own life and habits — money amounts in your own terms, objections you would actually voice, and a verbatimQuote that sounds like you talking out loud.",
+      "userPrompt": "# The pitch you are hearing\nSprout: a subscription plant-care app that pairs a $6/month plan with smart reminders, photo-based plant health diagnosis, and a mail-order 'rescue kit' (soil, treatment, tools) dispatched automatically when the app detects a struggling plant.\n\n# Extra detail the founder shared\nTarget launch: US + EU app stores. Team of 2, pre-seed.\n\n# Consider it through this lens\nI could see myself trying this if a friend vouched for it.\n\n# Questions the researchers want your honest answers woven into your reaction\n- Interesting concept, though the switching cost worries me.\n- This is a plausible mock response for local development.\n\nGive your gut-honest reaction as this person.",
+      "output": {
+        "confidence": 49.32,
+        "delighters": [
+          "I could see myself trying this if a friend vouched for it.",
+          "Interesting concept, though the switching cost worries me."
+        ],
+        "dealBreakers": [
+          "Synthetic data — replace with real model output.",
+          "The pricing feels steep for what it offers, honestly."
+        ],
+        "topObjections": [
+          "Interesting concept, though the switching cost worries me.",
+          "This is a plausible mock response for local development."
+        ],
+        "verbatimQuote": "This is a plausible mock response for local development.",
+        "wouldRecommend": true,
+        "willingnessToPay": {
+          "amount": 39.95,
+          "cadence": "monthly",
+          "currency": "Synthetic data — replace with real model output."
+        },
+        "emotionalReaction": "annoyed",
+        "adoptionLikelihood": 37.62
+      },
+      "rawText": "{\"adoptionLikelihood\":37.62,\"willingnessToPay\":{\"amount\":39.95,\"currency\":\"Synthetic data — replace with real model output.\",\"cadence\":\"monthly\"},\"emotionalReaction\":\"annoyed\",\"topObjections\":[\"Interesting concept, though the switching cost worries me.\",\"This is a plausible mock response for local development.\"],\"dealBreakers\":[\"Synthetic data — replace with real model output.\",\"The pricing feels steep for what it offers, honestly.\"],\"delighters\":[\"I could see myself trying this if a friend vouched for it.\",\"Interesting concept, though the switching cost worries me.\"],\"verbatimQuote\":\"This is a plausible mock response for local development.\",\"wouldRecommend\":true,\"confidence\":49.32}",
+      "inputTokens": 2455,
+      "outputTokens": 560,
+      "costUsd": "0.004469",
+      "error": null,
+      "startedAt": "2026-08-09T01:07:50.504Z",
+      "finishedAt": "2026-08-09T01:07:50.781Z",
+      "createdAt": "2026-08-09T01:07:50.504Z"
+    },
+    {
+      "id": "b82bc6f2-943b-4b28-9716-7a5260cfa8b8",
+      "runId": "fe99b8c2-d81d-4474-aaac-e8a52bf80592",
+      "parentAgentRunId": "b4f72149-ae6f-4a3b-84b9-3b9821fc3aad",
+      "kind": "persona",
+      "label": "Emily Zhang",
+      "personaId": "3836a774-8094-4450-a16f-a81c5a69c0d5",
+      "segment": "This is a plausible mock response for local development.",
+      "status": "completed",
+      "model": "mock:grok-4.20-0309-non-reasoning",
+      "systemPrompt": "You are the following person:\n\nName: Emily Zhang\nArchetype: Design-literate critic\nAge: 27 · Gender: female · Location: Vancouver, Canada\nOccupation: UX designer · Income band: middle · Education: BFA\nTech savviness: 5/5 · Risk tolerance: 3/5 · Price sensitivity: 3/5 · Openness to new things: 4/5\nValues: usability, craft, wellness\nSpending habits: Typical middle-income spender: pays for quality and convenience.\nBackstory: Emily Zhang is a 27-year-old ux designer in Vancouver, Canada. Day to day they juggle work and life as a design-literate critic, caring most about usability, craft, wellness. They decide on new products slowly when price sensitivity (3/5) bites, and their tech comfort is 5/5. Their media diet and social circle reflect a middle income household.\n\nReact ONLY as this person. Be honest, not agreeable; your traits govern skepticism — a price-sensitive skeptic stays skeptical, a low-openness person resists novelty, and enthusiasm must be earned by genuine fit with your life.\nYou are hearing this pitch cold, with no prior exposure and no obligation to like it. Cheap or free does NOT mean automatic adoption: you still weigh attention, effort, trust, and switching costs.\nAnswer every field from your own life and habits — money amounts in your own terms, objections you would actually voice, and a verbatimQuote that sounds like you talking out loud.",
+      "userPrompt": "# The pitch you are hearing\nSprout: a subscription plant-care app that pairs a $6/month plan with smart reminders, photo-based plant health diagnosis, and a mail-order 'rescue kit' (soil, treatment, tools) dispatched automatically when the app detects a struggling plant.\n\n# Extra detail the founder shared\nTarget launch: US + EU app stores. Team of 2, pre-seed.\n\n# Consider it through this lens\nThe pricing feels steep for what it offers, honestly.\n\n# Questions the researchers want your honest answers woven into your reaction\n- I could see myself trying this if a friend vouched for it.\n- Interesting concept, though the switching cost worries me.\n\nGive your gut-honest reaction as this person.",
+      "output": {
+        "confidence": 9.81,
+        "delighters": [
+          "I could see myself trying this if a friend vouched for it.",
+          "Interesting concept, though the switching cost worries me."
+        ],
+        "dealBreakers": [
+          "Synthetic data — replace with real model output.",
+          "The pricing feels steep for what it offers, honestly."
+        ],
+        "topObjections": [
+          "Interesting concept, though the switching cost worries me.",
+          "This is a plausible mock response for local development."
+        ],
+        "verbatimQuote": "This is a plausible mock response for local development.",
+        "wouldRecommend": false,
+        "willingnessToPay": {
+          "amount": 33.6,
+          "cadence": "one_time",
+          "currency": "Synthetic data — replace with real model output."
+        },
+        "emotionalReaction": "angry",
+        "adoptionLikelihood": 75.34
+      },
+      "rawText": "{\"adoptionLikelihood\":75.34,\"willingnessToPay\":{\"amount\":33.6,\"currency\":\"Synthetic data — replace with real model output.\",\"cadence\":\"one_time\"},\"emotionalReaction\":\"angry\",\"topObjections\":[\"Interesting concept, though the switching cost worries me.\",\"This is a plausible mock response for local development.\"],\"dealBreakers\":[\"Synthetic data — replace with real model output.\",\"The pricing feels steep for what it offers, honestly.\"],\"delighters\":[\"I could see myself trying this if a friend vouched for it.\",\"Interesting concept, though the switching cost worries me.\"],\"verbatimQuote\":\"This is a plausible mock response for local development.\",\"wouldRecommend\":false,\"confidence\":9.81}",
+      "inputTokens": 1290,
+      "outputTokens": 209,
+      "costUsd": "0.002135",
+      "error": null,
+      "startedAt": "2026-08-09T01:07:50.505Z",
+      "finishedAt": "2026-08-09T01:07:50.915Z",
+      "createdAt": "2026-08-09T01:07:50.504Z"
+    },
+    {
+      "id": "3cdc2a53-d233-45c8-ae9a-d3b9e526bab6",
+      "runId": "fe99b8c2-d81d-4474-aaac-e8a52bf80592",
+      "parentAgentRunId": "b4f72149-ae6f-4a3b-84b9-3b9821fc3aad",
+      "kind": "persona",
+      "label": "Aiko Tanaka",
+      "personaId": "d86be6f9-2efb-4466-bcd1-1477d7be25e9",
+      "segment": "This is a plausible mock response for local development.",
+      "status": "completed",
+      "model": "mock:grok-4.20-0309-non-reasoning",
+      "systemPrompt": "You are the following person:\n\nName: Aiko Tanaka\nArchetype: Methodical researcher\nAge: 26 · Gender: female · Location: Osaka, Japan\nOccupation: Lab technician · Income band: middle · Education: BSc Biology\nTech savviness: 4/5 · Risk tolerance: 2/5 · Price sensitivity: 4/5 · Openness to new things: 3/5\nValues: precision, learning, calm\nSpending habits: Typical middle-income spender: compares prices and waits for discounts.\nBackstory: Aiko Tanaka is a 26-year-old lab technician in Osaka, Japan. Day to day they juggle work and life as a methodical researcher, caring most about precision, learning, calm. They decide on new products slowly when price sensitivity (4/5) bites, and their tech comfort is 4/5. Their media diet and social circle reflect a middle income household.\n\nReact ONLY as this person. Be honest, not agreeable; your traits govern skepticism — a price-sensitive skeptic stays skeptical, a low-openness person resists novelty, and enthusiasm must be earned by genuine fit with your life.\nYou are hearing this pitch cold, with no prior exposure and no obligation to like it. Cheap or free does NOT mean automatic adoption: you still weigh attention, effort, trust, and switching costs.\nAnswer every field from your own life and habits — money amounts in your own terms, objections you would actually voice, and a verbatimQuote that sounds like you talking out loud.",
+      "userPrompt": "# The pitch you are hearing\nSprout: a subscription plant-care app that pairs a $6/month plan with smart reminders, photo-based plant health diagnosis, and a mail-order 'rescue kit' (soil, treatment, tools) dispatched automatically when the app detects a struggling plant.\n\n# Extra detail the founder shared\nTarget launch: US + EU app stores. Team of 2, pre-seed.\n\n# Consider it through this lens\nI could see myself trying this if a friend vouched for it.\n\n# Questions the researchers want your honest answers woven into your reaction\n- Interesting concept, though the switching cost worries me.\n- This is a plausible mock response for local development.\n\nGive your gut-honest reaction as this person.",
+      "output": {
+        "confidence": 88.62,
+        "delighters": [
+          "The pricing feels steep for what it offers, honestly.",
+          "I could see myself trying this if a friend vouched for it."
+        ],
+        "dealBreakers": [
+          "This is a plausible mock response for local development.",
+          "Synthetic data — replace with real model output."
+        ],
+        "topObjections": [
+          "I could see myself trying this if a friend vouched for it.",
+          "Interesting concept, though the switching cost worries me."
+        ],
+        "verbatimQuote": "Interesting concept, though the switching cost worries me.",
+        "wouldRecommend": false,
+        "willingnessToPay": {
+          "amount": 54.41,
+          "cadence": "yearly",
+          "currency": "This is a plausible mock response for local development."
+        },
+        "emotionalReaction": "angry",
+        "adoptionLikelihood": 15
+      },
+      "rawText": "{\"adoptionLikelihood\":15,\"willingnessToPay\":{\"amount\":54.41,\"currency\":\"This is a plausible mock response for local development.\",\"cadence\":\"yearly\"},\"emotionalReaction\":\"angry\",\"topObjections\":[\"I could see myself trying this if a friend vouched for it.\",\"Interesting concept, though the switching cost worries me.\"],\"dealBreakers\":[\"This is a plausible mock response for local development.\",\"Synthetic data — replace with real model output.\"],\"delighters\":[\"The pricing feels steep for what it offers, honestly.\",\"I could see myself trying this if a friend vouched for it.\"],\"verbatimQuote\":\"Interesting concept, though the switching cost worries me.\",\"wouldRecommend\":false,\"confidence\":88.62}",
+      "inputTokens": 902,
+      "outputTokens": 880,
+      "costUsd": "0.003328",
+      "error": null,
+      "startedAt": "2026-08-09T01:07:50.505Z",
+      "finishedAt": "2026-08-09T01:07:50.753Z",
+      "createdAt": "2026-08-09T01:07:50.505Z"
+    },
+    {
+      "id": "9e89c51c-df60-4c26-bd8c-bd53157bbdb8",
+      "runId": "fe99b8c2-d81d-4474-aaac-e8a52bf80592",
+      "parentAgentRunId": "1eda8bd9-2b52-42d3-a279-cf902a9c9a2f",
+      "kind": "critique",
+      "label": "Red-Team Critic",
+      "personaId": null,
+      "segment": null,
+      "status": "completed",
+      "model": "mock:grok-4.5",
+      "systemPrompt": "You are a red-team critic. Your target is the IDEA itself: attack it with market reality.\nBring competitors, failed precedents, unit economics, distribution and switching-cost problems, regulatory exposure, and market-timing risk. Where the simulated study looks rosier than reality, say exactly why.\nArgue from established market knowledge; be specific about companies and precedents you are confident in.\nSet stance to \"redteam\". Finish with adjustedConfidence: your confidence in the study's aggregate signal once real-world headwinds are priced in.",
+      "userPrompt": "# The idea\nSprout: a subscription plant-care app that pairs a $6/month plan with smart reminders, photo-based plant health diagnosis, and a mail-order 'rescue kit' (soil, treatment, tools) dispatched automatically when the app detects a struggling plant.\n\n# Founder context\nTarget launch: US + EU app stores. Team of 2, pre-seed.\n\n# How the study framed it\nSummary: This is a plausible mock response for local development.\nTarget market: The pricing feels steep for what it offers, honestly.\nRisk dimensions already identified: This is a plausible mock response for local development.; Synthetic data — replace with real model output.\n\n# What the simulated panel concluded\n{\n  \"sampleSize\": 18,\n  \"adoption\": {\n    \"histogram\": [\n      4,\n      5,\n      3,\n      3,\n      1,\n      0,\n      1,\n      1,\n      0,\n      0\n    ],\n    \"mean\": 24.64,\n    \"median\": 17.65,\n    \"bySegment\": {\n      \"The pricing feels steep for what it offers, honestly.\": {\n        \"count\": 11,\n        \"mean\": 22.42,\n        \"median\": 12.95\n      },\n      \"This is a plausible mock response for local development.\": {\n        \"count\": 7,\n        \"mean\": 28.11,\n        \"median\": 20.29\n      }\n    },\n    \"byArchetype\": {\n      \"Scrappy optimizer\": {\n        \"count\": 1,\n        \"mean\": 22.1,\n        \"median\": 22.1\n      },\n      \"Image-conscious curator\": {\n        \"count\": 1,\n        \"mean\": 11.32,\n        \"median\": 11.32\n      },\n      \"No-time-to-waste caregiver\": {\n        \"count\": 1,\n        \"mean\": 34.02,\n        \"median\": 34.02\n      },\n      \"Aesthetic-first creative\": {\n        \"count\": 1,\n        \"mean\": 13.36,\n        \"median\": 13.36\n      },\n      \"Broke experimenter\": {\n        \"count\": 1,\n        \"mean\": 34.79,\n        \"median\": 34.79\n      },\n      \"Trend-chasing early adopter\": {\n        \"count\": 1,\n        \"mean\": 64.88,\n        \"median\": 64.88\n      },\n      \"Deal-hunting digital native\": {\n        \"count\": 1,\n        \"mean\": 49.05,\n        \"median\": 49.05\n      },\n      \"Charismatic status buyer\": {\n        \"count\": 1,\n        \"mean\": 10.15,\n        \"median\": 10.15\n      },\n      \"Impact-weighing realist\": {\n        \"count\": 1,\n        \"mean\": 0.4,\n        \"median\": 0.4\n      },\n      \"Fixed-income frugalist\": {\n        \"count\": 1,\n        \"mean\": 28.07,\n        \"median\": 28.07\n      },\n      \"Methodical researcher\": {\n        \"count\": 1,\n        \"mean\": 15,\n        \"median\": 15\n      },\n      \"Trend-aware budget stylist\": {\n        \"count\": 1,\n        \"mean\": 37.62,\n        \"median\": 37.62\n      },\n      \"Cautious traditionalist\": {\n        \"count\": 1,\n        \"mean\": 20.29,\n        \"median\": 20.29\n      },\n      \"Helpful cautious adopter\": {\n        \"count\": 1,\n        \"mean\": 2.88,\n        \"median\": 2.88\n      },\n      \"Ethics-driven purchaser\": {\n        \"count\": 1,\n        \"mean\": 12.95,\n        \"median\": 12.95\n      },\n      \"Evidence-demanding skeptic\": {\n        \"count\": 1,\n        \"mean\": 3.48,\n        \"median\": 3.48\n      },\n      \"Design-literate critic\": {\n        \"count\": 1,\n        \"mean\": 75.34,\n        \"median\": 75.34\n      },\n      \"Late-adopting loyalist\": {\n        \"count\": 1,\n        \"mean\": 7.73,\n        \"median\": 7.73\n      }\n    },\n    \"byIncomeBand\": {\n      \"lower_middle\": {\n        \"count\": 5,\n        \"mean\": 28.91,\n        \"median\": 28.07\n      },\n      \"high\": {\n        \"count\": 1,\n        \"mean\": 11.32,\n        \"median\": 11.32\n      },\n      \"middle\": {\n        \"count\": 9,\n        \"mean\": 26.57,\n        \"median\": 15\n      },\n      \"low\": {\n        \"count\": 1,\n        \"mean\": 34.79,\n        \"median\": 34.79\n      },\n      \"upper_middle\": {\n        \"count\": 2,\n        \"mean\": 6.82,\n        \"median\": 6.82\n      }\n    }\n  },\n  \"emotionalReactions\": {\n    \"skeptical\": 3,\n    \"neutral\": 3,\n    \"curious\": 3,\n    \"excited\": 3,\n    \"angry\": 3,\n    \"annoyed\": 3\n  },\n  \"objections\": [\n    {\n      \"label\": \"Interesting concept, though the switching cost worries me.\",\n      \"count\": 8,\n      \"share\": 0.44\n    },\n    {\n      \"label\": \"This is a plausible mock response for local development.\",\n      \"count\": 8,\n      \"share\": 0.44\n    },\n    {\n      \"label\": \"I could see myself trying this if a friend vouched for it.\",\n      \"count\": 7,\n      \"share\": 0.39\n    },\n    {\n      \"label\": \"Synthetic data — replace with real model output.\",\n      \"count\": 7,\n      \"share\": 0.39\n    },\n    {\n      \"label\": \"The pricing feels steep for what it offers, honestly.\",\n      \"count\": 6,\n      \"share\": 0.33\n    }\n  ],\n  \"wtp\": {\n    \"applicable\": 18,\n    \"notApplicable\": 0,\n    \"byCadence\": {\n      \"one_time\": {\n        \"count\": 5,\n        \"mean\": 30.44,\n        \"median\": 28.99,\n        \"min\": 5.92,\n        \"max\": 63.92,\n        \"currency\": \"This is a plausible mock response for local development.\"\n      },\n      \"per_use\": {\n        \"count\": 5,\n        \"mean\": 58.78,\n        \"median\": 67.26,\n        \"min\": 22.4,\n        \"max\": 93.25,\n        \"currency\": \"Synthetic data — replace with real model output.\"\n      },\n      \"yearly\": {\n        \"count\": 4,\n        \"mean\": 46.87,\n        \"median\": 56.22,\n        \"min\": 6.44,\n        \"max\": 68.62,\n        \"currency\": \"The pricing feels steep for what it offers, honestly.\"\n      },\n      \"monthly\": {\n        \"count\": 4,\n        \"mean\": 45.03,\n        \"median\": 43.77,\n        \"min\": 4.87,\n        \"max\": 87.7,\n        \"currency\": \"I could see myself trying this if a friend vouched for it.\"\n      }\n    }\n  },\n  \"recommendRate\": 0.5,\n  \"meanConfidence\": 47.22\n}\n\nAttack the idea now.",
+      "output": {
+        "stance": "redteam",
+        "findings": [
+          {
+            "claim": "This is a plausible mock response for local development.",
+            "evidence": "Synthetic data — replace with real model output.",
+            "severity": "high"
+          },
+          {
+            "claim": "I could see myself trying this if a friend vouched for it.",
+            "evidence": "Interesting concept, though the switching cost worries me.",
+            "severity": "high"
+          }
+        ],
+        "biasWarnings": [
+          "This is a plausible mock response for local development.",
+          "Synthetic data — replace with real model output."
+        ],
+        "contraryEvidence": [
+          "The pricing feels steep for what it offers, honestly.",
+          "I could see myself trying this if a friend vouched for it."
+        ],
+        "adjustedConfidence": 22.02
+      },
+      "rawText": "{\"stance\":\"redteam\",\"findings\":[{\"severity\":\"high\",\"claim\":\"This is a plausible mock response for local development.\",\"evidence\":\"Synthetic data — replace with real model output.\"},{\"severity\":\"high\",\"claim\":\"I could see myself trying this if a friend vouched for it.\",\"evidence\":\"Interesting concept, though the switching cost worries me.\"}],\"biasWarnings\":[\"This is a plausible mock response for local development.\",\"Synthetic data — replace with real model output.\"],\"contraryEvidence\":[\"The pricing feels steep for what it offers, honestly.\",\"I could see myself trying this if a friend vouched for it.\"],\"adjustedConfidence\":22.02}",
+      "inputTokens": 1551,
+      "outputTokens": 943,
+      "costUsd": "0.008760",
+      "error": null,
+      "startedAt": "2026-08-09T01:07:50.935Z",
+      "finishedAt": "2026-08-09T01:07:51.169Z",
+      "createdAt": "2026-08-09T01:07:50.934Z"
+    },
+    {
+      "id": "41b66741-c21a-4beb-b8af-7fa443166c5f",
+      "runId": "fe99b8c2-d81d-4474-aaac-e8a52bf80592",
+      "parentAgentRunId": "1eda8bd9-2b52-42d3-a279-cf902a9c9a2f",
+      "kind": "critique",
+      "label": "Methodology Critic",
+      "personaId": null,
+      "segment": null,
+      "status": "completed",
+      "model": "mock:grok-4.5",
+      "systemPrompt": "You are a methodology critic reviewing a simulated market-validation study run on LLM-driven personas. Your target is the STUDY, not the idea.\nAttack the study's validity: sycophancy (LLM personas being too agreeable), consensus artifacts (suspiciously uniform scores or repeated phrasings), sample bias (segments or picks skewed toward fans), leading probe questions, and anything else that would make a real researcher distrust the aggregate signal.\nSet stance to \"methodology\". Every finding needs concrete evidence from the aggregates or the sampled verdicts. Finish with adjustedConfidence: how much the aggregate signal deserves to be trusted after your critique.",
+      "userPrompt": "# Study design\nIdea: This is a plausible mock response for local development.\nSegments: The pricing feels steep for what it offers, honestly.; This is a plausible mock response for local development.\nKey assumptions probed: I could see myself trying this if a friend vouched for it.; Interesting concept, though the switching cost worries me.\n\n# Aggregate results\n{\n  \"sampleSize\": 18,\n  \"adoption\": {\n    \"histogram\": [\n      4,\n      5,\n      3,\n      3,\n      1,\n      0,\n      1,\n      1,\n      0,\n      0\n    ],\n    \"mean\": 24.64,\n    \"median\": 17.65,\n    \"bySegment\": {\n      \"The pricing feels steep for what it offers, honestly.\": {\n        \"count\": 11,\n        \"mean\": 22.42,\n        \"median\": 12.95\n      },\n      \"This is a plausible mock response for local development.\": {\n        \"count\": 7,\n        \"mean\": 28.11,\n        \"median\": 20.29\n      }\n    },\n    \"byArchetype\": {\n      \"Scrappy optimizer\": {\n        \"count\": 1,\n        \"mean\": 22.1,\n        \"median\": 22.1\n      },\n      \"Image-conscious curator\": {\n        \"count\": 1,\n        \"mean\": 11.32,\n        \"median\": 11.32\n      },\n      \"No-time-to-waste caregiver\": {\n        \"count\": 1,\n        \"mean\": 34.02,\n        \"median\": 34.02\n      },\n      \"Aesthetic-first creative\": {\n        \"count\": 1,\n        \"mean\": 13.36,\n        \"median\": 13.36\n      },\n      \"Broke experimenter\": {\n        \"count\": 1,\n        \"mean\": 34.79,\n        \"median\": 34.79\n      },\n      \"Trend-chasing early adopter\": {\n        \"count\": 1,\n        \"mean\": 64.88,\n        \"median\": 64.88\n      },\n      \"Deal-hunting digital native\": {\n        \"count\": 1,\n        \"mean\": 49.05,\n        \"median\": 49.05\n      },\n      \"Charismatic status buyer\": {\n        \"count\": 1,\n        \"mean\": 10.15,\n        \"median\": 10.15\n      },\n      \"Impact-weighing realist\": {\n        \"count\": 1,\n        \"mean\": 0.4,\n        \"median\": 0.4\n      },\n      \"Fixed-income frugalist\": {\n        \"count\": 1,\n        \"mean\": 28.07,\n        \"median\": 28.07\n      },\n      \"Methodical researcher\": {\n        \"count\": 1,\n        \"mean\": 15,\n        \"median\": 15\n      },\n      \"Trend-aware budget stylist\": {\n        \"count\": 1,\n        \"mean\": 37.62,\n        \"median\": 37.62\n      },\n      \"Cautious traditionalist\": {\n        \"count\": 1,\n        \"mean\": 20.29,\n        \"median\": 20.29\n      },\n      \"Helpful cautious adopter\": {\n        \"count\": 1,\n        \"mean\": 2.88,\n        \"median\": 2.88\n      },\n      \"Ethics-driven purchaser\": {\n        \"count\": 1,\n        \"mean\": 12.95,\n        \"median\": 12.95\n      },\n      \"Evidence-demanding skeptic\": {\n        \"count\": 1,\n        \"mean\": 3.48,\n        \"median\": 3.48\n      },\n      \"Design-literate critic\": {\n        \"count\": 1,\n        \"mean\": 75.34,\n        \"median\": 75.34\n      },\n      \"Late-adopting loyalist\": {\n        \"count\": 1,\n        \"mean\": 7.73,\n        \"median\": 7.73\n      }\n    },\n    \"byIncomeBand\": {\n      \"lower_middle\": {\n        \"count\": 5,\n        \"mean\": 28.91,\n        \"median\": 28.07\n      },\n      \"high\": {\n        \"count\": 1,\n        \"mean\": 11.32,\n        \"median\": 11.32\n      },\n      \"middle\": {\n        \"count\": 9,\n        \"mean\": 26.57,\n        \"median\": 15\n      },\n      \"low\": {\n        \"count\": 1,\n        \"mean\": 34.79,\n        \"median\": 34.79\n      },\n      \"upper_middle\": {\n        \"count\": 2,\n        \"mean\": 6.82,\n        \"median\": 6.82\n      }\n    }\n  },\n  \"emotionalReactions\": {\n    \"skeptical\": 3,\n    \"neutral\": 3,\n    \"curious\": 3,\n    \"excited\": 3,\n    \"angry\": 3,\n    \"annoyed\": 3\n  },\n  \"objections\": [\n    {\n      \"label\": \"Interesting concept, though the switching cost worries me.\",\n      \"count\": 8,\n      \"share\": 0.44\n    },\n    {\n      \"label\": \"This is a plausible mock response for local development.\",\n      \"count\": 8,\n      \"share\": 0.44\n    },\n    {\n      \"label\": \"I could see myself trying this if a friend vouched for it.\",\n      \"count\": 7,\n      \"share\": 0.39\n    },\n    {\n      \"label\": \"Synthetic data — replace with real model output.\",\n      \"count\": 7,\n      \"share\": 0.39\n    },\n    {\n      \"label\": \"The pricing feels steep for what it offers, honestly.\",\n      \"count\": 6,\n      \"share\": 0.33\n    }\n  ],\n  \"wtp\": {\n    \"applicable\": 18,\n    \"notApplicable\": 0,\n    \"byCadence\": {\n      \"one_time\": {\n        \"count\": 5,\n        \"mean\": 30.44,\n        \"median\": 28.99,\n        \"min\": 5.92,\n        \"max\": 63.92,\n        \"currency\": \"This is a plausible mock response for local development.\"\n      },\n      \"per_use\": {\n        \"count\": 5,\n        \"mean\": 58.78,\n        \"median\": 67.26,\n        \"min\": 22.4,\n        \"max\": 93.25,\n        \"currency\": \"Synthetic data — replace with real model output.\"\n      },\n      \"yearly\": {\n        \"count\": 4,\n        \"mean\": 46.87,\n        \"median\": 56.22,\n        \"min\": 6.44,\n        \"max\": 68.62,\n        \"currency\": \"The pricing feels steep for what it offers, honestly.\"\n      },\n      \"monthly\": {\n        \"count\": 4,\n        \"mean\": 45.03,\n        \"median\": 43.77,\n        \"min\": 4.87,\n        \"max\": 87.7,\n        \"currency\": \"I could see myself trying this if a friend vouched for it.\"\n      }\n    }\n  },\n  \"recommendRate\": 0.5,\n  \"meanConfidence\": 47.22\n}\n\n# Sampled raw verdicts (10)\n- Nadia Osman (Impact-weighing realist, segment \"This is a plausible mock response for local development.\", income middle)\n  adoption 0.4/100 · curious · wtp 19.76 I could see myself trying this if a friend vouched for it. one_time · recommend false · confidence 35.96\n  objections: Synthetic data — replace with real model output.; The pricing feels steep for what it offers, honestly.\n  quote: \"The pricing feels steep for what it offers, honestly.\"\n- Hans Becker (Evidence-demanding skeptic, segment \"The pricing feels steep for what it offers, honestly.\", income upper_middle)\n  adoption 3.48/100 · excited · wtp 47.59 This is a plausible mock response for local development. monthly · recommend true · confidence 34.5\n  objections: I could see myself trying this if a friend vouched for it.; Interesting concept, though the switching cost worries me.\n  quote: \"Interesting concept, though the switching cost worries me.\"\n- Bruno Ferreira (Charismatic status buyer, segment \"The pricing feels steep for what it offers, honestly.\", income upper_middle)\n  adoption 10.15/100 · neutral · wtp 4.87 The pricing feels steep for what it offers, honestly. monthly · recommend true · confidence 81.08\n  objections: This is a plausible mock response for local development.; Synthetic data — replace with real model output.\n  quote: \"Synthetic data — replace with real model output.\"\n- Chloe Dubois (Ethics-driven purchaser, segment \"The pricing feels steep for what it offers, honestly.\", income middle)\n  adoption 12.95/100 · curious · wtp 68.62 Interesting concept, though the switching cost worries me. yearly · recommend false · confidence 66.4\n  objections: The pricing feels steep for what it offers, honestly.; I could see myself trying this if a friend vouched for it.\n  quote: \"I could see myself trying this if a friend vouched for it.\"\n- Aiko Tanaka (Methodical researcher, segment \"This is a plausible mock response for local development.\", income middle)\n  adoption 15/100 · angry · wtp 54.41 This is a plausible mock response for local development. yearly · recommend false · confidence 88.62\n  objections: I could see myself trying this if a friend vouched for it.; Interesting concept, though the switching cost worries me.\n  quote: \"Interesting concept, though the switching cost worries me.\"\n- Sarah O'Brien (Cautious traditionalist, segment \"This is a plausible mock response for local development.\", income middle)\n  adoption 20.29/100 · skeptical · wtp 63.92 The pricing feels steep for what it offers, honestly. one_time · recommend false · confidence 22.25\n  objections: This is a plausible mock response for local development.; Synthetic data — replace with real model output.\n  quote: \"Synthetic data — replace with real model output.\"\n- Viktor Kovac (Fixed-income frugalist, segment \"The pricing feels steep for what it offers, honestly.\", income lower_middle)\n  adoption 28.07/100 · excited · wtp 22.78 Interesting concept, though the switching cost worries me. per_use · recommend true · confidence 33.51\n  objections: The pricing feels steep for what it offers, honestly.; I could see myself trying this if a friend vouched for it.\n  quote: \"I could see myself trying this if a friend vouched for it.\"\n- Liam Murphy (Broke experimenter, segment \"This is a plausible mock response for local development.\", income low)\n  adoption 34.79/100 · angry · wtp 5.92 Interesting concept, though the switching cost worries me. one_time · recommend false · confidence 76.69\n  objections: The pricing feels steep for what it offers, honestly.; I could see myself trying this if a friend vouched for it.\n  quote: \"I could see myself trying this if a friend vouched for it.\"\n- Priya Sharma (Deal-hunting digital native, segment \"The pricing feels steep for what it offers, honestly.\", income lower_middle)\n  adoption 49.05/100 · skeptical · wtp 6.44 Synthetic data — replace with real model output. yearly · recommend false · confidence 56.57\n  objections: Interesting concept, though the switching cost worries me.; This is a plausible mock response for local development.\n  quote: \"This is a plausible mock response for local development.\"\n- Emily Zhang (Design-literate critic, segment \"This is a plausible mock response for local development.\", income middle)\n  adoption 75.34/100 · angry · wtp 33.6 Synthetic data — replace with real model output. one_time · recommend false · confidence 9.81\n  objections: Interesting concept, though the switching cost worries me.; This is a plausible mock response for local development.\n  quote: \"This is a plausible mock response for local development.\"\n\nCritique the study now.",
+      "output": {
+        "stance": "methodology",
+        "findings": [
+          {
+            "claim": "Synthetic data — replace with real model output.",
+            "evidence": "The pricing feels steep for what it offers, honestly.",
+            "severity": "medium"
+          },
+          {
+            "claim": "Interesting concept, though the switching cost worries me.",
+            "evidence": "This is a plausible mock response for local development.",
+            "severity": "medium"
+          }
+        ],
+        "biasWarnings": [
+          "Synthetic data — replace with real model output.",
+          "The pricing feels steep for what it offers, honestly."
+        ],
+        "contraryEvidence": [
+          "I could see myself trying this if a friend vouched for it.",
+          "Interesting concept, though the switching cost worries me."
+        ],
+        "adjustedConfidence": 76.64
+      },
+      "rawText": "{\"stance\":\"methodology\",\"findings\":[{\"severity\":\"medium\",\"claim\":\"Synthetic data — replace with real model output.\",\"evidence\":\"The pricing feels steep for what it offers, honestly.\"},{\"severity\":\"medium\",\"claim\":\"Interesting concept, though the switching cost worries me.\",\"evidence\":\"This is a plausible mock response for local development.\"}],\"biasWarnings\":[\"Synthetic data — replace with real model output.\",\"The pricing feels steep for what it offers, honestly.\"],\"contraryEvidence\":[\"I could see myself trying this if a friend vouched for it.\",\"Interesting concept, though the switching cost worries me.\"],\"adjustedConfidence\":76.64}",
+      "inputTokens": 706,
+      "outputTokens": 846,
+      "costUsd": "0.006488",
+      "error": null,
+      "startedAt": "2026-08-09T01:07:50.935Z",
+      "finishedAt": "2026-08-09T01:07:51.261Z",
+      "createdAt": "2026-08-09T01:07:50.934Z"
+    },
+    {
+      "id": "41247c7e-2292-41e7-8dec-140d46081779",
+      "runId": "fe99b8c2-d81d-4474-aaac-e8a52bf80592",
+      "parentAgentRunId": "1eda8bd9-2b52-42d3-a279-cf902a9c9a2f",
+      "kind": "synthesis",
+      "label": "Synthesis",
+      "personaId": null,
+      "segment": null,
+      "status": "completed",
+      "model": "mock:grok-4.5",
+      "systemPrompt": "You are the lead analyst writing the final readout of a simulated market-validation study.\nWrite for a founder who reads for 90 seconds: verdict first, then only what changes their next decision.\nEvery claim must trace to segment data in the aggregates or to a critique finding — no invented facts, no hedging filler (\"it depends\", \"more research is needed\") unless a critique concretely justifies it.\nRespect the critics: if the methodology critique undermines the sample, temper confidence; if the red-team surfaced real headwinds, they belong in topRisks. segmentSummaries must use the real per-segment means from the aggregates.\nboldestBet is the single highest-leverage change to the idea, not a platitude. nextSteps are concrete actions a founder could start this week.",
+      "userPrompt": "# The idea\nSprout: a subscription plant-care app that pairs a $6/month plan with smart reminders, photo-based plant health diagnosis, and a mail-order 'rescue kit' (soil, treatment, tools) dispatched automatically when the app detects a struggling plant.\n\n# Founder context\nTarget launch: US + EU app stores. Team of 2, pre-seed.\n\n# Study brief\n{\n  \"ideaSummary\": \"This is a plausible mock response for local development.\",\n  \"category\": \"policy\",\n  \"targetMarket\": \"The pricing feels steep for what it offers, honestly.\",\n  \"keyAssumptions\": [\n    \"I could see myself trying this if a friend vouched for it.\",\n    \"Interesting concept, though the switching cost worries me.\"\n  ],\n  \"riskDimensions\": [\n    \"This is a plausible mock response for local development.\",\n    \"Synthetic data — replace with real model output.\"\n  ],\n  \"segments\": [\n    {\n      \"name\": \"The pricing feels steep for what it offers, honestly.\",\n      \"description\": \"I could see myself trying this if a friend vouched for it.\",\n      \"whyRelevant\": \"Interesting concept, though the switching cost worries me.\"\n    },\n    {\n      \"name\": \"This is a plausible mock response for local development.\",\n      \"description\": \"Synthetic data — replace with real model output.\",\n      \"whyRelevant\": \"The pricing feels steep for what it offers, honestly.\"\n    }\n  ],\n  \"clarityScore\": 4.69,\n  \"ambiguities\": [\n    \"I could see myself trying this if a friend vouched for it.\",\n    \"Interesting concept, though the switching cost worries me.\"\n  ]\n}\n\n# Aggregate results\n{\n  \"sampleSize\": 18,\n  \"adoption\": {\n    \"histogram\": [\n      4,\n      5,\n      3,\n      3,\n      1,\n      0,\n      1,\n      1,\n      0,\n      0\n    ],\n    \"mean\": 24.64,\n    \"median\": 17.65,\n    \"bySegment\": {\n      \"The pricing feels steep for what it offers, honestly.\": {\n        \"count\": 11,\n        \"mean\": 22.42,\n        \"median\": 12.95\n      },\n      \"This is a plausible mock response for local development.\": {\n        \"count\": 7,\n        \"mean\": 28.11,\n        \"median\": 20.29\n      }\n    },\n    \"byArchetype\": {\n      \"Scrappy optimizer\": {\n        \"count\": 1,\n        \"mean\": 22.1,\n        \"median\": 22.1\n      },\n      \"Image-conscious curator\": {\n        \"count\": 1,\n        \"mean\": 11.32,\n        \"median\": 11.32\n      },\n      \"No-time-to-waste caregiver\": {\n        \"count\": 1,\n        \"mean\": 34.02,\n        \"median\": 34.02\n      },\n      \"Aesthetic-first creative\": {\n        \"count\": 1,\n        \"mean\": 13.36,\n        \"median\": 13.36\n      },\n      \"Broke experimenter\": {\n        \"count\": 1,\n        \"mean\": 34.79,\n        \"median\": 34.79\n      },\n      \"Trend-chasing early adopter\": {\n        \"count\": 1,\n        \"mean\": 64.88,\n        \"median\": 64.88\n      },\n      \"Deal-hunting digital native\": {\n        \"count\": 1,\n        \"mean\": 49.05,\n        \"median\": 49.05\n      },\n      \"Charismatic status buyer\": {\n        \"count\": 1,\n        \"mean\": 10.15,\n        \"median\": 10.15\n      },\n      \"Impact-weighing realist\": {\n        \"count\": 1,\n        \"mean\": 0.4,\n        \"median\": 0.4\n      },\n      \"Fixed-income frugalist\": {\n        \"count\": 1,\n        \"mean\": 28.07,\n        \"median\": 28.07\n      },\n      \"Methodical researcher\": {\n        \"count\": 1,\n        \"mean\": 15,\n        \"median\": 15\n      },\n      \"Trend-aware budget stylist\": {\n        \"count\": 1,\n        \"mean\": 37.62,\n        \"median\": 37.62\n      },\n      \"Cautious traditionalist\": {\n        \"count\": 1,\n        \"mean\": 20.29,\n        \"median\": 20.29\n      },\n      \"Helpful cautious adopter\": {\n        \"count\": 1,\n        \"mean\": 2.88,\n        \"median\": 2.88\n      },\n      \"Ethics-driven purchaser\": {\n        \"count\": 1,\n        \"mean\": 12.95,\n        \"median\": 12.95\n      },\n      \"Evidence-demanding skeptic\": {\n        \"count\": 1,\n        \"mean\": 3.48,\n        \"median\": 3.48\n      },\n      \"Design-literate critic\": {\n        \"count\": 1,\n        \"mean\": 75.34,\n        \"median\": 75.34\n      },\n      \"Late-adopting loyalist\": {\n        \"count\": 1,\n        \"mean\": 7.73,\n        \"median\": 7.73\n      }\n    },\n    \"byIncomeBand\": {\n      \"lower_middle\": {\n        \"count\": 5,\n        \"mean\": 28.91,\n        \"median\": 28.07\n      },\n      \"high\": {\n        \"count\": 1,\n        \"mean\": 11.32,\n        \"median\": 11.32\n      },\n      \"middle\": {\n        \"count\": 9,\n        \"mean\": 26.57,\n        \"median\": 15\n      },\n      \"low\": {\n        \"count\": 1,\n        \"mean\": 34.79,\n        \"median\": 34.79\n      },\n      \"upper_middle\": {\n        \"count\": 2,\n        \"mean\": 6.82,\n        \"median\": 6.82\n      }\n    }\n  },\n  \"emotionalReactions\": {\n    \"skeptical\": 3,\n    \"neutral\": 3,\n    \"curious\": 3,\n    \"excited\": 3,\n    \"angry\": 3,\n    \"annoyed\": 3\n  },\n  \"objections\": [\n    {\n      \"label\": \"Interesting concept, though the switching cost worries me.\",\n      \"count\": 8,\n      \"share\": 0.44\n    },\n    {\n      \"label\": \"This is a plausible mock response for local development.\",\n      \"count\": 8,\n      \"share\": 0.44\n    },\n    {\n      \"label\": \"I could see myself trying this if a friend vouched for it.\",\n      \"count\": 7,\n      \"share\": 0.39\n    },\n    {\n      \"label\": \"Synthetic data — replace with real model output.\",\n      \"count\": 7,\n      \"share\": 0.39\n    },\n    {\n      \"label\": \"The pricing feels steep for what it offers, honestly.\",\n      \"count\": 6,\n      \"share\": 0.33\n    }\n  ],\n  \"wtp\": {\n    \"applicable\": 18,\n    \"notApplicable\": 0,\n    \"byCadence\": {\n      \"one_time\": {\n        \"count\": 5,\n        \"mean\": 30.44,\n        \"median\": 28.99,\n        \"min\": 5.92,\n        \"max\": 63.92,\n        \"currency\": \"This is a plausible mock response for local development.\"\n      },\n      \"per_use\": {\n        \"count\": 5,\n        \"mean\": 58.78,\n        \"median\": 67.26,\n        \"min\": 22.4,\n        \"max\": 93.25,\n        \"currency\": \"Synthetic data — replace with real model output.\"\n      },\n      \"yearly\": {\n        \"count\": 4,\n        \"mean\": 46.87,\n        \"median\": 56.22,\n        \"min\": 6.44,\n        \"max\": 68.62,\n        \"currency\": \"The pricing feels steep for what it offers, honestly.\"\n      },\n      \"monthly\": {\n        \"count\": 4,\n        \"mean\": 45.03,\n        \"median\": 43.77,\n        \"min\": 4.87,\n        \"max\": 87.7,\n        \"currency\": \"I could see myself trying this if a friend vouched for it.\"\n      }\n    }\n  },\n  \"recommendRate\": 0.5,\n  \"meanConfidence\": 47.22\n}\n\n# Methodology critique (of the study)\n{\n  \"stance\": \"methodology\",\n  \"findings\": [\n    {\n      \"severity\": \"medium\",\n      \"claim\": \"Synthetic data — replace with real model output.\",\n      \"evidence\": \"The pricing feels steep for what it offers, honestly.\"\n    },\n    {\n      \"severity\": \"medium\",\n      \"claim\": \"Interesting concept, though the switching cost worries me.\",\n      \"evidence\": \"This is a plausible mock response for local development.\"\n    }\n  ],\n  \"biasWarnings\": [\n    \"Synthetic data — replace with real model output.\",\n    \"The pricing feels steep for what it offers, honestly.\"\n  ],\n  \"contraryEvidence\": [\n    \"I could see myself trying this if a friend vouched for it.\",\n    \"Interesting concept, though the switching cost worries me.\"\n  ],\n  \"adjustedConfidence\": 76.64\n}\n\n# Red-team critique (of the idea)\n{\n  \"stance\": \"redteam\",\n  \"findings\": [\n    {\n      \"severity\": \"high\",\n      \"claim\": \"This is a plausible mock response for local development.\",\n      \"evidence\": \"Synthetic data — replace with real model output.\"\n    },\n    {\n      \"severity\": \"high\",\n      \"claim\": \"I could see myself trying this if a friend vouched for it.\",\n      \"evidence\": \"Interesting concept, though the switching cost worries me.\"\n    }\n  ],\n  \"biasWarnings\": [\n    \"This is a plausible mock response for local development.\",\n    \"Synthetic data — replace with real model output.\"\n  ],\n  \"contraryEvidence\": [\n    \"The pricing feels steep for what it offers, honestly.\",\n    \"I could see myself trying this if a friend vouched for it.\"\n  ],\n  \"adjustedConfidence\": 22.02\n}\n\n# Best verbatim quotes\n- Bruno Ferreira (Charismatic status buyer, \"The pricing feels steep for what it offers, honestly.\", adoption 10.15/100): \"Synthetic data — replace with real model output.\"\n- Aiko Tanaka (Methodical researcher, \"This is a plausible mock response for local development.\", adoption 15/100): \"Interesting concept, though the switching cost worries me.\"\n- Chloe Dubois (Ethics-driven purchaser, \"The pricing feels steep for what it offers, honestly.\", adoption 12.95/100): \"I could see myself trying this if a friend vouched for it.\"\n- Liam Murphy (Broke experimenter, \"This is a plausible mock response for local development.\", adoption 34.79/100): \"I could see myself trying this if a friend vouched for it.\"\n- Kwame Mensah (Scrappy optimizer, \"The pricing feels steep for what it offers, honestly.\", adoption 22.1/100): \"Interesting concept, though the switching cost worries me.\"\n- Elena Petrova (Aesthetic-first creative, \"This is a plausible mock response for local development.\", adoption 13.36/100): \"The pricing feels steep for what it offers, honestly.\"\n- Priya Sharma (Deal-hunting digital native, \"The pricing feels steep for what it offers, honestly.\", adoption 49.05/100): \"This is a plausible mock response for local development.\"\n- Sofia Rossi (Trend-aware budget stylist, \"This is a plausible mock response for local development.\", adoption 37.62/100): \"This is a plausible mock response for local development.\"\n- Fatima Al-Rashid (Image-conscious curator, \"The pricing feels steep for what it offers, honestly.\", adoption 11.32/100): \"This is a plausible mock response for local development.\"\n- Nadia Osman (Impact-weighing realist, \"This is a plausible mock response for local development.\", adoption 0.4/100): \"The pricing feels steep for what it offers, honestly.\"\n- Maya Thompson (Trend-chasing early adopter, \"The pricing feels steep for what it offers, honestly.\", adoption 64.88/100): \"Interesting concept, though the switching cost worries me.\"\n- Sarah O'Brien (Cautious traditionalist, \"This is a plausible mock response for local development.\", adoption 20.29/100): \"Synthetic data — replace with real model output.\"\n- Carlos Mendoza (Helpful cautious adopter, \"The pricing feels steep for what it offers, honestly.\", adoption 2.88/100): \"The pricing feels steep for what it offers, honestly.\"\n- Emily Zhang (Design-literate critic, \"This is a plausible mock response for local development.\", adoption 75.34/100): \"This is a plausible mock response for local development.\"\n- Hans Becker (Evidence-demanding skeptic, \"The pricing feels steep for what it offers, honestly.\", adoption 3.48/100): \"Interesting concept, though the switching cost worries me.\"\n\nWrite the readout now.",
+      "output": {
+        "scores": {
+          "urgency": 89.44,
+          "viability": 75.27,
+          "desirability": 1.57
+        },
+        "verdict": "strong_signal",
+        "oneLiner": "Synthetic data — replace with real model output.",
+        "topRisks": [
+          {
+            "risk": "This is a plausible mock response for local development.",
+            "severity": "medium",
+            "mitigation": "The pricing feels steep for what it offers, honestly."
+          },
+          {
+            "risk": "I could see myself trying this if a friend vouched for it.",
+            "severity": "medium",
+            "mitigation": "This is a plausible mock response for local development."
+          }
+        ],
+        "nextSteps": [
+          "I could see myself trying this if a friend vouched for it.",
+          "Interesting concept, though the switching cost worries me."
+        ],
+        "boldestBet": "The pricing feels steep for what it offers, honestly.",
+        "confidence": 72.93,
+        "keyFindings": [
+          {
+            "title": "The pricing feels steep for what it offers, honestly.",
+            "detail": "I could see myself trying this if a friend vouched for it.",
+            "supportingSegments": [
+              "Interesting concept, though the switching cost worries me.",
+              "This is a plausible mock response for local development."
+            ]
+          },
+          {
+            "title": "Synthetic data — replace with real model output.",
+            "detail": "The pricing feels steep for what it offers, honestly.",
+            "supportingSegments": [
+              "I could see myself trying this if a friend vouched for it.",
+              "Interesting concept, though the switching cost worries me."
+            ]
+          }
+        ],
+        "segmentSummaries": [
+          {
+            "stance": "The pricing feels steep for what it offers, honestly.",
+            "segment": "Synthetic data — replace with real model output.",
+            "meanAdoption": 76.18,
+            "notableQuote": "I could see myself trying this if a friend vouched for it."
+          },
+          {
+            "stance": "This is a plausible mock response for local development.",
+            "segment": "Interesting concept, though the switching cost worries me.",
+            "meanAdoption": 19.76,
+            "notableQuote": "Synthetic data — replace with real model output."
+          }
+        ]
+      },
+      "rawText": "{\"verdict\":\"strong_signal\",\"confidence\":72.93,\"oneLiner\":\"Synthetic data — replace with real model output.\",\"scores\":{\"desirability\":1.57,\"viability\":75.27,\"urgency\":89.44},\"keyFindings\":[{\"title\":\"The pricing feels steep for what it offers, honestly.\",\"detail\":\"I could see myself trying this if a friend vouched for it.\",\"supportingSegments\":[\"Interesting concept, though the switching cost worries me.\",\"This is a plausible mock response for local development.\"]},{\"title\":\"Synthetic data — replace with real model output.\",\"detail\":\"The pricing feels steep for what it offers, honestly.\",\"supportingSegments\":[\"I could see myself trying this if a friend vouched for it.\",\"Interesting concept, though the switching cost worries me.\"]}],\"topRisks\":[{\"risk\":\"This is a plausible mock response for local development.\",\"severity\":\"medium\",\"mitigation\":\"The pricing feels steep for what it offers, honestly.\"},{\"risk\":\"I could see myself trying this if a friend vouched for it.\",\"severity\":\"medium\",\"mitigation\":\"This is a plausible mock response for local development.\"}],\"segmentSummaries\":[{\"segment\":\"Synthetic data — replace with real model output.\",\"meanAdoption\":76.18,\"stance\":\"The pricing feels steep for what it offers, honestly.\",\"notableQuote\":\"I could see myself trying this if a friend vouched for it.\"},{\"segment\":\"Interesting concept, though the switching cost worries me.\",\"meanAdoption\":19.76,\"stance\":\"This is a plausible mock response for local development.\",\"notableQuote\":\"Synthetic data — replace with real model output.\"}],\"boldestBet\":\"The pricing feels steep for what it offers, honestly.\",\"nextSteps\":[\"I could see myself trying this if a friend vouched for it.\",\"Interesting concept, though the switching cost worries me.\"]}",
+      "inputTokens": 687,
+      "outputTokens": 1163,
+      "costUsd": "0.008352",
+      "error": null,
+      "startedAt": "2026-08-09T01:07:51.268Z",
+      "finishedAt": "2026-08-09T01:07:51.444Z",
+      "createdAt": "2026-08-09T01:07:51.268Z"
+    }
+  ],
+  "personas": {
+    "6f261657-859f-4552-b25d-b91a00cbbb86": {
+      "id": "6f261657-859f-4552-b25d-b91a00cbbb86",
+      "name": "Maya Thompson",
+      "archetype": "Trend-chasing early adopter",
+      "avatarSeed": "bEvmdq6DKrCz3PRpYwlRm"
+    },
+    "b3de3641-98fe-4804-9bef-f2cd0c944af8": {
+      "id": "b3de3641-98fe-4804-9bef-f2cd0c944af8",
+      "name": "Elena Petrova",
+      "archetype": "Aesthetic-first creative",
+      "avatarSeed": "FhnLWysaxhZIIzi2R7aV7"
+    },
+    "d86be6f9-2efb-4466-bcd1-1477d7be25e9": {
+      "id": "d86be6f9-2efb-4466-bcd1-1477d7be25e9",
+      "name": "Aiko Tanaka",
+      "archetype": "Methodical researcher",
+      "avatarSeed": "IsGqEUMDy9TBl1a-wxxmi"
+    },
+    "e817ba6c-580d-41c2-a7b3-a062896ebb2d": {
+      "id": "e817ba6c-580d-41c2-a7b3-a062896ebb2d",
+      "name": "Sarah O'Brien",
+      "archetype": "Cautious traditionalist",
+      "avatarSeed": "szP3cqjxyBFgmEF5z4Egw"
+    },
+    "6952fb6e-9388-4beb-af64-f4d5fc0c6b9c": {
+      "id": "6952fb6e-9388-4beb-af64-f4d5fc0c6b9c",
+      "name": "Kwame Mensah",
+      "archetype": "Scrappy optimizer",
+      "avatarSeed": "jUKI4HBbrxFUqGLpa_MBK"
+    },
+    "80896b0d-7b94-484c-b469-eed84788097c": {
+      "id": "80896b0d-7b94-484c-b469-eed84788097c",
+      "name": "Priya Sharma",
+      "archetype": "Deal-hunting digital native",
+      "avatarSeed": "22UdOddfQXACLHLJ7p7fZ"
+    },
+    "5c9a59cf-cec1-4aeb-8618-6b348c710dd8": {
+      "id": "5c9a59cf-cec1-4aeb-8618-6b348c710dd8",
+      "name": "Hans Becker",
+      "archetype": "Evidence-demanding skeptic",
+      "avatarSeed": "jam6PSOhsjyRaWu5Ssqvp"
+    },
+    "b52b0a96-59d6-43fc-b6ee-6cdd1ab00ee6": {
+      "id": "b52b0a96-59d6-43fc-b6ee-6cdd1ab00ee6",
+      "name": "Fatima Al-Rashid",
+      "archetype": "Image-conscious curator",
+      "avatarSeed": "rNYHr3KsJ9bGu64phK3hm"
+    },
+    "3f6e5435-3fa1-433f-a5f5-e4cacf935e36": {
+      "id": "3f6e5435-3fa1-433f-a5f5-e4cacf935e36",
+      "name": "Liam Murphy",
+      "archetype": "Broke experimenter",
+      "avatarSeed": "o_-GiFBGp0avCH7_Ux0fz"
+    },
+    "10235f5a-5aae-43cd-9516-766f18050c3c": {
+      "id": "10235f5a-5aae-43cd-9516-766f18050c3c",
+      "name": "Chloe Dubois",
+      "archetype": "Ethics-driven purchaser",
+      "avatarSeed": "dIjfE5NhX88pl_dZJIaEh"
+    },
+    "d4100c97-29e1-40b6-8b68-5efb4ee05f84": {
+      "id": "d4100c97-29e1-40b6-8b68-5efb4ee05f84",
+      "name": "Viktor Kovac",
+      "archetype": "Fixed-income frugalist",
+      "avatarSeed": "TPSebNprn7HOr4FYTHQMP"
+    },
+    "b02c87b2-3f68-4e89-802e-fd24d84d8b2c": {
+      "id": "b02c87b2-3f68-4e89-802e-fd24d84d8b2c",
+      "name": "Jasmine Carter",
+      "archetype": "No-time-to-waste caregiver",
+      "avatarSeed": "WKYTWF0K7pgyIc4ROD6k8"
+    },
+    "3836a774-8094-4450-a16f-a81c5a69c0d5": {
+      "id": "3836a774-8094-4450-a16f-a81c5a69c0d5",
+      "name": "Emily Zhang",
+      "archetype": "Design-literate critic",
+      "avatarSeed": "rkaRkfJmkrAbCgOvCv55I"
+    },
+    "e342cf78-2b9f-4a18-9fcd-a9bf3a7204ef": {
+      "id": "e342cf78-2b9f-4a18-9fcd-a9bf3a7204ef",
+      "name": "Bruno Ferreira",
+      "archetype": "Charismatic status buyer",
+      "avatarSeed": "4AiFlwce7BqT82ODGuRYo"
+    },
+    "4ff72774-108a-4249-8370-d9ba72e22f19": {
+      "id": "4ff72774-108a-4249-8370-d9ba72e22f19",
+      "name": "Nadia Osman",
+      "archetype": "Impact-weighing realist",
+      "avatarSeed": "fpaEW6e0EOfbAqgevYlhU"
+    },
+    "eadef960-72cb-4ae4-9144-95b75a680bba": {
+      "id": "eadef960-72cb-4ae4-9144-95b75a680bba",
+      "name": "Sofia Rossi",
+      "archetype": "Trend-aware budget stylist",
+      "avatarSeed": "lB4SjaMMGKA7c8kyukRhW"
+    },
+    "73ea322d-b511-4cc4-805e-7707336a08a9": {
+      "id": "73ea322d-b511-4cc4-805e-7707336a08a9",
+      "name": "Margaret Hughes",
+      "archetype": "Late-adopting loyalist",
+      "avatarSeed": "wiq-Ghk-ixN9xOcrT_sd3"
+    },
+    "69581c9d-17b8-4a80-a2d9-ad754ce1c0b2": {
+      "id": "69581c9d-17b8-4a80-a2d9-ad754ce1c0b2",
+      "name": "Carlos Mendoza",
+      "archetype": "Helpful cautious adopter",
+      "avatarSeed": "cVqJIpnG7XgfwpDjWf6S3"
+    }
+  }
+}
