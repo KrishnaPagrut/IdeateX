@@ -1,9 +1,13 @@
 import type { RunStatus } from "@/lib/db/schema";
+import type { MARKETING_VERDICTS } from "@/lib/schemas/report";
 import type { SYNTHESIS_VERDICTS } from "@/lib/schemas/synthesis";
 
 // Display helpers shared by the run history table and the live run shell.
 
-export type SynthesisVerdict = (typeof SYNTHESIS_VERDICTS)[number];
+/** Marketing verdicts, plus legacy synthesis verdicts for pre-pivot rows. */
+export type SynthesisVerdict =
+  | (typeof MARKETING_VERDICTS)[number]
+  | (typeof SYNTHESIS_VERDICTS)[number];
 
 export const ACTIVE_STATUSES: ReadonlySet<RunStatus> = new Set<RunStatus>([
   "pending",
@@ -49,8 +53,12 @@ export function statusBadgeClass(status: RunStatus): string {
 }
 
 export const VERDICT_LABELS: Record<SynthesisVerdict, string> = {
-  strong_signal: "Strong signal",
+  launch_ready: "Launch ready",
   promising: "Promising",
+  needs_work: "Needs work",
+  high_risk: "High risk",
+  // Legacy (pre-pivot) verdicts, kept so old rows still render.
+  strong_signal: "Strong signal",
   mixed: "Mixed",
   weak: "Weak",
   dead_on_arrival: "Dead on arrival",
@@ -58,11 +66,14 @@ export const VERDICT_LABELS: Record<SynthesisVerdict, string> = {
 
 export function verdictBadgeClass(verdict: SynthesisVerdict): string {
   switch (verdict) {
+    case "launch_ready":
     case "strong_signal":
     case "promising":
       return "border-transparent bg-primary/10 text-primary";
+    case "needs_work":
     case "mixed":
       return "border-transparent bg-secondary text-secondary-foreground";
+    case "high_risk":
     case "weak":
     case "dead_on_arrival":
       return "border-transparent bg-destructive/10 text-destructive";

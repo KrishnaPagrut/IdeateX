@@ -13,7 +13,17 @@ export const dynamic = "force-dynamic";
 // PGlite on ./.pglite corrupts the real server's instance.
 
 const CreateRunSchema = z.object({
-  idea: z.string().trim().min(20, "Describe the idea in at least 20 characters"),
+  productName: z.string().trim().min(2, "Name the product").max(120),
+  description: z
+    .string()
+    .trim()
+    .min(20, "Describe the product in at least 20 characters"),
+  targetAudience: z
+    .string()
+    .trim()
+    .min(10, "Describe the target audience in at least 10 characters")
+    .max(2000),
+  objective: z.string().trim().max(2000).optional(),
   context: z.string().trim().max(4000).optional(),
   tier: z.enum(RUN_TIERS),
   grounding: z.boolean(),
@@ -42,11 +52,24 @@ export async function POST(request: Request) {
     import("@/lib/engine/orchestrator"),
   ]);
 
-  const { idea, context, tier, grounding, discussion, personaBudget } = parsed.data;
+  const {
+    productName,
+    description,
+    targetAudience,
+    objective,
+    context,
+    tier,
+    grounding,
+    discussion,
+    personaBudget,
+  } = parsed.data;
   const [row] = await db
     .insert(runs)
     .values({
-      idea,
+      idea: description,
+      productName,
+      targetAudience,
+      objective: objective ? objective : null,
       context: context ? context : null,
       tier,
       grounding,

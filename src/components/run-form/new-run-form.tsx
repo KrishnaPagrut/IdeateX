@@ -15,7 +15,8 @@ import type { RunTier } from "@/lib/db/schema";
 import { TIER_SHAPE } from "@/lib/llm/cost";
 import { cn } from "@/lib/utils";
 
-const MIN_IDEA_LENGTH = 20;
+const MIN_DESCRIPTION_LENGTH = 20;
+const MIN_AUDIENCE_LENGTH = 10;
 
 const TIERS: Array<{
   tier: RunTier;
@@ -23,20 +24,29 @@ const TIERS: Array<{
   blurb: string;
 }> = [
   { tier: "quick", name: "Quick", blurb: "A fast pulse-check" },
-  { tier: "standard", name: "Standard", blurb: "Balanced segment coverage" },
+  { tier: "standard", name: "Standard", blurb: "Balanced cohort coverage" },
   { tier: "deep", name: "Deep", blurb: "A full population sweep" },
 ];
 
-const IDEA_PLACEHOLDER =
-  "We're considering raising our Pro plan from $12 to $18/month for existing subscribers, grandfathering nobody, with a 60-day notice email…";
+const DESCRIPTION_PLACEHOLDER =
+  "A subscription plant-care app: $6/month, smart reminders, photo-based plant diagnosis, and a rescue kit mailed automatically when a plant is struggling…";
+
+const AUDIENCE_PLACEHOLDER =
+  "Urban millennial and Gen-Z plant owners in the US and EU; secondary: gift buyers and retired gardeners.";
+
+const OBJECTIVE_PLACEHOLDER =
+  "What should this campaign achieve? e.g. maximize app-store installs at launch without burning trust — and what you want out of this study.";
 
 const CONTEXT_PLACEHOLDER =
-  "Audience, market, pricing today, constraints — anything the swarm should know before reacting.";
+  "Market, pricing today, constraints, competitors — anything the study should know.";
 
 export function NewRunForm() {
   const router = useRouter();
 
-  const [idea, setIdea] = React.useState("");
+  const [productName, setProductName] = React.useState("");
+  const [description, setDescription] = React.useState("");
+  const [targetAudience, setTargetAudience] = React.useState("");
+  const [objective, setObjective] = React.useState("");
   const [context, setContext] = React.useState("");
   const [showContext, setShowContext] = React.useState(false);
   const [tier, setTier] = React.useState<RunTier>("standard");
@@ -76,13 +86,16 @@ export function NewRunForm() {
     };
   }, [tier, grounding, discussion, personaBudget]);
 
-  const ideaLength = idea.trim().length;
-  const ideaTooShort = ideaLength < MIN_IDEA_LENGTH;
+  const descriptionLength = description.trim().length;
+  const descriptionTooShort = descriptionLength < MIN_DESCRIPTION_LENGTH;
+  const nameMissing = productName.trim().length < 2;
+  const audienceTooShort = targetAudience.trim().length < MIN_AUDIENCE_LENGTH;
+  const invalid = nameMissing || descriptionTooShort || audienceTooShort;
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setTouched(true);
-    if (ideaTooShort) return;
+    if (invalid) return;
 
     setSubmitting(true);
     try {
@@ -90,7 +103,10 @@ export function NewRunForm() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          idea: idea.trim(),
+          productName: productName.trim(),
+          description: description.trim(),
+          targetAudience: targetAudience.trim(),
+          objective: objective.trim() ? objective.trim() : undefined,
           context: context.trim() ? context.trim() : undefined,
           tier,
           grounding,
@@ -114,40 +130,100 @@ export function NewRunForm() {
 
   return (
     <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-8">
-      {/* Idea */}
+      {/* Product name */}
+      <div className="flex flex-col gap-2">
+        <Label htmlFor="product-name" className="font-mono text-xs tracking-eyebrow uppercase">
+          Product
+        </Label>
+        <Input
+          id="product-name"
+          value={productName}
+          onChange={(e) => setProductName(e.target.value)}
+          onBlur={() => productName.length > 0 && setTouched(true)}
+          placeholder="Sprout"
+          className="bg-card text-base"
+          aria-invalid={touched && nameMissing ? true : undefined}
+        />
+        {touched && nameMissing && (
+          <p className="text-sm text-destructive">Name the product.</p>
+        )}
+      </div>
+
+      {/* Description */}
       <div className="flex flex-col gap-2">
         <div className="flex items-baseline justify-between">
-          <Label htmlFor="idea" className="font-mono text-xs tracking-eyebrow uppercase">
-            The idea
+          <Label htmlFor="description" className="font-mono text-xs tracking-eyebrow uppercase">
+            What it is
           </Label>
           <span
             className={cn(
               "font-mono text-2xs tabular-nums",
-              touched && ideaTooShort ? "text-destructive" : "text-muted-foreground",
+              touched && descriptionTooShort ? "text-destructive" : "text-muted-foreground",
             )}
           >
-            {ideaLength < MIN_IDEA_LENGTH ? `${ideaLength}/${MIN_IDEA_LENGTH} min` : `${ideaLength}`}
+            {descriptionLength < MIN_DESCRIPTION_LENGTH
+              ? `${descriptionLength}/${MIN_DESCRIPTION_LENGTH} min`
+              : `${descriptionLength}`}
           </span>
         </div>
         <Textarea
-          id="idea"
-          value={idea}
-          onChange={(e) => setIdea(e.target.value)}
-          onBlur={() => idea.length > 0 && setTouched(true)}
-          placeholder={IDEA_PLACEHOLDER}
-          className="min-h-36 resize-y bg-card text-base leading-relaxed"
-          aria-invalid={touched && ideaTooShort ? true : undefined}
+          id="description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          onBlur={() => description.length > 0 && setTouched(true)}
+          placeholder={DESCRIPTION_PLACEHOLDER}
+          className="min-h-28 resize-y bg-card text-base leading-relaxed"
+          aria-invalid={touched && descriptionTooShort ? true : undefined}
         />
-        {touched && ideaTooShort ? (
+        {touched && descriptionTooShort ? (
           <p className="text-sm text-destructive">
-            Describe the idea in at least {MIN_IDEA_LENGTH} characters so the swarm has something
-            to react to.
+            Describe the product in at least {MIN_DESCRIPTION_LENGTH} characters so the study has
+            something to test.
           </p>
         ) : (
           <p className="text-sm text-muted-foreground">
-            A product, a policy, a price change, a campaign — state it the way you&apos;d pitch it.
+            State it the way you&apos;d pitch it — the strategies are built from this.
           </p>
         )}
+      </div>
+
+      {/* Target audience */}
+      <div className="flex flex-col gap-2">
+        <Label htmlFor="target-audience" className="font-mono text-xs tracking-eyebrow uppercase">
+          Target audience
+        </Label>
+        <Textarea
+          id="target-audience"
+          value={targetAudience}
+          onChange={(e) => setTargetAudience(e.target.value)}
+          onBlur={() => targetAudience.length > 0 && setTouched(true)}
+          placeholder={AUDIENCE_PLACEHOLDER}
+          className="min-h-20 resize-y bg-card"
+          aria-invalid={touched && audienceTooShort ? true : undefined}
+        />
+        {touched && audienceTooShort ? (
+          <p className="text-sm text-destructive">
+            Describe who this is for — cohorts and the synthetic audience are cast from it.
+          </p>
+        ) : (
+          <p className="text-sm text-muted-foreground">
+            Who you&apos;re trying to reach. The audience cohorts are designed from this.
+          </p>
+        )}
+      </div>
+
+      {/* Objective */}
+      <div className="flex flex-col gap-2">
+        <Label htmlFor="objective" className="font-mono text-xs tracking-eyebrow uppercase">
+          What you&apos;re looking for <span className="text-muted-foreground/60">(optional)</span>
+        </Label>
+        <Textarea
+          id="objective"
+          value={objective}
+          onChange={(e) => setObjective(e.target.value)}
+          placeholder={OBJECTIVE_PLACEHOLDER}
+          className="min-h-20 resize-y bg-card"
+        />
       </div>
 
       {/* Optional context */}

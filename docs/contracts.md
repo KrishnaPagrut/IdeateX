@@ -59,8 +59,11 @@ export function cancelRun(runId: string): boolean; // true if the run was live i
 
 ## API contract (workstream B provides)
 
-- `POST /api/runs` body `{idea: string, context?: string, tier: RunTier, grounding: boolean}`
-  → `201 {runId}`. Creates the row, calls `startRun(runId)`, returns immediately.
+- `POST /api/runs` body `{productName: string, description: string,
+  targetAudience: string, objective?: string, context?: string, tier: RunTier,
+  grounding: boolean, discussion?: boolean, personaBudget?: number|null}`
+  → `201 {runId}`. `description` is stored as `runs.idea`. Creates the row,
+  calls `startRun(runId)`, returns immediately.
 - `GET /api/runs` → `{runs: Run[]}` newest first.
 - `GET /api/runs/[runId]` → `{run, agents: AgentRun[], personas: Record<personaId, PersonaLite>}`
   — full snapshot for initial page load / completed runs.

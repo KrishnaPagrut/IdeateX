@@ -27,6 +27,7 @@ import {
 export interface RunRow {
   id: string;
   idea: string;
+  productName: string | null;
   tier: RunTier;
   status: RunStatus;
   verdict: SynthesisVerdict | null;
@@ -42,7 +43,7 @@ export function RunsTable({ rows }: { rows: RunRow[] }) {
       <Table>
         <TableHeader>
           <TableRow className="hover:bg-transparent">
-            <TableHead>Idea</TableHead>
+            <TableHead>Product</TableHead>
             <TableHead className="w-24">Tier</TableHead>
             <TableHead className="w-32">Status</TableHead>
             <TableHead className="w-36">Verdict</TableHead>
@@ -59,7 +60,14 @@ export function RunsTable({ rows }: { rows: RunRow[] }) {
             >
               <TableCell className="max-w-0 sm:max-w-md">
                 <span className="block truncate font-medium" title={run.idea}>
-                  {run.idea}
+                  {run.productName ? (
+                    <>
+                      {run.productName}
+                      <span className="text-muted-foreground font-normal"> — {run.idea}</span>
+                    </>
+                  ) : (
+                    run.idea
+                  )}
                 </span>
               </TableCell>
               <TableCell>

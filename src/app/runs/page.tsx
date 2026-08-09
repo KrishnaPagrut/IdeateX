@@ -16,6 +16,7 @@ export default async function RunsPage() {
   const tableRows: RunRow[] = rows.map((run) => ({
     id: run.id,
     idea: run.idea,
+    productName: run.productName,
     tier: run.tier,
     status: run.status,
     verdict: verdictFromSynthesis(run.synthesis),
