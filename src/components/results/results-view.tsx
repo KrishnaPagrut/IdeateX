@@ -41,16 +41,25 @@ function Findings({ report }: { report: MarketingReport }) {
   return (
     <div className="rounded-xl border bg-card p-5">
       <h4 className="text-sm font-medium">Key findings</h4>
-      <ol className="mt-3 grid gap-x-8 gap-y-3 lg:grid-cols-2">
+      {/* min-w-0 on grid children is required: flex items default to
+          min-width:auto, so long sourceRef badges otherwise spill into the
+          neighboring column and paint on top of it. */}
+      <ol className="mt-3 grid gap-x-8 gap-y-5 lg:grid-cols-2">
         {report.keyFindings.map((f, i) => (
-          <li key={f.title} className="flex gap-3">
-            <span className="mt-0.5 font-mono text-2xs font-semibold text-muted-foreground">
+          <li key={f.title} className="flex min-w-0 gap-3">
+            <span className="mt-0.5 shrink-0 font-mono text-2xs font-semibold text-muted-foreground">
               {String(i + 1).padStart(2, "0")}
             </span>
-            <div>
-              <p className="text-xs font-medium">{f.title}</p>
-              <p className="mt-0.5 text-2xs leading-relaxed text-muted-foreground">{f.detail}</p>
-              <Badge variant="outline" className="mt-1.5 text-3xs font-normal">
+            <div className="min-w-0 flex-1 overflow-hidden">
+              <p className="text-xs font-medium wrap-break-word">{f.title}</p>
+              <p className="mt-0.5 text-2xs leading-relaxed wrap-break-word text-muted-foreground">
+                {f.detail}
+              </p>
+              <Badge
+                variant="outline"
+                title={f.sourceRef}
+                className="mt-1.5 max-w-full truncate text-3xs font-normal"
+              >
                 {f.sourceRef}
               </Badge>
             </div>
@@ -69,11 +78,11 @@ function NextMoves({ report }: { report: MarketingReport }) {
       </p>
       <ol className="mt-2 space-y-2">
         {report.nextSteps.map((step, i) => (
-          <li key={step} className="flex items-start gap-2 text-xs leading-relaxed">
-            <span className="mt-0.5 font-mono text-3xs font-semibold text-muted-foreground">
+          <li key={step} className="flex min-w-0 items-start gap-2 text-xs leading-relaxed">
+            <span className="mt-0.5 shrink-0 font-mono text-3xs font-semibold text-muted-foreground">
               {String(i + 1).padStart(2, "0")}
             </span>
-            <span className="flex-1">{step}</span>
+            <span className="min-w-0 flex-1 wrap-break-word">{step}</span>
             <ArrowRight className="mt-0.5 size-3 shrink-0 text-muted-foreground/50" />
           </li>
         ))}

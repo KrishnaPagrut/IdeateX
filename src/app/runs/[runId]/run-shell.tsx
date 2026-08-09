@@ -389,7 +389,7 @@ export function RunShell({ runId }: { runId: string }) {
               <RacePanel race={stream.race} />
             </div>
           )}
-          <div className="relative h-[max(540px,calc(100dvh-24rem))] border-y">
+          <div className="relative h-[max(620px,calc(100dvh-22rem))] border-y">
             <AgentGraph
               agents={agents}
               personas={personas}

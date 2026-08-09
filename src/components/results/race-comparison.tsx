@@ -116,29 +116,30 @@ export function RaceComparison({
             <div
               key={s.id}
               className={cn(
-                "rounded-xl border bg-card p-4",
+                "min-w-0 overflow-hidden rounded-xl border bg-card p-4",
                 s.id === winnerId && "border-primary/40",
               )}
             >
-              <p className="text-xs font-medium">{s.name}</p>
-              <p className="mt-1 text-2xs leading-relaxed text-muted-foreground">
+              <p className="text-xs font-medium wrap-break-word">{s.name}</p>
+              <p className="mt-1 text-2xs leading-relaxed wrap-break-word text-muted-foreground">
                 {s.positioningThesis}
               </p>
               <p className="mt-2 font-mono text-3xs tracking-eyebrow text-muted-foreground uppercase">
                 Narratives that formed
               </p>
               {r.narratives.length > 0 ? (
-                <ul className="mt-1.5 space-y-1">
+                <ul className="mt-1.5 space-y-1.5">
                   {r.narratives.map((n) => (
-                    <li key={n.id} className="flex items-baseline justify-between gap-2 text-2xs">
+                    <li key={n.id} className="flex min-w-0 items-baseline justify-between gap-2 text-2xs">
                       <span
                         className={cn(
+                          "min-w-0 wrap-break-word",
                           n.sentiment >= 0 ? "text-foreground/85" : "text-destructive",
                         )}
                       >
                         {n.label}
                       </span>
-                      <span className="font-mono text-3xs tabular-nums text-muted-foreground">
+                      <span className="shrink-0 font-mono text-3xs tabular-nums text-muted-foreground">
                         ×{n.momentum.toFixed(1)}
                       </span>
                     </li>

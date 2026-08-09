@@ -122,14 +122,22 @@ export function CampaignPackage({ report }: { report: MarketingReport }) {
           </p>
           <ul className="mt-3 space-y-3">
             {objectionLedger.map((o) => (
-              <li key={o.objection} className="grid gap-1.5 lg:grid-cols-[1fr_1.4fr] lg:gap-6">
-                <div>
-                  <p className="text-xs leading-snug font-medium">“{o.objection}”</p>
-                  <Badge variant="outline" className="mt-1 text-3xs font-normal">
+              <li key={o.objection} className="grid min-w-0 gap-1.5 lg:grid-cols-[1fr_1.4fr] lg:gap-6">
+                <div className="min-w-0 overflow-hidden">
+                  <p className="text-xs leading-snug font-medium wrap-break-word">
+                    “{o.objection}”
+                  </p>
+                  <Badge
+                    variant="outline"
+                    title={o.source}
+                    className="mt-1 max-w-full truncate text-3xs font-normal"
+                  >
                     {o.source}
                   </Badge>
                 </div>
-                <p className="text-2xs leading-relaxed text-foreground/85">{o.rebuttal}</p>
+                <p className="min-w-0 text-2xs leading-relaxed wrap-break-word text-foreground/85">
+                  {o.rebuttal}
+                </p>
               </li>
             ))}
           </ul>

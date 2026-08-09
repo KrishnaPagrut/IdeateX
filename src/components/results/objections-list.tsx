@@ -20,14 +20,16 @@ export function ObjectionsList({ aggregates }: { aggregates: RunAggregates }) {
       <ol className="mt-4 space-y-3">
         {items.map((item, rank) => (
           <li key={item.objection}>
-            <div className="flex items-baseline justify-between gap-3">
-              <span className="text-xs leading-snug text-foreground/90">
+            <div className="flex min-w-0 items-baseline justify-between gap-3">
+              <span className="min-w-0 text-xs leading-snug wrap-break-word text-foreground/90">
                 <span className="mr-1.5 font-mono text-3xs text-muted-foreground">
                   {String(rank + 1).padStart(2, "0")}
                 </span>
                 {item.objection}
               </span>
-              <span className="font-mono text-xs font-semibold tabular-nums">{item.count}</span>
+              <span className="shrink-0 font-mono text-xs font-semibold tabular-nums">
+                {item.count}
+              </span>
             </div>
             <div className="mt-1 h-1.5 overflow-hidden rounded-full bg-primary/15">
               <div

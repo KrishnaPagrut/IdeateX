@@ -128,7 +128,7 @@ function ExchangeCard({
       </p>
 
       {(out.changedMind || out.agreesWith.length > 0 || out.disagreesWith.length > 0) && (
-        <div className="mt-3 flex flex-wrap items-center gap-1">
+        <div className="mt-3 flex min-w-0 flex-wrap items-center gap-1.5">
           {out.changedMind && (
             <span className="rounded-full bg-primary/10 px-2 py-0.5 font-mono text-3xs font-semibold tracking-eyebrow text-primary uppercase">
               Changed mind
@@ -137,19 +137,21 @@ function ExchangeCard({
           {out.agreesWith.map((n) => (
             <span
               key={`a-${n}`}
-              className="rounded-full border border-primary/25 bg-primary/5 px-2 py-0.5 text-3xs text-foreground/85"
+              className="inline-flex max-w-full items-center gap-1 truncate rounded-full border border-primary/25 bg-primary/5 px-2 py-0.5 text-3xs text-foreground/85"
               title={`Sided with ${n}`}
             >
-              <span className="font-mono text-3xs text-primary">with</span> {n}
+              <span className="shrink-0 font-mono text-3xs text-primary">with</span>
+              <span className="truncate">{n}</span>
             </span>
           ))}
           {out.disagreesWith.map((n) => (
             <span
               key={`d-${n}`}
-              className="rounded-full border border-destructive/25 bg-destructive/5 px-2 py-0.5 text-3xs text-foreground/85"
+              className="inline-flex max-w-full items-center gap-1 truncate rounded-full border border-destructive/25 bg-destructive/5 px-2 py-0.5 text-3xs text-foreground/85"
               title={`Pushed back on ${n}`}
             >
-              <span className="font-mono text-3xs text-destructive">against</span> {n}
+              <span className="shrink-0 font-mono text-3xs text-destructive">against</span>
+              <span className="truncate">{n}</span>
             </span>
           ))}
         </div>
@@ -230,24 +232,27 @@ export function FocusGroup({
         </div>
 
         {segments.size > 1 && (
-          <div className="mt-4 flex flex-wrap gap-1.5 border-t pt-4">
+          <ul className="mt-4 flex list-none flex-col gap-2 border-t pt-4 sm:flex-row sm:flex-wrap">
             {[...segments.entries()].map(([seg, list]) => {
               const b = round1(mean(list.map((r) => r.original)));
               const a = round1(mean(list.map((r) => r.out.updatedAdoptionLikelihood)));
               return (
-                <span
+                <li
                   key={seg}
-                  className="flex items-center gap-1.5 rounded-full border px-2.5 py-1 font-mono text-3xs tabular-nums"
+                  className="flex min-w-0 max-w-full items-center gap-1.5 rounded-full border px-2.5 py-1 font-mono text-3xs tabular-nums"
+                  title={seg}
                 >
-                  <span className="max-w-40 truncate tracking-wider uppercase">{seg}</span>
-                  <span className="text-muted-foreground">{b}</span>
-                  <ArrowRight className="size-2.5 text-muted-foreground/60" />
-                  <span className="font-semibold">{a}</span>
+                  <span className="min-w-0 flex-1 truncate tracking-wider uppercase sm:max-w-56">
+                    {seg}
+                  </span>
+                  <span className="shrink-0 text-muted-foreground">{b}</span>
+                  <ArrowRight className="size-2.5 shrink-0 text-muted-foreground/60" />
+                  <span className="shrink-0 font-semibold">{a}</span>
                   {round1(a - b) !== 0 && <DeltaTag value={round1(a - b)} />}
-                </span>
+                </li>
               );
             })}
-          </div>
+          </ul>
         )}
       </div>
 

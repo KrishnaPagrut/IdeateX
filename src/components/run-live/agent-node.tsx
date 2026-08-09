@@ -17,6 +17,7 @@ import {
 
 import { cn } from "@/lib/utils";
 import type { AgentKind, AgentStatus } from "@/lib/db/schema";
+import { dimsForKind, HUB_H, HUB_W, isChipKind } from "./graph-layout";
 import type { AgentLite, PersonaLite } from "./types";
 import { PersonaAvatar } from "./persona-avatar";
 
@@ -84,11 +85,28 @@ function StatusDot({ status }: { status: AgentStatus }) {
   );
 }
 
+function chipTitle(agent: AgentLite, persona: PersonaLite | null): string {
+  if (persona?.name) return persona.name;
+  // Discussion labels look like "Priya Nair · reply" — keep the name only.
+  if (agent.kind === "discussion") {
+    const cut = agent.label.split("·")[0]?.trim();
+    return cut || agent.label;
+  }
+  return agent.label;
+}
+
+function chipSubtitle(agent: AgentLite, persona: PersonaLite | null, failed: boolean): string {
+  if (failed) return "failed";
+  if (agent.kind === "discussion") return "reply";
+  return persona?.archetype ?? KIND_EYEBROW[agent.kind];
+}
+
 export const AgentNode = memo(function AgentNode({ data, selected }: NodeProps<AgentNodeType>) {
   const { agent, persona } = data;
-  const isPersona = agent.kind === "persona";
   const running = agent.status === "running";
   const failed = agent.status === "failed";
+  const chip = isChipKind(agent.kind);
+  const { width, height } = dimsForKind(agent.kind);
 
   const handles = (
     <>
@@ -97,26 +115,31 @@ export const AgentNode = memo(function AgentNode({ data, selected }: NodeProps<A
     </>
   );
 
-  if (isPersona) {
+  if (chip) {
     return (
       <div
+        style={{ width, height }}
         className={cn(
-          "rise-in relative flex h-9 w-[132px] cursor-pointer items-center gap-1.5 rounded-md border bg-card px-1.5 transition-colors",
+          "rise-in relative flex cursor-pointer items-center gap-1.5 overflow-hidden rounded-md border bg-card px-1.5 transition-colors",
           statusClasses(agent.status),
           selected && "ring-2 ring-ring/60",
         )}
       >
         {persona ? (
           <PersonaAvatar seed={persona.avatarSeed} size={20} />
+        ) : agent.kind === "discussion" ? (
+          <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-secondary text-secondary-foreground">
+            <MessagesSquare className="size-3" strokeWidth={1.75} />
+          </span>
         ) : (
           <span className="size-5 shrink-0 rounded-full bg-muted" />
         )}
-        <span className="min-w-0 flex-1">
+        <span className="min-w-0 flex-1 overflow-hidden">
           <span className="block truncate text-3xs leading-tight font-medium text-card-foreground">
-            {persona?.name ?? agent.label}
+            {chipTitle(agent, persona)}
           </span>
           <span className="block truncate font-mono text-[8px] leading-tight tracking-wide text-muted-foreground uppercase">
-            {failed ? "failed" : (persona?.archetype ?? KIND_EYEBROW[agent.kind])}
+            {chipSubtitle(agent, persona, failed)}
           </span>
         </span>
         {failed ? (
@@ -133,8 +156,9 @@ export const AgentNode = memo(function AgentNode({ data, selected }: NodeProps<A
 
   return (
     <div
+      style={{ width: HUB_W, height: HUB_H }}
       className={cn(
-        "rise-in relative flex h-12 w-[176px] cursor-pointer items-center gap-2.5 rounded-md border bg-card px-3 transition-colors",
+        "rise-in relative flex cursor-pointer items-center gap-2.5 overflow-hidden rounded-md border bg-card px-3 transition-colors",
         statusClasses(agent.status),
         selected && "ring-2 ring-ring/60",
       )}
@@ -148,7 +172,7 @@ export const AgentNode = memo(function AgentNode({ data, selected }: NodeProps<A
       >
         <Icon className="size-4" strokeWidth={1.75} />
       </span>
-      <span className="min-w-0 flex-1">
+      <span className="min-w-0 flex-1 overflow-hidden">
         <span className="block truncate font-mono text-[8px] tracking-eyebrow text-muted-foreground uppercase">
           {KIND_EYEBROW[agent.kind]}
         </span>

@@ -47,7 +47,7 @@ export function ReportSection({
           {title}
         </h3>
         {sub && (
-          <p className="font-mono text-3xs tracking-eyebrow text-muted-foreground uppercase">
+          <p className="min-w-0 font-mono text-3xs tracking-eyebrow text-muted-foreground uppercase wrap-break-word">
             {sub}
           </p>
         )}

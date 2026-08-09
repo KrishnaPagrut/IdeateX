@@ -88,7 +88,10 @@ export function RacePanel({
       </p>
       <div className="grid gap-4 md:grid-cols-3">
         {columns.map((s) => (
-          <div key={s.strategyId} className="flex flex-col gap-3 rounded-lg border bg-card p-4">
+          <div
+            key={s.strategyId}
+            className="flex min-w-0 flex-col gap-3 overflow-hidden rounded-lg border bg-card p-4"
+          >
             <div className="flex items-baseline justify-between gap-2">
               <span className="min-w-0 truncate text-sm font-medium" title={s.strategyName}>
                 {s.strategyName}
@@ -98,14 +101,14 @@ export function RacePanel({
               </span>
             </div>
 
-            <div className="flex flex-col gap-1.5">
+            <div className="flex min-w-0 flex-col gap-1.5">
               <span className="font-mono text-3xs tabular-nums text-muted-foreground">
                 reached {s.reachedCount}/{s.personaCount}
               </span>
               <DotGrid total={s.personaCount} lit={s.activatedPersonaIds.length} />
             </div>
 
-            <div className="flex flex-col gap-1.5">
+            <div className="flex min-w-0 flex-col gap-1.5">
               {SCORE_ROWS.map((row) => (
                 <ScoreBar
                   key={row.key}
@@ -117,22 +120,23 @@ export function RacePanel({
             </div>
 
             {s.topNarratives.length > 0 && (
-              <div className="flex flex-wrap gap-1.5">
+              <ul className="flex min-w-0 list-none flex-col gap-1.5 border-t pt-3">
                 {s.topNarratives.map((n) => (
-                  <span
-                    key={n.id}
-                    className={cn(
-                      "rounded-full border px-2 py-0.5 font-mono text-3xs",
-                      n.sentiment >= 0
-                        ? "border-primary/40 text-primary"
-                        : "border-destructive/40 text-destructive",
-                    )}
-                    title={`momentum ${n.momentum.toFixed(1)}`}
-                  >
-                    {n.label}
-                  </span>
+                  <li key={n.id} className="min-w-0">
+                    <span
+                      className={cn(
+                        "inline-flex max-w-full items-center rounded-full border px-2 py-0.5 font-mono text-3xs",
+                        n.sentiment >= 0
+                          ? "border-primary/40 text-primary"
+                          : "border-destructive/40 text-destructive",
+                      )}
+                      title={`${n.label} · momentum ${n.momentum.toFixed(1)}`}
+                    >
+                      <span className="truncate">{n.label}</span>
+                    </span>
+                  </li>
                 ))}
-              </div>
+              </ul>
             )}
           </div>
         ))}
