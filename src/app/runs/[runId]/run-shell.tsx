@@ -112,6 +112,24 @@ export function RunShell({ runId }: { runId: string }) {
   const [cancelling, setCancelling] = React.useState(false);
   const [selectedId, setSelectedId] = React.useState<string | null>(null);
 
+  // Results-first tab flow. `tab` holds the user's explicit choice — null
+  // until they click a tab, so null doubles as "the user hasn't taken over".
+  // Until then the shell decides: a run opened while already completed lands
+  // on Results, an active run lands on Swarm and flips to Results when it
+  // completes live. The landing decision comes from the SNAPSHOT status,
+  // never the SSE stream — the stream replays historical statuses on connect,
+  // so a completed run briefly "looks" active on it.
+  const [tab, setTab] = React.useState<"swarm" | "results" | null>(null);
+  const [landing, setLanding] = React.useState<"completed" | "active" | null>(null);
+  const [autoSwitched, setAutoSwitched] = React.useState(false);
+
+  React.useEffect(() => {
+    if (!snapshot) return;
+    // One-time sync from the first snapshot (an external system) into state.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setLanding((prev) => prev ?? (snapshot.run.status === "completed" ? "completed" : "active"));
+  }, [snapshot]);
+
   const agents = React.useMemo(
     () => mergeAgents(snapshot?.agents ?? [], stream.agents, runId),
     [snapshot?.agents, stream.agents, runId],
@@ -129,6 +147,18 @@ export function RunShell({ runId }: { runId: string }) {
   const status: RunStatus = stream.status ?? snapshot?.run.status ?? "pending";
   const terminal = isTerminalStatus(status);
   const active = isActiveStatus(status);
+
+  // A watched run just completed: surface the report (subtly — a toast, and
+  // the tab only moves if the user hasn't taken over the tabs themselves).
+  React.useEffect(() => {
+    if (landing !== "active" || status !== "completed" || autoSwitched) return;
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setAutoSwitched(true);
+    toast.success("Report ready");
+  }, [landing, status, autoSwitched]);
+
+  const resolvedTab: "swarm" | "results" =
+    tab ?? (landing === "completed" || autoSwitched ? "results" : "swarm");
 
   // Once the run settles, pull the final snapshot (synthesis, costs, timings).
   const wasActiveRef = React.useRef(false);
@@ -308,7 +338,11 @@ export function RunShell({ runId }: { runId: string }) {
       </header>
 
       {/* Tabs */}
-      <Tabs defaultValue="swarm" className="mt-8">
+      <Tabs
+        value={resolvedTab}
+        onValueChange={(value) => setTab(value === "results" ? "results" : "swarm")}
+        className="mt-8"
+      >
         <TabsList variant="line">
           <TabsTrigger value="swarm">Swarm</TabsTrigger>
           <TabsTrigger value="results">Results</TabsTrigger>

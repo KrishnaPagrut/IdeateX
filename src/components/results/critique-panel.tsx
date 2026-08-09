@@ -136,19 +136,13 @@ export function CritiquePanel({
 
   if (critiques.length === 0) return null;
 
+  // Section chrome (title, counts) is owned by ResultsView's ReportSection so
+  // the adversarial review reads as a first-class chapter, not an appendix.
   return (
-    <section>
-      <header className="mb-3">
-        <h3 className="text-sm font-medium">Adversarial review</h3>
-        <p className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase">
-          2 critics red-teamed this study before synthesis
-        </p>
-      </header>
-      <div className="grid gap-3 lg:grid-cols-2">
-        {critiques.map((c) => (
-          <CritiqueCard key={c.stance} critique={c} synthesisConfidence={synthesisConfidence} />
-        ))}
-      </div>
-    </section>
+    <div className="grid gap-3 lg:grid-cols-2">
+      {critiques.map((c) => (
+        <CritiqueCard key={c.stance} critique={c} synthesisConfidence={synthesisConfidence} />
+      ))}
+    </div>
   );
 }

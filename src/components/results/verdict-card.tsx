@@ -39,16 +39,17 @@ function VerdictStamp({ verdict }: { verdict: Synthesis["verdict"] }) {
 }
 
 function ScoreBar({ label, value }: { label: string; value: number }) {
+  const rounded = Math.round(value);
   return (
     <div>
       <div className="flex items-baseline justify-between">
         <span className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase">
           {label}
         </span>
-        <span className="font-mono text-sm font-semibold tabular-nums">{value}</span>
+        <span className="font-mono text-sm font-semibold tabular-nums">{rounded}</span>
       </div>
       <div className="mt-1.5 h-2 overflow-hidden rounded-full bg-primary/15">
-        <div className="h-full rounded-full bg-primary" style={{ width: `${value}%` }} />
+        <div className="h-full rounded-full bg-primary" style={{ width: `${rounded}%` }} />
       </div>
     </div>
   );
@@ -74,12 +75,8 @@ export function VerdictCard({
     <section className="rounded-xl border bg-card p-6 sm:p-8">
       <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
         <div className="max-w-2xl">
-          <p className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase">
-            Synthesis verdict
-          </p>
-          <div className="mt-3">
-            <VerdictStamp verdict={synthesis.verdict} />
-          </div>
+          {/* The section header above supplies the eyebrow; the stamp leads. */}
+          <VerdictStamp verdict={synthesis.verdict} />
           <p className="mt-5 text-lg leading-snug font-medium text-balance sm:text-xl">
             {synthesis.oneLiner}
           </p>

@@ -41,15 +41,11 @@ export function QuotesWall({
     })
     .sort((a, b) => b.adoption - a.adoption);
 
+  if (entries.length === 0) return null;
+
+  // Section chrome (title, count) is owned by ResultsView's ReportSection.
   return (
-    <section>
-      <header className="mb-3">
-        <h3 className="text-sm font-medium">In their own words</h3>
-        <p className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase">
-          {entries.length} verbatim reactions · sorted by adoption
-        </p>
-      </header>
-      <div className="columns-1 gap-3 sm:columns-2 xl:columns-3 [&>*]:mb-3 [&>*]:break-inside-avoid">
+    <div className="columns-1 gap-3 sm:columns-2 xl:columns-3 [&>*]:mb-3 [&>*]:break-inside-avoid">
         {entries.map((e) => {
           const inner = (
             <>
@@ -95,7 +91,6 @@ export function QuotesWall({
             </figure>
           );
         })}
-      </div>
-    </section>
+    </div>
   );
 }
