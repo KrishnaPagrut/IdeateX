@@ -14,7 +14,10 @@ import * as schema from "./schema";
 
 type Database = ReturnType<typeof drizzlePostgres<typeof schema>>;
 
-const globalDb = globalThis as unknown as { __ideatexDb?: Database };
+// The PROMISE is cached (not the resolved value) so concurrent module
+// evaluations — e.g. two route bundles compiling at once in dev — share one
+// createDb() call instead of racing to open the same PGlite directory.
+const globalDb = globalThis as unknown as { __ideatexDb?: Promise<Database> };
 
 async function createDb(): Promise<Database> {
   const connectionString = process.env.DATABASE_URL;
@@ -30,6 +33,32 @@ async function createDb(): Promise<Database> {
   return db as unknown as Database;
 }
 
-export const db = (globalDb.__ideatexDb ??= await createDb());
+function getDb(): Promise<Database> {
+  const cached = globalDb.__ideatexDb;
+  if (cached) return cached;
+  // Clear the cache on failure so the next import retries instead of caching
+  // a rejected promise forever (e.g. a transient PGlite dir collision while a
+  // Next.js dev/build worker process briefly held the directory).
+  const promise = createDb().catch((error: unknown) => {
+    globalDb.__ideatexDb = undefined;
+    throw error;
+  });
+  globalDb.__ideatexDb = promise;
+  return promise;
+}
+
+// Next.js imports route modules in short-lived helper processes that must
+// never open PGlite alongside the real server (same ./.pglite directory):
+//  - `next build` page-data collection (NEXT_PHASE=phase-production-build)
+//  - `next dev` static-paths workers (jest-worker sets JEST_WORKER_ID)
+// Those helpers only inspect module exports and never run a query, so they
+// get an inert placeholder; the real server (and scripts/tests) get the db.
+const isNextHelperProcess =
+  process.env.NEXT_PHASE === "phase-production-build" ||
+  process.env.JEST_WORKER_ID !== undefined;
+
+export const db = isNextHelperProcess
+  ? (undefined as unknown as Database)
+  : await getDb();
 
 export * from "./schema";
