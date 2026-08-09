@@ -11,6 +11,8 @@ export interface GenerateArgs<T> {
   system: string;
   prompt: string;
   effort?: ReasoningEffort;
+  /** Sampling temperature — raise for generation diversity (e.g. persona seeding). */
+  temperature?: number;
   /** xAI server-side tools (web_search / x_search). Responses API only. */
   tools?: Parameters<typeof generateText>[0]["tools"];
   abortSignal?: AbortSignal;
@@ -48,6 +50,7 @@ export async function generate<T>(args: GenerateArgs<T>): Promise<GenerateResult
     prompt: args.prompt,
     output: Output.object({ schema: args.schema }),
     tools: args.tools,
+    temperature: args.temperature,
     providerOptions,
     abortSignal: args.abortSignal,
     maxRetries: 0,

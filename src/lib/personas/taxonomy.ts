@@ -226,6 +226,108 @@ export const TAXONOMY: Domain[] = [
         description: "EU/UK buyers; privacy-regulation literate, quality-over-novelty, wary of US-style subscriptions.",
         seedHints: "Germany, France, UK, Nordics, Spain, Poland — mix of urban and provincial, all ages",
       },
+      {
+        key: "east-asian-consumers",
+        name: "East Asian consumers",
+        description: "Japan, Korea, Taiwan, urban China; super-app natives, quality- and service-standard demanding.",
+        seedHints: "Tokyo salarymen, Seoul students, Taipei families, Shanghai professionals, rural-to-urban migrants",
+      },
+      {
+        key: "middle-east-africa",
+        name: "Middle East & Africa",
+        description: "Gulf, Levant, and African consumers; young populations, remittance economies, mobile-money fluent.",
+        seedHints: "Dubai expats, Cairo families, Nairobi entrepreneurs, Lagos traders, Johannesburg professionals",
+      },
+    ],
+  },
+  {
+    key: "finance",
+    name: "Financial lives",
+    subdomains: [
+      {
+        key: "underbanked",
+        name: "Underbanked & cash-first",
+        description: "Thin credit files, cash and prepaid rails; fee-burned and institution-wary.",
+        seedHints: "check-cashing users, recent immigrants, cash-tip workers, credit-invisible young adults",
+      },
+      {
+        key: "debt-managers",
+        name: "Debt managers",
+        description: "Juggling student loans, cards, medical debt; payoff-strategy minded, offer-skeptical.",
+        seedHints: "student-loan carriers, BNPL users, medical-debt households, consolidation seekers",
+      },
+      {
+        key: "retail-investors",
+        name: "Savers & retail investors",
+        description: "Actively growing money; from index-fund savers to options gamblers, research-heavy.",
+        seedHints: "401k maximizers, FIRE followers, dividend savers, crypto dabblers, first-home savers",
+      },
+    ],
+  },
+  {
+    key: "life-context",
+    name: "Life contexts",
+    subdomains: [
+      {
+        key: "caregivers",
+        name: "Caregivers",
+        description: "Caring for children, elders, or both; time- and attention-starved, reliability-first buyers.",
+        seedHints: "sandwich-generation adults, single parents, special-needs parents, adult children of aging parents",
+      },
+      {
+        key: "accessibility-community",
+        name: "Disability & accessibility community",
+        description: "Disabled users and advocates; accessibility is adoption's gate, workarounds are daily life.",
+        seedHints: "screen-reader users, wheelchair users, chronic-illness patients, Deaf/HoH, neurodivergent adults",
+      },
+      {
+        key: "new-arrivals",
+        name: "Immigrants & new arrivals",
+        description: "Building life in a new country; bilingual, remittance-sending, credential-rebuilding.",
+        seedHints: "recent immigrants, international students staying on, refugees, returning expats",
+      },
+      {
+        key: "military-veterans",
+        name: "Military & veterans",
+        description: "Service members, vets, and families; relocation-shaped lives, benefits-literate, loyalty-strong.",
+        seedHints: "active-duty spouses, recent vets in transition, career NCOs, reservists with day jobs",
+      },
+    ],
+  },
+  {
+    key: "communities",
+    name: "Communities & passions",
+    subdomains: [
+      {
+        key: "gamers",
+        name: "Gamers",
+        description: "Console, PC, and mobile players; free-to-play literate, monetization-cynical, community-driven.",
+        seedHints: "competitive PC gamers, casual mobile players, parents who game, retro collectors, streamers' viewers",
+      },
+      {
+        key: "outdoor-enthusiasts",
+        name: "Outdoor enthusiasts",
+        description: "Hikers, anglers, climbers; gear-research obsessive, durability-first, brand-tribal.",
+        seedHints: "weekend hikers, hunters, trail runners, van-lifers, national-park regulars",
+      },
+      {
+        key: "diy-homeowners",
+        name: "DIY & homeowners",
+        description: "Fix-it-themselves home people; project-driven spending, YouTube-taught, tool-proud.",
+        seedHints: "first-time homeowners, garage tinkerers, gardeners, home-renovation couples, landlords",
+      },
+      {
+        key: "pet-parents",
+        name: "Pet parents",
+        description: "Pets as family; premium-willing on health, subscription-open, vet-bill scarred.",
+        seedHints: "dog and cat households, multi-pet homes, exotic-pet keepers, rescue volunteers, rural working-dog owners",
+      },
+      {
+        key: "sustainability-minded",
+        name: "Sustainability-minded",
+        description: "Climate and ethics shape purchases; greenwashing detectors, repair-over-replace.",
+        seedHints: "zero-wasters, EV owners, secondhand-first shoppers, climate-anxious younger adults, off-grid aspirants",
+      },
     ],
   },
 ];
