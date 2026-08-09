@@ -6,7 +6,7 @@
  * here rather than asked of the model, for the same reason the CMO's findings
  * come from simulation data: a number a model invented is not evidence.
  */
-import type { BuildAnalysis, EngTask } from "../schemas";
+import type { BuildAnalysis, EngTask } from "./types";
 
 /**
  * Longest-path search over the dependency DAG, weighted by estimate.

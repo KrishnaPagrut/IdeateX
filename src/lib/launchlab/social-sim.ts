@@ -16,7 +16,7 @@
  * Everything is emitted as a stream of events so the UI can animate the run
  * rather than showing a spinner and then a number.
  */
-import { hashSeed, makeRng, type Rng } from "../ai/rng";
+import { hashSeed, makeRng, type Rng } from "./rng";
 import type {
   AudienceCohort,
   CampaignStrategy,
@@ -26,7 +26,7 @@ import type {
   StrategyScores,
   SyntheticAudience,
   SyntheticPersona,
-} from "../schemas";
+} from "./types";
 
 export interface SimPost {
   id: string;

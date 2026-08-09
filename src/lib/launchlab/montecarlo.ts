@@ -12,8 +12,8 @@
  *
  * Seeded, so a given plan replays identically.
  */
-import { makeRng, type Rng } from "../ai/rng";
-import type { EngTask } from "../schemas";
+import { makeRng, type Rng } from "./rng";
+import type { EngTask } from "./types";
 
 export type ScheduleSimulation = {
   runs: number;
