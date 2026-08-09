@@ -43,15 +43,15 @@ function FindingsAndRisks({ synthesis }: { synthesis: Synthesis }) {
         <ol className="mt-3 space-y-3">
           {synthesis.keyFindings.map((f, i) => (
             <li key={f.title} className="flex gap-3">
-              <span className="mt-0.5 font-mono text-[11px] font-semibold text-muted-foreground">
+              <span className="mt-0.5 font-mono text-2xs font-semibold text-muted-foreground">
                 {String(i + 1).padStart(2, "0")}
               </span>
               <div>
                 <p className="text-xs font-medium">{f.title}</p>
-                <p className="mt-0.5 text-[11px] leading-relaxed text-muted-foreground">{f.detail}</p>
+                <p className="mt-0.5 text-2xs leading-relaxed text-muted-foreground">{f.detail}</p>
                 <div className="mt-1.5 flex flex-wrap gap-1">
                   {f.supportingSegments.map((s) => (
-                    <Badge key={s} variant="outline" className="text-[9px]">
+                    <Badge key={s} variant="outline" className="text-3xs">
                       {s}
                     </Badge>
                   ))}
@@ -76,13 +76,13 @@ function FindingsAndRisks({ synthesis }: { synthesis: Synthesis }) {
                         ? "outline"
                         : "secondary"
                   }
-                  className="shrink-0 font-mono text-[9px] tracking-widest uppercase"
+                  className="shrink-0 font-mono text-3xs tracking-eyebrow uppercase"
                 >
                   {r.severity}
                 </Badge>
               </div>
-              <p className="mt-0.5 text-[11px] leading-relaxed text-muted-foreground">
-                <span className="font-mono text-[9px] tracking-widest uppercase">Mitigation · </span>
+              <p className="mt-0.5 text-2xs leading-relaxed text-muted-foreground">
+                <span className="font-mono text-3xs tracking-eyebrow uppercase">Mitigation · </span>
                 {r.mitigation}
               </p>
             </li>
@@ -98,19 +98,19 @@ function NextMoves({ synthesis }: { synthesis: Synthesis }) {
     <div className="rounded-xl border bg-card p-5">
       <div className="grid gap-5 lg:grid-cols-[1fr_1.2fr]">
         <div className="rounded-lg border border-primary/25 bg-secondary/40 p-4">
-          <p className="flex items-center gap-1.5 font-mono text-[10px] tracking-widest text-muted-foreground uppercase">
+          <p className="flex items-center gap-1.5 font-mono text-3xs tracking-eyebrow text-muted-foreground uppercase">
             <Lightbulb className="size-3.5" /> Boldest bet
           </p>
           <p className="mt-2 text-sm leading-relaxed font-medium">{synthesis.boldestBet}</p>
         </div>
         <div>
-          <p className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase">
+          <p className="font-mono text-3xs tracking-eyebrow text-muted-foreground uppercase">
             Next steps
           </p>
           <ol className="mt-2 space-y-2">
             {synthesis.nextSteps.map((step, i) => (
               <li key={step} className="flex items-start gap-2 text-xs leading-relaxed">
-                <span className="mt-0.5 font-mono text-[10px] font-semibold text-muted-foreground">
+                <span className="mt-0.5 font-mono text-3xs font-semibold text-muted-foreground">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <span className="flex-1">{step}</span>

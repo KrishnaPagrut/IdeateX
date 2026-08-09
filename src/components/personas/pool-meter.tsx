@@ -34,7 +34,7 @@ export function PoolMeter({
         />
       ))}
       {overflow > 0 && (
-        <span className="ml-0.5 font-mono text-[10px] leading-none text-primary">
+        <span className="ml-0.5 font-mono text-3xs leading-none text-primary">
           +{overflow}
         </span>
       )}

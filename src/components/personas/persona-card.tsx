@@ -29,7 +29,7 @@ export function PersonaCard({
           <h3 className="truncate text-sm font-semibold tracking-tight text-foreground">
             {persona.name}
           </h3>
-          <p className="mt-0.5 truncate font-mono text-[11px] text-muted-foreground">
+          <p className="mt-0.5 truncate font-mono text-2xs text-muted-foreground">
             {d.age} · {d.occupation} · {d.location}
           </p>
           <Badge variant="outline" className="mt-1.5 max-w-full">
@@ -49,19 +49,19 @@ export function PersonaCard({
           {persona.tags.length > 0 && (
             <div className="flex flex-wrap gap-1">
               {visibleTags.map((t) => (
-                <Badge key={t} variant="secondary" className="max-w-full font-mono text-[10px]">
+                <Badge key={t} variant="secondary" className="max-w-full font-mono text-3xs">
                   <span className="truncate">{t}</span>
                 </Badge>
               ))}
               {moreTags > 0 && (
-                <span className="self-center font-mono text-[10px] text-muted-foreground/80">
+                <span className="self-center font-mono text-3xs text-muted-foreground/80">
                   +{moreTags}
                 </span>
               )}
             </div>
           )}
           {showPool && (
-            <p className="truncate font-mono text-[10px] tracking-wide text-muted-foreground/70">
+            <p className="truncate font-mono text-3xs tracking-wide text-muted-foreground/70">
               {persona.domain}/{persona.subdomain}
             </p>
           )}

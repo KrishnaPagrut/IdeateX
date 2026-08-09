@@ -56,11 +56,11 @@ export function ScoreDistribution({ aggregates }: { aggregates: RunAggregates })
       <header className="flex items-baseline justify-between gap-2">
         <div>
           <h3 className="text-sm font-medium">Adoption distribution</h3>
-          <p className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase">
+          <p className="font-mono text-3xs tracking-eyebrow text-muted-foreground uppercase">
             n = {aggregates.completed} personas · adoption likelihood 0–100
           </p>
         </div>
-        <p className="font-mono text-[10px] tabular-nums text-muted-foreground">
+        <p className="font-mono text-3xs tabular-nums text-muted-foreground">
           median {aggregates.medianAdoption}
         </p>
       </header>
@@ -178,7 +178,7 @@ export function ScoreDistribution({ aggregates }: { aggregates: RunAggregates })
 
         {hover !== null && (
           <div
-            className="pointer-events-none absolute -translate-x-1/2 rounded-md border bg-popover px-2 py-1 font-mono text-[10px] whitespace-nowrap text-popover-foreground shadow-sm"
+            className="pointer-events-none absolute -translate-x-1/2 rounded-md border bg-popover px-2 py-1 font-mono text-3xs whitespace-nowrap text-popover-foreground shadow-sm"
             style={{
               left: `${((PAD_L + hover * slot + slot / 2) / W) * 100}%`,
               top: 0,

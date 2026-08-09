@@ -101,13 +101,13 @@ export function StageProgress({
                 ) : state === "active" ? (
                   <DotmSquare3 size={12} dotSize={1.5} colorPreset="solid-theme" ariaLabel={`${s.label} in progress`} />
                 ) : (
-                  <span className="font-mono text-[9px] leading-none">{i + 1}</span>
+                  <span className="font-mono text-3xs leading-none">{i + 1}</span>
                 )}
               </span>
               <span className="flex min-w-0 flex-col">
                 <span
                   className={cn(
-                    "truncate font-mono text-[10px] tracking-widest uppercase",
+                    "truncate font-mono text-3xs tracking-eyebrow uppercase",
                     state === "pending" ? "text-muted-foreground/60" : "text-foreground",
                     state === "failed" && "text-destructive",
                   )}
@@ -115,7 +115,7 @@ export function StageProgress({
                   {s.label}
                 </span>
                 {total > 0 && (
-                  <span className="font-mono text-[9px] tabular-nums text-muted-foreground">
+                  <span className="font-mono text-3xs tabular-nums text-muted-foreground">
                     {done}/{total}
                     {failedCount > 0 && <span className="text-destructive"> · {failedCount} failed</span>}
                   </span>

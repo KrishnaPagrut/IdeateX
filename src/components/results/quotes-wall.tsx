@@ -49,7 +49,7 @@ export function QuotesWall({
         {entries.map((e) => {
           const inner = (
             <>
-              <blockquote className="text-[13px] leading-relaxed text-foreground/95 italic">
+              <blockquote className="font-serif text-[15px] leading-relaxed text-foreground/95 italic">
                 &ldquo;{e.quote}&rdquo;
               </blockquote>
               <figcaption className="mt-3 flex items-center gap-2 border-t pt-2.5">
@@ -62,12 +62,12 @@ export function QuotesWall({
                   <span className="block truncate text-xs font-medium not-italic">
                     {e.persona?.name ?? "Unknown persona"}
                   </span>
-                  <span className="block truncate font-mono text-[9px] tracking-wider text-muted-foreground uppercase">
+                  <span className="block truncate font-mono text-3xs tracking-wider text-muted-foreground uppercase">
                     {e.persona?.archetype ?? e.segment ?? ""}
                   </span>
                 </span>
                 <span
-                  className="shrink-0 rounded-full bg-primary/10 px-2 py-0.5 font-mono text-[10px] font-semibold tabular-nums"
+                  className="shrink-0 rounded-full bg-primary/10 px-2 py-0.5 font-mono text-3xs font-semibold tabular-nums"
                   title={`Adoption likelihood ${e.adoption}/100 · ${e.emotion}`}
                 >
                   {e.adoption}

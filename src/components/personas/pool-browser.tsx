@@ -34,7 +34,7 @@ function PoolCard({
           <h3 className="truncate text-sm font-semibold tracking-tight text-foreground">
             {pool.name}
           </h3>
-          <p className="mt-0.5 truncate font-mono text-[10px] tracking-wide text-muted-foreground/80">
+          <p className="mt-0.5 truncate font-mono text-3xs tracking-wide text-muted-foreground/80">
             {key}
           </p>
         </div>
@@ -48,11 +48,11 @@ function PoolCard({
       <div className="mt-auto flex items-center justify-between gap-3 border-t border-border/70 pt-2.5">
         <PoolMeter count={pool.count} />
         {empty ? (
-          <span className="shrink-0 font-mono text-[10px] tracking-wide text-primary group-hover:underline">
+          <span className="shrink-0 font-mono text-3xs tracking-wide text-primary group-hover:underline">
             0 of ~{POOL_TARGET} — generate
           </span>
         ) : (
-          <span className="shrink-0 font-mono text-[10px] tracking-wide text-muted-foreground">
+          <span className="shrink-0 font-mono text-3xs tracking-wide text-muted-foreground">
             {pool.count} / ~{POOL_TARGET}
           </span>
         )}
@@ -92,10 +92,10 @@ export function PoolBrowser({
         return (
           <section key={domainKey}>
             <div className="flex items-baseline justify-between gap-4 border-b border-border pb-2">
-              <h2 className="font-mono text-[11px] tracking-[0.18em] uppercase text-foreground/80">
+              <h2 className="font-mono text-2xs tracking-eyebrow uppercase text-foreground/80">
                 {domainName(domainKey)}
               </h2>
-              <p className="font-mono text-[10px] tracking-wide text-muted-foreground">
+              <p className="font-mono text-3xs tracking-wide text-muted-foreground">
                 {domainPools.length} {domainPools.length === 1 ? "pool" : "pools"} · {people}{" "}
                 {people === 1 ? "person" : "people"}
               </p>

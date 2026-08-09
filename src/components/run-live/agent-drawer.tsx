@@ -51,14 +51,14 @@ function formatCost(costUsd: string | null): string | null {
 
 function Eyebrow({ children }: { children: ReactNode }) {
   return (
-    <p className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase">{children}</p>
+    <p className="font-mono text-3xs tracking-eyebrow text-muted-foreground uppercase">{children}</p>
   );
 }
 
 function Stat({ label, value }: { label: string; value: ReactNode }) {
   return (
     <div className="min-w-0">
-      <p className="font-mono text-[9px] tracking-widest text-muted-foreground uppercase">{label}</p>
+      <p className="font-mono text-3xs tracking-eyebrow text-muted-foreground uppercase">{label}</p>
       <p className="truncate font-mono text-xs tabular-nums text-foreground">{value}</p>
     </div>
   );
@@ -86,7 +86,7 @@ function SeverityChip({ severity }: { severity: "low" | "medium" | "high" }) {
   return (
     <Badge
       variant={severity === "high" ? "destructive" : severity === "medium" ? "outline" : "secondary"}
-      className="font-mono text-[9px] tracking-widest uppercase"
+      className="font-mono text-3xs tracking-eyebrow uppercase"
     >
       {severity}
     </Badge>
@@ -116,11 +116,11 @@ function Collapsible({
         <ChevronRight
           className={cn("size-3.5 text-muted-foreground transition-transform", open && "rotate-90")}
         />
-        <span className="flex-1 font-mono text-[10px] tracking-widest text-foreground uppercase">{title}</span>
-        {meta && <span className="font-mono text-[10px] tabular-nums text-muted-foreground">{meta}</span>}
+        <span className="flex-1 font-mono text-3xs tracking-eyebrow text-foreground uppercase">{title}</span>
+        {meta && <span className="font-mono text-3xs tabular-nums text-muted-foreground">{meta}</span>}
       </button>
       {open && (
-        <pre className="max-h-64 overflow-auto border-t px-3 py-2 font-mono text-[11px] leading-relaxed whitespace-pre-wrap text-muted-foreground">
+        <pre className="max-h-64 overflow-auto border-t px-3 py-2 font-mono text-2xs leading-relaxed whitespace-pre-wrap text-muted-foreground">
           {children}
         </pre>
       )}
@@ -132,7 +132,7 @@ function PullQuote({ quote }: { quote: string }) {
   return (
     <figure className="relative rounded-lg border-l-2 border-primary bg-secondary/50 py-3 pr-3 pl-4">
       <Quote className="absolute top-2 right-2 size-3.5 text-muted-foreground/40" />
-      <blockquote className="text-sm leading-relaxed text-foreground italic">&ldquo;{quote}&rdquo;</blockquote>
+      <blockquote className="font-serif text-[15px] leading-relaxed text-foreground italic">&ldquo;{quote}&rdquo;</blockquote>
     </figure>
   );
 }
@@ -204,27 +204,27 @@ function CastingSpecOutput({ spec }: { spec: CastingSpec }) {
           {spec.requests.map((request, i) => (
             <li key={i} className="rounded-lg border p-2.5">
               <p className="flex items-baseline gap-2 text-xs font-medium">
-                <span className="font-mono text-[10px] tracking-wider text-primary uppercase">
+                <span className="font-mono text-3xs tracking-wider text-primary uppercase">
                   {request.pool}
                 </span>
-                <span className="font-mono text-[10px] text-muted-foreground tabular-nums">
+                <span className="font-mono text-3xs text-muted-foreground tabular-nums">
                   ×{request.count}
                 </span>
               </p>
               {request.mustInclude.length > 0 && (
                 <p className="mt-1 flex flex-wrap gap-1">
                   {request.mustInclude.map((label) => (
-                    <Badge key={label} variant="outline" className="text-[9px]">
+                    <Badge key={label} variant="outline" className="text-3xs">
                       {label}
                     </Badge>
                   ))}
                 </p>
               )}
-              <p className="mt-1 text-[11px] leading-relaxed text-muted-foreground">{request.angle}</p>
+              <p className="mt-1 text-2xs leading-relaxed text-muted-foreground">{request.angle}</p>
               {request.probeQuestions.length > 0 && (
                 <ul className="mt-1.5 space-y-0.5">
                   {request.probeQuestions.map((q) => (
-                    <li key={q} className="text-[11px] leading-relaxed text-foreground/80">
+                    <li key={q} className="text-2xs leading-relaxed text-foreground/80">
                       — {q}
                     </li>
                   ))}
@@ -267,12 +267,12 @@ function CastingOutput({
                   <p className="text-xs font-medium">
                     {persona?.name ?? pick.personaId}
                     {persona && (
-                      <span className="ml-1.5 font-mono text-[9px] tracking-wider text-muted-foreground uppercase">
+                      <span className="ml-1.5 font-mono text-3xs tracking-wider text-muted-foreground uppercase">
                         {persona.archetype}
                       </span>
                     )}
                   </p>
-                  <p className="mt-0.5 text-[11px] leading-relaxed text-muted-foreground">{pick.angle}</p>
+                  <p className="mt-0.5 text-2xs leading-relaxed text-muted-foreground">{pick.angle}</p>
                 </div>
               </li>
             );
@@ -300,7 +300,7 @@ function BriefOutput({ brief }: { brief: Brief }) {
           {brief.segments.map((s) => (
             <li key={s.name} className="rounded-lg border p-2.5">
               <p className="text-xs font-medium">{s.name}</p>
-              <p className="mt-0.5 text-[11px] leading-relaxed text-muted-foreground">{s.description}</p>
+              <p className="mt-0.5 text-2xs leading-relaxed text-muted-foreground">{s.description}</p>
             </li>
           ))}
         </ul>
@@ -328,7 +328,7 @@ function CritiqueOutput({ critique }: { critique: Critique }) {
                 <p className="text-xs font-medium">{f.claim}</p>
                 <SeverityChip severity={f.severity} />
               </div>
-              <p className="mt-1 text-[11px] leading-relaxed text-muted-foreground">{f.evidence}</p>
+              <p className="mt-1 text-2xs leading-relaxed text-muted-foreground">{f.evidence}</p>
             </li>
           ))}
         </ul>
@@ -378,7 +378,7 @@ function DiscussionOutputSection({ reply }: { reply: DiscussionOutput }) {
           adoption → {reply.updatedAdoptionLikelihood}/100
         </span>
         {reply.changedMind && (
-          <Badge variant="outline" className="font-mono text-[9px] tracking-wider uppercase">
+          <Badge variant="outline" className="font-mono text-3xs tracking-wider uppercase">
             changed mind
           </Badge>
         )}
@@ -407,7 +407,7 @@ function OutputSection({
   }
   if (typeof agent.output !== "object") {
     return (
-      <pre className="max-h-80 overflow-auto rounded-lg border bg-secondary/40 p-3 font-mono text-[11px] leading-relaxed whitespace-pre-wrap">
+      <pre className="max-h-80 overflow-auto rounded-lg border bg-secondary/40 p-3 font-mono text-2xs leading-relaxed whitespace-pre-wrap">
         {JSON.stringify(agent.output, null, 2)}
       </pre>
     );
@@ -432,7 +432,7 @@ function OutputSection({
       return <SynthesisOutput synthesis={agent.output as Synthesis} />;
     default:
       return (
-        <pre className="max-h-80 overflow-auto rounded-lg border bg-secondary/40 p-3 font-mono text-[11px] leading-relaxed whitespace-pre-wrap">
+        <pre className="max-h-80 overflow-auto rounded-lg border bg-secondary/40 p-3 font-mono text-2xs leading-relaxed whitespace-pre-wrap">
           {JSON.stringify(agent.output, null, 2)}
         </pre>
       );
@@ -444,7 +444,7 @@ function OutputSection({
 function TraitDots({ label, value }: { label: string; value: number }) {
   return (
     <div className="flex items-center justify-between gap-2">
-      <span className="text-[11px] text-muted-foreground">{label}</span>
+      <span className="text-2xs text-muted-foreground">{label}</span>
       <span className="flex gap-0.5" aria-label={`${label}: ${value} of 5`}>
         {[1, 2, 3, 4, 5].map((i) => (
           <span
@@ -466,18 +466,18 @@ function PersonaCard({ persona }: { persona: PersonaLite }) {
         <PersonaAvatar seed={persona.avatarSeed} size={36} />
         <div className="min-w-0">
           <p className="text-sm font-medium">{persona.name}</p>
-          <p className="font-mono text-[10px] tracking-wider text-muted-foreground uppercase">
+          <p className="font-mono text-3xs tracking-wider text-muted-foreground uppercase">
             {persona.archetype}
           </p>
         </div>
       </div>
       {d && (
-        <p className="mt-2 text-[11px] text-muted-foreground">
+        <p className="mt-2 text-2xs text-muted-foreground">
           {d.age} · {d.occupation} · {d.location} · {d.incomeBand}
         </p>
       )}
       {persona.backstory && (
-        <p className="mt-2 text-[11px] leading-relaxed text-foreground/85">{persona.backstory}</p>
+        <p className="mt-2 text-2xs leading-relaxed text-foreground/85">{persona.backstory}</p>
       )}
       {p && (
         <div className="mt-3 grid grid-cols-2 gap-x-4 gap-y-1.5">
@@ -490,7 +490,7 @@ function PersonaCard({ persona }: { persona: PersonaLite }) {
       {p && p.values.length > 0 && (
         <div className="mt-2.5 flex flex-wrap gap-1">
           {p.values.map((v) => (
-            <Badge key={v} variant="outline" className="text-[10px]">
+            <Badge key={v} variant="outline" className="text-3xs">
               {v}
             </Badge>
           ))}
@@ -538,7 +538,7 @@ export function AgentDrawer({
               </Eyebrow>
               <div className="flex items-center gap-2">
                 <SheetTitle className="truncate">{agent.label}</SheetTitle>
-                <Badge className={cn("font-mono text-[9px] tracking-widest uppercase", STATUS_BADGE[agent.status].className)}>
+                <Badge className={cn("font-mono text-3xs tracking-eyebrow uppercase", STATUS_BADGE[agent.status].className)}>
                   {STATUS_BADGE[agent.status].label}
                 </Badge>
               </div>
@@ -577,7 +577,7 @@ export function AgentDrawer({
               {agent.status === "failed" ? (
                 <div className="rounded-lg border border-destructive/40 bg-destructive/5 p-3">
                   <Eyebrow>Error</Eyebrow>
-                  <p className="mt-1 font-mono text-[11px] leading-relaxed text-destructive">
+                  <p className="mt-1 font-mono text-2xs leading-relaxed text-destructive">
                     {agent.error ?? "Agent failed without an error message."}
                   </p>
                 </div>
@@ -585,7 +585,7 @@ export function AgentDrawer({
                 <div className="space-y-3" style={DOT_STYLE}>
                   <div className="flex items-center gap-2.5">
                     <DotmSquare4 size={24} dotSize={3} colorPreset="solid-theme" ariaLabel="Agent running" />
-                    <p className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase">
+                    <p className="font-mono text-3xs tracking-eyebrow text-muted-foreground uppercase">
                       {agent.status === "running" ? "Working — output streams in live" : "Queued"}
                     </p>
                   </div>

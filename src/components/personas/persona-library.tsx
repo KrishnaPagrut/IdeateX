@@ -160,10 +160,10 @@ export function PersonaLibrary() {
 
       <header className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <p className="font-mono text-[11px] tracking-[0.18em] uppercase text-muted-foreground">
+          <p className="font-mono text-2xs tracking-eyebrow uppercase text-muted-foreground">
             Synthetic population
           </p>
-          <h1 className="mt-1 text-2xl font-semibold tracking-tight text-foreground">
+          <h1 className="mt-1 font-serif text-3xl font-bold tracking-tight text-foreground">
             Persona library
           </h1>
           <p className="mt-1 font-mono text-xs text-muted-foreground">
@@ -274,7 +274,7 @@ export function PersonaLibrary() {
       {initialLoading && (
         <div className="mt-24 flex flex-col items-center gap-3">
           <MatrixLoader size={28} label="Loading persona library" />
-          <p className="font-mono text-[11px] tracking-[0.18em] uppercase text-muted-foreground">
+          <p className="font-mono text-2xs tracking-eyebrow uppercase text-muted-foreground">
             Loading population
           </p>
         </div>
@@ -283,7 +283,7 @@ export function PersonaLibrary() {
       {libraryEmpty && (
         <div className="mt-16 flex flex-col items-center rounded-xl border border-dashed border-border p-12 text-center">
           <MatrixLoader size={28} label="" className="opacity-60" />
-          <h2 className="mt-4 text-lg font-semibold tracking-tight">
+          <h2 className="mt-4 font-serif text-xl font-bold tracking-tight">
             The population is empty
           </h2>
           <p className="mt-2 max-w-md text-sm text-muted-foreground">
@@ -325,7 +325,7 @@ export function PersonaLibrary() {
             <button
               type="button"
               onClick={backToPools}
-              className="inline-flex items-center gap-1.5 font-mono text-[11px] tracking-[0.12em] uppercase text-muted-foreground transition-colors hover:text-foreground"
+              className="inline-flex items-center gap-1.5 font-mono text-2xs tracking-eyebrow uppercase text-muted-foreground transition-colors hover:text-foreground"
             >
               <ArrowLeftIcon className="size-3.5" />
               Pools
@@ -334,10 +334,10 @@ export function PersonaLibrary() {
             {selected && (
               <div className="mt-3 flex flex-wrap items-end justify-between gap-4 rounded-xl border border-border bg-card p-4">
                 <div className="min-w-0">
-                  <p className="font-mono text-[10px] tracking-wide text-muted-foreground/80">
+                  <p className="font-mono text-3xs tracking-wide text-muted-foreground/80">
                     {selectedPool}
                   </p>
-                  <h2 className="mt-0.5 text-lg font-semibold tracking-tight text-foreground">
+                  <h2 className="mt-0.5 font-serif text-xl font-bold tracking-tight text-foreground">
                     {selected.name}
                   </h2>
                   <p className="mt-1 max-w-xl text-sm text-muted-foreground">
@@ -345,7 +345,7 @@ export function PersonaLibrary() {
                   </p>
                   <div className="mt-2.5 flex items-center gap-2.5">
                     <PoolMeter count={selected.count} />
-                    <span className="font-mono text-[10px] tracking-wide text-muted-foreground">
+                    <span className="font-mono text-3xs tracking-wide text-muted-foreground">
                       {selected.count} / ~{POOL_TARGET}
                     </span>
                   </div>
@@ -381,7 +381,7 @@ export function PersonaLibrary() {
             <div className="mt-10 flex flex-col items-center rounded-xl border border-dashed border-border p-12 text-center">
               {selected && selected.count === 0 && !hasFilters ? (
                 <>
-                  <h2 className="text-base font-semibold tracking-tight">
+                  <h2 className="font-serif text-lg font-bold tracking-tight">
                     This pool is empty
                   </h2>
                   <p className="mt-2 max-w-md text-sm text-muted-foreground">
@@ -408,7 +408,7 @@ export function PersonaLibrary() {
                 </>
               ) : (
                 <>
-                  <h2 className="text-base font-semibold tracking-tight">
+                  <h2 className="font-serif text-lg font-bold tracking-tight">
                     No personas match
                   </h2>
                   <p className="mt-2 text-sm text-muted-foreground">

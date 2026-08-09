@@ -29,7 +29,7 @@ export function SegmentBreakdown({
     <section className="rounded-xl border bg-card p-5">
       <header>
         <h3 className="text-sm font-medium">Segment breakdown</h3>
-        <p className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase">
+        <p className="font-mono text-3xs tracking-eyebrow text-muted-foreground uppercase">
           {synthesis.segmentSummaries.length} segments studied
         </p>
       </header>
@@ -37,11 +37,11 @@ export function SegmentBreakdown({
         <Table>
           <TableHeader>
             <TableRow className="hover:bg-transparent">
-              <TableHead className="font-mono text-[10px] tracking-widest uppercase">Segment</TableHead>
-              <TableHead className="w-10 text-right font-mono text-[10px] tracking-widest uppercase">n</TableHead>
-              <TableHead className="w-40 font-mono text-[10px] tracking-widest uppercase">Mean adoption</TableHead>
-              <TableHead className="font-mono text-[10px] tracking-widest uppercase">Stance</TableHead>
-              <TableHead className="min-w-56 font-mono text-[10px] tracking-widest uppercase">Notable quote</TableHead>
+              <TableHead className="font-mono text-3xs tracking-eyebrow uppercase">Segment</TableHead>
+              <TableHead className="w-10 text-right font-mono text-3xs tracking-eyebrow uppercase">n</TableHead>
+              <TableHead className="w-40 font-mono text-3xs tracking-eyebrow uppercase">Mean adoption</TableHead>
+              <TableHead className="font-mono text-3xs tracking-eyebrow uppercase">Stance</TableHead>
+              <TableHead className="min-w-56 font-mono text-3xs tracking-eyebrow uppercase">Notable quote</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>

@@ -44,7 +44,8 @@ const KIND_EYEBROW: Record<AgentKind, string> = {
 function statusClasses(status: AgentStatus): string {
   switch (status) {
     case "running":
-      return "border-primary shadow-sm";
+      // The halo utility breathes a soft primary ring; no extra element needed.
+      return "halo-running border-primary";
     case "completed":
       return "border-border";
     case "failed":
@@ -56,16 +57,6 @@ function statusClasses(status: AgentStatus): string {
   }
 }
 
-/** Animated pulse ring shown while an agent is running. */
-function RunningRing() {
-  return (
-    <span
-      aria-hidden
-      className="pointer-events-none absolute -inset-1 animate-ping rounded-lg border-2 border-primary/40 [animation-duration:1.6s]"
-    />
-  );
-}
-
 function StatusDot({ status }: { status: AgentStatus }) {
   return (
     <span
@@ -73,7 +64,7 @@ function StatusDot({ status }: { status: AgentStatus }) {
       className={cn(
         "size-1.5 shrink-0 rounded-full",
         status === "completed" && "bg-primary",
-        status === "running" && "animate-pulse bg-primary",
+        status === "running" && "breathe bg-primary",
         status === "failed" && "bg-destructive",
         (status === "pending" || status === "skipped") && "bg-muted-foreground/40",
       )}
@@ -98,22 +89,21 @@ export const AgentNode = memo(function AgentNode({ data, selected }: NodeProps<A
     return (
       <div
         className={cn(
-          "relative flex h-9 w-[132px] cursor-pointer items-center gap-1.5 rounded-lg border bg-card px-1.5 transition-colors",
+          "rise-in relative flex h-9 w-[132px] cursor-pointer items-center gap-1.5 rounded-md border bg-card px-1.5 transition-colors",
           statusClasses(agent.status),
           selected && "ring-2 ring-ring/60",
         )}
       >
-        {running && <RunningRing />}
         {persona ? (
           <PersonaAvatar seed={persona.avatarSeed} size={20} />
         ) : (
           <span className="size-5 shrink-0 rounded-full bg-muted" />
         )}
         <span className="min-w-0 flex-1">
-          <span className="block truncate text-[10px] leading-tight font-medium text-card-foreground">
+          <span className="block truncate text-3xs leading-tight font-medium text-card-foreground">
             {persona?.name ?? agent.label}
           </span>
-          <span className="block truncate font-mono text-[8px] leading-tight text-muted-foreground uppercase">
+          <span className="block truncate font-mono text-[8px] leading-tight tracking-wide text-muted-foreground uppercase">
             {failed ? "failed" : (persona?.archetype ?? KIND_EYEBROW[agent.kind])}
           </span>
         </span>
@@ -132,22 +122,22 @@ export const AgentNode = memo(function AgentNode({ data, selected }: NodeProps<A
   return (
     <div
       className={cn(
-        "relative flex h-12 w-[176px] cursor-pointer items-center gap-2.5 rounded-lg border bg-card px-3 transition-colors",
+        "rise-in relative flex h-12 w-[176px] cursor-pointer items-center gap-2.5 rounded-md border bg-card px-3 transition-colors",
         statusClasses(agent.status),
         selected && "ring-2 ring-ring/60",
       )}
     >
-      {running && <RunningRing />}
       <span
         className={cn(
-          "flex size-7 shrink-0 items-center justify-center rounded-md",
+          "flex size-7 shrink-0 items-center justify-center rounded-sm",
           failed ? "bg-destructive/10 text-destructive" : "bg-secondary text-secondary-foreground",
+          running && "bg-primary/10 text-primary",
         )}
       >
         <Icon className="size-4" strokeWidth={1.75} />
       </span>
       <span className="min-w-0 flex-1">
-        <span className="block truncate font-mono text-[9px] tracking-widest text-muted-foreground uppercase">
+        <span className="block truncate font-mono text-[8px] tracking-eyebrow text-muted-foreground uppercase">
           {KIND_EYEBROW[agent.kind]}
         </span>
         <span className="block truncate text-xs font-medium text-card-foreground">

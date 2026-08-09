@@ -74,7 +74,7 @@ function DeltaTag({ value, className }: { value: number; className?: string }) {
 
 function FieldLabel({ children }: { children: React.ReactNode }) {
   return (
-    <p className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase">
+    <p className="font-mono text-3xs tracking-eyebrow text-muted-foreground uppercase">
       {children}
     </p>
   );
@@ -100,7 +100,7 @@ function ExchangeCard({
           <span className="block truncate text-xs font-medium">
             {persona?.name ?? "Unknown persona"}
           </span>
-          <span className="block truncate font-mono text-[9px] tracking-wider text-muted-foreground uppercase">
+          <span className="block truncate font-mono text-3xs tracking-wider text-muted-foreground uppercase">
             {persona?.archetype ?? ""}
             {row.segment ? `${persona?.archetype ? " · " : ""}${row.segment}` : ""}
           </span>
@@ -113,43 +113,43 @@ function ExchangeCard({
           <ArrowRight className="size-3 text-muted-foreground/60" />
           <span className="font-semibold">{out.updatedAdoptionLikelihood}</span>
           {row.delta !== null && row.delta !== 0 && (
-            <DeltaTag value={row.delta} className="text-[11px]" />
+            <DeltaTag value={row.delta} className="text-2xs" />
           )}
         </span>
       </div>
 
-      <blockquote className="mt-3 text-[13px] leading-relaxed text-foreground/95 italic">
+      <blockquote className="mt-3 text-sm leading-relaxed text-foreground/95 italic">
         &ldquo;{out.reaction}&rdquo;
       </blockquote>
 
-      <p className="mt-2.5 text-[11px] leading-relaxed text-muted-foreground">
-        <span className="font-mono text-[9px] tracking-widest uppercase">Key point heard · </span>
+      <p className="mt-2.5 text-2xs leading-relaxed text-muted-foreground">
+        <span className="font-mono text-3xs tracking-eyebrow uppercase">Key point heard · </span>
         {out.keyPointHeard}
       </p>
 
       {(out.changedMind || out.agreesWith.length > 0 || out.disagreesWith.length > 0) && (
         <div className="mt-3 flex flex-wrap items-center gap-1">
           {out.changedMind && (
-            <span className="rounded-full bg-primary/10 px-2 py-0.5 font-mono text-[9px] font-semibold tracking-widest text-primary uppercase">
+            <span className="rounded-full bg-primary/10 px-2 py-0.5 font-mono text-3xs font-semibold tracking-eyebrow text-primary uppercase">
               Changed mind
             </span>
           )}
           {out.agreesWith.map((n) => (
             <span
               key={`a-${n}`}
-              className="rounded-full border border-primary/25 bg-primary/5 px-2 py-0.5 text-[10px] text-foreground/85"
+              className="rounded-full border border-primary/25 bg-primary/5 px-2 py-0.5 text-3xs text-foreground/85"
               title={`Sided with ${n}`}
             >
-              <span className="font-mono text-[9px] text-primary">with</span> {n}
+              <span className="font-mono text-3xs text-primary">with</span> {n}
             </span>
           ))}
           {out.disagreesWith.map((n) => (
             <span
               key={`d-${n}`}
-              className="rounded-full border border-destructive/25 bg-destructive/5 px-2 py-0.5 text-[10px] text-foreground/85"
+              className="rounded-full border border-destructive/25 bg-destructive/5 px-2 py-0.5 text-3xs text-foreground/85"
               title={`Pushed back on ${n}`}
             >
-              <span className="font-mono text-[9px] text-destructive">against</span> {n}
+              <span className="font-mono text-3xs text-destructive">against</span> {n}
             </span>
           ))}
         </div>
@@ -237,7 +237,7 @@ export function FocusGroup({
               return (
                 <span
                   key={seg}
-                  className="flex items-center gap-1.5 rounded-full border px-2.5 py-1 font-mono text-[10px] tabular-nums"
+                  className="flex items-center gap-1.5 rounded-full border px-2.5 py-1 font-mono text-3xs tabular-nums"
                 >
                   <span className="max-w-40 truncate tracking-wider uppercase">{seg}</span>
                   <span className="text-muted-foreground">{b}</span>

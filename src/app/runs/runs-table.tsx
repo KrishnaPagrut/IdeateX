@@ -61,7 +61,7 @@ export function RunsTable({ rows }: { rows: RunRow[] }) {
                 </span>
               </TableCell>
               <TableCell>
-                <Badge variant="outline" className="font-mono text-[10px] tracking-wider uppercase">
+                <Badge variant="outline" className="font-mono text-3xs tracking-wider uppercase">
                   {run.tier}
                 </Badge>
               </TableCell>

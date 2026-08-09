@@ -13,7 +13,7 @@ export function PsychoDots({
   const filled = Math.max(0, Math.min(5, Math.round(value)));
   return (
     <div className={cn("flex items-center justify-between gap-3", className)}>
-      <span className="font-mono text-[10px] tracking-[0.12em] uppercase text-muted-foreground">
+      <span className="font-mono text-3xs tracking-eyebrow uppercase text-muted-foreground">
         {label}
       </span>
       <span

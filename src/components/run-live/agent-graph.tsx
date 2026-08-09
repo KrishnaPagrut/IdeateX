@@ -7,6 +7,8 @@ import {
   Background,
   BackgroundVariant,
   useReactFlow,
+  useStore,
+  useNodesInitialized,
   useNodesState,
   useEdgesState,
   type Edge,
@@ -215,17 +217,41 @@ function buildGraph(
 
 function FitOnGrowth({ count }: { count: number }) {
   const { fitView } = useReactFlow();
-  const prev = useRef(0);
+  const domNode = useStore((s) => s.domNode);
+  const nodesInitialized = useNodesInitialized();
+  const fittedCount = useRef(-1);
+
+  // Fit only once nodes are measured — fitting earlier is a no-op that leaves
+  // the swarm clipped. `nodesInitialized` drops to false while new agents
+  // stream in and flips true when they're measured, so each batch refits once.
   useEffect(() => {
-    if (count !== prev.current) {
-      prev.current = count;
-      // Wait a frame so newly added nodes are measured before fitting.
-      const t = requestAnimationFrame(() => {
-        void fitView({ padding: 0.1, duration: 350 });
+    if (!nodesInitialized || count === fittedCount.current) return;
+    fittedCount.current = count;
+    const t = requestAnimationFrame(() => {
+      void fitView({ padding: 0.12, duration: 350 });
+    });
+    return () => cancelAnimationFrame(t);
+  }, [nodesInitialized, count, fitView]);
+
+  // Keep the swarm framed when the canvas itself changes size — window
+  // resizes, tab switches, container height changes. Without this the graph
+  // holds a stale viewport and clips.
+  useEffect(() => {
+    if (!domNode) return;
+    let raf = 0;
+    const observer = new ResizeObserver(() => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        void fitView({ padding: 0.12, duration: 200 });
       });
-      return () => cancelAnimationFrame(t);
-    }
-  }, [count, fitView]);
+    });
+    observer.observe(domNode);
+    return () => {
+      observer.disconnect();
+      cancelAnimationFrame(raf);
+    };
+  }, [domNode, fitView]);
+
   return null;
 }
 
@@ -270,9 +296,8 @@ function AgentGraphInner({ agents, personas, onSelect, selectedId, className }: 
         panOnDrag
         zoomOnScroll
         proOptions={{ hideAttribution: false }}
-        className="bg-background"
       >
-        <Background variant={BackgroundVariant.Dots} gap={22} size={1.5} color="var(--border)" />
+        <Background variant={BackgroundVariant.Dots} gap={26} size={1.25} color="var(--border)" />
         <FitOnGrowth count={agents.length} />
       </ReactFlow>
     </div>
