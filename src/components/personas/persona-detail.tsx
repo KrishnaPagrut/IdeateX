@@ -119,7 +119,12 @@ export function PersonaDetail({ id }: { id: string }) {
     return (
       <div className="mx-auto w-full max-w-4xl px-6 py-16 text-center">
         <p className="text-sm text-muted-foreground">{error}.</p>
-        <Button variant="outline" className="mt-4" render={<Link href="/personas" />}>
+        <Button
+          variant="outline"
+          className="mt-4"
+          nativeButton={false}
+          render={<Link href="/personas" />}
+        >
           <ArrowLeftIcon data-icon="inline-start" />
           Back to library
         </Button>

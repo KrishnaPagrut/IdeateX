@@ -181,7 +181,7 @@ export function RunShell({ runId }: { runId: string }) {
       <div className="mx-auto w-full max-w-3xl px-6 py-20">
         <div className="flex flex-col items-start gap-3 rounded-lg border border-dashed bg-card p-8">
           <p className="font-medium">{notFound ? "This run does not exist." : error}</p>
-          <Button variant="outline" size="sm" render={<Link href="/runs" />}>
+          <Button variant="outline" size="sm" nativeButton={false} render={<Link href="/runs" />}>
             <ArrowLeftIcon data-icon="inline-start" />
             Back to runs
           </Button>
