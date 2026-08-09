@@ -188,6 +188,33 @@ export const agentRuns = pgTable(
   (t) => [index("agent_runs_run_id_idx").on(t.runId)],
 );
 
+export const campaignItems = pgTable(
+  "campaign_items",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    runId: uuid("run_id")
+      .notNull()
+      .references(() => runs.id, { onDelete: "cascade" }),
+    kind: text("kind").notNull(),
+    state: text("state").$type<"draft" | "approved" | "cut">().notNull().default("draft"),
+    title: text("title").notNull(),
+    body: text("body").notNull(),
+    /** Days relative to launch day: negative = before launch. */
+    dayOffset: integer("day_offset").notNull(),
+    platform: text("platform").notNull(),
+    targetCohorts: text("target_cohorts").array().notNull().default([]),
+    purpose: text("purpose").notNull(),
+    callToAction: text("call_to_action").notNull().default(""),
+    hashtags: text("hashtags").array().notNull().default([]),
+    imagePrompt: text("image_prompt"),
+    imageUrl: text("image_url"),
+    sortOrder: integer("sort_order").notNull().default(0),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [index("campaign_items_run_id_idx").on(t.runId)],
+);
+
 export const runEvents = pgTable(
   "run_events",
   {
@@ -213,3 +240,4 @@ export type CustomPool = typeof customPools.$inferSelect;
 export type Run = typeof runs.$inferSelect;
 export type AgentRun = typeof agentRuns.$inferSelect;
 export type RunEvent = typeof runEvents.$inferSelect;
+export type CampaignItemRow = typeof campaignItems.$inferSelect;

@@ -36,6 +36,13 @@
       "when": 1786249348085,
       "tag": "0004_mixed_zuras",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1786251522131,
+      "tag": "0005_puzzling_daredevil",
+      "breakpoints": true
     }
   ]
 }
