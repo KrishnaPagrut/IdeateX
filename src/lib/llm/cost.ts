@@ -25,17 +25,23 @@ const EST = {
 };
 
 /** Pre-launch estimate shown on the new-run form. Grounding adds tool-call fees (~$5/1k calls). */
-export function estimateRunCost(tier: RunTier, grounding: boolean, discussion = false): number {
+export function estimateRunCost(
+  tier: RunTier,
+  grounding: boolean,
+  discussion = false,
+  personaBudget?: number | null,
+): number {
   const shape = TIER_SHAPE[tier];
+  const personaCount = personaBudget ?? shape.personaTotal;
   let usd = 0;
   usd += costForTokens("reasoner", EST.framing.in, EST.framing.out);
   usd += shape.planners * costForTokens("reasoner", EST.planner.in, EST.planner.out);
-  usd += shape.personaTotal * costForTokens("swarm", EST.persona.in, EST.persona.out);
+  usd += personaCount * costForTokens("swarm", EST.persona.in, EST.persona.out);
   usd += 2 * costForTokens("reasoner", EST.critique.in, EST.critique.out);
   usd += costForTokens("reasoner", EST.synthesis.in, EST.synthesis.out);
   if (discussion) {
     // One focus-group reply per persona: persona-sized input + a shorter reply.
-    usd += shape.personaTotal * costForTokens("swarm", EST.persona.in, EST.persona.out / 2);
+    usd += personaCount * costForTokens("swarm", EST.persona.in, EST.persona.out / 2);
   }
   if (grounding) usd += 0.1; // ~20 server-side search calls at $5/1k
   return usd;

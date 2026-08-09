@@ -7,6 +7,7 @@ import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 import { DotmSquare3 } from "@/components/ui/dotm-square-3";
+import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
@@ -41,6 +42,7 @@ export function NewRunForm() {
   const [tier, setTier] = React.useState<RunTier>("standard");
   const [grounding, setGrounding] = React.useState(false);
   const [discussion, setDiscussion] = React.useState(true);
+  const [personaBudget, setPersonaBudget] = React.useState<number | null>(null);
   const [touched, setTouched] = React.useState(false);
   const [submitting, setSubmitting] = React.useState(false);
 
@@ -56,7 +58,7 @@ export function NewRunForm() {
         const res = await fetch("/api/runs/estimate", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ tier, grounding, discussion }),
+          body: JSON.stringify({ tier, grounding, discussion, personaBudget }),
           signal: controller.signal,
         });
         if (!res.ok) return;
@@ -72,7 +74,7 @@ export function NewRunForm() {
       controller.abort();
       clearTimeout(timer);
     };
-  }, [tier, grounding, discussion]);
+  }, [tier, grounding, discussion, personaBudget]);
 
   const ideaLength = idea.trim().length;
   const ideaTooShort = ideaLength < MIN_IDEA_LENGTH;
@@ -93,6 +95,7 @@ export function NewRunForm() {
           tier,
           grounding,
           discussion,
+          personaBudget,
         }),
       });
       if (res.status !== 201) {
@@ -229,6 +232,34 @@ export function NewRunForm() {
           </p>
         </div>
         <Switch id="discussion" checked={discussion} onCheckedChange={setDiscussion} />
+      </div>
+
+      {/* Persona budget */}
+      <div className="flex items-start justify-between gap-4 rounded-lg border bg-card p-4">
+        <div className="flex flex-col gap-1">
+          <Label htmlFor="persona-budget" className="text-sm font-medium">
+            Persona budget
+          </Label>
+          <p className="text-xs text-muted-foreground">
+            Cap how many people the planners may cast. Blank uses the tier default
+            ({TIER_SHAPE[tier].personaTotal}); planners scale their casting contracts to fit.
+          </p>
+        </div>
+        <Input
+          id="persona-budget"
+          type="number"
+          min={3}
+          max={200}
+          value={personaBudget ?? ""}
+          placeholder={String(TIER_SHAPE[tier].personaTotal)}
+          onChange={(e) => {
+            const v = e.target.value;
+            if (v === "") return setPersonaBudget(null);
+            const n = Number(v);
+            if (Number.isFinite(n)) setPersonaBudget(Math.max(3, Math.min(200, Math.round(n))));
+          }}
+          className="w-24 text-right font-mono tabular-nums"
+        />
       </div>
 
       {/* Launch */}

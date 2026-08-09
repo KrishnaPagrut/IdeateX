@@ -18,6 +18,7 @@ const CreateRunSchema = z.object({
   tier: z.enum(RUN_TIERS),
   grounding: z.boolean(),
   discussion: z.boolean().optional().default(false),
+  personaBudget: z.number().int().min(3).max(200).nullable().optional(),
 });
 
 export async function POST(request: Request) {
@@ -41,7 +42,7 @@ export async function POST(request: Request) {
     import("@/lib/engine/orchestrator"),
   ]);
 
-  const { idea, context, tier, grounding, discussion } = parsed.data;
+  const { idea, context, tier, grounding, discussion, personaBudget } = parsed.data;
   const [row] = await db
     .insert(runs)
     .values({
@@ -50,8 +51,9 @@ export async function POST(request: Request) {
       tier,
       grounding,
       discussion,
+      personaBudget: personaBudget ?? null,
       status: "pending",
-      estCostUsd: estimateRunCost(tier, grounding, discussion).toFixed(4),
+      estCostUsd: estimateRunCost(tier, grounding, discussion, personaBudget).toFixed(4),
     })
     .returning({ id: runs.id });
 

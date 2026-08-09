@@ -58,10 +58,16 @@ export type AgentStatus = (typeof AGENT_STATUSES)[number];
 // Tables
 // ---------------------------------------------------------------------------
 
-export const personas = pgTable("personas", {
+export const personas = pgTable(
+  "personas",
+  {
   id: uuid("id").primaryKey().defaultRandom(),
   name: text("name").notNull(),
   archetype: text("archetype").notNull(),
+  // Pool taxonomy: personas live in domain/subdomain pools (~20-30 each) that
+  // planners request by name in casting specs. See src/lib/personas/taxonomy.ts.
+  domain: text("domain").notNull().default("general"),
+  subdomain: text("subdomain").notNull().default("general"),
   demographics: jsonb("demographics")
     .$type<{
       age: number;
@@ -89,7 +95,9 @@ export const personas = pgTable("personas", {
   active: boolean("active").notNull().default(true),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
-});
+  },
+  (t) => [index("personas_pool_idx").on(t.domain, t.subdomain)],
+);
 
 export const runs = pgTable("runs", {
   id: uuid("id").primaryKey().defaultRandom(),
@@ -99,6 +107,8 @@ export const runs = pgTable("runs", {
   grounding: boolean("grounding").notNull().default(false),
   // Focus-group stage: personas hear segment peers' verdicts and respond.
   discussion: boolean("discussion").notNull().default(false),
+  // Max personas this run may spawn; null = tier default (TIER_SHAPE).
+  personaBudget: integer("persona_budget"),
   status: text("status").$type<RunStatus>().notNull().default("pending"),
   brief: jsonb("brief"),
   synthesis: jsonb("synthesis"),

@@ -11,7 +11,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { DotmSquare4 } from "@/components/ui/dotm-square-4";
 import type { AgentStatus } from "@/lib/db/schema";
 import type { Brief } from "@/lib/schemas/brief";
-import type { CastingPlan } from "@/lib/schemas/casting";
+import type { CastingPlan, CastingSpec } from "@/lib/schemas/casting";
 import type { Critique } from "@/lib/schemas/critique";
 import type { DiscussionOutput } from "@/lib/schemas/discussion";
 import type { Synthesis } from "@/lib/schemas/synthesis";
@@ -187,6 +187,53 @@ function VerdictOutput({ verdict }: { verdict: Verdict }) {
       <ListSection title="Objections" items={verdict.topObjections} />
       <ListSection title="Deal breakers" items={verdict.dealBreakers} tone="destructive" />
       <ListSection title="Delighters" items={verdict.delighters} />
+    </div>
+  );
+}
+
+function CastingSpecOutput({ spec }: { spec: CastingSpec }) {
+  return (
+    <div className="space-y-4">
+      <div>
+        <Eyebrow>Casting rationale</Eyebrow>
+        <p className="mt-1 text-xs leading-relaxed text-foreground/90">{spec.rationale}</p>
+      </div>
+      <div>
+        <Eyebrow>Casting contract · {spec.requests.reduce((n, r) => n + r.count, 0)} people requested</Eyebrow>
+        <ul className="mt-2 space-y-2">
+          {spec.requests.map((request, i) => (
+            <li key={i} className="rounded-lg border p-2.5">
+              <p className="flex items-baseline gap-2 text-xs font-medium">
+                <span className="font-mono text-[10px] tracking-wider text-primary uppercase">
+                  {request.pool}
+                </span>
+                <span className="font-mono text-[10px] text-muted-foreground tabular-nums">
+                  ×{request.count}
+                </span>
+              </p>
+              {request.mustInclude.length > 0 && (
+                <p className="mt-1 flex flex-wrap gap-1">
+                  {request.mustInclude.map((label) => (
+                    <Badge key={label} variant="outline" className="text-[9px]">
+                      {label}
+                    </Badge>
+                  ))}
+                </p>
+              )}
+              <p className="mt-1 text-[11px] leading-relaxed text-muted-foreground">{request.angle}</p>
+              {request.probeQuestions.length > 0 && (
+                <ul className="mt-1.5 space-y-0.5">
+                  {request.probeQuestions.map((q) => (
+                    <li key={q} className="text-[11px] leading-relaxed text-foreground/80">
+                      — {q}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
@@ -369,7 +416,12 @@ function OutputSection({
     case "persona":
       return <VerdictOutput verdict={agent.output as Verdict} />;
     case "planner":
-      return <CastingOutput plan={agent.output as CastingPlan} personas={personas} />;
+      // Casting contracts (v2, pool requests) vs legacy id-pick plans.
+      return Array.isArray((agent.output as { requests?: unknown }).requests) ? (
+        <CastingSpecOutput spec={agent.output as CastingSpec} />
+      ) : (
+        <CastingOutput plan={agent.output as CastingPlan} personas={personas} />
+      );
     case "framing":
       return <BriefOutput brief={agent.output as Brief} />;
     case "discussion":
