@@ -16,11 +16,13 @@ import type { AgentLite } from "./types";
 
 const ALL_STAGES = [
   { stage: "framing", kind: "framing", label: "Framing" },
-  { stage: "planning", kind: "planner", label: "Planning" },
-  { stage: "simulating", kind: "persona", label: "Simulating" },
+  { stage: "planning", kind: "planner", label: "Casting" },
+  { stage: "strategizing", kind: "strategy", label: "Strategy" },
+  { stage: "racing", kind: "reaction", label: "Race" },
+  { stage: "advising", kind: "advisor", label: "Advisors" },
+  { stage: "simulating", kind: "persona", label: "Deep swarm" },
   { stage: "discussing", kind: "discussion", label: "Focus group" },
-  { stage: "critiquing", kind: "critique", label: "Critiquing" },
-  { stage: "synthesizing", kind: "synthesis", label: "Synthesizing" },
+  { stage: "synthesizing", kind: "synthesis", label: "Report" },
 ] as const satisfies ReadonlyArray<{ stage: string; kind: AgentKind; label: string }>;
 
 type StageDef = (typeof ALL_STAGES)[number];

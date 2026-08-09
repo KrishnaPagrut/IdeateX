@@ -9,8 +9,24 @@ import {
   RunEventSchema,
   type RunEventMessage,
 } from "@/lib/schemas/events";
+import type { StrategyScores } from "@/lib/schemas/marketing";
 
 export type AgentEventPayload = z.infer<typeof AgentEventPayloadSchema>;
+
+/** Live per-strategy race state, accumulated from sim:tick events. */
+export interface RaceStrategyState {
+  strategyId: string;
+  strategyName: string;
+  tick: number;
+  totalTicks: number;
+  scores: StrategyScores;
+  reachedCount: number;
+  personaCount: number;
+  /** Persona ids in activation order (cumulative across ticks). */
+  activatedPersonaIds: string[];
+  topNarratives: Array<{ id: string; label: string; sentiment: number; momentum: number }>;
+  finished: boolean;
+}
 
 export const RUN_STAGES = [
   "framing",
@@ -37,6 +53,8 @@ export interface RunStreamState {
   stages: Record<RunStage, StageState>;
   /** Latest agent event per agentRunId. */
   agents: Record<string, AgentEventPayload>;
+  /** Live race state per strategy id; empty until the first sim:tick. */
+  race: Record<string, RaceStrategyState>;
   /** Latest cost:update total; null until the first one. */
   costUsd: number | null;
   lastSeq: number;
@@ -74,6 +92,7 @@ function initialState(): RunStreamState {
     status: null,
     stages: emptyStages(),
     agents: {},
+    race: {},
     costUsd: null,
     lastSeq: 0,
     error: null,
@@ -128,6 +147,34 @@ function reducer(state: RunStreamState, action: Action): RunStreamState {
         case "agent:completed":
         case "agent:failed":
           next.agents = { ...state.agents, [event.payload.agentRunId]: event.payload };
+          break;
+        case "sim:tick": {
+          const p = event.payload;
+          const prev = state.race[p.strategyId];
+          next.race = {
+            ...state.race,
+            [p.strategyId]: {
+              strategyId: p.strategyId,
+              strategyName: p.strategyName,
+              tick: p.tick,
+              totalTicks: p.totalTicks,
+              scores: p.scores,
+              reachedCount: p.reachedCount,
+              personaCount: p.personaCount,
+              activatedPersonaIds: [
+                ...(prev?.activatedPersonaIds ?? []),
+                ...p.activatedPersonaIds,
+              ],
+              topNarratives: p.topNarratives,
+              finished: p.tick >= p.totalTicks,
+            },
+          };
+          break;
+        }
+        case "race:completed":
+          next.race = Object.fromEntries(
+            Object.entries(state.race).map(([id, s]) => [id, { ...s, finished: true }]),
+          );
           break;
         case "cost:update":
           next.costUsd = event.payload.totalUsd;

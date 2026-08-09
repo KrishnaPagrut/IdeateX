@@ -23,6 +23,7 @@ import { ResultsView } from "@/components/results/results-view";
 import { toRunAggregates } from "@/components/run-live/adapt";
 import { AgentDrawer } from "@/components/run-live/agent-drawer";
 import { AgentGraph } from "@/components/run-live/agent-graph";
+import { RacePanel } from "@/components/run-live/race-panel";
 import { StageProgress } from "@/components/run-live/stage-progress";
 import type {
   AgentRunSnapshot,
@@ -363,6 +364,11 @@ export function RunShell({ runId }: { runId: string }) {
           <div className="mx-auto w-full max-w-4xl px-6 pb-4">
             <StageProgress status={status} agents={agents} />
           </div>
+          {Object.keys(stream.race).length > 0 && (
+            <div className="mx-auto w-full max-w-4xl px-6 pb-5">
+              <RacePanel race={stream.race} />
+            </div>
+          )}
           <div className="relative h-[max(540px,calc(100dvh-24rem))] border-y">
             <AgentGraph
               agents={agents}
