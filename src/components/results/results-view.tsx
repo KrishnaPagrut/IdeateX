@@ -1,6 +1,7 @@
 import { ArrowRight } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import type { MarketingReport } from "@/lib/schemas/report";
 import type { AgentRunSnapshot, PersonaLite, RunSnapshot } from "@/components/run-live/types";
 
@@ -70,23 +71,46 @@ function Findings({ report }: { report: MarketingReport }) {
   );
 }
 
-function NextMoves({ report }: { report: MarketingReport }) {
+function NextMoves({
+  report,
+  onOpenLaunchKit,
+}: {
+  report: MarketingReport;
+  onOpenLaunchKit?: () => void;
+}) {
   return (
-    <div className="rounded-xl border bg-card p-5">
-      <p className="font-mono text-3xs tracking-eyebrow text-muted-foreground uppercase">
-        Next steps
-      </p>
-      <ol className="mt-2 space-y-2">
-        {report.nextSteps.map((step, i) => (
-          <li key={step} className="flex min-w-0 items-start gap-2 text-xs leading-relaxed">
-            <span className="mt-0.5 shrink-0 font-mono text-3xs font-semibold text-muted-foreground">
-              {String(i + 1).padStart(2, "0")}
-            </span>
-            <span className="min-w-0 flex-1 wrap-break-word">{step}</span>
-            <ArrowRight className="mt-0.5 size-3 shrink-0 text-muted-foreground/50" />
-          </li>
-        ))}
-      </ol>
+    <div className="space-y-3">
+      <div className="rounded-xl border bg-card p-5">
+        <p className="font-mono text-3xs tracking-eyebrow text-muted-foreground uppercase">
+          Next steps
+        </p>
+        <ol className="mt-2 space-y-2">
+          {report.nextSteps.map((step, i) => (
+            <li key={step} className="flex min-w-0 items-start gap-2 text-xs leading-relaxed">
+              <span className="mt-0.5 shrink-0 font-mono text-3xs font-semibold text-muted-foreground">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <span className="min-w-0 flex-1 wrap-break-word">{step}</span>
+              <ArrowRight className="mt-0.5 size-3 shrink-0 text-muted-foreground/50" />
+            </li>
+          ))}
+        </ol>
+      </div>
+      {onOpenLaunchKit && (
+        <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border bg-card p-5">
+          <div className="min-w-0">
+            <p className="font-mono text-3xs tracking-eyebrow text-primary uppercase">Launch kit</p>
+            <p className="mt-1 text-sm font-medium">Turn the winner into a dated campaign timeline</p>
+            <p className="mt-0.5 text-2xs leading-relaxed text-muted-foreground">
+              Teasers, launch day, follow-ups — copy and visuals you can edit.
+            </p>
+          </div>
+          <Button size="sm" onClick={onOpenLaunchKit}>
+            Open launch kit
+            <ArrowRight data-icon="inline-end" />
+          </Button>
+        </div>
+      )}
     </div>
   );
 }
@@ -96,12 +120,15 @@ export function ResultsView({
   agents,
   personas,
   onSelectAgent,
+  onOpenLaunchKit,
 }: {
   run: RunSnapshot;
   agents: AgentRunSnapshot[];
   personas: Record<string, PersonaLite>;
   /** Optional: quote/exchange cards open that agent in the inspector. */
   onSelectAgent?: (agentRunId: string) => void;
+  /** Optional: jump from the report into the launch-kit tab. */
+  onOpenLaunchKit?: () => void;
 }) {
   const report = run.synthesis;
   const aggregates = run.aggregates;
@@ -236,7 +263,7 @@ export function ResultsView({
       id: "next",
       label: "Next",
       title: "What next",
-      node: <NextMoves report={report} />,
+      node: <NextMoves report={report} onOpenLaunchKit={onOpenLaunchKit} />,
     },
   ];
 

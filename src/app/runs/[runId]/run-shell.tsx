@@ -160,19 +160,9 @@ export function RunShell({ runId }: { runId: string }) {
   const terminal = isTerminalStatus(status);
   const active = isActiveStatus(status);
 
-  // A watched run just completed: surface the report (subtly — a toast, and
-  // the tab only moves if the user hasn't taken over the tabs themselves).
-  React.useEffect(() => {
-    if (landing !== "active" || status !== "completed" || autoSwitched) return;
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setAutoSwitched(true);
-    toast.success("Report ready");
-  }, [landing, status, autoSwitched]);
-
-  const resolvedTab: "swarm" | "results" | "launch-kit" =
-    tab ?? (landing === "completed" || autoSwitched ? "results" : "swarm");
-
-  // Once the run settles, pull the final snapshot (synthesis, costs, timings).
+  // Once the run settles, pull the final snapshot (synthesis, costs, timings)
+  // BEFORE we flip to Results — otherwise the tab opens on "No report yet"
+  // while the refetch is still in flight.
   const wasActiveRef = React.useRef(false);
   React.useEffect(() => {
     if (active) wasActiveRef.current = true;
@@ -181,6 +171,26 @@ export function RunShell({ runId }: { runId: string }) {
       void refetch();
     }
   }, [active, terminal, refetch]);
+
+  // A watched run just completed: wait until the snapshot carries the report,
+  // then surface it (toast + tab flip only if the user hasn't taken over).
+  const reportReady = snapshot?.run.synthesis != null && snapshot.run.status === "completed";
+  React.useEffect(() => {
+    if (landing !== "active" || !reportReady || autoSwitched) return;
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setAutoSwitched(true);
+    toast.success("Report ready", {
+      action: {
+        label: "Launch kit",
+        onClick: () => setTab("launch-kit"),
+      },
+    });
+  }, [landing, reportReady, autoSwitched]);
+
+  const resolvedTab: "swarm" | "results" | "launch-kit" =
+    tab ?? (landing === "completed" || autoSwitched ? "results" : "swarm");
+
+  const launchKitAvailable = reportReady;
 
   const elapsed = useElapsed(
     snapshot?.run.startedAt ?? snapshot?.run.createdAt ?? null,
@@ -378,9 +388,7 @@ export function RunShell({ runId }: { runId: string }) {
           <TabsList variant="line">
             <TabsTrigger value="swarm">Swarm</TabsTrigger>
             <TabsTrigger value="results">Results</TabsTrigger>
-            {run.status === "completed" && run.synthesis != null && (
-              <TabsTrigger value="launch-kit">Launch kit</TabsTrigger>
-            )}
+            {launchKitAvailable && <TabsTrigger value="launch-kit">Launch kit</TabsTrigger>}
           </TabsList>
         </div>
 
@@ -420,18 +428,31 @@ export function RunShell({ runId }: { runId: string }) {
                   This run ended before a verdict — status: {STATUS_LABELS[status].toLowerCase()}.
                 </p>
               </div>
+            ) : status === "completed" && !run.synthesis ? (
+              <div className="flex flex-col items-center gap-3 rounded-xl border border-dashed p-10 text-center">
+                <DotmSquare3
+                  colorPreset="solid-theme"
+                  size={28}
+                  dotSize={4}
+                  ariaLabel="Loading report"
+                />
+                <p className="font-mono text-xs tracking-eyebrow text-muted-foreground uppercase">
+                  Pulling the report
+                </p>
+              </div>
             ) : (
               <ResultsView
                 run={vizRun}
                 agents={agents}
                 personas={personas}
                 onSelectAgent={handleSelect}
+                onOpenLaunchKit={launchKitAvailable ? () => setTab("launch-kit") : undefined}
               />
             )}
           </div>
         </TabsContent>
 
-        {run.status === "completed" && run.synthesis != null && (
+        {launchKitAvailable && (
           <TabsContent value="launch-kit" className="mt-6">
             <div className="mx-auto w-full max-w-4xl px-6">
               <LaunchKitPanel runId={runId} />

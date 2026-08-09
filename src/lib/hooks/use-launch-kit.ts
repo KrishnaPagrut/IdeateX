@@ -6,9 +6,9 @@ import type { CampaignItemSnapshot } from "@/lib/schemas/launch";
 
 // ---------------------------------------------------------------------------
 // Launch-kit data hook. Wraps GET/POST /api/runs/[runId]/launch-kit:
-//   GET 404  → the kit hasn't been generated ("none")
-//   GET 200  → {items} ("ready")
-//   POST 200 → {items}; POST 409 also returns {items} (someone generated it
+//   GET 200 {items: []} → not generated yet ("none")
+//   GET 200 {items: [...]} → "ready"
+//   POST 201 → {items}; POST 409 also returns {items} (someone generated it
 //              first — same outcome, treated as success)
 // ---------------------------------------------------------------------------
 
@@ -25,6 +25,11 @@ export type ItemPatch =
     >
   | { action: "regenerate_image" };
 
+/** Contracts: GET may return an empty list — that means "none", not "ready". */
+export function launchKitStatusFromItems(items: CampaignItemSnapshot[]): "none" | "ready" {
+  return items.length === 0 ? "none" : "ready";
+}
+
 export async function patchItem(
   itemId: string,
   body: ItemPatch,
@@ -35,7 +40,8 @@ export async function patchItem(
     body: JSON.stringify(body),
   });
   if (!res.ok) throw new Error(`Save failed (HTTP ${res.status})`);
-  return (await res.json()) as CampaignItemSnapshot;
+  const json = (await res.json()) as { item?: CampaignItemSnapshot } & CampaignItemSnapshot;
+  return json.item ?? json;
 }
 
 export interface UseLaunchKitResult {
@@ -56,23 +62,20 @@ export function useLaunchKit(runId: string): UseLaunchKitResult {
   const refresh = useCallback(async () => {
     try {
       const res = await fetch(`/api/runs/${runId}/launch-kit`, { cache: "no-store" });
-      if (res.status === 404) {
-        // Not generated yet — but never demote an in-flight generation.
-        setStatus((s) => (s === "generating" ? s : "none"));
-        return;
-      }
       if (!res.ok) {
         setError(`Could not load the launch kit (HTTP ${res.status})`);
-        setStatus((s) => (s === "loading" ? "none" : s));
+        setStatus((s) => (s === "loading" || s === "generating" ? "none" : s));
         return;
       }
       const body = (await res.json()) as { items: CampaignItemSnapshot[] };
-      setItems(body.items);
-      setStatus("ready");
+      const next = launchKitStatusFromItems(body.items ?? []);
+      // Never demote an in-flight generation on a concurrent empty poll.
+      setStatus((s) => (s === "generating" && next === "none" ? s : next));
+      setItems(next === "ready" ? body.items : null);
       setError(null);
     } catch {
       setError("Could not load the launch kit — check your connection");
-      setStatus((s) => (s === "loading" ? "none" : s));
+      setStatus((s) => (s === "loading" || s === "generating" ? "none" : s));
     }
   }, [runId]);
 
@@ -90,12 +93,19 @@ export function useLaunchKit(runId: string): UseLaunchKitResult {
       const res = await fetch(`/api/runs/${runId}/launch-kit`, { method: "POST" });
       // 409 = already generated; the route returns the existing items either way.
       if (res.ok || res.status === 409) {
-        const body = (await res.json()) as { items: CampaignItemSnapshot[] };
-        setItems(body.items);
-        setStatus("ready");
+        const body = (await res.json()) as { items?: CampaignItemSnapshot[]; error?: string };
+        const list = body.items ?? [];
+        if (launchKitStatusFromItems(list) === "ready") {
+          setItems(list);
+          setStatus("ready");
+          return;
+        }
+        setError(body.error ?? "Generation returned no timeline items");
+        setStatus("none");
         return;
       }
-      setError(`Generation failed (HTTP ${res.status})`);
+      const body = (await res.json().catch(() => null)) as { error?: string } | null;
+      setError(body?.error ?? `Generation failed (HTTP ${res.status})`);
       setStatus("none");
     } catch {
       setError("Generation failed — check your connection");

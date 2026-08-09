@@ -21,12 +21,6 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { MatrixLoader } from "./matrix-loader";
 
-const EXAMPLES = [
-  "Risk-averse people from high-income households",
-  "First-generation college students juggling jobs",
-  "Small-town landlords who self-manage their rentals",
-];
-
 /**
  * "New pool" flow: describe a population in free text, the generator turns it
  * into a named custom pool, then the standard batch generator fills it. Two
@@ -111,25 +105,10 @@ export function NewPoolDialog({
               id="pool-prompt"
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
-              placeholder={`e.g. "${EXAMPLES[0]}"`}
+              placeholder="Describe the population to generate"
               rows={3}
               disabled={busy}
             />
-            <p className="text-xs text-muted-foreground">
-              Try: {EXAMPLES.slice(1).map((ex, i) => (
-                <React.Fragment key={ex}>
-                  {i > 0 && " · "}
-                  <button
-                    type="button"
-                    className="underline-offset-2 hover:underline disabled:opacity-50"
-                    onClick={() => setPrompt(ex)}
-                    disabled={busy}
-                  >
-                    {ex}
-                  </button>
-                </React.Fragment>
-              ))}
-            </p>
           </div>
 
           <div className="flex items-center gap-2">

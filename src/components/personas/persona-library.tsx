@@ -177,7 +177,7 @@ export function PersonaLibrary() {
     : null;
 
   return (
-    <div className="mx-auto w-full max-w-6xl px-6 py-10">
+    <div className="mx-auto w-full max-w-6xl px-6 py-14">
       <Toaster position="bottom-right" />
 
       <header className="flex flex-wrap items-end justify-between gap-4">

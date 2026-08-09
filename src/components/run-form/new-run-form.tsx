@@ -28,17 +28,10 @@ const TIERS: Array<{
   { tier: "deep", name: "Deep", blurb: "A full population sweep" },
 ];
 
-const DESCRIPTION_PLACEHOLDER =
-  "A subscription plant-care app: $6/month, smart reminders, photo-based plant diagnosis, and a rescue kit mailed automatically when a plant is struggling…";
-
-const AUDIENCE_PLACEHOLDER =
-  "Urban millennial and Gen-Z plant owners in the US and EU; secondary: gift buyers and retired gardeners.";
-
-const OBJECTIVE_PLACEHOLDER =
-  "What should this campaign achieve? e.g. maximize app-store installs at launch without burning trust — and what you want out of this study.";
-
-const CONTEXT_PLACEHOLDER =
-  "Market, pricing today, constraints, competitors — anything the study should know.";
+const DESCRIPTION_PLACEHOLDER = "Describe the product";
+const AUDIENCE_PLACEHOLDER = "Who it's for";
+const OBJECTIVE_PLACEHOLDER = "What success looks like for this campaign";
+const CONTEXT_PLACEHOLDER = "Pricing, competitors, constraints, or other context";
 
 export function NewRunForm() {
   const router = useRouter();
@@ -140,7 +133,7 @@ export function NewRunForm() {
           value={productName}
           onChange={(e) => setProductName(e.target.value)}
           onBlur={() => productName.length > 0 && setTouched(true)}
-          placeholder="Sprout"
+          placeholder="Product name"
           className="bg-card text-base"
           aria-invalid={touched && nameMissing ? true : undefined}
         />
