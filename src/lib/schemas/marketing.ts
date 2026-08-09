@@ -48,21 +48,21 @@ export type CreativeTheme = z.infer<typeof CreativeThemeSchema>;
 export const CampaignStrategySchema = z.object({
   /** Overwritten in code with a stable "strategy_<i>" id after generation. */
   id: z.string(),
-  name: z.string().max(60),
+  name: z.string().describe("Short strategy name, a few words"),
   theme: CreativeThemeSchema,
   positioningThesis: z.string(),
   targetCohortIds: z
     .array(z.string())
     .min(1)
     .describe("Cohort NAMES from the brief this strategy is aimed at"),
-  centralMessage: z.string().max(240),
+  centralMessage: z.string().describe("The one-sentence campaign message (aim under 240 chars)"),
   creativeDirection: z.string(),
   sampleLaunchPost: z.object({
     platform: PlatformSchema,
-    body: z.string().max(600),
+    body: z.string().describe("The post itself, platform-native (aim under 600 chars)"),
     hashtags: z.array(z.string()).max(4),
   }),
-  callToAction: z.string().max(120),
+  callToAction: z.string().describe("Imperative CTA, a short phrase"),
   contentMix: z
     .array(
       z.object({

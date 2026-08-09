@@ -42,6 +42,7 @@ export async function runStrategyStage(
         direction,
       });
 
+      try {
       const { agentRunId, output } = await executeAgent({
         ctx,
         kind: "strategy",
@@ -73,14 +74,29 @@ export async function runStrategyStage(
         targetCohortIds: targetCohortIds.length > 0 ? targetCohortIds : [...validCohorts],
       };
       return { strategy, agentRunId };
+      } catch (error) {
+        // A single direction dying (e.g. an upstream constrained-decoding 500
+        // that survives retries) must not kill the race: the row is already
+        // marked failed by executeAgent; race with the survivors.
+        if (ctx.signal.aborted) throw error;
+        console.error(`[strategy] ${direction.label} failed after retries:`, error);
+        return null;
+      }
     }),
   );
 
-  const strategies = results.map((r) => r.strategy);
+  const survivors = results.filter((r): r is NonNullable<typeof r> => r !== null);
+  if (survivors.length < 2) {
+    throw new Error(
+      `strategy_failures: only ${survivors.length}/${STRATEGY_DIRECTIONS.length} strategies generated — need at least 2 to race`,
+    );
+  }
+
+  const strategies = survivors.map((r) => r.strategy);
   await db
     .update(runs)
     .set({ strategies: strategies as unknown as Record<string, unknown> })
     .where(eq(runs.id, run.id));
 
-  return { strategies, strategyAgentIds: results.map((r) => r.agentRunId) };
+  return { strategies, strategyAgentIds: survivors.map((r) => r.agentRunId) };
 }
