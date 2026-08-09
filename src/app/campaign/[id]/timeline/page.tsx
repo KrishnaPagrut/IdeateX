@@ -201,7 +201,7 @@ export default function TimelinePage({ params }: { params: { id: string } }) {
 
   return (
     <Shell role="cmo" companyId={params.id} company={campaign?.brief?.productName}>
-      <div className="mb-5 flex items-start justify-between">
+      <div className="mb-5 flex flex-wrap items-start justify-between gap-4">
         <div>
           <h1 className="text-[22px] font-semibold tracking-tight">
             {campaign?.brief?.productName} — campaign timeline
@@ -280,7 +280,7 @@ export default function TimelinePage({ params }: { params: { id: string } }) {
           )}
 
           {view === "assets" && (
-            <div className="grid grid-cols-4 gap-3">
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
               {items.filter((i) => i.imagePrompt).map((i) => (
                 <button key={i.id} onClick={() => setSel(i)} className="panel overflow-hidden text-left">
                   {imageFor(i) ? (
@@ -356,7 +356,7 @@ export default function TimelinePage({ params }: { params: { id: string } }) {
               onBlur={(e) => patch(sel.id, { patch: { body: e.target.value } }, "save")}
             />
 
-            <div className="mb-3 grid grid-cols-2 gap-3">
+            <div className="mb-3 grid gap-3 sm:grid-cols-2">
               <div>
                 <label className="label">Date &amp; time</label>
                 <input

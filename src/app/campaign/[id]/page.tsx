@@ -115,7 +115,7 @@ export default function CompanyPage({ params }: { params: { id: string } }) {
           </label>
           <input
             id="objective"
-            className="field mb-6"
+            className="field input-w mb-6"
             value={objective}
             onChange={(e) => setObjective(e.target.value)}
             placeholder="Ship an MVP in 8 weeks and get 500 signups in launch week"

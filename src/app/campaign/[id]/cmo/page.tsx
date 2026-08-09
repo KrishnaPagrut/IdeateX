@@ -89,7 +89,7 @@ export default function CampaignPage({ params }: { params: { id: string } }) {
 
   return (
     <Shell role="cmo" companyId={params.id} company={campaign.brief.productName}>
-      <div className="mb-6 flex items-start justify-between">
+      <div className="mb-6 flex flex-wrap items-start justify-between gap-4">
         <div>
           <h1 className="text-[24px] font-semibold tracking-tight">{campaign.brief.productName}</h1>
           <p className="mt-1 max-w-[720px] text-[14px] text-[var(--muted)]">
@@ -105,7 +105,7 @@ export default function CampaignPage({ params }: { params: { id: string } }) {
           Synthetic audience · {campaign.audience?.personas.length ?? 0} fictional personas across{" "}
           {campaign.audience?.cohorts.length ?? 0} cohorts
         </h2>
-        <div className="grid grid-cols-4 gap-3">
+        <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
           {(campaign.audience?.cohorts ?? []).map((c: any) => (
             <div key={c.id} className="panel p-4" style={{ borderTop: `2px solid ${c.color}` }}>
               <div className="flex items-center justify-between">
@@ -136,7 +136,7 @@ export default function CampaignPage({ params }: { params: { id: string } }) {
       {/* Strategies */}
       <section className="mb-6">
         <h2 className="label mb-3">Three campaign strategies</h2>
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
           {strategies.map((s) => {
             const won = findings?.winningStrategyId === s.id;
             const isSel = selected === s.id;
@@ -194,7 +194,7 @@ export default function CampaignPage({ params }: { params: { id: string } }) {
           <h2 className="label mb-3">What the simulation learned</h2>
           <div className="panel p-5">
             <p className="text-[15px] leading-relaxed">{findings.whyItWon}</p>
-            <div className="mt-4 grid grid-cols-2 gap-2.5">
+            <div className="mt-4 grid gap-3 lg:grid-cols-2">
               {findings.findings.map((f) => {
                 const tone =
                   f.kind === "worked"

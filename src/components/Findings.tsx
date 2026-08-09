@@ -53,7 +53,7 @@ export function FindingsPanel({
         {headline}
       </h3>
       <p className="mt-2 text-[15px] leading-relaxed">{report.whyItWon}</p>
-      <div className="mt-4 grid grid-cols-2 gap-2.5">
+      <div className="mt-4 grid gap-3 lg:grid-cols-2">
         {report.findings.map((f) => (
           <FindingCard key={f.id} finding={f} />
         ))}

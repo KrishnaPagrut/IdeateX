@@ -154,15 +154,21 @@ export function Meter({
   max = 100,
   tone = "var(--accent)",
   height = 6,
+  /**
+   * Caps the track width. Past ~560px a bar stops reading as a proportion and
+   * just reads as a long line, so wide layouts cap by default.
+   */
+  cap = false,
 }: {
   value: number;
   max?: number;
   tone?: string;
   height?: number;
+  cap?: boolean;
 }) {
   return (
     <div
-      className="flex-1 overflow-hidden rounded-full"
+      className={`flex-1 overflow-hidden rounded-full ${cap ? "meter-w" : ""}`}
       style={{ height, background: "var(--track)" }}
     >
       <div

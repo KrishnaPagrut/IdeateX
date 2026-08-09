@@ -107,7 +107,7 @@ export default function IntakePage() {
         per the design system's tension principle. The graphic drops on small
         screens rather than shrinking into illegibility.
       */}
-      <section className="relative mb-16 grid items-center gap-10 pt-10 lg:grid-cols-[1.1fr_0.9fr] lg:pt-16">
+      <section className="relative mb-20 grid max-w-[1240px] items-center gap-12 pt-10 lg:grid-cols-[1.05fr_0.95fr] lg:pt-16">
         <div className="reveal is-visible">
           <SectionLabel live>Simulation-first</SectionLabel>
           <h1 className="display mt-6 text-[2.75rem] sm:text-[4rem] lg:text-[4.75rem]">
@@ -145,7 +145,7 @@ export default function IntakePage() {
         <HeroGraphic />
       </section>
 
-      <div id="brief" className="mx-auto max-w-[880px] scroll-mt-20">
+      <div id="brief" className="prose-w scroll-mt-20">
         <Reveal className="mb-6">
           <SectionLabel>Step 01 — Company</SectionLabel>
           <h2 className="display mt-4 text-[2rem] sm:text-[2.5rem]">

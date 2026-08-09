@@ -49,6 +49,33 @@
 
   --radius: 12px;
   --radius-lg: 16px;
+
+  /*
+   * Measure system. Without explicit caps, `flex-1` children grow without
+   * limit on wide displays — 1200px progress bars and 1000px single-line
+   * inputs. These are the widths past which an element stops communicating.
+   */
+  --w-page: 1440px; /* outer shell */
+  --w-prose: 1120px; /* reading + forms */
+  --w-input: 760px; /* single-line inputs */
+  --w-meter: 560px; /* bars and meters */
+}
+
+/* Shared page gutter, so every screen lands on the same left edge. */
+.page {
+  width: 100%;
+  max-width: var(--w-page);
+  margin-inline: auto;
+}
+.prose-w {
+  width: 100%;
+  max-width: var(--w-prose);
+}
+.input-w {
+  max-width: var(--w-input);
+}
+.meter-w {
+  max-width: var(--w-meter);
 }
 
 html,

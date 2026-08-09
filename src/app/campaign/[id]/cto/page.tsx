@@ -140,10 +140,10 @@ export default function CtoPage({ params }: { params: { id: string } }) {
 
   return (
     <Shell company={company?.brief?.productName} companyId={params.id} role="cto">
-      <div className="mb-5 flex items-start justify-between">
+      <div className="mb-5 flex flex-wrap items-start justify-between gap-4">
         <div>
           <><SectionLabel tone="var(--cto)">CTO</SectionLabel><h1 className="display mt-4 text-[2.25rem] sm:text-[2.75rem]">Simulate the build <GradientText>before you commit</GradientText>.</h1></>
-          <p className="mt-1 max-w-[720px] text-[13.5px] text-[var(--muted)]">
+          <p className="mt-3 max-w-[680px] text-[14px] leading-relaxed text-[var(--muted)]">
             Decomposes the objective into a task graph, runs thousands of Monte Carlo schedule
             simulations over it, and reports where the finish dates actually land. Every artifact is
             a draft — nothing is opened against a repository.
@@ -155,14 +155,14 @@ export default function CtoPage({ params }: { params: { id: string } }) {
       {/* Objective */}
       <div className="panel mb-5 p-4">
         <label className="label">Objective</label>
-        <div className="flex gap-3">
+        <div className="flex flex-col gap-3 sm:flex-row">
           <input
-            className="field flex-1"
+            className="field input-w flex-1"
             value={objective}
             onChange={(e) => setObjective(e.target.value)}
             placeholder="Ship a working MVP in 8 weeks"
           />
-          <button className="btn btn-primary shrink-0" onClick={run} disabled={busy || !objective.trim()}>
+          <button className="btn btn-primary shrink-0 sm:w-auto" onClick={run} disabled={busy || !objective.trim()}>
             {busy ? "Simulating…" : record ? <>Re-run simulation <span className="arrow">→</span></> : <>Run simulation <span className="arrow">→</span></>}
           </button>
         </div>
@@ -203,7 +203,7 @@ export default function CtoPage({ params }: { params: { id: string } }) {
                       sampling every task&apos;s real duration from its risk profile.
                     </p>
                   </div>
-                  <div className="grid grid-cols-4 gap-7">
+                  <div className="grid grid-cols-2 gap-x-7 gap-y-4 sm:grid-cols-4">
                     <Stat invert label="P10" value={`${sim.p10}d`} />
                     <Stat invert label="P50" value={`${sim.p50}d`} />
                     <Stat invert label="P80" value={`${sim.p80}d`} tone="#fbbf24" />
@@ -260,21 +260,30 @@ export default function CtoPage({ params }: { params: { id: string } }) {
               <h3 className="display mt-4 mb-1 text-[1.6rem]">
                 Which tasks actually <GradientText>decide the date</GradientText>.
               </h3>
-              <p className="mb-5 text-[13px] text-[var(--muted)]">
+              <p className="mb-5 max-w-[680px] text-[13px] leading-relaxed text-[var(--muted)]">
                 How often each task landed on the critical path across all runs. A task critical in
                 90% of runs is a real risk; one critical in 20% is noise.
               </p>
+              {/*
+                Grid rather than flex: the label column grows with available
+                space up to a sane cap, and the bar is width-capped, so neither
+                one degenerates on a very wide display.
+              */}
               <div className="space-y-2.5">
                 {sim.criticality.map((c) => (
-                  <div key={c.taskId} className="flex items-center gap-3">
-                    <span className="w-[220px] shrink-0 truncate text-[13px]">
+                  <div
+                    key={c.taskId}
+                    className="grid items-center gap-4"
+                    style={{ gridTemplateColumns: "minmax(160px, 22rem) minmax(0, 34rem) 3rem" }}
+                  >
+                    <span className="truncate text-[13px]" title={byId.get(c.taskId)?.title}>
                       {byId.get(c.taskId)?.title ?? c.taskId}
                     </span>
                     <Meter
                       value={c.share * 100}
                       tone={c.share >= 0.9 ? "var(--neg)" : c.share >= 0.5 ? "var(--warn)" : "var(--accent)"}
                     />
-                    <span className="mono w-11 shrink-0 text-right text-[12px]">
+                    <span className="mono text-right text-[12px]">
                       {Math.round(c.share * 100)}%
                     </span>
                   </div>
@@ -350,7 +359,7 @@ export default function CtoPage({ params }: { params: { id: string } }) {
           </div>
 
           {/* Artifacts */}
-          <div className="flex gap-4">
+          <div className="flex flex-col gap-4 xl:flex-row">
             <div className="min-w-0 flex-1">
               <h3 className="label mb-3">
                 Draft artifacts — {items.length} generated from the plan
@@ -387,7 +396,7 @@ export default function CtoPage({ params }: { params: { id: string } }) {
             </div>
 
             {sel && (
-              <aside className="panel slide-in w-[420px] shrink-0 self-start p-4">
+              <aside className="panel slide-in w-full shrink-0 self-start p-4 xl:w-[420px]">
                 <div className="mb-3 flex items-start justify-between">
                   <div>
                     <span className="mono text-[10px] uppercase text-[var(--faint)]">

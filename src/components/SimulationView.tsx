@@ -192,7 +192,7 @@ export function SimulationView({
       </div>
 
       {/* Three columns */}
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         {strategies.map((s) => {
           const f = frames[s.id];
           const feed = feeds[s.id] ?? [];

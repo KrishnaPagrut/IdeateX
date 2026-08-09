@@ -28,7 +28,7 @@ export function Shell({
         className="sticky top-0 z-30 border-b bg-[var(--bg)]/80 backdrop-blur-md"
         style={{ borderColor: "var(--line)" }}
       >
-        <div className="mx-auto flex h-16 max-w-[1600px] items-center gap-4 px-6">
+        <div className="page flex h-16 items-center gap-4 px-6">
           <Link href="/" className="flex items-center gap-2.5" aria-label="LaunchLab home">
             <span
               className="flex h-7 w-7 items-center justify-center rounded-lg"
@@ -94,7 +94,7 @@ export function Shell({
           </div>
         </div>
       </header>
-      <main className="mx-auto max-w-[1600px] px-6 py-8">{children}</main>
+      <main className="page px-6 py-8">{children}</main>
     </div>
   );
 }
@@ -103,7 +103,7 @@ export function ProviderBadge({ live, name }: { live: boolean; name: string }) {
   const tone = live ? "var(--pos)" : "var(--warn)";
   return (
     <span
-      className="mono inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-[10.5px] uppercase tracking-[0.12em]"
+      className="mono inline-flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full border px-3 py-1.5 text-[10.5px] uppercase tracking-[0.12em]"
       style={{
         borderColor: live ? "rgb(15 138 77 / 0.3)" : "rgb(180 83 9 / 0.3)",
         background: live ? "rgb(15 138 77 / 0.06)" : "rgb(180 83 9 / 0.06)",
