@@ -47,10 +47,18 @@ export function isRetryableError(error: unknown): boolean {
     const e = error as {
       isRetryable?: unknown;
       code?: unknown;
+      name?: unknown;
       message?: unknown;
       cause?: unknown;
     };
     if (e.isRetryable === true) return true;
+    // Schema-validation misses are stochastic — a re-sample usually conforms.
+    if (e.name === "AI_NoObjectGeneratedError" || e.name === "AI_TypeValidationError") {
+      return true;
+    }
+    if (typeof e.message === "string" && /did not match schema|response did not match/i.test(e.message)) {
+      return true;
+    }
     if (typeof e.code === "string" && NETWORK_ERROR_CODES.has(e.code)) return true;
     if (typeof e.message === "string" && /fetch failed|network|socket hang up/i.test(e.message)) {
       return true;
