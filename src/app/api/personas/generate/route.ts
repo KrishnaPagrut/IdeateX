@@ -6,7 +6,7 @@ import { nanoid } from "nanoid";
 import { db, personas, type Persona } from "@/lib/db";
 import { generate } from "@/lib/llm/client";
 import { buildCastingSheet } from "@/lib/personas/casting-sheet";
-import { findSubdomain, parsePoolKey } from "@/lib/personas/taxonomy";
+import { resolvePoolTarget } from "@/lib/personas/custom-pools";
 import { GeneratedPersonaBatchSchema } from "@/lib/schemas/persona-gen";
 import {
   buildPersonaBatchPrompt,
@@ -54,18 +54,12 @@ export async function POST(req: NextRequest) {
 
   let target = GENERAL_POOL;
   if (pool) {
-    const keys = parsePoolKey(pool);
-    const sub = keys && findSubdomain(keys.domainKey, keys.subdomainKey);
-    if (!keys || !sub) {
+    // Taxonomy pools first, then user-created custom pools.
+    const resolved = await resolvePoolTarget(pool);
+    if (!resolved) {
       return NextResponse.json({ error: `Unknown pool "${pool}"` }, { status: 400 });
     }
-    target = {
-      domainKey: keys.domainKey,
-      subdomainKey: keys.subdomainKey,
-      name: sub.name,
-      description: sub.description,
-      seedHints: sub.seedHints,
-    };
+    target = resolved;
   }
 
   // Exclusion lists from the current library keep new personas distinct;

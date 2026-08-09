@@ -4,6 +4,7 @@ import { db, personas, runs, type Persona, type Run } from "@/lib/db";
 import { isMock } from "@/lib/llm/client";
 import { TIER_SHAPE } from "@/lib/llm/cost";
 import { findSubdomain } from "@/lib/personas/taxonomy";
+import { listCustomPools } from "@/lib/personas/custom-pools";
 import { buildFollowGraph } from "../social/graph";
 import { hashSeed } from "../social/rng";
 import { deriveTraits } from "../social/traits";
@@ -57,8 +58,14 @@ function poolKey(p: Persona): string {
   return `${p.domain}/${p.subdomain}`;
 }
 
-/** Catalog of pools actually present in the library (taxonomy adds descriptions). */
-function buildCatalog(library: Persona[]): {
+/**
+ * Catalog of pools actually present in the library (taxonomy and custom-pool
+ * definitions add names/descriptions).
+ */
+function buildCatalog(
+  library: Persona[],
+  customByKey: Map<string, { name: string; description: string }> = new Map(),
+): {
   catalog: PoolCatalogEntry[];
   byPool: Map<string, Persona[]>;
 } {
@@ -72,7 +79,7 @@ function buildCatalog(library: Persona[]): {
 
   const catalog = [...byPool.entries()].map(([key, members]) => {
     const [domainKey, subdomainKey] = key.split("/");
-    const sub = findSubdomain(domainKey, subdomainKey);
+    const sub = findSubdomain(domainKey, subdomainKey) ?? customByKey.get(key);
     const labelCounts = new Map<string, number>();
     for (const m of members) {
       for (const tag of m.tags) labelCounts.set(tag, (labelCounts.get(tag) ?? 0) + 1);
@@ -162,7 +169,13 @@ export async function runPlanningStage(
     throw new Error("no_active_personas: seed the persona library before starting a run");
   }
   const personaById = new Map(library.map((p) => [p.id, p]));
-  const { catalog, byPool } = buildCatalog(library);
+  const customByKey = new Map(
+    (await listCustomPools()).map((c) => [
+      `${c.domain}/${c.subdomain}`,
+      { name: c.name, description: c.description },
+    ]),
+  );
+  const { catalog, byPool } = buildCatalog(library, customByKey);
   const poolCatalog = formatPoolCatalog(catalog);
   const validPools = new Set(catalog.map((c) => c.key));
 

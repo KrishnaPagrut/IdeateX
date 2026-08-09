@@ -73,7 +73,7 @@ export function cancelRun(runId: string): boolean; // true if the run was live i
 - `POST /api/runs/[runId]/cancel` → `{cancelled: boolean}`.
 - `POST /api/runs/estimate` body `{tier, grounding}` → `{usd: number}`.
 - `GET/POST /api/personas` (list filters include `domain` + `subdomain`),
-  `GET /api/personas/pools`, `GET/PATCH /api/personas/[id]`,
+  `GET/POST /api/personas/pools`, `GET/PATCH /api/personas/[id]`,
   `POST /api/personas/generate` body `{count?, pool?}` (see workstream D).
 
 ## Fixture contract (workstream C consumes)
@@ -110,13 +110,29 @@ export function cancelRun(runId: string): boolean; // true if the run was live i
   seeds via `deriveSeed(baseSeed, poolLabel, batchIndex)` and logs each
   batch's `sheetSummary` one-liner. The sheet is rendered into the batch
   prompt as hard requirements by `buildPersonaBatchPrompt({sheet, ...})`.
+- **Custom pools**: users create pools from a free-text prompt. The
+  `custom_pools` table (`src/lib/db/schema.ts`) stores each definition —
+  `domain` (always `"custom"`), `subdomain` (kebab slug, unique per domain),
+  `name`, `description`, `seedHints`, and the original `prompt`. Pool keys
+  resolve through `resolvePoolTarget` in `src/lib/personas/custom-pools.ts`
+  (static taxonomy first, then `custom_pools`), so `custom/<slug>` works
+  anywhere a taxonomy key does: generation, the pool catalog, and planner
+  casting (the planning stage feeds custom names/descriptions into
+  `buildCatalog`).
 - `GET /api/personas/pools` → `{pools: [{domain, subdomain, name, description,
-  count, sample}]}` — every taxonomy pool (count may be 0) plus non-taxonomy
-  pools found in the DB (e.g. general/general). `sample` is up to 5
-  `{id, name, avatarSeed}` for avatar stacks.
+  count, sample}]}` — every taxonomy pool (count may be 0), every custom pool,
+  plus non-taxonomy pools found in the DB (e.g. general/general). `sample` is
+  up to 5 `{id, name, avatarSeed}` for avatar stacks.
+- `POST /api/personas/pools` body `{prompt: string}` → `201 {pool}` — one
+  `generate({role: "generator", schema: PoolSpecSchema})` call distills the
+  prompt into `{name, description, seedHints}`, slugged (deduped `-2`, `-3`…)
+  and inserted under the `custom` domain. Members are generated separately via
+  `POST /api/personas/generate` with the returned key; a seeding failure still
+  leaves a usable empty pool. Prompts under 8 chars 400; LLM failure 502 with
+  nothing inserted.
 - `POST /api/personas/generate` body `{count?, pool?: "domain/subdomain"}` —
-  with `pool`, personas are written to fit that subdomain and stamped into it;
-  unknown pools 400.
+  with `pool` (taxonomy or custom), personas are written to fit that pool and
+  stamped into it; unknown pools 400.
 - Planners never see individual personas at library scale. The engine
   (workstream A) builds a `PoolCatalogEntry[]` catalog from the live library —
   `{key, name, description, available, labels}` per pool, labels being the

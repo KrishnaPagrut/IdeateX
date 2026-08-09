@@ -31,3 +31,18 @@ export const GeneratedPersonaBatchSchema = z.object({
 });
 
 export type GeneratedPersona = z.infer<typeof GeneratedPersonaSchema>;
+
+/** A pool definition distilled from a user's free-text population prompt. */
+export const PoolSpecSchema = z.object({
+  name: z.string().min(3).max(60).describe('Short pool name, e.g. "Risk-averse retirees"'),
+  description: z
+    .string()
+    .min(20)
+    .describe("One or two sentences: who these people are and how they buy"),
+  seedHints: z
+    .string()
+    .min(10)
+    .describe("Comma-separated kinds of people the pool must span, like taxonomy seedHints"),
+});
+
+export type PoolSpec = z.infer<typeof PoolSpecSchema>;

@@ -11,6 +11,7 @@ import { PoolMeter, POOL_TARGET } from "./pool-meter";
 /** Display name for a domain key: taxonomy first, then a readable fallback. */
 function domainName(key: string): string {
   if (key === "general") return "General population";
+  if (key === "custom") return "Custom pools";
   return TAXONOMY.find((d) => d.key === key)?.name ?? key;
 }
 
@@ -92,11 +93,15 @@ export function PoolBrowser({
     byDomain.set(p.domain, list);
   }
   const taxonomyDomains = new Set(TAXONOMY.map((d) => d.key));
-  const strayDomains = [...byDomain.keys()].filter((key) => !taxonomyDomains.has(key));
-  // Populated stray domains lead (people the header counts live there);
-  // empty strays trail the taxonomy.
+  const strayDomains = [...byDomain.keys()].filter(
+    (key) => !taxonomyDomains.has(key) && key !== "custom",
+  );
+  // Custom pools lead (the user made them on purpose), then populated stray
+  // domains (people the header counts live there); empty strays trail the
+  // taxonomy.
   const populated = (key: string) => byDomain.get(key)!.some((p) => p.count > 0);
   const order = [
+    ...(byDomain.has("custom") ? ["custom"] : []),
     ...strayDomains.filter(populated),
     ...TAXONOMY.map((d) => d.key).filter((key) => byDomain.has(key)),
     ...strayDomains.filter((key) => !populated(key)),
@@ -123,7 +128,13 @@ export function PoolBrowser({
                     }`}
               </p>
             </div>
-            {stray && (
+            {domainKey === "custom" && (
+              <p className="mt-2 text-xs text-muted-foreground">
+                Pools you defined from a prompt. Planners cast from them exactly like
+                taxonomy pools.
+              </p>
+            )}
+            {stray && domainKey !== "custom" && (
               <p className="mt-2 text-xs text-muted-foreground">
                 These personas sit outside the casting taxonomy — created before the pool
                 system, or generated without a pool. Planners can still cast them.

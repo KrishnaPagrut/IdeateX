@@ -79,6 +79,30 @@ ${renderLabelVocabulary()}
 - You may invent a new label when none of the vocabulary fits a real trait — keep it lowercase-kebab-case, generalizable (another persona could plausibly carry it), and never a proper noun.
 - Pick labels that DIFFERENTIATE this persona from pool-mates — if everyone in the pool would carry the label, it is useless for casting. Do not tag the pool's own name.`;
 
+/**
+ * Turns a user's free-text population description into a pool definition
+ * (name, description, seed hints) shaped like a taxonomy subdomain, so the
+ * batch generator can target it. Consumed by POST /api/personas/pools.
+ */
+export const POOL_SPEC_SYSTEM = `You are a market-research demographer. A user describes a population segment in plain language; you formalize it into a pool definition for a synthetic-persona library.
+
+Rules:
+- The name is short and concrete (2-5 words), title-cased like "Risk-averse retirees" — never generic ("Custom pool") and never a full sentence.
+- The description is 1-2 sentences a researcher would recognize: who these people are, what shapes their buying behavior. Stay faithful to the user's intent — sharpen it, don't broaden it.
+- seedHints is a comma-separated list of 4-7 kinds of people the pool must span — occupations, life situations, and contexts that all genuinely fit the described segment while pulling in real internal diversity.`;
+
+export function buildPoolSpecPrompt(userPrompt: string, existingPoolNames: string[]): string {
+  const taken =
+    existingPoolNames.length > 0
+      ? `Pool names already in the library (pick a clearly distinct name):\n${existingPoolNames.join(", ")}`
+      : "";
+  return `Define a persona pool from this population description:
+
+"${userPrompt}"
+
+${taken}`.trim();
+}
+
 /** The subdomain a generation batch targets, straight from the taxonomy. */
 export interface PoolTarget {
   domainKey: string;
