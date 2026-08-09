@@ -5,6 +5,7 @@ import { nanoid } from "nanoid";
 
 import { db, personas, type Persona } from "@/lib/db";
 import { generate } from "@/lib/llm/client";
+import { buildCastingSheet } from "@/lib/personas/casting-sheet";
 import { findSubdomain, parsePoolKey } from "@/lib/personas/taxonomy";
 import { GeneratedPersonaBatchSchema } from "@/lib/schemas/persona-gen";
 import {
@@ -12,6 +13,9 @@ import {
   PERSONA_GEN_SYSTEM,
   type PoolTarget,
 } from "@/lib/prompts/persona-gen";
+
+/** High-but-coherent sampling temperature for persona generation diversity. */
+const GEN_TEMPERATURE = 0.9;
 
 const BodySchema = z.object({
   count: z.number().int().min(1).max(40).default(20),
@@ -91,9 +95,12 @@ export async function POST(req: NextRequest) {
       role: "generator",
       schema: GeneratedPersonaBatchSchema,
       system: PERSONA_GEN_SYSTEM,
+      temperature: GEN_TEMPERATURE,
       prompt: buildPersonaBatchPrompt({
         count: remaining,
         pool: target,
+        // Fresh randomized casting sheet per batch — controlled stochasticity.
+        sheet: buildCastingSheet(),
         usedNames: [...usedNames].slice(-400),
         usedOccupations: [...usedOccupations].slice(-400),
         poolTags: [...poolTags].slice(-60),

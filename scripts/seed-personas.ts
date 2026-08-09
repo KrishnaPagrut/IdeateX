@@ -4,9 +4,9 @@
  * pool reaches its target, inserting them with the pool's domain/subdomain
  * and source 'seed'.
  *
- *   pnpm seed-personas                                    # 12/pool, real API (22 pools → 264)
- *   pnpm exec tsx scripts/seed-personas.ts --mock --per-pool 4
- *   pnpm exec tsx scripts/seed-personas.ts --per-pool 25  # full ~550-persona library
+ *   pnpm seed-personas                                    # 12/pool, real API (40 pools → 480)
+ *   pnpm exec tsx scripts/seed-personas.ts --mock --per-pool 4 --seed 7
+ *   pnpm exec tsx scripts/seed-personas.ts --per-pool 25  # full ~1000-persona library
  *   pnpm exec tsx scripts/seed-personas.ts --pool consumers/budget-households --per-pool 25
  *
  * Flags:
@@ -14,6 +14,14 @@
  *   --pool D/S     seed only this pool (e.g. consumers/budget-households)
  *   --append       grow pools by N even if they already meet the target
  *   --mock         set MOCK_LLM=1 before loading the LLM client
+ *   --seed N       base seed for per-batch casting sheets (reproducible runs);
+ *                  random when omitted. Sheets derive per (pool, batch), so the
+ *                  same seed reproduces the same sheets regardless of pool order.
+ *
+ * Every batch draws a randomized casting sheet (gender quota, age curve,
+ * income spread, household + geography mix, two wildcards) and is generated
+ * at temperature 0.9 — controlled stochasticity so pools don't converge on
+ * the same defaults.
  *
  * Guard: pools already at/above the target are skipped (reported, exit 0)
  * unless --append is given, which adds N more to every selected pool.
@@ -46,11 +54,14 @@ if (flag("--mock")) process.env.MOCK_LLM = "1";
 const MAX_BATCH = 15;
 /** Hard cap on generator calls per pool, so a degenerate model can't loop forever. */
 const MAX_BATCHES_PER_POOL = 25;
+/** High-but-coherent sampling temperature for persona generation diversity. */
+const GEN_TEMPERATURE = 0.9;
 
 async function main() {
   const perPool = intArg("--per-pool", 12);
   const onlyPool = strArg("--pool");
   const append = flag("--append");
+  const baseSeed = intArg("--seed", Math.floor(Math.random() * 0xffffffff));
 
   // Dynamic imports AFTER the env is set so MOCK_LLM applies to the client.
   const [
@@ -59,6 +70,7 @@ async function main() {
     { GeneratedPersonaBatchSchema },
     prompts,
     { allSubdomains },
+    { buildCastingSheet, deriveSeed, sheetSummary },
     { and, eq, sql },
     { nanoid },
   ] = await Promise.all([
@@ -67,6 +79,7 @@ async function main() {
     import("../src/lib/schemas/persona-gen"),
     import("../src/lib/prompts/persona-gen"),
     import("../src/lib/personas/taxonomy"),
+    import("../src/lib/personas/casting-sheet"),
     import("drizzle-orm"),
     import("nanoid"),
   ]);
@@ -87,7 +100,7 @@ async function main() {
 
   console.log(
     `Seeding ${pools.length} pool(s) to ${append ? `+${perPool} each (--append)` : `${perPool} personas each`}` +
-      `${isMock() ? " (MOCK_LLM=1)" : ""}.`,
+      `${isMock() ? " (MOCK_LLM=1)" : ""} — casting-sheet seed ${baseSeed}, temperature ${GEN_TEMPERATURE}.`,
   );
 
   // Exclusion lists start from what's already in the DB and grow per batch.
@@ -135,10 +148,15 @@ async function main() {
     let batches = 0;
     while (before + added < target && batches < MAX_BATCHES_PER_POOL) {
       const size = Math.min(MAX_BATCH, target - before - added);
+      // Fresh casting sheet per batch, derived from the base seed so --seed N
+      // reproduces identical sheets run-to-run.
+      const sheet = buildCastingSheet(deriveSeed(baseSeed, poolLabel, batches));
+      console.log(`  batch ${batches + 1} sheet: ${sheetSummary(sheet)}`);
       const result = await generate({
         role: "generator",
         schema: GeneratedPersonaBatchSchema,
         system: prompts.PERSONA_GEN_SYSTEM,
+        temperature: GEN_TEMPERATURE,
         prompt: prompts.buildPersonaBatchPrompt({
           count: size,
           pool: {
@@ -148,6 +166,7 @@ async function main() {
             description: sub.description,
             seedHints: sub.seedHints,
           },
+          sheet,
           // Cap exclusion lists to keep the prompt bounded as the library grows.
           usedNames: [...usedNames].slice(-400),
           usedOccupations: [...usedOccupations].slice(-400),

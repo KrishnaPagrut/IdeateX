@@ -75,12 +75,23 @@ export function cancelRun(runId: string): boolean; // true if the run was live i
   subdomains, and every persona carries `domain` + `subdomain` columns
   (default `general`/`general` for pre-taxonomy personas).
 - `scripts/seed-personas.ts`: seeds pool-by-pool from the taxonomy via
-  `generate({role: "generator", schema: GeneratedPersonaBatchSchema, ...})`,
-  inserting with the pool's `domain`/`subdomain`, `source: 'seed'`,
-  `avatarSeed = nanoid()`. `--per-pool N` (default 12; ~25 is the full pool
-  target), `--pool domain/subdomain` for one pool, `--append` to grow past the
-  target. Idempotent-ish: pools already at/above target are skipped and a
-  per-pool count report is printed.
+  `generate({role: "generator", schema: GeneratedPersonaBatchSchema,
+  temperature: 0.9, ...})`, inserting with the pool's `domain`/`subdomain`,
+  `source: 'seed'`, `avatarSeed = nanoid()`. `--per-pool N` (default 12; ~25
+  is the full pool target), `--pool domain/subdomain` for one pool, `--append`
+  to grow past the target, `--seed N` for reproducible casting sheets.
+  Idempotent-ish: pools already at/above target are skipped and a per-pool
+  count report is printed.
+- **Casting sheets** (`src/lib/personas/casting-sheet.ts`): every generation
+  batch (seeder and `/api/personas/generate`) draws a randomized per-batch
+  constraint sheet — gender quota (women 40-55% / men 40-55% / nonbinary 3-8%,
+  redrawn per batch), age curve (skew-young/skew-old/bimodal/flat), income
+  spread, two must-appear household structures, geography mix, and a pair of
+  wildcard constraints from a 36-entry bank. `buildCastingSheet(seed?)` is
+  deterministic given a seed (random otherwise); the seeder derives per-batch
+  seeds via `deriveSeed(baseSeed, poolLabel, batchIndex)` and logs each
+  batch's `sheetSummary` one-liner. The sheet is rendered into the batch
+  prompt as hard requirements by `buildPersonaBatchPrompt({sheet, ...})`.
 - `GET /api/personas/pools` → `{pools: [{domain, subdomain, name, description,
   count, sample}]}` — every taxonomy pool (count may be 0) plus non-taxonomy
   pools found in the DB (e.g. general/general). `sample` is up to 5
@@ -95,5 +106,11 @@ export function cancelRun(runId: string): boolean; // true if the run was live i
   against it (`formatPoolCatalog` in `src/lib/prompts/planner.ts`). The engine
   resolves contracts to concrete personas within the run's persona budget,
   softly matching `mustInclude` labels against persona `tags`/`archetype` — so
-  tags are casting labels: 3-6 lowercase-kebab-case descriptors per persona
-  mixing attitude, life stage, and context.
+  tags are casting labels: 4-6 **lowercase-kebab-case** descriptors per
+  persona (kebab-case is load-bearing: planners' `mustInclude` matching
+  depends on it). The label vocabulary (`LABEL_VOCABULARY` in
+  `src/lib/prompts/persona-gen.ts`, rendered into the generation system
+  prompt) is organized by axis — **attitude, price posture, decision style,
+  life stage, tech posture, context, values** — and each persona draws labels
+  from at least three axes; the generator may also coin new kebab-case labels
+  when the vocabulary falls short.

@@ -26,6 +26,10 @@ export async function POST(
     role: "generator",
     schema: RegeneratedBackstorySchema,
     system: PERSONA_GEN_SYSTEM,
+    // High temperature: the whole point of regeneration is a fresh angle on
+    // the same fixed facts, so sample hot rather than converging on the
+    // previous backstory.
+    temperature: 0.9,
     prompt: buildBackstoryRegenPrompt(persona),
   });
 
