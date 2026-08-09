@@ -43,10 +43,13 @@ export function PersonaAvatar({
   seed,
   size = 24,
   className,
+  label,
 }: {
   seed: string;
   size?: number;
   className?: string;
+  /** Accessible name; falls back to a seed-based label. */
+  label?: string;
 }) {
   const { hue, cells } = specFromSeed(seed);
   const bg = `oklch(0.93 0.045 ${hue})`;
@@ -59,7 +62,7 @@ export function PersonaAvatar({
       width={size}
       height={size}
       role="img"
-      aria-label={`Avatar for seed ${seed}`}
+      aria-label={label ?? `Avatar for seed ${seed}`}
       className={className}
       style={{ borderRadius: "50%", flexShrink: 0 }}
     >
