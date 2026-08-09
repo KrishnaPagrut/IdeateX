@@ -23,7 +23,7 @@ export const RunStatusEventPayload = z.object({
 });
 
 export const StageEventPayload = z.object({
-  stage: z.enum(["framing", "planning", "simulating", "critiquing", "synthesizing"]),
+  stage: z.enum(["framing", "planning", "simulating", "discussing", "critiquing", "synthesizing"]),
   /** Number of agents this stage will run (for progress bars); set on stage:started */
   agentCount: z.number().optional(),
 });

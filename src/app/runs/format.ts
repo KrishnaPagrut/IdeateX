@@ -10,6 +10,7 @@ export const ACTIVE_STATUSES: ReadonlySet<RunStatus> = new Set<RunStatus>([
   "framing",
   "planning",
   "simulating",
+  "discussing",
   "critiquing",
   "synthesizing",
 ]);
@@ -23,6 +24,7 @@ export const STATUS_LABELS: Record<RunStatus, string> = {
   framing: "Framing",
   planning: "Planning",
   simulating: "Simulating",
+  discussing: "Focus group",
   critiquing: "Critiquing",
   synthesizing: "Synthesizing",
   completed: "Completed",

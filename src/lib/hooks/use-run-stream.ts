@@ -16,6 +16,7 @@ export const RUN_STAGES = [
   "framing",
   "planning",
   "simulating",
+  "discussing",
   "critiquing",
   "synthesizing",
 ] as const;
@@ -56,6 +57,7 @@ function emptyStages(): Record<RunStage, StageState> {
     framing: { started: false, completed: false },
     planning: { started: false, completed: false },
     simulating: { started: false, completed: false },
+    discussing: { started: false, completed: false },
     critiquing: { started: false, completed: false },
     synthesizing: { started: false, completed: false },
   };

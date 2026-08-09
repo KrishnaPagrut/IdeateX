@@ -25,6 +25,7 @@ export const RUN_STATUSES = [
   "framing",
   "planning",
   "simulating",
+  "discussing",
   "critiquing",
   "synthesizing",
   "completed",
@@ -38,6 +39,7 @@ export const AGENT_KINDS = [
   "framing",
   "planner",
   "persona",
+  "discussion",
   "critique",
   "synthesis",
 ] as const;
@@ -95,6 +97,8 @@ export const runs = pgTable("runs", {
   context: text("context"),
   tier: text("tier").$type<RunTier>().notNull().default("standard"),
   grounding: boolean("grounding").notNull().default(false),
+  // Focus-group stage: personas hear segment peers' verdicts and respond.
+  discussion: boolean("discussion").notNull().default(false),
   status: text("status").$type<RunStatus>().notNull().default("pending"),
   brief: jsonb("brief"),
   synthesis: jsonb("synthesis"),
