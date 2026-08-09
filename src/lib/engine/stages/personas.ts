@@ -15,9 +15,26 @@ import type { CastingPick } from "./planning";
 export const MAX_PERSONA_FAILURE_RATE = 0.2;
 const COST_CHECK_EVERY = 10;
 
+/**
+ * What the deep swarm reacts to: the product plus the WINNING strategy's
+ * actual campaign message and launch post, so the panel evaluates the thing
+ * that will actually ship.
+ */
+export function composeStimulus(
+  run: Run,
+  winner: { centralMessage: string; sampleLaunchPost: { platform: string; body: string } },
+): string {
+  return [
+    `${run.productName ?? "The product"}: ${run.idea}`,
+    `Campaign message under test:\n"${winner.centralMessage}"`,
+    `Launch post (${winner.sampleLaunchPost.platform}): ${winner.sampleLaunchPost.body}`,
+  ].join("\n\n");
+}
+
 export async function runSimulationStage(
   ctx: AgentContext,
   run: Run,
+  stimulus: string,
   picks: CastingPick[],
   personaById: Map<string, Persona>,
 ): Promise<VerdictRecord[]> {
@@ -41,7 +58,7 @@ export async function runSimulationStage(
 
         const { system, prompt } = personaPrompt({
           persona,
-          idea: run.idea,
+          idea: stimulus,
           context: run.context,
           angle: pick.angle,
           probeQuestions: pick.probeQuestions,

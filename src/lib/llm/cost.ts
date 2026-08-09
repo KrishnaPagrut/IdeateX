@@ -19,10 +19,16 @@ export const TIER_SHAPE: Record<
 const EST = {
   framing: { in: 2_000, out: 1_500 },
   planner: { in: 8_000, out: 2_000 }, // includes persona library index
+  strategy: { in: 6_000, out: 2_500 },
+  reaction: { in: 1_500, out: 300 },
+  advisor: { in: 14_000, out: 3_000 }, // reads all strategies + race evidence
   persona: { in: 2_500, out: 800 },
-  critique: { in: 12_000, out: 3_000 },
-  synthesis: { in: 15_000, out: 3_000 },
+  synthesis: { in: 18_000, out: 4_000 }, // report + drafted campaign content
 };
+
+const STRATEGY_COUNT = 3;
+const REACTIONS_PER_STRATEGY = 12;
+const ADVISOR_CALLS = 4; // three lenses + moderator
 
 /** Pre-launch estimate shown on the new-run form. Grounding adds tool-call fees (~$5/1k calls). */
 export function estimateRunCost(
@@ -36,8 +42,13 @@ export function estimateRunCost(
   let usd = 0;
   usd += costForTokens("reasoner", EST.framing.in, EST.framing.out);
   usd += shape.planners * costForTokens("reasoner", EST.planner.in, EST.planner.out);
+  usd += STRATEGY_COUNT * costForTokens("reasoner", EST.strategy.in, EST.strategy.out);
+  usd +=
+    STRATEGY_COUNT *
+    REACTIONS_PER_STRATEGY *
+    costForTokens("swarm", EST.reaction.in, EST.reaction.out);
+  usd += ADVISOR_CALLS * costForTokens("reasoner", EST.advisor.in, EST.advisor.out);
   usd += personaCount * costForTokens("swarm", EST.persona.in, EST.persona.out);
-  usd += 2 * costForTokens("reasoner", EST.critique.in, EST.critique.out);
   usd += costForTokens("reasoner", EST.synthesis.in, EST.synthesis.out);
   if (discussion) {
     // One focus-group reply per persona: persona-sized input + a shorter reply.

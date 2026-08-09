@@ -34,10 +34,15 @@ if (!["quick", "standard", "deep"].includes(tier)) {
 }
 if (mock) process.env.MOCK_LLM = "1";
 
+const SAMPLE_PRODUCT_NAME = "Sprout";
 const SAMPLE_IDEA =
-  "Sprout: a subscription plant-care app that pairs a $6/month plan with smart reminders, " +
+  "A subscription plant-care app that pairs a $6/month plan with smart reminders, " +
   "photo-based plant health diagnosis, and a mail-order 'rescue kit' (soil, treatment, tools) " +
   "dispatched automatically when the app detects a struggling plant.";
+const SAMPLE_AUDIENCE =
+  "Urban millennials and Gen-Z plant owners in the US and EU; secondary: gift buyers and retired gardeners.";
+const SAMPLE_OBJECTIVE =
+  "Launch campaign for the app-store debut; maximize installs from plant owners without burning trust.";
 
 const TIMEOUT_MS = 5 * 60 * 1000;
 
@@ -153,6 +158,9 @@ async function main(): Promise<void> {
     .insert(runs)
     .values({
       idea: SAMPLE_IDEA,
+      productName: SAMPLE_PRODUCT_NAME,
+      targetAudience: SAMPLE_AUDIENCE,
+      objective: SAMPLE_OBJECTIVE,
       context: "Target launch: US + EU app stores. Team of 2, pre-seed.",
       tier: tier as RunTier,
       grounding: false,
@@ -179,7 +187,11 @@ async function main(): Promise<void> {
           ? `${p.stage}${p.agentCount !== undefined ? ` ×${p.agentCount}` : ""}`
           : event.type.startsWith("agent:")
             ? `${p.kind} · ${p.label}${p.error ? ` (${p.error})` : ""}`
-            : `$${Number(p.totalUsd).toFixed(4)}`;
+            : event.type === "sim:tick"
+              ? `${p.strategyId} t${p.tick}/${p.totalTicks} reached ${p.reachedCount}/${p.personaCount}`
+              : event.type === "race:completed"
+                ? `${(p.results as unknown[]).length} strategies`
+                : `$${Number(p.totalUsd).toFixed(4)}`;
     console.log(`  [${String(event.seq).padStart(3)}] ${event.type.padEnd(15)} ${detail}`);
     if (
       event.type === "run:status" &&

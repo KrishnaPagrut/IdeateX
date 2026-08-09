@@ -3,15 +3,21 @@ import { eq } from "drizzle-orm";
 import { db, runs, type Run } from "@/lib/db";
 import { synthesisPrompt, type QuoteForSynthesis } from "@/lib/prompts/synthesis";
 import type { MarketingBrief } from "@/lib/schemas/brief";
-import { SynthesisSchema, type Synthesis } from "@/lib/schemas/synthesis";
+import type {
+  AdvisorConsensus,
+  AdvisorVerdict,
+  CampaignStrategy,
+  RaceResult,
+} from "@/lib/schemas/marketing";
+import { MarketingReportSchema, type MarketingReport } from "@/lib/schemas/report";
 import type { Aggregates, VerdictRecord } from "../aggregate";
 import { executeAgent, type AgentContext } from "../agent";
-import type { CritiqueResult } from "./critique";
 
 // ---------------------------------------------------------------------------
-// Synthesis: the founder-facing readout. Fed the brief, aggregates, both
-// critiques, and ~15 best verbatim quotes (highest-confidence, spread
-// round-robin across segments so no segment dominates the narrative).
+// Synthesis: the founder-facing marketing report. Fed the winner, the advisor
+// consensus (whose directives are hard constraints on drafted content), all
+// race results, the deep-swarm aggregates, and ~15 best verbatim quotes
+// (highest-confidence, spread round-robin across cohorts).
 // ---------------------------------------------------------------------------
 
 const QUOTE_BUDGET = 15;
@@ -50,19 +56,26 @@ export async function runSynthesisStage(
   ctx: AgentContext,
   run: Run,
   brief: MarketingBrief,
+  winner: CampaignStrategy,
+  consensus: AdvisorConsensus,
+  verdicts: AdvisorVerdict[],
+  race: RaceResult[],
   aggregates: Aggregates,
-  critiques: CritiqueResult,
   records: VerdictRecord[],
   framingAgentId: string,
   discussionNote = "",
-): Promise<Synthesis> {
+): Promise<MarketingReport> {
   const { system, prompt: basePrompt } = synthesisPrompt({
-    idea: run.idea,
+    productName: run.productName ?? run.idea.slice(0, 80),
+    description: run.idea,
+    objective: run.objective,
     context: run.context,
     brief,
+    winner,
+    consensus,
+    verdicts,
+    race,
     aggregates,
-    methodologyCritique: critiques.methodology,
-    redTeamCritique: critiques.redteam,
     quotes: selectQuotes(records),
   });
   const prompt = discussionNote ? `${basePrompt}\n\n${discussionNote}` : basePrompt;
@@ -70,10 +83,10 @@ export async function runSynthesisStage(
   const { output } = await executeAgent({
     ctx,
     kind: "synthesis",
-    label: "Synthesis",
+    label: "Campaign Report",
     parentAgentRunId: framingAgentId,
     role: "reasoner",
-    schema: SynthesisSchema,
+    schema: MarketingReportSchema,
     system,
     prompt,
     effort: "high",

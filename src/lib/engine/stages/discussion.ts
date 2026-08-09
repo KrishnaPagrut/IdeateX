@@ -52,6 +52,7 @@ function toPeerTake(r: VerdictRecord): PeerTake {
 export async function runDiscussionStage(
   ctx: AgentContext,
   run: Run,
+  stimulus: string,
   records: VerdictRecord[],
   personaById: Map<string, Persona>,
 ): Promise<DiscussionRecord[]> {
@@ -68,7 +69,7 @@ export async function runDiscussionStage(
 
         const { system, prompt } = discussionPrompt({
           persona,
-          idea: run.idea,
+          idea: stimulus,
           ownVerdict: record.verdict,
           peers: peers.map(toPeerTake),
         });

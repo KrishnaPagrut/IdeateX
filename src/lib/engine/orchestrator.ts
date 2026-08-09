@@ -7,17 +7,22 @@ import type { AgentContext } from "./agent";
 import { isAbortError } from "./concurrency";
 import { emitRunEvent, initRunSequence } from "./events";
 import { abortRun, registerRun, releaseRun } from "./registry";
-import { runCritiqueStage } from "./stages/critique";
+import { runAdvisorStage } from "./stages/advisors";
 import { runDiscussionStage, summarizeDiscussion } from "./stages/discussion";
 import { runFramingStage } from "./stages/framing";
-import { runSimulationStage } from "./stages/personas";
+import { composeStimulus, runSimulationStage } from "./stages/personas";
 import { runPlanningStage } from "./stages/planning";
+import { runRaceStage } from "./stages/race";
+import { runStrategyStage } from "./stages/strategy";
 import { runSynthesisStage } from "./stages/synthesis";
+import { ADVISOR_LENSES } from "@/lib/prompts/advisors";
+import { STRATEGY_DIRECTIONS } from "@/lib/prompts/strategy";
 
 // ---------------------------------------------------------------------------
-// The multi-agent validation pipeline:
-//   pending → framing → planning → simulating → critiquing → synthesizing
-//   → completed | failed | cancelled
+// The marketing pipeline:
+//   pending → framing → planning → strategizing → racing → advising
+//   → simulating (deep swarm on the winner) → discussing (opt-in)
+//   → synthesizing → completed | failed | cancelled
 // Statuses are persisted AND emitted at every transition; each stage brackets
 // itself with stage:started / stage:completed events.
 // ---------------------------------------------------------------------------
@@ -31,6 +36,9 @@ const NON_TERMINAL: RunStatus[] = [
   "pending",
   "framing",
   "planning",
+  "strategizing",
+  "racing",
+  "advising",
   "simulating",
   "discussing",
   "critiquing",
@@ -108,17 +116,63 @@ async function pipeline(runId: string, signal: AbortSignal, meter: CostMeter): P
   await emitRunEvent(runId, "stage:completed", { stage: "framing" });
   checkpoint(ctx);
 
-  // -- planning
+  // -- planning (casting + audience build)
   await setStatus(runId, "planning");
   await emitRunEvent(runId, "stage:started", { stage: "planning", agentCount: shape.planners });
-  const { picks, personaById } = await runPlanningStage(ctx, run, brief, framingAgentId);
+  const { picks, personaById, audience } = await runPlanningStage(ctx, run, brief, framingAgentId);
   await emitRunEvent(runId, "stage:completed", { stage: "planning" });
   checkpoint(ctx);
 
-  // -- simulating
+  // -- strategizing
+  await setStatus(runId, "strategizing");
+  await emitRunEvent(runId, "stage:started", {
+    stage: "strategizing",
+    agentCount: STRATEGY_DIRECTIONS.length,
+  });
+  const { strategies, strategyAgentIds } = await runStrategyStage(ctx, run, brief, framingAgentId);
+  await emitRunEvent(runId, "stage:completed", { stage: "strategizing" });
+  checkpoint(ctx);
+
+  // -- racing (every strategy vs. the same frozen audience)
+  await setStatus(runId, "racing");
+  await emitRunEvent(runId, "stage:started", { stage: "racing", agentCount: strategies.length });
+  const race = await runRaceStage(
+    ctx,
+    run,
+    brief,
+    audience,
+    strategies,
+    strategyAgentIds,
+    personaById,
+  );
+  await emitRunEvent(runId, "stage:completed", { stage: "racing" });
+  checkpoint(ctx);
+
+  // -- advising
+  await setStatus(runId, "advising");
+  await emitRunEvent(runId, "stage:started", {
+    stage: "advising",
+    agentCount: ADVISOR_LENSES.length + 1,
+  });
+  const { consensus, verdicts } = await runAdvisorStage(
+    ctx,
+    run,
+    brief,
+    strategies,
+    race,
+    framingAgentId,
+  );
+  await emitRunEvent(runId, "stage:completed", { stage: "advising" });
+  checkpoint(ctx);
+
+  const winner =
+    strategies.find((s) => s.id === consensus.winnerStrategyId) ?? strategies[0];
+  const stimulus = composeStimulus(run, winner);
+
+  // -- simulating (deep swarm on the winner)
   await setStatus(runId, "simulating");
   await emitRunEvent(runId, "stage:started", { stage: "simulating", agentCount: picks.length });
-  const records = await runSimulationStage(ctx, run, picks, personaById);
+  const records = await runSimulationStage(ctx, run, stimulus, picks, personaById);
   const aggregates = computeAggregates(records);
   await db
     .update(runs)
@@ -132,26 +186,11 @@ async function pipeline(runId: string, signal: AbortSignal, meter: CostMeter): P
   if (run.discussion) {
     await setStatus(runId, "discussing");
     await emitRunEvent(runId, "stage:started", { stage: "discussing", agentCount: records.length });
-    const replies = await runDiscussionStage(ctx, run, records, personaById);
+    const replies = await runDiscussionStage(ctx, run, stimulus, records, personaById);
     discussionNote = summarizeDiscussion(replies);
     await emitRunEvent(runId, "stage:completed", { stage: "discussing" });
     checkpoint(ctx);
   }
-
-  // -- critiquing
-  await setStatus(runId, "critiquing");
-  await emitRunEvent(runId, "stage:started", { stage: "critiquing", agentCount: 2 });
-  const critiques = await runCritiqueStage(
-    ctx,
-    run,
-    brief,
-    aggregates,
-    records,
-    framingAgentId,
-    discussionNote,
-  );
-  await emitRunEvent(runId, "stage:completed", { stage: "critiquing" });
-  checkpoint(ctx);
 
   // -- synthesizing
   await setStatus(runId, "synthesizing");
@@ -160,8 +199,11 @@ async function pipeline(runId: string, signal: AbortSignal, meter: CostMeter): P
     ctx,
     run,
     brief,
+    winner,
+    consensus,
+    verdicts,
+    race,
     aggregates,
-    critiques,
     records,
     framingAgentId,
     discussionNote,
