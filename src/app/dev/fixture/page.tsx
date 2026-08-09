@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
+import { toRunAggregates } from "@/components/run-live/adapt";
 import { AgentGraph } from "@/components/run-live/agent-graph";
 import { AgentDrawer } from "@/components/run-live/agent-drawer";
 import { StageProgress } from "@/components/run-live/stage-progress";
@@ -135,9 +136,15 @@ export default function FixtureHarnessPage() {
   }, [live, elapsed]);
 
   const run = useMemo<RunSnapshot>(() => {
-    if (!live) return FIXTURE.run;
+    // Regenerated fixtures carry engine-shaped aggregates (the snapshot API's
+    // raw run row); adapt to the wire shape exactly like the live page does.
+    const adapted = {
+      ...FIXTURE.run,
+      aggregates: toRunAggregates(FIXTURE.run.aggregates, FIXTURE.agents),
+    };
+    if (!live) return adapted;
     // While replaying, the synthesis hasn't "happened" yet.
-    return { ...FIXTURE.run, status: runStatus, synthesis: null, aggregates: null, finishedAt: null };
+    return { ...adapted, status: runStatus, synthesis: null, aggregates: null, finishedAt: null };
   }, [live, runStatus]);
 
   const selectedAgent = selectedId ? (agents.find((a) => a.id === selectedId) ?? null) : null;

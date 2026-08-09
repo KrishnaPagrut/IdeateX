@@ -3,18 +3,25 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 
 import rawFixture from "@/fixtures/run-fixture.json";
-import type { AgentRunSnapshot, PersonaLite, RunFixture } from "@/components/run-live/types";
+import { toRunAggregates } from "@/components/run-live/adapt";
+import type { AgentRunSnapshot, RunFixture, RunSnapshot } from "@/components/run-live/types";
 import type { DiscussionOutput } from "@/lib/schemas/discussion";
 
 import { FocusGroup, hasFocusGroup } from "./focus-group";
 import { ResultsView } from "./results-view";
 
-// The fixture predates the focus-group stage, so discussion rows are layered
-// on top of it here: this pins the contract (parent = original persona run,
-// output = DiscussionOutput) until the fixture is regenerated with a
-// discussion stage.
+// The fixture is a full mock run WITH a discussion stage; its aggregates are
+// engine-shaped (raw snapshot), adapted here exactly like the live page does.
 
 const FIXTURE = rawFixture as unknown as RunFixture;
+
+const RUN: RunSnapshot = {
+  ...FIXTURE.run,
+  aggregates: toRunAggregates(FIXTURE.run.aggregates, FIXTURE.agents),
+};
+
+/** The fixture without its discussion rows — the no-focus-group path. */
+const AGENTS_WITHOUT_DISCUSSION = FIXTURE.agents.filter((a) => a.kind !== "discussion");
 
 function discussionRow(
   id: string,
@@ -40,38 +47,40 @@ function discussionRow(
   };
 }
 
-function fixtureWithDiscussions(): {
+/** Three synthetic replies over the discussion-free fixture: a controlled small case. */
+function syntheticDiscussions(): {
   agents: AgentRunSnapshot[];
-  personas: Record<string, PersonaLite>;
   parents: AgentRunSnapshot[];
 } {
-  const parents = FIXTURE.agents
-    .filter((a) => a.kind === "persona" && a.status === "completed" && a.output != null)
-    .slice(0, 3);
+  const parents = AGENTS_WITHOUT_DISCUSSION.filter(
+    (a) => a.kind === "persona" && a.status === "completed" && a.output != null,
+  ).slice(0, 3);
   const [p0, p1, p2] = parents;
   const agents = [
-    ...FIXTURE.agents,
+    ...AGENTS_WITHOUT_DISCUSSION,
     discussionRow("d-0", p0, { updatedAdoptionLikelihood: 20, changedMind: true, agreesWith: ["Maya Chen"] }),
     discussionRow("d-1", p1, { updatedAdoptionLikelihood: 90, changedMind: true, disagreesWith: ["Tom Okafor"] }),
     discussionRow("d-2", p2, { updatedAdoptionLikelihood: 55 }),
   ];
-  return { agents, personas: FIXTURE.personas, parents };
+  return { agents, parents };
 }
 
 describe("hasFocusGroup", () => {
-  it("is false for the fixture (no discussion stage)", () => {
-    expect(hasFocusGroup(FIXTURE.agents)).toBe(false);
+  it("is true for the fixture (it carries a discussion stage)", () => {
+    expect(hasFocusGroup(FIXTURE.agents)).toBe(true);
   });
 
-  it("is true once completed discussion rows exist", () => {
-    expect(hasFocusGroup(fixtureWithDiscussions().agents)).toBe(true);
+  it("is false once discussion rows are stripped", () => {
+    expect(hasFocusGroup(AGENTS_WITHOUT_DISCUSSION)).toBe(false);
   });
 });
 
 describe("FocusGroup", () => {
   it("renders shift stats, exchanges, and agree/disagree chips", () => {
-    const { agents, personas, parents } = fixtureWithDiscussions();
-    const html = renderToStaticMarkup(createElement(FocusGroup, { agents, personas }));
+    const { agents, parents } = syntheticDiscussions();
+    const html = renderToStaticMarkup(
+      createElement(FocusGroup, { agents, personas: FIXTURE.personas }),
+    );
 
     expect(html).toContain("Minds changed");
     expect(html).toContain("/3</span>"); // 3 participants
@@ -87,11 +96,11 @@ describe("FocusGroup", () => {
 });
 
 describe("ResultsView report composition", () => {
-  it("omits the focus-group section for the fixture and keeps numbering contiguous", () => {
+  it("omits the focus-group section without discussion rows, numbering contiguous", () => {
     const html = renderToStaticMarkup(
       createElement(ResultsView, {
-        run: FIXTURE.run,
-        agents: FIXTURE.agents,
+        run: RUN,
+        agents: AGENTS_WITHOUT_DISCUSSION,
         personas: FIXTURE.personas,
       }),
     );
@@ -103,9 +112,12 @@ describe("ResultsView report composition", () => {
   });
 
   it("inserts the focus-group section between evidence and the red team", () => {
-    const { agents, personas } = fixtureWithDiscussions();
     const html = renderToStaticMarkup(
-      createElement(ResultsView, { run: FIXTURE.run, agents, personas }),
+      createElement(ResultsView, {
+        run: RUN,
+        agents: FIXTURE.agents,
+        personas: FIXTURE.personas,
+      }),
     );
     expect(html).toContain("Focus group");
     expect(html).toContain("§07"); // 7 sections with a focus group
@@ -116,7 +128,7 @@ describe("ResultsView report composition", () => {
   it("falls back to an empty state without a synthesis", () => {
     const html = renderToStaticMarkup(
       createElement(ResultsView, {
-        run: { ...FIXTURE.run, synthesis: null },
+        run: { ...RUN, synthesis: null },
         agents: FIXTURE.agents,
         personas: FIXTURE.personas,
       }),
