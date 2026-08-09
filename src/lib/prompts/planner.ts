@@ -1,4 +1,4 @@
-import type { Brief } from "@/lib/schemas/brief";
+import type { MarketingBrief } from "@/lib/schemas/brief";
 
 // ---------------------------------------------------------------------------
 // Casting planner: writes a casting CONTRACT against the persona pool catalog
@@ -27,8 +27,15 @@ export function formatPoolCatalog(pools: PoolCatalogEntry[]): string {
 }
 
 export interface PlannerPromptArgs {
-  brief: Brief;
-  segment: { name: string; description: string; whyRelevant: string };
+  brief: MarketingBrief;
+  /** The cohort this planner casts for (cohort name doubles as segment key). */
+  segment: {
+    name: string;
+    description: string;
+    whyRelevant: string;
+    commonObjections?: string[];
+    purchasingTriggers?: string[];
+  };
   poolCatalog: string;
   /** Total people this planner may request across all pools. */
   budget: number;
@@ -47,10 +54,16 @@ export function plannerPrompt(args: PlannerPromptArgs): { system: string; prompt
   ].join("\n");
 
   const prompt = [
-    `# Study brief\nIdea: ${args.brief.ideaSummary}\nTarget market: ${args.brief.targetMarket}\nKey assumptions: ${args.brief.keyAssumptions.join("; ")}\nRisk dimensions: ${args.brief.riskDimensions.join("; ")}`,
-    `# Your assigned segment\n${args.segment.name}: ${args.segment.description}\nWhy it matters: ${args.segment.whyRelevant}`,
+    `# Study brief\nProduct: ${args.brief.productSummary}\nCampaign objective: ${args.brief.objectiveSummary}\nKey assumptions: ${args.brief.keyAssumptions.join("; ")}\nRisk dimensions: ${args.brief.riskDimensions.join("; ")}`,
+    `# Your assigned cohort\n${args.segment.name}: ${args.segment.description}\nWhy it matters: ${args.segment.whyRelevant}` +
+      (args.segment.commonObjections?.length
+        ? `\nCommon objections: ${args.segment.commonObjections.join("; ")}`
+        : "") +
+      (args.segment.purchasingTriggers?.length
+        ? `\nPurchasing triggers: ${args.segment.purchasingTriggers.join("; ")}`
+        : ""),
     `# Persona pool catalog (key · name (available) — description)\n${args.poolCatalog}`,
-    `Write your casting contract now: ${args.budget} people total for segment "${args.segment.name}".`,
+    `Write your casting contract now: ${args.budget} people total for cohort "${args.segment.name}".`,
   ].join("\n\n");
 
   return { system, prompt };

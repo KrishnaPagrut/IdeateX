@@ -1,5 +1,5 @@
 import type { Aggregates } from "@/lib/engine/aggregate";
-import type { Brief } from "@/lib/schemas/brief";
+import type { MarketingBrief } from "@/lib/schemas/brief";
 import type { Critique } from "@/lib/schemas/critique";
 
 // ---------------------------------------------------------------------------
@@ -18,7 +18,7 @@ export interface QuoteForSynthesis {
 export interface SynthesisPromptArgs {
   idea: string;
   context?: string | null;
-  brief: Brief;
+  brief: MarketingBrief;
   aggregates: Aggregates;
   methodologyCritique: Critique;
   redTeamCritique: Critique;

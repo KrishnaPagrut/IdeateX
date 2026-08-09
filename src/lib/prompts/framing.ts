@@ -1,30 +1,37 @@
 // ---------------------------------------------------------------------------
-// Framing agent: a research director who DESIGNS the validation study.
-// Explicitly forbidden from evaluating the idea — evaluation belongs to the
-// persona swarm and critics. Segment count is pinned to the tier's planner
-// count so one planner maps to one segment.
+// Framing agent: head of audience research who DESIGNS the campaign study.
+// Explicitly forbidden from evaluating the product or picking a strategy —
+// that belongs to the race, the advisors, and the swarm. Cohort count is
+// pinned to the tier's planner count so one planner maps to one cohort.
 // ---------------------------------------------------------------------------
 
 export interface FramingPromptArgs {
-  idea: string;
+  productName: string;
+  description: string;
+  targetAudience: string;
+  objective?: string | null;
   context?: string | null;
-  /** Exact number of segments to emit — one planner is assigned per segment. */
-  segmentCount: number;
+  /** Exact number of cohorts to emit — one planner is assigned per cohort. */
+  cohortCount: number;
 }
 
 export function framingPrompt(args: FramingPromptArgs): { system: string; prompt: string } {
   const system = [
-    "You are the research director of a market-validation lab. Your job is to DESIGN a rigorous study of a business idea, not to evaluate it.",
-    "Do NOT judge whether the idea is good or bad, and do not let optimism or pessimism about it leak into your framing. Restate it neutrally.",
-    "Surface the assumptions the idea's success depends on and the dimensions along which it could fail — these guide what the study must probe.",
-    `Define EXACTLY ${args.segmentCount} population segments to study. Each segment gets its own casting planner, so segments must be distinct, concretely described, and collectively cover the market including likely skeptics and non-obvious stakeholders — not just the founder's imagined fans.`,
-    "Score how well-specified the idea is (clarityScore) and list genuine ambiguities a founder should resolve.",
+    "You are the head of audience research at a marketing lab. Your job is to DESIGN a rigorous campaign study for a product, not to evaluate the product or propose campaign ideas.",
+    "Do NOT judge whether the product is good or bad, and do not let optimism or pessimism leak into your framing. Restate the product and the campaign objective neutrally.",
+    "Surface the assumptions the campaign's success depends on and the dimensions along which it could fail — these guide what the study must probe.",
+    `Define EXACTLY ${args.cohortCount} audience cohorts drawn from the stated target audience (plus any non-obvious adjacent groups a campaign would actually touch — skeptics and loud detractors included). Each cohort gets its own casting planner, so cohorts must be distinct and concretely described.`,
+    "For each cohort estimate populationShare (shares across cohorts should sum to roughly 1), list core interests, values, common objections, purchasing triggers, and the platforms in its media diet.",
+    "Set each cohort's baseline dispositions (humor, skepticism, influence, persuadability; each 0-1) to values a researcher could defend from the cohort description — e.g. burned-before enterprise buyers skew high skepticism, creator-adjacent cohorts skew high influence.",
+    "Score how well-specified the inputs are (clarityScore) and list genuine ambiguities the founder should resolve.",
   ].join("\n");
 
   const prompt = [
-    `# Idea under study\n${args.idea}`,
+    `# Product\n${args.productName}\n\n${args.description}`,
+    `# Target audience (founder's words)\n${args.targetAudience}`,
+    args.objective ? `# Campaign objective\n${args.objective}` : null,
     args.context ? `# Additional context from the founder\n${args.context}` : null,
-    `Design the study now. Remember: exactly ${args.segmentCount} segments, neutral framing, no evaluation of the idea itself.`,
+    `Design the study now. Remember: exactly ${args.cohortCount} cohorts, neutral framing, no evaluation of the product and no campaign ideas.`,
   ]
     .filter(Boolean)
     .join("\n\n");

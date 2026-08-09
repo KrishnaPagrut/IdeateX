@@ -4,11 +4,15 @@ import { memo } from "react";
 import { Handle, Position, type NodeProps, type Node } from "@xyflow/react";
 import {
   Crosshair,
+  Gavel,
+  Lightbulb,
   ListChecks,
+  MessageCircleReply,
   MessagesSquare,
   ShieldAlert,
   FlaskConical,
   TriangleAlert,
+  UserCheck,
 } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -27,6 +31,10 @@ export type AgentNodeType = Node<
 const KIND_ICON: Record<Exclude<AgentKind, "persona">, typeof Crosshair> = {
   framing: Crosshair,
   planner: ListChecks,
+  strategy: Lightbulb,
+  reaction: MessageCircleReply,
+  advisor: UserCheck,
+  moderator: Gavel,
   discussion: MessagesSquare,
   critique: ShieldAlert,
   synthesis: FlaskConical,
@@ -35,6 +43,10 @@ const KIND_ICON: Record<Exclude<AgentKind, "persona">, typeof Crosshair> = {
 const KIND_EYEBROW: Record<AgentKind, string> = {
   framing: "framing",
   planner: "planner",
+  strategy: "strategist",
+  reaction: "reaction",
+  advisor: "advisor",
+  moderator: "moderator",
   persona: "persona",
   discussion: "focus group",
   critique: "critic",

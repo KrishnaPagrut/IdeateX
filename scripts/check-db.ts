@@ -13,6 +13,13 @@ const REQUIRED_COLUMNS = [
   ["personas", "subdomain"],
   ["runs", "persona_budget"],
   ["runs", "discussion"],
+  ["runs", "product_name"],
+  ["runs", "target_audience"],
+  ["runs", "objective"],
+  ["runs", "audience"],
+  ["runs", "strategies"],
+  ["runs", "race"],
+  ["runs", "advisor_report"],
 ] as const;
 
 async function main() {

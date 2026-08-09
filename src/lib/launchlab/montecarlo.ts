@@ -12,7 +12,7 @@
  *
  * Seeded, so a given plan replays identically.
  */
-import { makeRng, type Rng } from "./rng";
+import { makeRng, type Rng } from "@/lib/engine/social/rng";
 import type { EngTask } from "./types";
 
 export type ScheduleSimulation = {

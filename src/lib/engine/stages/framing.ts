@@ -3,31 +3,34 @@ import { eq } from "drizzle-orm";
 import { db, runs, type Run } from "@/lib/db";
 import { TIER_SHAPE } from "@/lib/llm/cost";
 import { framingPrompt } from "@/lib/prompts/framing";
-import { BriefSchema, type Brief } from "@/lib/schemas/brief";
+import { MarketingBriefSchema, type MarketingBrief } from "@/lib/schemas/brief";
 import { executeAgent, type AgentContext } from "../agent";
 
 export interface FramingResult {
-  brief: Brief;
+  brief: MarketingBrief;
   framingAgentId: string;
 }
 
-/** Research director designs the study; the brief is persisted on the run row. */
+/** Audience-research head designs the study; the brief is persisted on the run row. */
 export async function runFramingStage(ctx: AgentContext, run: Run): Promise<FramingResult> {
-  const segmentCount = TIER_SHAPE[run.tier].planners;
+  const cohortCount = TIER_SHAPE[run.tier].planners;
   const { system, prompt } = framingPrompt({
-    idea: run.idea,
+    productName: run.productName ?? run.idea.slice(0, 80),
+    description: run.idea,
+    targetAudience: run.targetAudience ?? "Not specified — infer a plausible audience from the product.",
+    objective: run.objective,
     context: run.context,
-    // Brief schema caps segments at 8; deep tier's 8 planners fit exactly.
-    segmentCount: Math.min(segmentCount, 8),
+    // Brief schema caps cohorts at 8; deep tier's 8 planners fit exactly.
+    cohortCount: Math.min(cohortCount, 8),
   });
 
   const { agentRunId, output } = await executeAgent({
     ctx,
     kind: "framing",
-    label: "Research Director",
+    label: "Audience Research",
     parentAgentRunId: null,
     role: "reasoner",
-    schema: BriefSchema,
+    schema: MarketingBriefSchema,
     system,
     prompt,
     effort: "high",

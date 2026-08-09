@@ -1,17 +1,21 @@
 import { eq } from "drizzle-orm";
 
-import { db, personas, type Persona, type Run } from "@/lib/db";
+import { db, personas, runs, type Persona, type Run } from "@/lib/db";
 import { isMock } from "@/lib/llm/client";
 import { TIER_SHAPE } from "@/lib/llm/cost";
 import { findSubdomain } from "@/lib/personas/taxonomy";
+import { buildFollowGraph } from "../social/graph";
+import { hashSeed } from "../social/rng";
+import { deriveTraits } from "../social/traits";
 import {
   formatPoolCatalog,
   plannerInvalidPoolsRetrySuffix,
   plannerPrompt,
   type PoolCatalogEntry,
 } from "@/lib/prompts/planner";
-import type { Brief } from "@/lib/schemas/brief";
+import type { MarketingBrief } from "@/lib/schemas/brief";
 import { CastingSpecSchema, type CastingSpec } from "@/lib/schemas/casting";
+import type { SimTraits, SyntheticAudience } from "@/lib/schemas/marketing";
 import { executeAgent, type AgentContext } from "../agent";
 
 // ---------------------------------------------------------------------------
@@ -33,6 +37,8 @@ export interface CastingPick {
 export interface PlanningResult {
   picks: CastingPick[];
   personaById: Map<string, Persona>;
+  /** The frozen population every strategy races against; persisted on the run. */
+  audience: SyntheticAudience;
 }
 
 const FALLBACK_ANGLE =
@@ -146,7 +152,7 @@ function resolveSpec(
 export async function runPlanningStage(
   ctx: AgentContext,
   run: Run,
-  brief: Brief,
+  brief: MarketingBrief,
   framingAgentId: string,
 ): Promise<PlanningResult> {
   const shape = TIER_SHAPE[run.tier];
@@ -164,9 +170,9 @@ export async function runPlanningStage(
   const perPlannerBudget = Math.max(3, Math.floor(runBudget / shape.planners));
 
   const plannerJobs = Array.from({ length: shape.planners }, (_, i) => {
-    // The framing prompt pins segment count to planner count, but tolerate a
-    // shorter list (e.g. schema-min mock briefs) by cycling segments.
-    const segment = brief.segments[i % brief.segments.length];
+    // The framing prompt pins cohort count to planner count, but tolerate a
+    // shorter list (e.g. schema-min mock briefs) by cycling cohorts.
+    const segment = brief.cohorts[i % brief.cohorts.length];
     return { index: i, segment };
   });
 
@@ -222,5 +228,54 @@ export async function runPlanningStage(
   // Final budget clamp across the whole cast (planners may round up).
   const all = [...deduped.values()].slice(0, runBudget);
 
-  return { picks: all, personaById };
+  const audience = buildAudience(run, brief, all, personaById);
+  await db
+    .update(runs)
+    .set({ audience: audience as unknown as Record<string, unknown> })
+    .where(eq(runs.id, run.id));
+
+  return { picks: all, personaById, audience };
+}
+
+// ---------------------------------------------------------------------------
+// Audience assembly: cast personas become sim members. Traits derive
+// deterministically from persona psychographics blended with the cohort
+// baseline; the follow graph is seeded preferential attachment. Same run id →
+// identical audience, so every race sim replays.
+// ---------------------------------------------------------------------------
+
+const DEFAULT_BASELINE: SimTraits = {
+  humor: 0.5,
+  skepticism: 0.5,
+  influence: 0.4,
+  persuadability: 0.5,
+};
+
+function buildAudience(
+  run: Run,
+  brief: MarketingBrief,
+  picks: CastingPick[],
+  personaById: Map<string, Persona>,
+): SyntheticAudience {
+  const seed = hashSeed(run.id);
+  const baselineByCohort = new Map(brief.cohorts.map((c) => [c.name, c.baseline]));
+
+  const members = picks.flatMap((pick) => {
+    const persona = personaById.get(pick.personaId);
+    if (!persona) return [];
+    const baseline = baselineByCohort.get(pick.segment) ?? DEFAULT_BASELINE;
+    const { traits, engagement } = deriveTraits(persona, baseline, seed);
+    return [{ personaId: persona.id, cohort: pick.segment, traits, engagement }];
+  });
+
+  const edges = buildFollowGraph(
+    members.map((m) => ({
+      personaId: m.personaId,
+      cohort: m.cohort,
+      influence: m.traits.influence,
+    })),
+    seed,
+  );
+
+  return { members, edges, seed };
 }
