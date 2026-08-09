@@ -106,6 +106,25 @@ export const personas = pgTable(
   (t) => [index("personas_pool_idx").on(t.domain, t.subdomain)],
 );
 
+// User-created pools defined from a free-text prompt. Taxonomy pools live in
+// src/lib/personas/taxonomy.ts; these rows extend that catalog at runtime so
+// prompt-created pools can be topped up later and described to planners.
+export const customPools = pgTable(
+  "custom_pools",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    domain: text("domain").notNull().default("custom"),
+    subdomain: text("subdomain").notNull(),
+    name: text("name").notNull(),
+    description: text("description").notNull(),
+    seedHints: text("seed_hints").notNull(),
+    /** The user's original population description, kept for provenance. */
+    prompt: text("prompt").notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [uniqueIndex("custom_pools_key_idx").on(t.domain, t.subdomain)],
+);
+
 export const runs = pgTable("runs", {
   id: uuid("id").primaryKey().defaultRandom(),
   /** Product description (the marketing pipeline's main stimulus text). */
@@ -190,6 +209,7 @@ export const runEvents = pgTable(
 
 export type Persona = typeof personas.$inferSelect;
 export type NewPersona = typeof personas.$inferInsert;
+export type CustomPool = typeof customPools.$inferSelect;
 export type Run = typeof runs.$inferSelect;
 export type AgentRun = typeof agentRuns.$inferSelect;
 export type RunEvent = typeof runEvents.$inferSelect;

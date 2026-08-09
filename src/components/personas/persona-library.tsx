@@ -20,6 +20,7 @@ import {
 import { Toaster } from "@/components/ui/sonner";
 import { INCOME_BANDS } from "./income-bands";
 import { MatrixLoader } from "./matrix-loader";
+import { NewPoolDialog } from "./new-pool-dialog";
 import { PersonaCard } from "./persona-card";
 import { PoolBrowser } from "./pool-browser";
 import { PoolMeter, POOL_TARGET } from "./pool-meter";
@@ -162,9 +163,11 @@ export function PersonaLibrary() {
   const seededCount =
     pools?.filter((p) => p.count > 0 && taxonomyKeys.has(`${p.domain}/${p.subdomain}`)).length ??
     null;
+  // Custom pools are real pools, not strays — only truly unpooled personas
+  // (e.g. general/general) count as "outside the taxonomy".
   const unpooledCount =
     pools
-      ?.filter((p) => !taxonomyKeys.has(`${p.domain}/${p.subdomain}`))
+      ?.filter((p) => p.domain !== "custom" && !taxonomyKeys.has(`${p.domain}/${p.subdomain}`))
       .reduce((sum, p) => sum + p.count, 0) ?? 0;
   const count = personas?.length ?? 0;
   const initialLoading = pools === null && !error;
@@ -196,19 +199,27 @@ export function PersonaLibrary() {
           </p>
         </div>
         {!selectedPool && !libraryEmpty && (
-          <Button onClick={() => generateInto(null)} disabled={generating}>
-            {generating ? (
-              <>
-                <MatrixLoader size={16} label="Generating personas" />
-                Generating…
-              </>
-            ) : (
-              <>
-                <PlusIcon data-icon="inline-start" />
-                Generate 20 more
-              </>
-            )}
-          </Button>
+          <div className="flex flex-wrap items-center gap-2">
+            <NewPoolDialog
+              onCreated={(key) => {
+                setRefreshKey((k) => k + 1);
+                openPool(key);
+              }}
+            />
+            <Button onClick={() => generateInto(null)} disabled={generating}>
+              {generating ? (
+                <>
+                  <MatrixLoader size={16} label="Generating personas" />
+                  Generating…
+                </>
+              ) : (
+                <>
+                  <PlusIcon data-icon="inline-start" />
+                  Generate 20 more
+                </>
+              )}
+            </Button>
+          </div>
         )}
       </header>
 
@@ -318,19 +329,27 @@ export function PersonaLibrary() {
           <p className="mt-4 text-sm text-muted-foreground">
             Or generate a first batch right here — “Generate 20 more” adds 20 personas.
           </p>
-          <Button className="mt-4" onClick={() => generateInto(null)} disabled={generating}>
-            {generating ? (
-              <>
-                <MatrixLoader size={16} label="Generating personas" />
-                Generating…
-              </>
-            ) : (
-              <>
-                <PlusIcon data-icon="inline-start" />
-                Generate 20 more
-              </>
-            )}
-          </Button>
+          <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
+            <Button onClick={() => generateInto(null)} disabled={generating}>
+              {generating ? (
+                <>
+                  <MatrixLoader size={16} label="Generating personas" />
+                  Generating…
+                </>
+              ) : (
+                <>
+                  <PlusIcon data-icon="inline-start" />
+                  Generate 20 more
+                </>
+              )}
+            </Button>
+            <NewPoolDialog
+              onCreated={(key) => {
+                setRefreshKey((k) => k + 1);
+                openPool(key);
+              }}
+            />
+          </div>
         </div>
       )}
 
