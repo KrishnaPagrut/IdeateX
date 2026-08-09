@@ -29,3 +29,6 @@ pnpm-debug.log*
 
 # test
 coverage/
+
+# local dev database (PGlite fallback when DATABASE_URL is unset)
+.pglite/

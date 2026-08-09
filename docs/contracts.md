@@ -7,7 +7,10 @@ change: update this doc in the same commit and flag it at merge time.
 
 - `src/lib/db/schema.ts` — Drizzle tables `personas`, `runs`, `agent_runs`,
   `run_events` + TS unions (`RunTier`, `RunStatus`, `AgentKind`, `AgentStatus`).
-- `src/lib/db/index.ts` — `db` client (Supabase pooler, `prepare: false`).
+- `src/lib/db/index.ts` — `db` client. Uses Supabase (`DATABASE_URL`) when set,
+  otherwise falls back to PGlite persisted at `./.pglite` with migrations
+  auto-applied — so every workstream can run against a real Postgres with zero
+  setup (no `.env` needed for mock-mode work).
 - `src/lib/llm/client.ts` — `generate<T>({role, schema, system, prompt, effort?, tools?, abortSignal?})`
   → `{object, rawText, inputTokens, outputTokens, model}`. The ONLY way to call the LLM.
   `MOCK_LLM=1` routes to the mock adapter automatically. Retries are the caller's job.
