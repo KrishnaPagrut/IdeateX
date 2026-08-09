@@ -42,10 +42,12 @@ commit.
 ## 2. Audience build
 
 Personas are cast from the existing pooled library (reusing casting
-contracts) into the brief's cohorts — never generated from scratch. The
-caster's LLM call also assigns each persona a sim trait vector (humor,
-skepticism, influence, persuadability, engagement rates) varying around the
-cohort baseline. The follow graph is generated in code, seeded: preferential
+contracts) into the brief's cohorts — never generated from scratch. Sim trait
+vectors (humor, skepticism, influence, persuadability, engagement rates) are
+derived deterministically in code from each persona's psychographics blended
+with the cohort baseline plus seeded jitter — planners write pool contracts
+and never see individual personas, so an LLM cannot assign per-persona traits
+without an extra fan-out. (Amended from the original LLM-assigned design.) The follow graph is generated in code, seeded: preferential
 attachment, dense within cohorts, sparse cross-cohort weak ties,
 influence-weighted. The resulting `SyntheticAudience` is persisted on the run;
 race and report read the same frozen population.

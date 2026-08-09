@@ -15,6 +15,9 @@ export type AgentEventPayload = z.infer<typeof AgentEventPayloadSchema>;
 export const RUN_STAGES = [
   "framing",
   "planning",
+  "strategizing",
+  "racing",
+  "advising",
   "simulating",
   "discussing",
   "critiquing",
@@ -56,6 +59,9 @@ function emptyStages(): Record<RunStage, StageState> {
   return {
     framing: { started: false, completed: false },
     planning: { started: false, completed: false },
+    strategizing: { started: false, completed: false },
+    racing: { started: false, completed: false },
+    advising: { started: false, completed: false },
     simulating: { started: false, completed: false },
     discussing: { started: false, completed: false },
     critiquing: { started: false, completed: false },

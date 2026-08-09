@@ -24,6 +24,9 @@ export const RUN_STATUSES = [
   "pending",
   "framing",
   "planning",
+  "strategizing",
+  "racing",
+  "advising",
   "simulating",
   "discussing",
   "critiquing",
@@ -38,6 +41,10 @@ export type RunStatus = (typeof RUN_STATUSES)[number];
 export const AGENT_KINDS = [
   "framing",
   "planner",
+  "strategy",
+  "reaction",
+  "advisor",
+  "moderator",
   "persona",
   "discussion",
   "critique",
@@ -101,8 +108,13 @@ export const personas = pgTable(
 
 export const runs = pgTable("runs", {
   id: uuid("id").primaryKey().defaultRandom(),
+  /** Product description (the marketing pipeline's main stimulus text). */
   idea: text("idea").notNull(),
   context: text("context"),
+  // Marketing-run inputs (nullable: legacy rows predate the pivot).
+  productName: text("product_name"),
+  targetAudience: text("target_audience"),
+  objective: text("objective"),
   tier: text("tier").$type<RunTier>().notNull().default("standard"),
   grounding: boolean("grounding").notNull().default(false),
   // Focus-group stage: personas hear segment peers' verdicts and respond.
@@ -111,6 +123,11 @@ export const runs = pgTable("runs", {
   personaBudget: integer("persona_budget"),
   status: text("status").$type<RunStatus>().notNull().default("pending"),
   brief: jsonb("brief"),
+  // Marketing pipeline artifacts, in stage order.
+  audience: jsonb("audience"),
+  strategies: jsonb("strategies"),
+  race: jsonb("race"),
+  advisorReport: jsonb("advisor_report"),
   synthesis: jsonb("synthesis"),
   aggregates: jsonb("aggregates"),
   estCostUsd: numeric("est_cost_usd", { precision: 10, scale: 4 }),

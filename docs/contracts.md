@@ -18,9 +18,12 @@ change: update this doc in the same commit and flag it at merge time.
   hardcode a model id anywhere else.
 - `src/lib/llm/cost.ts` — `estimateRunCost(tier, grounding)`, `CostMeter`, `TIER_SHAPE`
   (planner/persona counts per tier).
-- `src/lib/schemas/*` — zod schemas for every structured output: `BriefSchema`,
-  `CastingPlanSchema`, `VerdictSchema`, `CritiqueSchema`, `SynthesisSchema`,
-  `GeneratedPersonaBatchSchema`, and the SSE event union `RunEventSchema`.
+- `src/lib/schemas/*` — zod schemas for every structured output:
+  `MarketingBriefSchema` (cohort-based brief), `CastingPlanSchema`,
+  `VerdictSchema`, `CampaignStrategySchema`, `SyntheticAudienceSchema`,
+  `RaceResultSchema`, `AdvisorVerdictSchema`/`AdvisorConsensusSchema`,
+  `MarketingReportSchema`, `GeneratedPersonaBatchSchema`, and the SSE event
+  union `RunEventSchema` (now including `sim:tick` + `race:completed`).
 - `src/lib/engine/events.ts` — `emitRunEvent`, `subscribeToRun`, `replayRunEvents`,
   `initRunSequence`. Events persist to `run_events` AND fan out in-process.
 
@@ -32,12 +35,22 @@ export function startRun(runId: string): void; // fire-and-forget; never throws 
 export function cancelRun(runId: string): boolean; // true if the run was live in this process
 ```
 
-- `startRun` drives statuses: pending → framing → planning → simulating →
-  critiquing → synthesizing → completed (or failed/cancelled).
+- `startRun` drives statuses (marketing pipeline): pending → framing →
+  planning → strategizing → racing → advising → simulating → discussing
+  (opt-in) → synthesizing → completed (or failed/cancelled).
+- Marketing-run artifacts persist on the runs row in stage order:
+  `brief` (MarketingBrief), `audience` (SyntheticAudience), `strategies`
+  (CampaignStrategy[3]), `race` (RaceResult[3]), `advisorReport`
+  ({consensus, verdicts}), `synthesis` (MarketingReport), `aggregates`.
+  Input columns: `productName`, `idea` (= product description),
+  `targetAudience`, `objective`, `context`.
 - Every LLM call gets an `agent_runs` row (pending→running→completed/failed) and
   paired `agent:*` events. Graph edges come from `parent_agent_run_id`:
-  framing has no parent; planners → framing; personas → their planner;
-  critiques → framing; synthesis → framing.
+  framing has no parent; planners → framing; strategies → framing;
+  race reactions → their strategy; advisors + moderator → framing;
+  personas → their planner; synthesis → framing.
+- The race additionally emits `sim:tick` (per strategy per tick: scores,
+  reached delta, top narratives) and one final `race:completed` event.
 - Persona fan-out: `p-limit(20)`, 2 retries with backoff on 429/5xx, run aborts
   if >20% of personas fail or `CostMeter.exceeded`.
 - In mock mode, planner casting picks are replaced with a real sample of persona

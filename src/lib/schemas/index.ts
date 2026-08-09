@@ -1,4 +1,6 @@
 export * from "./brief";
+export * from "./marketing";
+export * from "./report";
 export * from "./casting";
 export * from "./verdict";
 export * from "./discussion";
