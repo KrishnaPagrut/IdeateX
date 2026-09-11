@@ -50,7 +50,7 @@
     "tailwindcss": "^4",
     "tsx": "^4.23.11",
     "typescript": "^5",
-    "vitest": "^4.1.10"
+    "vitest": "^4.1.11"
   },
   "packageManager": "pnpm@11.9.0",
   "type": "module"
